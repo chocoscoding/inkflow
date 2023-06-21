@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar/Navbar";
 import "../globals.css";
+import Footer from "@/app/components/Navbar/LNavigation";
 
 export const metadata = {
   title: "Inkflow",
@@ -11,6 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <div>
       <Navbar />
       {children}
+      <Footer bottom />
     </div>
   );
 }
