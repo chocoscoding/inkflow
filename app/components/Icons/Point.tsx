@@ -7,7 +7,7 @@ const Point = (props: { className?: string }) => (
     className={props.className}
     {...props}>
     <path
-      stroke="#3F4354"
+      stroke="currentColor"
       strokeLinecap="square"
       strokeLinejoin="round"
       d="M8 9h9M5 9h1M8 6h9M5 6h1M8 12h9M5 12h1M8 15h9M5 15h1"

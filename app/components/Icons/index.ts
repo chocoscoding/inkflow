@@ -1,4 +1,5 @@
 export { default as Arrow1 } from "./Arrow1";
+export { default as ArrowDown } from "./ArrowDown";
 export { default as Arrow } from "./Arrow";
 export { default as BackArrow } from "./BackArrow";
 export { default as Bitcoin } from "./Bitcoin";
@@ -21,8 +22,9 @@ export { default as Fire } from "./Fire";
 export { default as Follow1 } from "./Follow1";
 export { default as Follow } from "./Follow";
 export { default as Following } from "./Following";
-export { default as Group1 } from "./Group1";
-export { default as Group } from "./Group";
+export { default as Night } from "./Night";
+export { default as Groups } from "./Groups";
+export { default as GroupsActive } from "./GroupsActive";
 export { default as Growing } from "./Growing";
 export { default as Headline } from "./Headline";
 export { default as Home } from "./Home";

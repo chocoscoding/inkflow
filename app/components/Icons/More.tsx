@@ -10,19 +10,19 @@ const More = (props: { className?: string }) => (
       cx={2.504}
       cy={10}
       r={2.5}
-      fill="#3F4354"
+      fill="currentColor"
     />
     <circle
       cx={10.004}
       cy={10}
       r={2.5}
-      fill="#3F4354"
+      fill="currentColor"
     />
     <circle
       cx={17.504}
       cy={10}
       r={2.5}
-      fill="#3F4354"
+      fill="currentColor"
     />
   </svg>
 );

@@ -7,7 +7,7 @@ const Midle = (props: { className?: string }) => (
     className={props.className}
     {...props}>
     <path
-      stroke="#3F4354"
+      stroke="currentColor"
       strokeLinecap="square"
       strokeLinejoin="round"
       d="M6 9h9M4 6h13M4 12h13M6 15h9"

@@ -7,14 +7,14 @@ const Voice = (props: { className?: string }) => (
     className={props.className}
     {...props}>
     <path
-      stroke="#3F4354"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.5}
       d="M10.181 19v-3.176"
     />
     <path
-      stroke="#3F4354"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.5}
@@ -22,7 +22,7 @@ const Voice = (props: { className?: string }) => (
       clipRule="evenodd"
     />
     <path
-      stroke="#3F4354"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.5}

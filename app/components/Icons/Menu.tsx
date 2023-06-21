@@ -7,7 +7,7 @@ const Menu = (props: { className?: string }) => (
     className={props.className}
     {...props}>
     <path
-      fill="#3F4354"
+      fill="currentColor"
       d="M0 2v3h20V2H0Zm0 6.5v3h20v-3H0ZM0 15v3h20v-3H0Z"
     />
   </svg>

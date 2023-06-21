@@ -1,4 +1,4 @@
-const SearchIcon = (props: { className?: string }) => (
+const SearchIcon = (props: { className?: string; weight: number }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={21}
@@ -10,13 +10,13 @@ const SearchIcon = (props: { className?: string }) => (
       cx={10}
       cy={9}
       r={8}
-      stroke="#3F4354"
-      strokeWidth={2}
+      stroke="currentColor"
+      strokeWidth={props.weight}
     />
     <path
-      stroke="#3F4354"
+      stroke="currentColor"
       strokeLinecap="round"
-      strokeWidth={2}
+      strokeWidth={props.weight}
       d="m15.5 15.5 4 4"
     />
   </svg>

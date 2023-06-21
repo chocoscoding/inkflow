@@ -7,7 +7,7 @@ const Left = (props: { className?: string }) => (
     className={props.className}
     {...props}>
     <path
-      stroke="#3F4354"
+      stroke="currentColor"
       strokeLinecap="square"
       strokeLinejoin="round"
       d="M12 9H3M15 6H3M15 12H3M12 15H3"
