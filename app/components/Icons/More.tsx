@@ -1,0 +1,29 @@
+const More = (props: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={21}
+    height={20}
+    fill="none"
+    className={props.className}
+    {...props}>
+    <circle
+      cx={2.504}
+      cy={10}
+      r={2.5}
+      fill="#3F4354"
+    />
+    <circle
+      cx={10.004}
+      cy={10}
+      r={2.5}
+      fill="#3F4354"
+    />
+    <circle
+      cx={17.504}
+      cy={10}
+      r={2.5}
+      fill="#3F4354"
+    />
+  </svg>
+);
+export default More;
