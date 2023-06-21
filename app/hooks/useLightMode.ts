@@ -7,7 +7,7 @@ interface LightModeType {
 }
 
 const useLightMode = create<LightModeType>((set) => ({
-  lightMode: true,
+  lightMode: false,
   on: () => set({ lightMode: true }),
   off: () => set({ lightMode: false }),
 }));

@@ -1,9 +1,9 @@
 import Image from "next/image";
 const Logo = ({ lightMode }: { lightMode: boolean }) => {
-  const bigLogo = lightMode ? "/light" : "/dark";
-  const smallLogo = lightMode ? "/miniLight" : "/miniDark";
+  const bigLogo = lightMode ? "/dark" : "/light";
+  const smallLogo = lightMode ? "/miniDark" : "/miniLight";
   return (
-    <div className="w-[100px] lg:w-[150px] overflow-hidden h-[95%] object-cover relative flex items-center ml-4">
+    <div className="w-[100px] lg:w-[150px] overflow-hidden h-[95%] object-cover relative flex items-center ml-4 shrink-0">
       <Image
         src={`${bigLogo}.png`}
         alt="logo"
