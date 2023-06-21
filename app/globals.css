@@ -24,3 +24,7 @@ body {
 .transition1 * {
   transition: 0.3s all ease;
 }
+
+.transitionDelayed {
+  transition-delay: 0.3s;
+}

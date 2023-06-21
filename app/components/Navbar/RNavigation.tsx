@@ -1,27 +1,26 @@
 import React from "react";
-import { ArrowDown, DownArrow, Message, Notification, Vector } from "../Icons";
+import { ArrowDown, Message, Notification } from "../Icons";
 import useLightMode from "@/app/hooks/useLightMode";
 import Image from "next/image";
 import Avatar from "../Avatar";
+import UserMenu from "./UserMenu";
+import Link from "next/link";
 
 const RNavigation = () => {
   const lightMode = useLightMode();
   return (
-    <div className="flex gap-6 items-center flex-shrink-0">
-      <span className="cursor-pointer bg-dark-40 p-2 rounded-md hover:bg-dark-20">
+    <div className="flex xl:gap-6 lg:gap-4 md:gap-3 gap-2 items-center flex-shrink-0">
+      <Link
+        href={`#`}
+        className="cursor-pointer bg-dark-40 p-2 rounded-md hover:bg-dark-20 xl1:scale-75">
         <Message className={`text-secondary-60`} />
-      </span>
-      <span className="cursor-pointer bg-dark-40 p-2 rounded-md hover:bg-dark-20">
+      </Link>
+      <Link
+        href={`#`}
+        className="cursor-pointer bg-dark-40 p-2 rounded-md hover:bg-dark-20 xl1:scale-75">
         <Notification className={`text-secondary-60`} />
-      </span>
-      {/* user */}
-      <section className="flex items-center gap-4 text-secondary-60">
-        <div className="border border-yellow-30 rounded-md">
-          <Avatar />
-        </div>
-        <p className="font-bold">Timileyin</p>
-        <ArrowDown className={`text-secondary-60`} />
-      </section>
+      </Link>
+      <UserMenu />
     </div>
   );
 };
