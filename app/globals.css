@@ -28,3 +28,13 @@ body {
 .transitionDelayed {
   transition-delay: 0.3s;
 }
+
+@media (max-width: 639px) {
+  .md2\:px-0 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .md2\:h-full {
+    height: 100% !important;
+  }
+}

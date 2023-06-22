@@ -16,7 +16,7 @@ const SearchInput = () => {
   );
   return (
     <form
-      className={`flex xl:max-w-[540px] md:max-w-[400px] max-w-[250px] w-full overflow-hidden rounded-md bg-dark-40 text-secondary-40 mx-4  ${conditionalStyleForm()}`}>
+      className={`flex xl:max-w-[540px] md:max-w-[400px] max-w-[250px]md2:max-w-none w-full overflow-hidden rounded-md bg-dark-40 text-secondary-40 mx-4 h-auto lg1:h-[34px]  ${conditionalStyleForm()}`}>
       {isOpen ? (
         <button
           onClick={onClose}
