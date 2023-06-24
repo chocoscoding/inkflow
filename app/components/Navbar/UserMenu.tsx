@@ -5,9 +5,11 @@ import { ArrowDown } from "../Icons";
 import MenuItem from "./MenuItem";
 import ModeToggler from "./ModeToggler";
 import useNavigation from "@/app/hooks/useNavigation";
+import { useRouter } from "next/navigation";
 
 const UserMenu = () => {
   const { isOpen, onOpen, onClose } = useNavigation();
+  const { push } = useRouter();
 
   const toggle = () => {
     if (isOpen) return onClose();
@@ -39,11 +41,11 @@ const UserMenu = () => {
           transition={{ duration: 0.1, ease: "easeOut", staggerChildren: 0.2 }}>
           <div className="flex flex-col cursor-pointer">
             <MenuItem
-              onClick={() => {}}
+              onClick={() => push("/auth/signin")}
               label="Login"
             />
             <MenuItem
-              onClick={() => {}}
+              onClick={() => push("/auth/signup")}
               label="Signup"
             />
             <motion.div className="border-t border-gray-700 mx-4 my-1"></motion.div>
