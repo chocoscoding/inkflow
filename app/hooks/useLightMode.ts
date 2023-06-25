@@ -21,16 +21,34 @@ const getPreferredMode = () => {
   }
   return null;
 };
-
+const mutateClasslist = (type: boolean) => {
+  const root = window.document.documentElement;
+  if (type) {
+    root.classList.remove("dark");
+    root.classList.add("light");
+    return;
+  }
+  root.classList.remove("light");
+  root.classList.add("dark");
+  return;
+};
 const getFromLocalStorage = () => {
   const localTheme = localStorage.getItem(LOCALSTORAGE_THEME_NAME);
-  if (localTheme === "true") return true;
-  if (localTheme === "false") return false;
+  if (localTheme === "true") {
+    mutateClasslist(true);
+    return true;
+  }
+  if (localTheme === "false") {
+    mutateClasslist(false);
+    return false;
+  }
   const PreferredMode = getPreferredMode();
   if (PreferredMode === null) {
     localStorage.setItem(LOCALSTORAGE_THEME_NAME, "false");
+    mutateClasslist(false);
     return false;
   }
+  mutateClasslist(PreferredMode);
   return PreferredMode;
 };
 

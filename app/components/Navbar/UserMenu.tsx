@@ -22,19 +22,19 @@ const UserMenu = () => {
   return (
     <>
       <section
-        className="flex items-center xl1:gap-2 gap-4 text-secondary-60 cursor-pointer"
+        className="flex items-center xl1:gap-2 gap-4 dark:text-secondary-60 cursor-pointer"
         onClick={toggle}>
-        <div className="outline outline-yellow-30 rounded-md xl1:scale-75">
+        <div className="outline outline-yellow-default rounded-md xl1:scale-75">
           <Avatar />
         </div>
-        <p className="font-bold xl1:text-[10px]">Timileyinwandf</p>
+        <p className="font-bold xl1:text-[10px] text-secondary-10 dark:text-secondaryBg-10">Timileyinwandf</p>
         <span>
-          <ArrowDown className={`text-secondary-60 ${isOpen ? "rotate-180" : ""}`} />
+          <ArrowDown className={`text-secondary-40 dark:text-secondary-60 transition-all ${isOpen ? "rotate-180" : ""}`} />
         </span>
       </section>
       {isOpen ? (
         <motion.div
-          className="absolute rounded-lg shadow-md w-[33vw] sm:w-[25vw] max-w-[250px] min-w-[200px] bg-dark-10 border-dark-40 text-secondaryBg-20 border-[1px] overflow-hidden right-4 top-[3.3rem] text-sm"
+          className="absolute rounded-lg shadow-md w-[33vw] sm:w-[25vw] max-w-[250px] min-w-[200px] bg-secondaryBg-10 dark:bg-dark-10 dark:border-dark-40 dark:text-secondaryBg-20 text-secondary-20 border-[1px] overflow-hidden right-0 top-[3.3rem] text-sm"
           initial="hidden"
           animate="visible"
           variants={itemVariants}
@@ -48,7 +48,7 @@ const UserMenu = () => {
               onClick={() => push("/auth/signup")}
               label="Signup"
             />
-            <motion.div className="border-t border-gray-700 mx-4 my-1"></motion.div>
+            <motion.div className="border-t border-secondaryBg-20 dark:border-gray-700 mx-4 my-1"></motion.div>
             <MenuItem
               onClick={() => {}}
               noHover

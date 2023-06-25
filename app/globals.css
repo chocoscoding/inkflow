@@ -26,7 +26,7 @@ body {
 }
 
 .transitionDelayed {
-  transition-delay: 0.3s;
+  transition-delay: 0.2s;
 }
 
 @media (max-width: 639px) {
@@ -38,3 +38,5 @@ body {
     height: 100% !important;
   }
 }
+
+

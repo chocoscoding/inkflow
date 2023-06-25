@@ -15,14 +15,13 @@ const LNavigation: FC<LNavigationType> = ({ bottom }) => {
 
   const route = usePathname();
   const { onOpen } = useSearchModal();
-  const lightColor = lightMode ? "text-secondaryBg-50" : "text-secondaryBg-10";
-  const lightColor2 = lightMode ? "text-secondaryBg-40" : "text-secondary-40";
+  const lightColor = "text-secondary-50 dark:text-secondaryBg-10";
   const conditionalStyles_Bottom = useCallback(() => {
     const conditionalStyle1 = bottom ? `md2:flex md2:w-full hidden sticky bottom-0 px-1 py-2 justify-around` : `sm:flex hidden`;
     const conditionalStyle2 = bottom ? `md2:scale-110` : `xl1:scale-75`;
     const conditionalStyle3 = () => {
       if (!bottom) return "";
-      return lightMode ? "bg-secondaryBg-10" : "bg-dark-10";
+      return "bg-secondaryBg-10 dark:bg-dark-10";
     };
     return {
       body: conditionalStyle1,
@@ -31,9 +30,9 @@ const LNavigation: FC<LNavigationType> = ({ bottom }) => {
     };
   }, []);
   const active = (pathName: string) => {
-    if (route === "/" && pathName === " ") return " bg-red-default font-sm";
-    if (route.includes(pathName)) return " bg-red-default font-sm";
-    return "hover:bg-dark-20";
+    if (route === "/" && pathName === " ") return { container: "bg-red-default font-sm text-secondaryBg-10", icon: "text-secondaryBg-10" };
+    if (route.includes(pathName)) return { container: "bg-red-default font-sm text-secondaryBg-10", icon: "text-secondaryBg-10" };
+    return { container: "hover:bg-secondaryBg-20 dark:hover:bg-dark-20", icon: "" };
   };
 
   return (
@@ -44,23 +43,31 @@ const LNavigation: FC<LNavigationType> = ({ bottom }) => {
         }`}>
         <Link
           href={"/"}
-          className={`${active(" ")} cursor-pointer p-2 rounded-md ${conditionalStyles_Bottom().scale} text-inherit no-underline`}>
-          <Home className={lightColor} />
+          className={`${active(" ").container} cursor-pointer p-2 rounded-md ${
+            conditionalStyles_Bottom().scale
+          } text-inherit no-underline`}>
+          <Home className={`${lightColor} ${active(" ").icon} `} />
         </Link>
         <Link
           href={"/meetups"}
-          className={`${active("meetups")} cursor-pointer p-2 rounded-md ${conditionalStyles_Bottom().scale} text-inherit no-underline`}>
-          <Calendar className={lightColor} />
+          className={`${active("meetups").container} cursor-pointer p-2 rounded-md ${
+            conditionalStyles_Bottom().scale
+          } text-inherit no-underline`}>
+          <Calendar className={`${lightColor} ${active("meetups").icon}`} />
         </Link>
         <Link
           href={"/groups"}
-          className={`${active("groups")} cursor-pointer p-2 rounded-md ${conditionalStyles_Bottom().scale} text-inherit no-underline`}>
-          <Groups className={lightColor} />
+          className={`${active("groups").container} cursor-pointer p-2 rounded-md ${
+            conditionalStyles_Bottom().scale
+          } text-inherit no-underline`}>
+          <Groups className={`${lightColor} ${active("groups").icon}`} />
         </Link>
         <Link
           href={"/interviews"}
-          className={`${active("interviews")} cursor-pointer p-2 rounded-md ${conditionalStyles_Bottom().scale} text-inherit no-underline`}>
-          <Interviews className={lightColor} />
+          className={`${active("interviews").container} cursor-pointer p-2 rounded-md ${
+            conditionalStyles_Bottom().scale
+          } text-inherit no-underline`}>
+          <Interviews className={`${lightColor} ${active("interviews").icon}`} />
         </Link>
       </div>
 
@@ -71,7 +78,7 @@ const LNavigation: FC<LNavigationType> = ({ bottom }) => {
             onClick={onOpen}>
             <SearchIcon
               weight={2}
-              className={lightColor2}
+              className={`text-secondary-40 dark:text-secondary-40`}
             />
           </span>
         </div>

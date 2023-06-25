@@ -11,7 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <div>
       <Navbar />
-      {children}
+      <div className="bg-secondaryBg-20 dark:bg-dark-20">{children}</div>
       <Footer bottom />
     </div>
   );
