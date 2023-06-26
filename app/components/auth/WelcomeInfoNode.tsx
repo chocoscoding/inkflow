@@ -1,27 +1,33 @@
 "use client";
 import React, { ReactNode } from "react";
 import { Business, Feedback, Fire, Inbox, Rocket, Trouble } from "../Icons";
-import useLightMode from "@/app/hooks/useLightMode";
+import { motion } from "framer-motion";
 interface WelcomeInfoNodeType {
   lightMode?: boolean;
   color: "red" | "yellow" | "blue" | "green";
   icon: "Rocket" | "Business" | "Chat" | "Inbox" | "Fire" | "Lightning";
   label: ReactNode;
 }
+const boxVariants = {
+  initial: { y: "10rem" },
+  animate: {
+    y: 0,
+    transition: { staggerChildren: 0.05, ease: "easeInOut", duration: 1 },
+  },
+};
 
 const WelcomeInfoNode: React.FC<WelcomeInfoNodeType> = ({ color, icon, label }) => {
-  const { lightMode } = useLightMode();
   const iconContainerColor = {
-    red: lightMode ? "bg-red-10" : "bg-dark-40",
-    yellow: lightMode ? "bg-yellow-10" : "bg-dark-40",
-    blue: lightMode ? "bg-blue-10" : "bg-dark-40",
-    green: lightMode ? "bg-green-10" : "bg-dark-40",
+    red: "bg-red-10 dark:bg-dark-40",
+    yellow: "bg-yellow-10 dark:bg-dark-40",
+    blue: "bg-blue-10 dark:bg-dark-40",
+    green: "bg-green-10 dark:bg-dark-40",
   };
   const iconColor = {
     red: "text-red-default",
     yellow: "text-yellow-default",
     blue: "text-blue-default",
-    green: "text-blue-default",
+    green: "text-green-default",
   };
   const iconScale = "scale-125";
   iconColor["red"];
@@ -35,12 +41,14 @@ const WelcomeInfoNode: React.FC<WelcomeInfoNodeType> = ({ color, icon, label }) 
   };
 
   return (
-    <div className="  flex h-[100px] w-full bg-dark-30 rounded-lg mb-5 items-center p-4 gap-4  dark:bg-green-dark-10">
+    <motion.div
+      className="flex h-[100px] w-full  rounded-lg mb-5 items-center p-4 gap-4 bg-white dark:bg-dark-30"
+      variants={boxVariants}>
       <div className={`${iconContainerColor[color]} h-full w-[17%] rounded-lg shrink-0 flex items-center justify-center`}>
         {icons[icon]}
       </div>
-      <p className="font-bold text-lg text-secondary-60 ">{label}</p>
-    </div>
+      <p className="font-bold text-lg text-secondary-20 dark:text-secondary-60">{label}</p>
+    </motion.div>
   );
 };
 

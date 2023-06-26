@@ -14,7 +14,7 @@ module.exports = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       boxShadow: {
-        'inner-2': 'inset 0 2px 4px 0 rgb(20 27 34)'
+        'inner-2': 'inset 0 2px 4px 0 hsl(210 16% 6% / 1)'
       },
       colors: {
 
@@ -96,7 +96,7 @@ module.exports = {
           70: '#71A2EB',
           80: '#5D95E8',
           90: '#4887E5',
-          deafult: '#347AE2',
+          default: '#347AE2',
           dark: {
             90: '#2F6ECB',
             80: '#2A62B5',

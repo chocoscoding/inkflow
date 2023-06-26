@@ -24,6 +24,7 @@ export { default as Follow } from "./Follow";
 export { default as Following } from "./Following";
 export { default as Night } from "./Night";
 export { default as Groups } from "./Groups";
+export { default as Github } from "./Github";
 export { default as GroupsActive } from "./GroupsActive";
 export { default as Growing } from "./Growing";
 export { default as Headline } from "./Headline";
