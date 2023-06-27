@@ -4,87 +4,77 @@ import Input from "@/app/components/auth/Input";
 import OrLine from "@/app/components/auth/OrLine";
 import Select from "@/app/components/auth/Select";
 import SocialAuth from "@/app/components/auth/SocialAuth";
+import Step1 from "@/app/components/auth/Step1";
+import Step2 from "@/app/components/auth/Step2";
 import useLightMode from "@/app/hooks/useLightMode";
+import { getFormattedDate, validateNotEmpty } from "@/app/libs/helper";
 import React, { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
-interface StepOneType {
-  Firstname: string;
-  Lastname: string;
-  Age: string;
-  Nationality: string;
+export interface FormType {
+  firstname: string;
+  lastname: string;
+  age: string;
+  country: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
 }
 const DataFields = () => {
   const { lightMode } = useLightMode();
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, dirtyFields },
+    formState: { errors, dirtyFields },
     getValues,
-  } = useForm<FieldValues>({
+    setError,
+    clearErrors,
+    trigger,
+  } = useForm<FormType>({
     defaultValues: {
       email: "",
       password: "",
+      confirmPassword: "",
       firstname: "",
       lastname: "",
-      username: "",
       age: "",
       country: "",
     },
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const isComplete = useCallback(() => {
-    //get if the values have been inputed
-    const { firstname, lastname, age, country } = dirtyFields;
-    return firstname && lastname && age && country;
-  }, [dirtyFields]);
+  const [step, setStep] = useState<number>(1);
+  const onSubmit = (data: FieldValues) => {
+    console.log(data);
+  };
+  const submit = ()=>{
+    if(step === 1 ) return;
+     handleSubmit(onSubmit)
+  }
   return (
     <section
       className={`flex-1 h-full md2:w-full shrink-0 overflow-x-hidden overflow-y-auto bg-secondaryBg-10 dark:bg-dark-30 p-8 flex flex-col items-center justify-center`}>
-      <div className="w-full sm:w-10/12 lg:w-8/12 my-9">
-        <Input
-          id="firstname"
-          label="Firstname"
-          disabled={isLoading}
-          register={register}
-          errors={errors}
-          required
-        />
-        <Input
-          id="lastname"
-          label="Lastname"
-          disabled={isLoading}
-          register={register}
-          errors={errors}
-          required
-        />
-        <div className="w-full sm:flex sm:gap-4">
-          <Input
-            id="age"
-            label="Age"
-            inputType="date"
-            disabled={isLoading}
+      <form
+        onSubmit={submit}
+        className="w-full sm:w-10/12 lg:w-8/12 my-9">
+        {step === 1 ? (
+          <Step1
+            trigger={trigger}
+            dirtyFields={dirtyFields}
             register={register}
             errors={errors}
-            required
-            condition={{ max: new Date(Date.now()) }}
+            setStep={setStep}
           />
-          <Select
-            id="country"
-            label="Country"
-            disabled={isLoading}
+        ) : null}
+        {step === 2 ? (
+          <Step2
+            trigger={trigger}
+            dirtyFields={dirtyFields}
             register={register}
             errors={errors}
-            required
+            setStep={setStep}
           />
-        </div>
-
-        <button
-          className="w-full h-[50px] bg-red-80 disabled:bg-red-60 rounded-lg cursor-pointer"
-          disabled={!isComplete()}>
-          NEXT
-        </button>
-      </div>
+        ) : null}
+      </form>
 
       <div className="w-full sm:w-10/12 lg:w-8/12 my-9">
         <OrLine />
