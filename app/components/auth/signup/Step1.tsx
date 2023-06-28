@@ -1,14 +1,14 @@
 import React, { Dispatch, SetStateAction, useCallback } from "react";
-import Input from "./Input";
-import Select from "./Select";
+import Input from "../Input";
+import Select from "../Select";
 import { UseFormRegister, FieldValues, UseFormTrigger, useFormContext, Controller } from "react-hook-form";
 import { getFormattedDate, validateNotEmpty } from "@/app/libs/helper";
 import { FormType } from "@/app/(authentication)/auth/signup/DataFields";
-interface Step1Type {
-  setStep: Dispatch<SetStateAction<number>>;
-}
-const Step1: React.FC<Step1Type> = ({ setStep }) => {
+import useSignupSteps from "@/app/hooks/useSignupSteps";
+
+const Step1 = () => {
   const { register, formState, trigger, clearErrors } = useFormContext<FormType>();
+  const { two } = useSignupSteps();
   const { errors, dirtyFields } = formState;
   const isComplete = useCallback(() => {
     //get if the values have been inputed
@@ -22,7 +22,7 @@ const Step1: React.FC<Step1Type> = ({ setStep }) => {
     const containsError = keysToCheck.some((key) => Object.keys(errors).includes(key));
     if (containsError) return;
     if (!isComplete()) return;
-    return setStep(2);
+    return two();
   };
 
   return (

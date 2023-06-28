@@ -16,11 +16,11 @@ const boxVariants = {
 const WelcomeInfoContainer: React.FC<WelcomeInfoContainerType> = ({ heading, children }) => {
   return (
     <motion.section
-      className=" self-center flex-1 flex flex-col justify-center items-center p-4 w-10/12 lg1:w-11/12 max-h-[700px] max-w-[700px]"
+      className=" self-center flex-1 flex flex-col justify-center items-center p-4 lg1:p-2 w-10/12 xl1:w-11/12 lg1:w-[95%] max-h-[700px] max-w-[700px]"
       initial="initial"
       animate="animate"
       variants={boxVariants}>
-      <h2 className="text-secondary-20 dark:text-secondaryBg-20 font-bold xl:text-3xl text-2xl mb-7 w-full">{heading}</h2>
+      <h2 className="text-secondary-20 dark:text-secondaryBg-20 font-bold xl:text-3xl text-2xl mb-7 w-full lg1:text-xl">{heading}</h2>
       {children}
     </motion.section>
   );

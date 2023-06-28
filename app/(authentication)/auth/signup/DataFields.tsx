@@ -1,15 +1,13 @@
 "use client";
-import { Google } from "@/app/components/Icons/Icon";
-import Input from "@/app/components/auth/Input";
 import OrLine from "@/app/components/auth/OrLine";
-import Select from "@/app/components/auth/Select";
 import SocialAuth from "@/app/components/auth/SocialAuth";
-import Step1 from "@/app/components/auth/Step1";
-import Step2 from "@/app/components/auth/Step2";
+import MobileScreenHeading from "@/app/components/auth/signup/MobileScreenHeading";
+import Step1 from "@/app/components/auth/signup/Step1";
+import Step2 from "@/app/components/auth/signup/Step2";
 import useLightMode from "@/app/hooks/useLightMode";
-import { getFormattedDate, validateNotEmpty } from "@/app/libs/helper";
-import React, { useCallback, useState } from "react";
-import { FieldValues, SubmitHandler, useForm, FormProvider, useFormContext } from "react-hook-form";
+import useSignupSteps from "@/app/hooks/useSignupSteps";
+import React, { useState } from "react";
+import { FieldValues, useForm, FormProvider } from "react-hook-form";
 
 export interface FormType {
   firstname: string;
@@ -35,23 +33,22 @@ const DataFields = () => {
     mode: "onChange",
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [step, setStep] = useState<number>(1);
-  const onSubmit = (data: FieldValues) => {
-    console.log(data);
-  };
+  const { steps } = useSignupSteps();
+  const onSubmit = (data: FieldValues) => {};
   const submit = () => {
-    if (step === 1) return;
+    if (steps === 1) return;
     methods.handleSubmit(onSubmit);
   };
   return (
     <section
-      className={`flex-1 h-full md2:w-full shrink-0 overflow-x-hidden overflow-y-auto bg-secondaryBg-10 dark:bg-dark-30 p-8 flex flex-col items-center justify-center`}>
+      className={`flex-1 h-full md2:w-full shrink-0 overflow-x-hidden overflow-y-auto bg-secondaryBg-10 dark:bg-dark-30 p-8 flex flex-col items-center lg:justify-center`}>
+      <MobileScreenHeading />
       <FormProvider {...methods}>
         <form
           onSubmit={submit}
           className="w-full sm:w-10/12 lg:w-8/12 my-9">
-          {step === 1 ? <Step1 setStep={setStep} /> : null}
-          {step === 2 ? <Step2 setStep={setStep} /> : null}
+          {steps === 1 ? <Step1 /> : null}
+          {steps === 2 ? <Step2 /> : null}
         </form>
       </FormProvider>
 

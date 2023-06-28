@@ -1,40 +1,41 @@
 import React, { Dispatch, SetStateAction, useCallback } from "react";
-import Input from "./Input";
-import Select from "./Select";
+import Input from "../Input";
+import Select from "../Select";
 import { UseFormRegister, FieldValues, UseFormTrigger, useFormContext } from "react-hook-form";
 import { getFormattedDate, validateNotEmpty } from "@/app/libs/helper";
 import { FormType } from "@/app/(authentication)/auth/signup/DataFields";
-import { ArrowDown, BackArrow } from "../Icons";
-interface Step1Type {
-  setStep: Dispatch<SetStateAction<number>>;
-}
-const Step2: React.FC<Step1Type> = ({ setStep }) => {
+import { ArrowDown, BackArrow } from "../../Icons";
+import useSignupSteps from "@/app/hooks/useSignupSteps";
+
+const Step2 = () => {
   const {
     register,
     formState: { errors, dirtyFields },
     trigger,
     watch,
   } = useFormContext<FormType>();
+  const { one, two } = useSignupSteps();
+
   const password = React.useRef({});
   password.current = watch("password", "");
   const isComplete = useCallback(() => {
     //get if the values have been inputed
-    const { email, password } = dirtyFields;
-    return email && password;
+    const { email, password, confirmPassword } = dirtyFields;
+    return email && password && confirmPassword;
   }, [dirtyFields]);
   const isValid = () => {
     const keysToCheck: any[] = ["email", "password", "confirmPassword"];
     trigger(keysToCheck);
     const containsError = keysToCheck.some((key) => Object.keys(errors).includes(key));
     if (containsError) return;
-    setStep(2);
+    two();
   };
 
   return (
     <>
       <div
         className={`w-[50px] h-[50px] rounded-full cursor-pointer bg-dark-40 flex justify-center items-center mt-10 mb-6`}
-        onClick={() => setStep(1)}>
+        onClick={() => one()}>
         <BackArrow className="text-secondary-40 scale-125" />
       </div>
       <Input
@@ -59,7 +60,14 @@ const Step2: React.FC<Step1Type> = ({ setStep }) => {
         inputType="password"
         register={register}
         errors={errors}
-        required={{ required: "Password required?", validate: (value: string) => validateNotEmpty(value, "Password required") }}
+        required={{
+          required: "Password required?",
+          minLength: {
+            message: "Please pick password longer than 8 characters",
+            value: 8,
+          },
+          validate: (value: string) => validateNotEmpty(value, "Password required"),
+        }}
       />
 
       <Input
@@ -70,7 +78,7 @@ const Step2: React.FC<Step1Type> = ({ setStep }) => {
         placeholder="Confirm your password"
         errors={errors}
         required={{
-          required: "Password required?",
+          required: "Password required",
           validate: {
             notEmpty: (value: string) => validateNotEmpty(value, "This field is required"),
             matchPassword: (value: string) => value === password.current || "The passwords do not match",

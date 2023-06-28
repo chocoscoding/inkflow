@@ -29,7 +29,7 @@ const WelcomeInfoNode: React.FC<WelcomeInfoNodeType> = ({ color, icon, label }) 
     blue: "text-blue-default",
     green: "text-green-default",
   };
-  const iconScale = "scale-125";
+  const iconScale = "scale-125 lg1:scale-95";
   iconColor["red"];
   const icons = {
     Rocket: <Rocket className={`${iconScale} ${iconColor[color]}`} />,
@@ -42,12 +42,13 @@ const WelcomeInfoNode: React.FC<WelcomeInfoNodeType> = ({ color, icon, label }) 
 
   return (
     <motion.div
-      className="flex h-[100px] w-full  rounded-lg mb-5 items-center p-4 gap-4 bg-white dark:bg-dark-30"
+      className="flex h-[100px] w-full  rounded-lg mb-5 items-center p-4 lg1:p-3 lg1:gap-2 gap-4 bg-white dark:bg-dark-30"
       variants={boxVariants}>
-      <div className={`${iconContainerColor[color]} h-full w-[17%] rounded-lg shrink-0 flex items-center justify-center`}>
+      <div
+        className={`${iconContainerColor[color]} h-full w-[17%] lg1:w-[20%] lg1:h-[80%] rounded-lg shrink-0 flex items-center justify-center`}>
         {icons[icon]}
       </div>
-      <p className="font-bold text-lg text-secondary-20 dark:text-secondary-60">{label}</p>
+      <p className="font-bold text-lg lg1:text-sm text-secondary-20 dark:text-secondary-60">{label}</p>
     </motion.div>
   );
 };
