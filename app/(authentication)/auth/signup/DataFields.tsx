@@ -9,7 +9,7 @@ import Step2 from "@/app/components/auth/Step2";
 import useLightMode from "@/app/hooks/useLightMode";
 import { getFormattedDate, validateNotEmpty } from "@/app/libs/helper";
 import React, { useCallback, useState } from "react";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm, FormProvider, useFormContext } from "react-hook-form";
 
 export interface FormType {
   firstname: string;
@@ -22,15 +22,7 @@ export interface FormType {
 }
 const DataFields = () => {
   const { lightMode } = useLightMode();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, dirtyFields },
-    getValues,
-    setError,
-    clearErrors,
-    trigger,
-  } = useForm<FormType>({
+  const methods = useForm<FormType>({
     defaultValues: {
       email: "",
       password: "",
@@ -40,41 +32,28 @@ const DataFields = () => {
       age: "",
       country: "",
     },
+    mode: "onChange",
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [step, setStep] = useState<number>(1);
   const onSubmit = (data: FieldValues) => {
     console.log(data);
   };
-  const submit = ()=>{
-    if(step === 1 ) return;
-     handleSubmit(onSubmit)
-  }
+  const submit = () => {
+    if (step === 1) return;
+    methods.handleSubmit(onSubmit);
+  };
   return (
     <section
       className={`flex-1 h-full md2:w-full shrink-0 overflow-x-hidden overflow-y-auto bg-secondaryBg-10 dark:bg-dark-30 p-8 flex flex-col items-center justify-center`}>
-      <form
-        onSubmit={submit}
-        className="w-full sm:w-10/12 lg:w-8/12 my-9">
-        {step === 1 ? (
-          <Step1
-            trigger={trigger}
-            dirtyFields={dirtyFields}
-            register={register}
-            errors={errors}
-            setStep={setStep}
-          />
-        ) : null}
-        {step === 2 ? (
-          <Step2
-            trigger={trigger}
-            dirtyFields={dirtyFields}
-            register={register}
-            errors={errors}
-            setStep={setStep}
-          />
-        ) : null}
-      </form>
+      <FormProvider {...methods}>
+        <form
+          onSubmit={submit}
+          className="w-full sm:w-10/12 lg:w-8/12 my-9">
+          {step === 1 ? <Step1 setStep={setStep} /> : null}
+          {step === 2 ? <Step2 setStep={setStep} /> : null}
+        </form>
+      </FormProvider>
 
       <div className="w-full sm:w-10/12 lg:w-8/12 my-9">
         <OrLine />

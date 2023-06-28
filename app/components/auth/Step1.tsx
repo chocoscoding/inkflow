@@ -1,17 +1,15 @@
 import React, { Dispatch, SetStateAction, useCallback } from "react";
 import Input from "./Input";
 import Select from "./Select";
-import { UseFormRegister, FieldValues, UseFormTrigger } from "react-hook-form";
+import { UseFormRegister, FieldValues, UseFormTrigger, useFormContext, Controller } from "react-hook-form";
 import { getFormattedDate, validateNotEmpty } from "@/app/libs/helper";
 import { FormType } from "@/app/(authentication)/auth/signup/DataFields";
 interface Step1Type {
-  register: UseFormRegister<FormType>;
-  errors: FieldValues;
-  dirtyFields: Partial<Readonly<{ [K in keyof FormType]?: boolean }>>;
-  trigger: UseFormTrigger<FormType>;
   setStep: Dispatch<SetStateAction<number>>;
 }
-const Step1: React.FC<Step1Type> = ({ register, errors, dirtyFields, trigger, setStep }) => {
+const Step1: React.FC<Step1Type> = ({ setStep }) => {
+  const { register, formState, trigger, clearErrors } = useFormContext<FormType>();
+  const { errors, dirtyFields } = formState;
   const isComplete = useCallback(() => {
     //get if the values have been inputed
     const { firstname, lastname, age, country } = dirtyFields;
@@ -23,7 +21,8 @@ const Step1: React.FC<Step1Type> = ({ register, errors, dirtyFields, trigger, se
 
     const containsError = keysToCheck.some((key) => Object.keys(errors).includes(key));
     if (containsError) return;
-    setStep(2);
+    if (!isComplete()) return;
+    return setStep(2);
   };
 
   return (
@@ -34,7 +33,13 @@ const Step1: React.FC<Step1Type> = ({ register, errors, dirtyFields, trigger, se
         register={register}
         errors={errors}
         placeholder="John"
-        required={{ required: "What's your firstname?", validate: (value: string) => validateNotEmpty(value, "What's your firstname") }}
+        required={{
+          required: "First name is required.",
+          pattern: {
+            value: /^[a-zA-Z]+$/,
+            message: "First name should contain only characters.",
+          },
+        }}
       />
       <Input
         id="lastname"
@@ -42,24 +47,31 @@ const Step1: React.FC<Step1Type> = ({ register, errors, dirtyFields, trigger, se
         register={register}
         errors={errors}
         placeholder="Doe"
-        required={{ required: "What's your lastname?", validate: (value: string) => validateNotEmpty(value, "What's your lastname") }}
+        required={{
+          required: "Last name is required.",
+          pattern: {
+            value: /^[a-zA-Z]+$/,
+            message: "First name should contain only characters.",
+          },
+        }}
       />
       <div className="w-full sm:flex sm:gap-4">
         <Input
           id="age"
-          label="Age"
+          label="Date of Birth"
           inputType="date"
           register={register}
           errors={errors}
-          required={{ required: "Tell us your age" }}
+          required={{ required: "DOB is required" }}
           condition={{ max: getFormattedDate(), min: "1990-01-10" }}
         />
         <Select
           id="country"
-          label="Country"
+          label="Nationality"
           register={register}
           errors={errors}
-          required={{ required: "Where are you from?" }}
+          clearErrors={clearErrors}
+          required={{ required: "Nationality is required" }}
         />
       </div>
 

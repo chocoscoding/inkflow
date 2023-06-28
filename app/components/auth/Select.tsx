@@ -3,7 +3,7 @@ import countries from "i18n-iso-countries";
 // Import the languages you want to use
 import enLocale from "i18n-iso-countries/langs/en.json";
 import itLocale from "i18n-iso-countries/langs/it.json";
-import { UseFormRegister, FieldValues } from "react-hook-form";
+import { UseFormRegister, FieldValues, UseFormClearErrors } from "react-hook-form";
 import { FormType } from "@/app/(authentication)/auth/signup/DataFields";
 
 interface InputType {
@@ -14,10 +14,10 @@ interface InputType {
   register: UseFormRegister<FormType>;
   errors: FieldValues;
   placeholder?: string;
+  clearErrors: UseFormClearErrors<FormType>;
 }
 
-const Select: React.FC<InputType> = ({ label, register, id, required, disabled, errors }) => {
-
+const Select: React.FC<InputType> = ({ label, register, id, required, disabled, errors, clearErrors }) => {
   countries.registerLocale(enLocale);
   countries.registerLocale(itLocale);
   const countryObj = countries.getNames("en", { select: "official" });
