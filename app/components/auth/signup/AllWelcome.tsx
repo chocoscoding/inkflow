@@ -33,14 +33,14 @@ const AllWelcome = () => {
       <WelcomeInfoNode
         lightMode
         color="red"
-        icon="Rocket"
-        label="Help us build the best community for people like you."
+        icon="Fire"
+        label="Choose your login information to finish signing up."
       />
       <WelcomeInfoNode
         lightMode
         color="yellow"
-        icon="Chat"
-        label="See the best content and conversations, tailored to your interests."
+        icon="Rocket"
+        label="Dive into the community. Your first days are the most important!"
       />
     </WelcomeInfoContainer>
   );

@@ -46,7 +46,7 @@ const DataFields = () => {
       <FormProvider {...methods}>
         <form
           onSubmit={submit}
-          className="w-full sm:w-10/12 lg:w-8/12 my-9">
+          className={`w-full sm:w-10/12 lg:w-8/12 sm:my-9 ${steps === 1 ? "mt-4" : "mt-0"}`}>
           {steps === 1 ? <Step1 /> : null}
           {steps === 2 ? <Step2 /> : null}
         </form>

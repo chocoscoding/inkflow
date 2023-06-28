@@ -34,7 +34,7 @@ const Step2 = () => {
   return (
     <>
       <div
-        className={`w-[50px] h-[50px] rounded-full cursor-pointer bg-dark-40 flex justify-center items-center mt-10 mb-6`}
+        className={`w-[50px] h-[50px] rounded-full cursor-pointer bg-dark-40 flex justify-center items-center sm:mt-10 mt-8 mb-6`}
         onClick={() => one()}>
         <BackArrow className="text-secondary-40 scale-125" />
       </div>
