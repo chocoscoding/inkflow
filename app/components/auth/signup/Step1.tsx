@@ -12,11 +12,11 @@ const Step1 = () => {
   const { errors, dirtyFields } = formState;
   const isComplete = useCallback(() => {
     //get if the values have been inputed
-    const { firstname, lastname, age, country } = dirtyFields;
-    return firstname && lastname && age && country;
+    const { firstname, lastname, dob, country } = dirtyFields;
+    return firstname && lastname && dob && country;
   }, [dirtyFields]);
   const isValid = () => {
-    const keysToCheck: any[] = ["firstname", "lastname", "age", "country"];
+    const keysToCheck: any[] = ["firstname", "lastname", "dob", "country"];
     trigger(keysToCheck);
 
     const containsError = keysToCheck.some((key) => Object.keys(errors).includes(key));
@@ -57,13 +57,13 @@ const Step1 = () => {
       />
       <div className="w-full sm:flex sm:gap-4">
         <Input
-          id="age"
+          id="dob"
           label="Date of Birth"
           inputType="date"
           register={register}
           errors={errors}
           required={{ required: "DOB is required" }}
-          condition={{ max: getFormattedDate(), min: "1990-01-10" }}
+          condition={{ max: getFormattedDate(), min: "1900-01-10" }}
         />
         <Select
           id="country"

@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+import getCurrentUser from "../actions/getCurrentUser";
 import "../globals.css";
 import { Inter } from "next/font/google";
 
@@ -8,6 +10,8 @@ export const metadata = {
   description: "Let's start our journey here",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const currentUser = await getCurrentUser();
+  if (currentUser?.username) return redirect("/");
   return <div>{children}</div>;
 }

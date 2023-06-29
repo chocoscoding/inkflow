@@ -1,34 +1,36 @@
-import React, { Dispatch, SetStateAction, useCallback } from "react";
+import React, { MutableRefObject, useCallback } from "react";
 import Input from "../Input";
-import Select from "../Select";
-import { UseFormRegister, FieldValues, UseFormTrigger, useFormContext } from "react-hook-form";
-import { getFormattedDate, validateNotEmpty } from "@/app/libs/helper";
+import { useFormContext } from "react-hook-form";
+import { validateNotEmpty } from "@/app/libs/helper";
 import { FormType } from "@/app/(authentication)/auth/signup/DataFields";
-import { ArrowDown, BackArrow } from "../../Icons";
+import { BackArrow } from "../../Icons";
 import useSignupSteps from "@/app/hooks/useSignupSteps";
-
-const Step2 = () => {
+interface Step2Type {
+  formRef: MutableRefObject<HTMLFormElement | null>;
+  isLoading: boolean;
+}
+const Step2: React.FC<Step2Type> = ({ formRef, isLoading }) => {
   const {
     register,
     formState: { errors, dirtyFields },
     trigger,
     watch,
   } = useFormContext<FormType>();
-  const { one, two } = useSignupSteps();
-
+  const { one } = useSignupSteps();
   const password = React.useRef({});
   password.current = watch("password", "");
+
   const isComplete = useCallback(() => {
     //get if the values have been inputed
     const { email, password, confirmPassword } = dirtyFields;
     return email && password && confirmPassword;
   }, [dirtyFields]);
-  const isValid = () => {
+  const isValid = (e: any) => {
     const keysToCheck: any[] = ["email", "password", "confirmPassword"];
     trigger(keysToCheck);
     const containsError = keysToCheck.some((key) => Object.keys(errors).includes(key));
-    if (containsError) return;
-    two();
+    if (containsError) return e.preventDefault();
+    return;
   };
 
   return (
@@ -87,9 +89,10 @@ const Step2 = () => {
       />
 
       <button
-        type="button"
-        className={`w-full h-[50px]  ${isComplete() ? "bg-red-default" : "bg-red-60"} rounded-lg cursor-pointer`}
-        onClick={isValid}>
+        type="submit"
+        disabled={isLoading}
+        className={`w-full h-[50px]  ${isComplete() ? "bg-red-default" : "bg-red-60"} disabled:bg-red-60 rounded-lg cursor-pointer`}
+        onClick={(e) => isValid(e)}>
         SUBMIT
       </button>
     </>
