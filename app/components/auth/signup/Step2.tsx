@@ -78,7 +78,7 @@ const Step2 = () => {
         placeholder="Confirm your password"
         errors={errors}
         required={{
-          required: "Password required",
+          required: "This field is required",
           validate: {
             notEmpty: (value: string) => validateNotEmpty(value, "This field is required"),
             matchPassword: (value: string) => value === password.current || "The passwords do not match",
@@ -88,7 +88,7 @@ const Step2 = () => {
 
       <button
         type="button"
-        className={`w-full h-[50px]  ${isComplete() ? "bg-red-80" : "bg-red-60"} rounded-lg cursor-pointer`}
+        className={`w-full h-[50px]  ${isComplete() ? "bg-red-default" : "bg-red-60"} rounded-lg cursor-pointer`}
         onClick={isValid}>
         SUBMIT
       </button>
