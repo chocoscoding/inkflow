@@ -11,8 +11,6 @@ interface LNavigationType {
 }
 const LNavigation: FC<LNavigationType> = ({ bottom }) => {
   const { lightMode } = useLightMode();
-  console.log(lightMode);
-
   const route = usePathname();
   const { onOpen } = useSearchModal();
   const lightColor = "text-secondary-50 dark:text-secondaryBg-10";
@@ -31,7 +29,7 @@ const LNavigation: FC<LNavigationType> = ({ bottom }) => {
   }, []);
   const active = (pathName: string) => {
     if (route === "/" && pathName === " ") return { container: "bg-red-default font-sm text-secondaryBg-10", icon: "text-secondaryBg-10" };
-    if (route.includes(pathName)) return { container: "bg-red-default font-sm text-secondaryBg-10", icon: "text-secondaryBg-10" };
+    if (route?.includes(pathName)) return { container: "bg-red-default font-sm text-secondaryBg-10", icon: "text-secondaryBg-10" };
     return { container: "hover:bg-secondaryBg-20 dark:hover:bg-dark-20", icon: "" };
   };
 

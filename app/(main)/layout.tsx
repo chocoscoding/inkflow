@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+import getCurrentUser from "../actions/getCurrentUser";
 import Navbar from "../components/Navbar/Navbar";
 import "../globals.css";
 import Footer from "@/app/components/Navbar/LNavigation";
@@ -7,10 +9,12 @@ export const metadata = {
   description: "Pour what you have up there👆",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const currentUser = await getCurrentUser();
+  if (currentUser?.id && !currentUser?.username) return redirect("/welcome");
   return (
     <div>
-      <Navbar />
+      <Navbar currentUser={currentUser} />
       <div className="bg-secondaryBg-20 dark:bg-dark-20">{children}</div>
       <Footer bottom />
     </div>

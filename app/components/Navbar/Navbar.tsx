@@ -8,8 +8,13 @@ import RNavigation from "./RNavigation";
 import { useState } from "react";
 import useSearchModal from "@/app/hooks/useSearchModal";
 import { useTheme } from "next-themes";
+import { SafeUser } from "@/app/types";
 
-const Navbar = () => {
+export interface NavbarProps {
+  currentUser?: SafeUser | null;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
   const { theme } = useTheme();
   const searchOpen = useSearchModal().isOpen;
   return (
@@ -25,7 +30,7 @@ const Navbar = () => {
         <div className="flex w-full justify-between lg:max-w-[1200px] md:max-w-[850px] lg:mr-6">
           <LNavigation />
           <SearchInput />
-          <RNavigation />
+          <RNavigation currentUser={currentUser}/>
         </div>
       </div>
     </nav>

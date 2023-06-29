@@ -6,8 +6,10 @@ import Step3 from "@/app/components/welcome/Step3";
 import Step4 from "@/app/components/welcome/Step4";
 import useLightMode from "@/app/hooks/useLightMode";
 import useWelcomeSteps from "@/app/hooks/useWelcomeSteps";
+import axios from "axios";
 import React, { useState } from "react";
-
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 export interface FormType {
   firstname: string;
   lastname: string;
@@ -18,27 +20,53 @@ export interface FormType {
   confirmPassword: string;
 }
 const DataFields = () => {
-  const { lightMode } = useLightMode();
+  const { push } = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<{ message: string } | null>(null);
   const { steps } = useWelcomeSteps();
-  const onSubmit = () => {};
+  // const {} =
   const [welcomeInfo, setWelcomeInfo] = useState<{
     q1: number;
     q2: number;
     q3: number[];
-    email: string;
+    username: string;
   }>({
     q1: 0,
     q2: 0,
     q3: [],
-    email: "",
+    username: "",
   });
+  const onSubmit = async () => {
+    setIsLoading(true);
+    const loading = toast.loading("loading");
+    try {
+      const response: any = await axios.post("/api/userinfo", welcomeInfo);
+      toast.dismiss(loading);
+      if (response.data.status === 200) {
+        toast.success("Data Updated successfully");
+        push("/");
+        toast.loading("Redirecting");
+        return;
+      }
+      throw new Error(response.data.error);
+    } catch (error: any) {
+      toast.dismiss(loading);
+      if (error.message === "username taken") {
+        setError({
+          message: "This username has already been taken",
+        });
+        return;
+      }
+      toast.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const setQ1 = (value: number) => setWelcomeInfo((prev) => ({ ...prev, q1: value }));
   const setQ2 = (value: number) => setWelcomeInfo((prev) => ({ ...prev, q2: value }));
   const setQ3 = (value: number[]) => setWelcomeInfo((prev) => ({ ...prev, q3: value }));
-  const setQ4 = (value: string) => setWelcomeInfo((prev) => ({ ...prev, email: value }));
+  const setQ4 = (value: string) => setWelcomeInfo((prev) => ({ ...prev, username: value }));
   const clearError = () => setError(null);
   return (
     <section
@@ -68,7 +96,7 @@ const DataFields = () => {
             error={error}
             onSubmit={onSubmit}
             isLoading={isLoading}
-            data={welcomeInfo.email}
+            data={welcomeInfo.username}
             set={setQ4}
           />
         ) : null}

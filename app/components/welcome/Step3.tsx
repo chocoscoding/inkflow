@@ -38,7 +38,7 @@ const Step3: React.FC<StepType> = ({ data, set }) => {
   return (
     <div>
       <div
-        className={`w-[50px] h-[50px] rounded-full cursor-pointer bg-dark-40 flex justify-center items-center sm:mt-10 mt-8 mb-6`}
+        className={`w-[50px] h-[50px] rounded-full cursor-pointer bg-secondary-60 dark:bg-dark-40 flex justify-center items-center sm:mt-10 mt-8 mb-6`}
         onClick={() => two()}>
         <BackArrow className="text-secondary-40 scale-125" />
       </div>

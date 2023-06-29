@@ -13,11 +13,12 @@ interface StepType {
 }
 const Step4: React.FC<StepType> = ({ data, set, isLoading, error, clearError, onSubmit }) => {
   const { three, one } = useWelcomeSteps();
-  const isValid = data && data.length >= 5 && data.length < 15;
+  const maindata = data.trim();
+  const isValid = maindata && maindata.length >= 5 && maindata.length < 15 && maindata !== "";
   return (
     <div>
       <div
-        className={`w-[50px] h-[50px] rounded-full cursor-pointer bg-dark-40 flex justify-center items-center sm:mt-10 mt-8 mb-6`}
+        className={`w-[50px] h-[50px] rounded-full cursor-pointer bg-secondary-60 dark:bg-dark-40 flex justify-center items-center sm:mt-10 mt-8 mb-6`}
         onClick={() => three()}>
         <BackArrow className="text-secondary-40 scale-125" />
       </div>
@@ -27,7 +28,7 @@ const Step4: React.FC<StepType> = ({ data, set, isLoading, error, clearError, on
           <div className="w-full flex justify-between">
             <label
               htmlFor={"username"}
-              className="dark:text-secondaryBg-20 text-secondary-20">
+              className="dark:text-secondaryBg-20 text-secondary-20 ">
               {"Choose a username"}
             </label>
           </div>
@@ -43,7 +44,7 @@ const Step4: React.FC<StepType> = ({ data, set, isLoading, error, clearError, on
               }}
               id={"username"}
               disabled={isLoading}
-              className={`w-full rounded-lg bg-secondaryBg-60 dark:bg-dark-20 text-secondaryBg-30 h-[3rem] p-6 outline 
+              className={`w-full rounded-lg bg-secondary-60 dark:bg-dark-20 dark:text-secondaryBg-20 text-dark-30 h-[3rem] p-6 outline 
           ${error && "outline-1 outline-red-dark-50"}
           ${error && "focus:outline-2 outline-red-dark-50"}
           ${!error && "outline-0"}
@@ -62,7 +63,7 @@ const Step4: React.FC<StepType> = ({ data, set, isLoading, error, clearError, on
         </div>
         <button
           type="button"
-          disabled={isLoading}
+          disabled={isLoading || !isValid}
           className={`w-full h-[50px] min-w-[60px] ${isValid ? "bg-red-90" : "bg-red-40"} rounded-lg cursor-pointer mt-4`}
           onClick={onSubmit}>
           SUBMIT
