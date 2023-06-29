@@ -34,15 +34,15 @@ const Step2 = () => {
   return (
     <>
       <div
-        className={`w-[50px] h-[50px] rounded-full cursor-pointer bg-dark-40 flex justify-center items-center sm:mt-10 mt-8 mb-6`}
+        className={`w-[50px] h-[50px] rounded-full cursor-pointer dark:bg-dark-40 bg-secondary-60 flex justify-center items-center sm:mt-10 mt-8 mb-6`}
         onClick={() => one()}>
         <BackArrow className="text-secondary-40 scale-125" />
       </div>
       <Input
         id="email"
         label="Email"
-        inputType="email"
         register={register}
+        inputType="email"
         errors={errors}
         placeholder="example@email.com"
         required={{
