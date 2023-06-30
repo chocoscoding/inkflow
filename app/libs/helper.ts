@@ -1,3 +1,5 @@
+import { SignInResponse } from "next-auth/react";
+
 export const trimmer = (value: string) => {
   return value.trim();
 };

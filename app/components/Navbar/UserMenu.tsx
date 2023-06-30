@@ -18,7 +18,7 @@ const UserMenu: React.FC<NavbarProps> = ({ currentUser }) => {
     return onOpen();
   };
   const itemVariants = {
-    hidden: { opacity: 0, y: 200 },
+    hidden: { opacity: 0, y: 250 },
     visible: { opacity: 1, y: 0 },
   };
   return (

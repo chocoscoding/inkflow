@@ -10,8 +10,9 @@ import axios from "axios";
 import React, { useRef, useState } from "react";
 import { FieldValues, useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { signIn } from "next-auth/react";
+import { SignInResponse, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export interface FormType {
   firstname: string;
@@ -22,6 +23,7 @@ export interface FormType {
   password: string;
   confirmPassword: string;
 }
+
 const DataFields = () => {
   const { lightMode } = useLightMode();
   const { push } = useRouter();
@@ -40,6 +42,17 @@ const DataFields = () => {
   const formRef = useRef<HTMLFormElement | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { steps } = useSignupSteps();
+  const socialSignUpWrapper = async (func: Promise<SignInResponse | undefined>) => {
+    const loading = toast.loading("loading");
+    try {
+      await func;
+      push("/welcome");
+      toast.dismiss(loading);
+      toast.success("Redirecting", { duration: 5000 });
+    } catch (error: any) {
+      toast.error("Something went wrong, try again");
+    }
+  };
   const onSubmit: SubmitHandler<FieldValues> = async (data, e) => {
     e?.preventDefault();
     setIsLoading(true);
@@ -47,17 +60,15 @@ const DataFields = () => {
     if (steps === 1) return;
     try {
       const response: any = await axios.post("/api/register", data);
-      toast.dismiss(loading);
       if (response.data.status === 200) {
         await signIn("credentials", {
           email: data.email,
           password: data.password,
           redirect: false,
         });
-        toast.success("Registered successfully");
-        toast.loading("Redirecting");
+        toast.success("Registered successfully", { id: loading, duration: 1000 });
         push("/welcome");
-        toast.dismiss();
+        toast.success("Redirecting", { id: loading });
         return;
       }
       throw new Error(response.data.error);
@@ -83,7 +94,7 @@ const DataFields = () => {
         <form
           ref={formRef}
           onSubmit={methods.handleSubmit(onSubmit)}
-          className={`w-full sm:w-10/12 lg:w-8/12 sm:my-9 ${steps === 1 ? "mt-4" : "mt-0"}`}>
+          className={`w-full sm:w-10/12 lg:w-8/12 sm:my-4 ${steps === 1 ? "mt-4" : "mt-0"}`}>
           {steps === 1 ? <Step1 /> : null}
           {steps === 2 ? (
             <Step2
@@ -93,19 +104,26 @@ const DataFields = () => {
           ) : null}
         </form>
       </FormProvider>
-
-      <div className="w-full sm:w-10/12 lg:w-8/12 my-9">
+      <p className="text-sm">
+        {`Already have an account?`}
+        <Link
+          className="text-red-70 ml-2"
+          href={"/auth/signin"}>
+          Login
+        </Link>
+      </p>
+      <div className="w-full sm:w-10/12 lg:w-8/12 my-4">
         <OrLine />
 
         <SocialAuth
           label="Sign up with Google"
           icon="Google"
-          onClick={() => {}}
+          onClick={() => socialSignUpWrapper(signIn("google"))}
         />
         <SocialAuth
           label="Sign up with Github"
           icon="Github"
-          onClick={() => {}}
+          onClick={() => socialSignUpWrapper(signIn("github"))}
         />
       </div>
     </section>

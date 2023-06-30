@@ -12,7 +12,7 @@ const boxVariants = {
   initial: { y: "10rem" },
   animate: {
     y: 0,
-    transition: { staggerChildren: 0.05, ease: "easeInOut", duration: 1 },
+    transition: { staggerChildren: 0.05, ease: "backOut", duration: 1 },
   },
 };
 

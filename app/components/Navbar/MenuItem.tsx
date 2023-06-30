@@ -17,7 +17,7 @@ const MenuItem: FC<MenuItemsProps> = ({ onClick, label, noHover }) => {
     <motion.div
       variants={itemVariants}
       onClick={onClick}
-      transition={{ duration: 0.15 }}
+      transition={{ duration: 0.15, ease: "backIn" }}
       className={`px-4 py-3 ${noHover ? "" : "hover:bg-secondaryBg-20 dark:hover:bg-dark-20"} transition font-semibold`}>
       {label}
     </motion.div>

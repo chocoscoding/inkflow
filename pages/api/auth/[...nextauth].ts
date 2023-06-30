@@ -18,12 +18,13 @@ export const authOptions: AuthOptions = {
       profile(profile) {
         return {
           id: profile.sub,
-          name: profile.name,
           email: profile.email,
           image: profile.picture,
           firstname: profile.given_name,
-          lastName: profile.family_name,
+          lastname: profile.family_name,
           country: profile.locale,
+          dob: profile.birthday,
+          emailVerified: profile.email_verified,
         };
       },
     }),
@@ -42,10 +43,10 @@ export const authOptions: AuthOptions = {
           },
         });
 
-        if (!user || !user.hashedPassword) throw new Error("Invalid Credential");
+        if (!user || !user.hashedPassword) throw new Error("Email doesn't exist");
 
         const isCorrectPassword = await bcrypt.compare(credentials.password, user.hashedPassword);
-        if (!isCorrectPassword) throw new Error("Invalid Credentials");
+        if (!isCorrectPassword) throw new Error("Incorrect Password");
 
         return user;
       },

@@ -41,11 +41,10 @@ const DataFields = () => {
     const loading = toast.loading("loading");
     try {
       const response: any = await axios.post("/api/userinfo", welcomeInfo);
-      toast.dismiss(loading);
       if (response.data.status === 200) {
-        toast.success("Data Updated successfully");
+        toast.success("Data Updated successfully", { id: loading });
         push("/");
-        toast.loading("Redirecting");
+        toast.loading("Redirecting", { id: loading});
         return;
       }
       throw new Error(response.data.error);

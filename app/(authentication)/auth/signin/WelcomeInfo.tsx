@@ -17,18 +17,18 @@ const WelcomeInfo = () => {
       </span>
       <WelcomeInfoContainer
         key={"welcome1"}
-        heading="Tell us a little about yourself!">
+        heading="Sign in to Inkflow">
         <WelcomeInfoNode
           lightMode
-          color="red"
-          icon="Rocket"
-          label="Help us build the best community for people like you."
+          color="green"
+          icon="Inbox"
+          label="Communicated faster and more securely"
         />
         <WelcomeInfoNode
           lightMode
           color="yellow"
-          icon="Chat"
-          label="See the best content and conversations, tailored to your interests."
+          icon="Lightning"
+          label="Supercharge your growth with the aid of like-minded people"
         />
       </WelcomeInfoContainer>
     </section>

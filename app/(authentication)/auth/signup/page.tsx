@@ -10,3 +10,6 @@ const page = () => {
 };
 
 export default page;
+page.Auth = {
+  authorized: "/",
+};

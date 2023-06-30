@@ -8,10 +8,12 @@ import axios from "axios";
 import React, { useCallback, useState } from "react";
 import { FieldValues, useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { signIn } from "next-auth/react";
+import { SignInResponse, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Input from "@/app/components/auth/Input";
 import { validateNotEmpty } from "@/app/libs/helper";
+import WelcomeInfoContainer2 from "@/app/components/auth/signup/WelcomeInfoContainer2";
+import Link from "next/link";
 
 export interface FormType {
   firstname: string;
@@ -30,7 +32,7 @@ const DataFields = () => {
     handleSubmit,
     formState: { errors, dirtyFields },
     trigger,
-    watch,
+    setError,
   } = useForm<FormType>({
     defaultValues: {
       email: "",
@@ -38,8 +40,6 @@ const DataFields = () => {
     },
     mode: "onChange",
   });
-
-  const { one } = useSignupSteps();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const isComplete = useCallback(() => {
     //get if the values have been inputed
@@ -56,15 +56,64 @@ const DataFields = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data, e) => {
     e?.preventDefault();
+    setIsLoading(true);
+    const loading = toast.loading("loading");
+    try {
+      const signinReq = await signIn("credentials", {
+        ...data,
+        redirect: false,
+      });
+      if (signinReq?.status === 200) {
+        toast.dismiss(loading);
+        push("/");
+        return;
+      }
+      if (signinReq?.error === `Email doesn't exist`) {
+        setError("email", {
+          type: "manual",
+          message: "Email doesn't exist",
+        });
+        toast.dismiss(loading);
+        return;
+      }
+      if (signinReq?.error === `Incorrect Password`) {
+        setError("password", {
+          type: "manual",
+          message: "Incorrect Password",
+        });
+        toast.dismiss(loading);
+        return;
+      }
+      throw new Error(signinReq?.error);
+    } catch (error) {
+      toast.error("Something went wrong, try again");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
+  const socialSignInWrapper = async (func: Promise<SignInResponse | undefined>) => {
+    const loading = toast.loading("Loading");
+    try {
+      await func;
+      toast.success("Logged in successfully", { id: loading, duration: 1000 });
+      // push("/");
+      toast.loading("Redirecting", { id: loading });
+    } catch (error: any) {
+      toast.dismiss(loading);
+      toast.error("Something went wrong, try again");
+    }
+  };
   return (
     <section
       className={`flex-1 h-full md2:w-full shrink-0 overflow-x-hidden overflow-y-auto bg-secondaryBg-10 dark:bg-dark-30 p-8 flex flex-col items-center lg:justify-center`}>
-      <MobileScreenHeading />
+      <WelcomeInfoContainer2
+        heading="Sign in to Inkflow"
+        key={"mobileWelcome1"}
+      />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={`w-full sm:w-10/12 lg:w-8/12 sm:my-9`}>
+        className={`w-full sm:w-10/12 lg:w-8/12 sm:mt-9`}>
         <Input
           id="email"
           label="Email"
@@ -100,18 +149,26 @@ const DataFields = () => {
           SUBMIT
         </button>
       </form>
-      <div className="w-full sm:w-10/12 lg:w-8/12 my-9">
+      <p className="text-sm mt-3">
+        {`Don't have an account yet?`}{" "}
+        <Link
+          className="text-red-70 ml-2"
+          href={"/auth/signup"}>
+          Register
+        </Link>
+      </p>
+      <div className="w-full sm:w-10/12 lg:w-8/12 my-4">
         <OrLine />
 
         <SocialAuth
           label="Sign in with Google"
           icon="Google"
-          onClick={() => {}}
+          onClick={() => socialSignInWrapper(signIn("google"))}
         />
         <SocialAuth
           label="Sign in with Github"
           icon="Github"
-          onClick={() => {}}
+          onClick={() => socialSignInWrapper(signIn("github"))}
         />
       </div>
     </section>
