@@ -41,7 +41,12 @@ const Select: React.FC<InputType> = ({ label, register, id, required, disabled, 
           id={id}
           {...register(id, { ...required })}
           disabled={disabled}
-          className={`w-full rounded-lg bg-secondaryBg-60 dark:bg-dark-20  h-[3rem] p-3`}>
+          className={`w-full rounded-lg bg-secondary-60 dark:bg-dark-20 dark:text-secondaryBg-20 text-dark-10 h-[3rem] outline p-3
+          ${errors[id] && "outline-1 dark:outline-red-dark-50 outline-red-dark-90"}
+          ${errors[id] && "focus:outline-2 dark:outline-red-dark-50 outline-red-dark-90"}
+          ${!errors[id] && "outline-0"}
+          ${!errors[id] && "focus:outline-1 outline-secondaryBg-10"}
+          `}>
           <option
             value=""
             className="text-secondary-40">

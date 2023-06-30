@@ -35,7 +35,7 @@ const UserMenu: React.FC<NavbarProps> = ({ currentUser }) => {
         </span>
       </section>
       {isOpen ? (
-        <motion.div
+        <motion.section
           className="absolute rounded-lg shadow-md w-[33vw] sm:w-[25vw] max-w-[250px] min-w-[200px] bg-secondaryBg-10 dark:bg-dark-10 dark:border-dark-40 dark:text-secondaryBg-20 text-secondary-20 border-[1px] overflow-hidden right-0 top-[3.3rem] text-sm"
           initial="hidden"
           animate="visible"
@@ -81,7 +81,7 @@ const UserMenu: React.FC<NavbarProps> = ({ currentUser }) => {
               }
             />
           </div>
-        </motion.div>
+        </motion.section>
       ) : null}
     </>
   );

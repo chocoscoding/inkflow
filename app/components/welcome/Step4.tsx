@@ -16,14 +16,14 @@ const Step4: React.FC<StepType> = ({ data, set, isLoading, error, clearError, on
   const maindata = data.trim();
   const isValid = maindata && maindata.length >= 5 && maindata.length < 15 && maindata !== "";
   return (
-    <div>
+    <>
       <div
         className={`w-[50px] h-[50px] rounded-full cursor-pointer bg-secondary-60 dark:bg-dark-40 flex justify-center items-center sm:mt-10 mt-8 mb-6`}
         onClick={() => three()}>
         <BackArrow className="text-secondary-40 scale-125" />
       </div>
       <h2 className="text-secondary-20 dark:text-secondaryBg-20 font-bold xl:text-3xl text-2xl mb-7 w-full lg1:text-xl">{`Final step!!!`}</h2>
-      <div className="flex flex-col">
+      <section className="flex flex-col">
         <div className="w-full flex flex-col gap-3 mb-4">
           <div className="w-full flex justify-between">
             <label
@@ -33,7 +33,7 @@ const Step4: React.FC<StepType> = ({ data, set, isLoading, error, clearError, on
             </label>
           </div>
 
-          <div>
+          <>
             <input
               maxLength={14}
               min={5}
@@ -59,17 +59,17 @@ const Step4: React.FC<StepType> = ({ data, set, isLoading, error, clearError, on
                 {error.message || "Required"}
               </label>
             ) : null}
-          </div>
+          </>
         </div>
         <button
           type="button"
           disabled={isLoading || !isValid}
-          className={`w-full h-[50px] min-w-[60px] ${isValid ? "bg-red-90" : "bg-red-40"} rounded-lg cursor-pointer mt-4`}
+          className={`w-full h-[50px] min-w-[60px] ${isValid ? "bg-red-90" : "bg-red-40"} text-secondaryBg-10 rounded-lg cursor-pointer mt-4`}
           onClick={onSubmit}>
           SUBMIT
         </button>
-      </div>
-    </div>
+      </section>
+    </>
   );
 };
 

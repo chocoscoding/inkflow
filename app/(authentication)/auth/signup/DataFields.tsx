@@ -112,7 +112,7 @@ const DataFields = () => {
           Login
         </Link>
       </p>
-      <div className="w-full sm:w-10/12 lg:w-8/12 my-4">
+      <section className="w-full sm:w-10/12 lg:w-8/12 my-4">
         <OrLine />
 
         <SocialAuth
@@ -121,11 +121,11 @@ const DataFields = () => {
           onClick={() => socialSignUpWrapper(signIn("google"))}
         />
         <SocialAuth
-          label="Sign up with Github"
-          icon="Github"
-          onClick={() => socialSignUpWrapper(signIn("github"))}
+          label="Sign up with Facebook"
+          icon="Facebook"
+          onClick={() => socialSignUpWrapper(signIn("facebook"))}
         />
-      </div>
+      </section>
     </section>
   );
 };

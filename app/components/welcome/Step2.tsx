@@ -12,14 +12,14 @@ const Step2: React.FC<StepType> = ({ data, set }) => {
     return;
   };
   return (
-    <div>
+    <>
       <div
         className={`w-[50px] h-[50px] rounded-full cursor-pointer bg-secondary-60 dark:bg-dark-40 flex justify-center items-center sm:mt-10 mt-8 mb-6`}
         onClick={() => one()}>
         <BackArrow className="text-secondary-40 scale-125" />
       </div>
       <h2 className="text-secondary-20 dark:text-secondaryBg-20 font-bold xl:text-3xl text-2xl mb-7 w-full lg1:text-xl">{`Which best describes the stage you're at right now?`}</h2>
-      <div className="flex flex-col gap-4">
+      <section className="flex flex-col gap-4">
         <Option
           label="Considering or planning to start a business"
           data={data}
@@ -53,12 +53,12 @@ const Step2: React.FC<StepType> = ({ data, set }) => {
 
         <button
           type="button"
-          className={`w-3/12 h-[50px] min-w-[60px] ${isValid ? "bg-red-90" : "bg-red-40"} rounded-lg cursor-pointer mt-4`}
+          className={`w-3/12 h-[50px] min-w-[60px] ${isValid ? "bg-red-90" : "bg-red-40"} text-secondaryBg-10 rounded-lg cursor-pointer mt-4`}
           onClick={next}>
           Next
         </button>
-      </div>
-    </div>
+      </section>
+    </>
   );
 };
 

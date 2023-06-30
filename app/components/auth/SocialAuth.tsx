@@ -1,16 +1,15 @@
 import React from "react";
-import { Google } from "../Icons/Icon";
-import Github from "../Icons/Github";
+import { Facebook, Google } from "../Icons/Icon";
 
 interface SocialAuthType {
   label: string;
   onClick: () => void;
-  icon: "Google" | "Github";
+  icon: "Google" | "Facebook";
 }
 const SocialAuth: React.FC<SocialAuthType> = ({ label, onClick, icon }) => {
   const icons = {
     Google: <Google className="dark:text-secondaryBg-10 text-secondary-20" />,
-    Github: <Github className="dark:text-secondaryBg-10 text-secondary-20" />,
+    Facebook: <Facebook className="dark:text-secondaryBg-10 text-secondary-20" />,
   };
   return (
     <div

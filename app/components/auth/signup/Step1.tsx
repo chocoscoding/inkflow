@@ -77,7 +77,7 @@ const Step1 = () => {
 
       <button
         type="button"
-        className={`w-full h-[50px]  ${isComplete() ? "bg-red-default" : "bg-red-60"} rounded-lg cursor-pointer`}
+        className={`w-full h-[50px]  ${isComplete() ? "bg-red-default" : "bg-red-60"} text-secondaryBg-10 rounded-lg cursor-pointer`}
         onClick={isValid}>
         NEXT
       </button>

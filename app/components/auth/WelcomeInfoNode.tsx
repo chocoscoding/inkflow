@@ -41,7 +41,7 @@ const WelcomeInfoNode: React.FC<WelcomeInfoNodeType> = ({ color, icon, label }) 
   };
 
   return (
-    <motion.div
+    <motion.section
       className="flex h-[100px] w-full  rounded-lg mb-5 items-center p-4 lg1:p-3 lg1:gap-2 gap-4 bg-white dark:bg-dark-30"
       variants={boxVariants}>
       <div
@@ -49,7 +49,7 @@ const WelcomeInfoNode: React.FC<WelcomeInfoNodeType> = ({ color, icon, label }) 
         {icons[icon]}
       </div>
       <p className="font-bold text-lg lg1:text-sm text-secondary-20 dark:text-secondary-60">{label}</p>
-    </motion.div>
+    </motion.section>
   );
 };
 

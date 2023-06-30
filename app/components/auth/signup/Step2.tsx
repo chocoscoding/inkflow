@@ -91,7 +91,9 @@ const Step2: React.FC<Step2Type> = ({ formRef, isLoading }) => {
       <button
         type="submit"
         disabled={isLoading}
-        className={`w-full h-[50px]  ${isComplete() ? "bg-red-default" : "bg-red-60"} disabled:bg-red-60 rounded-lg cursor-pointer`}
+        className={`w-full h-[50px]  ${
+          isComplete() ? "bg-red-default" : "bg-red-60"
+        } text-secondaryBg-10 disabled:bg-red-60 rounded-lg cursor-pointer`}
         onClick={(e) => isValid(e)}>
         SUBMIT
       </button>

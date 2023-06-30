@@ -31,7 +31,7 @@ const ModeToggler = () => {
     <div
       onClick={toggleSwitch}
       className="flex-start flex h-[35px] w-[75px] rounded-[50px] bg-secondaryBg-20 dark:bg-dark-30 p-[5px] shadow-inner dark:shadow-inner-2 hover:cursor-pointer transition items-center relative">
-      <motion.div
+      <motion.section
         transition={{ ease: "easeIn" }}
         className={style.iconContainer}
         animate={{ right: ballAnimation() }}
@@ -52,7 +52,7 @@ const ModeToggler = () => {
             <Night className={`${style.iconStyle} text-blue-dark-90`} />
           </motion.div>
         ) : null}
-      </motion.div>
+      </motion.section>
 
       <div
         className={`${
