@@ -10,7 +10,7 @@ const Logo: React.FC<LogoType> = ({ lightMode, noMarginLeft }) => {
   return (
     <Link href={`/`}>
       <div
-        className={`w-[42px] sm:w-[100px] lg:w-[150px] overflow-hidden h-auto md2:h-[95%] object-cover relative flex items-center ${
+        className={`w-[27px] sm:w-[100px] lg:w-[150px] overflow-hidden h-auto md2:h-[95%] object-cover relative flex items-center ${
           noMarginLeft ? "" : "xl:ml-4"
         } shrink-0 md:mr-[3rem] md1:mr-0`}>
         <Image

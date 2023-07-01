@@ -8,22 +8,6 @@ import bcrypt from "bcrypt";
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
-    FacebookProvider({
-      clientId: process.env.FACEBOOK_ID as string,
-      clientSecret: process.env.FACEBOOK_SECRET as string,
-      profile(profile) {
-        return {
-          id: profile.id,
-          email: profile.email,
-          image: profile.picture,
-          firstname: profile.name.givenName,
-          lastname: profile.name.familyName,
-          country: profile.locale,
-          dob: profile.birthday,
-          emailVerified: profile.emailVerified,
-        };
-      },
-    }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
@@ -65,7 +49,8 @@ export const authOptions: AuthOptions = {
     }),
   ],
   pages: {
-    signIn: `/`,
+    signIn: `/auth/signin`,
+    
   },
   debug: process.env.NODE_ENV === "development",
   session: {

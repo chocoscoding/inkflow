@@ -120,11 +120,6 @@ const DataFields = () => {
           icon="Google"
           onClick={() => socialSignUpWrapper(signIn("google"))}
         />
-        <SocialAuth
-          label="Sign up with Facebook"
-          icon="Facebook"
-          onClick={() => socialSignUpWrapper(signIn("facebook"))}
-        />
       </section>
     </section>
   );

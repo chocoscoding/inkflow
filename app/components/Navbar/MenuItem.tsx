@@ -18,7 +18,14 @@ const MenuItem: FC<MenuItemsProps> = ({ onClick, label, noHover }) => {
       variants={itemVariants}
       onClick={onClick}
       transition={{ duration: 0.15, ease: "backIn" }}
-      className={`px-4 py-3 ${noHover ? "" : "hover:bg-secondaryBg-20 dark:hover:bg-dark-20"} transition font-semibold`}>
+      data-te-ripple-init
+      data-te-ripple-color="light"
+      className={`px-4 py-3 ${
+        noHover
+          ? ""
+          : "sm:hover:bg-secondaryBg-20 sm:dark:hover:bg-dark-20 dark:active:hover:brightness-125 active:hover:brightness-95 select-none"
+      } 
+      transition font-semibold`}>
       {label}
     </motion.div>
   );
