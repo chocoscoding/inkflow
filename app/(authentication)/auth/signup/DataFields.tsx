@@ -4,7 +4,6 @@ import SocialAuth from "@/app/components/auth/SocialAuth";
 import MobileScreenHeading from "@/app/components/auth/signup/MobileScreenHeading";
 import Step1 from "@/app/components/auth/signup/Step1";
 import Step2 from "@/app/components/auth/signup/Step2";
-import useLightMode from "@/app/hooks/useLightMode";
 import useSignupSteps from "@/app/hooks/useSignupSteps";
 import axios from "axios";
 import React, { useRef, useState } from "react";
@@ -25,7 +24,6 @@ export interface FormType {
 }
 
 const DataFields = () => {
-  const { lightMode } = useLightMode();
   const { push } = useRouter();
   const methods = useForm<FormType>({
     defaultValues: {

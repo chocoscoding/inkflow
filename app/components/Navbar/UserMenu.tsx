@@ -18,7 +18,7 @@ const UserMenu: React.FC<NavbarProps> = ({ currentUser }) => {
     return onOpen();
   };
   const itemVariants = {
-    hidden: { opacity: 0, y: 250 },
+    hidden: { opacity: 0, y: 300 },
     visible: { opacity: 1, y: 0 },
   };
   return (
@@ -40,7 +40,7 @@ const UserMenu: React.FC<NavbarProps> = ({ currentUser }) => {
           initial="hidden"
           animate="visible"
           variants={itemVariants}
-          transition={{ duration: 0.1, ease: "easeOut", staggerChildren: 0.2 }}>
+          transition={{ duration: 0.1, ease: "easeOut", staggerChildren: 0.1 }}>
           <div className="flex flex-col cursor-pointer">
             {currentUser ? (
               <>

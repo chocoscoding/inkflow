@@ -11,11 +11,12 @@ export const metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const currentUser = await getCurrentUser();
+
   if (currentUser?.id && !currentUser?.username) return redirect("/welcome");
   return (
-    <div>
+    <div className="relative">
       <Navbar currentUser={currentUser} />
-      <div className="bg-secondaryBg-20 dark:bg-dark-20">{children}</div>
+      <div className="bg-secondaryBg-20 dark:bg-dark-20 sticky top-[50px] ">{children}</div>
       <Footer bottom />
     </div>
   );

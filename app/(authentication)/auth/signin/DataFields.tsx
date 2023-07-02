@@ -1,10 +1,6 @@
 "use client";
 import OrLine from "@/app/components/auth/OrLine";
 import SocialAuth from "@/app/components/auth/SocialAuth";
-import MobileScreenHeading from "@/app/components/auth/signup/MobileScreenHeading";
-import useLightMode from "@/app/hooks/useLightMode";
-import useSignupSteps from "@/app/hooks/useSignupSteps";
-import axios from "axios";
 import React, { useCallback, useState } from "react";
 import { FieldValues, useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { toast } from "react-hot-toast";
@@ -25,7 +21,6 @@ export interface FormType {
   confirmPassword: string;
 }
 const DataFields = () => {
-  const { lightMode } = useLightMode();
   const { push } = useRouter();
   const {
     register,

@@ -4,13 +4,11 @@ import { usePathname } from "next/navigation";
 import { Calendar, Groups, GroupsActive, Home, Interviews, Podcasts, SearchIcon } from "../Icons";
 import Link from "next/link";
 import useSearchModal from "@/app/hooks/useSearchModal";
-import useLightMode from "@/app/hooks/useLightMode";
 
 interface LNavigationType {
   bottom?: boolean;
 }
 const LNavigation: FC<LNavigationType> = ({ bottom }) => {
-  const { lightMode } = useLightMode();
   const route = usePathname();
   const { onOpen } = useSearchModal();
   const lightColor = "text-secondary-50 dark:text-secondaryBg-10";

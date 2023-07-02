@@ -158,6 +158,9 @@ module.exports = {
         }
 
       },
+      height: {
+        'screen-50': 'calc(100vh - 50px)',
+      },
       screens: {
         'sm1': { 'max': '480px' },
         'md2': { 'max': '639px' },

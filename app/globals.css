@@ -39,3 +39,14 @@ body {
     height: 100% !important;
   }
 }
+
+.text-xss {
+  font-size: 0.6rem /* 12px */;
+  line-height: 0.8rem /* 16px */;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -3,7 +3,7 @@ import { ThemeProvider } from "next-themes";
 import { useState, useEffect, ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { toast } from "react-hot-toast";
-export default function Providers({ children }: {children: ReactNode}) {
+export default function Providers({ children }: { children: ReactNode }) {
   const [mounted, setMounted] = useState<boolean>(false);
   const pathname = usePathname();
   useEffect(() => {
@@ -13,9 +13,7 @@ export default function Providers({ children }: {children: ReactNode}) {
     toast.dismiss();
   }, [pathname]);
 
-  if (!mounted) {
-    return <>{children}</>;
-  }
+  if (!mounted) null;
 
   return <ThemeProvider attribute="class">{children}</ThemeProvider>;
 }

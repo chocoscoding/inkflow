@@ -17,9 +17,7 @@ const MenuItem: FC<MenuItemsProps> = ({ onClick, label, noHover }) => {
     <motion.div
       variants={itemVariants}
       onClick={onClick}
-      transition={{ duration: 0.15, ease: "backIn" }}
-      data-te-ripple-init
-      data-te-ripple-color="light"
+      transition={{ duration: 0.1, ease: "backIn" }}
       className={`px-4 py-3 ${
         noHover
           ? ""
