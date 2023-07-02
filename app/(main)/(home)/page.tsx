@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { New, New1 } from "../../components/Icons";
 import HomeNav from "../../components/home/HomeNav";
+import Meetup from "@/app/components/home/Meetups";
 
 export default function Home() {
   return (
@@ -28,50 +29,29 @@ export default function Home() {
         </section>
         <section className="flex p-4 rounded-2xl flex-col justify-start items-start gap-3 dark:bg-dark-30">
           <p>Trending Tags</p>
-          <HomeNav
-            Name="New"
-            mainText="Newest and Recent"
-            secondaryText="Find the latest updates"
-            active={true}
-          />
-          <HomeNav
-            Name="Popular"
-            mainText="Popular of the day"
-            secondaryText="The best of today"
-            active={false}
-          />
-          <HomeNav
-            Name="Follow"
-            mainText="Following"
-            secondaryText="Explore from your favourite person"
-            active={false}
-          />
+          <ul className="flex flex-col gap-2">
+            <li className="text-xl text-secondary-30 cursor-pointer">#business</li>
+            <li className="text-xl text-secondary-30 cursor-pointer">#blogging</li>
+            <li className="text-xl text-secondary-30 cursor-pointer">#life</li>
+            <li className="text-xl text-secondary-30 cursor-pointer">#tech</li>
+            <li className="text-xl text-secondary-30 cursor-pointer">#finance</li>
+            <li className="text-xl text-secondary-30 cursor-pointer">#blogging</li>
+            <li className="text-xl text-secondary-30 cursor-pointer">#life</li>
+            <li className="text-xl text-secondary-30 cursor-pointer">#tech</li>
+            <li className="text-xl text-secondary-30 cursor-pointer">#finance</li>
+            <li className="text-xl text-secondary-30 cursor-pointer">#tech</li>
+            <li className="text-xl text-secondary-30 cursor-pointer">#finance</li>
+          </ul>
         </section>
-        <section className="flex p-4 rounded-2xl flex-col justify-start items-start gap-3 dark:bg-dark-30">
-          <p>Trending Tags</p>
-          <HomeNav
-            Name="New"
-            mainText="Newest and Recent"
-            secondaryText="Find the latest updates"
-            active={true}
-          />
-          <HomeNav
-            Name="Popular"
-            mainText="Popular of the day"
-            secondaryText="The best of today"
-            active={false}
-          />
-          <HomeNav
-            Name="Follow"
-            mainText="Following"
-            secondaryText="Explore from your favourite person"
-            active={false}
-          />
-        </section>
-       
       </div>
 
       <section className="h-screen bg-blue-dark-70 w-7/12"></section>
+      <section className="sticky top-[60px] lg:min-w-[230px] h-fit flex flex-col gap-2 w-3/12">
+        <section className="flex p-4 rounded-2xl flex-col justify-start items-start gap-3 dark:bg-dark-30">
+          <p>Meetups</p>
+          <Meetup />
+        </section>
+      </section>
     </main>
   );
 }
