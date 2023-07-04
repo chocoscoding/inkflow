@@ -7,19 +7,23 @@ import Ping from "../Ping";
 const Meetup: React.FC<any> = () => {
   return (
     <div
-      className={`w-full min-h-[70px] rounded-lg cursor-pointer dark:active:hover:bg-dark-30 active:hover:brightness-90 gap-2 flex p-2 transition-all border`}>
-      <div className="rounded-md border flex flex-col items-center h-[4.3rem] px-2">
+      className={`w-full min-h-[70px] rounded-lg cursor-pointer dark:active:hover:bg-dark-30 active:hover:brightness-90 gap-3 flex p-[3px] transition-all select-none`}>
+      <div className="rounded-md flex flex-col items-center h-[4.3rem] px-2 shadow-md dark:shadow-dark-10">
         <p className="">FEB</p>
         <p className="text-blue-80 font-extrabold text-2xl">7</p>
       </div>
-      <div className="border flex-1 overflow-hidden">
-        <p className="truncate font-semibold">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet dolores exercitationem eum natus iusto obcaecati odit magni
-          repudiandae, adipisci quam blanditiis in quia! Nihil fugit laudantium, natus blanditiis consequuntur obcaecati?
+      <div className="flex-1 overflow-hidden">
+        <p className="truncate font-semibold text-sm">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet dolores exercitationem eum natus iusto obcaecati obcaecati?
         </p>
-        <p>
+        <p className=" text-xs text-secondary-30">
           UIHUT <span></span> <span>Sylhet, Bangladesh</span>
         </p>
+        <div className="flex mt-2 gap-2 overflow-x-auto scroll">
+          <div className="rounded-full px-2 py-1 bg-dark-40 text-xss text-secondary-40">Enterprenureship</div>
+          <div className="rounded-full px-2 py-1 bg-dark-40 text-xss text-secondary-40">International</div>
+          <div className="rounded-full px-2 py-1 bg-dark-40 text-xss text-secondary-40">Sustainability</div>
+        </div>
       </div>
     </div>
   );

@@ -45,10 +45,21 @@ export default function Home() {
         </section>
       </div>
 
-      <section className="h-screen bg-blue-dark-70 w-7/12"></section>
+      <section className="min-h-screen w-7/12">
+        {Array(30)
+          .fill("")
+          .map((i) => (
+            <div
+              className="bg-blue-dark-70 h-40 w-full mb-4 rounded-md"
+              key={`posts${i}`}></div>
+          ))}
+      </section>
       <section className="sticky top-[60px] lg:min-w-[230px] h-fit flex flex-col gap-2 w-3/12">
-        <section className="flex p-4 rounded-2xl flex-col justify-start items-start gap-3 dark:bg-dark-30">
+        <section className="flex p-4 rounded-2xl flex-col justify-start items-start gap-4 dark:bg-dark-30">
           <p>Meetups</p>
+          <Meetup />
+          <Meetup />
+          <Meetup />
           <Meetup />
         </section>
       </section>
