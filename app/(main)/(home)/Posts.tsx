@@ -4,7 +4,7 @@ import React from "react";
 
 const Posts = () => {
   return (
-    <section className="min-h-screen w-7/12 flex-1">
+    <section className="min-h-screen w-7/12 flex-1 pt-1">
       <div className="sticky top-[50px] py-2 bg-dark-20 md2:flex hidden">
         <HomeNavMobile
           Name="New"
