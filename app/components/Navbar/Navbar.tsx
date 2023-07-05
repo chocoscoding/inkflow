@@ -1,6 +1,5 @@
 "use client";
 
-import useLightMode from "@/app/hooks/useLightMode";
 import Logo from "./Logo";
 import LNavigation from "./LNavigation";
 import SearchInput from "./SearchInput";

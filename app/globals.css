@@ -40,13 +40,12 @@ body {
   }
 }
 
-.text-xss {
-  font-size: 0.6rem /* 12px */;
-  line-height: 0.8rem /* 16px */;
-}
-
 .flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }

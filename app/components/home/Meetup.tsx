@@ -19,7 +19,7 @@ const Meetup: React.FC<any> = () => {
         <p className=" text-xs text-secondary-30">
           UIHUT <span></span> <span>Sylhet, Bangladesh</span>
         </p>
-        <div className="flex mt-2 gap-2 overflow-x-auto scroll">
+        <div className="flex mt-2 gap-2 overflow-x-auto scroll scrollbar-none">
           <div className="rounded-full px-2 py-1 bg-dark-40 text-xss text-secondary-40">Enterprenureship</div>
           <div className="rounded-full px-2 py-1 bg-dark-40 text-xss text-secondary-40">International</div>
           <div className="rounded-full px-2 py-1 bg-dark-40 text-xss text-secondary-40">Sustainability</div>

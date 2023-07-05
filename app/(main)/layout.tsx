@@ -16,7 +16,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <div className="relative">
       <Navbar currentUser={currentUser} />
-      <div className="bg-secondaryBg-20 dark:bg-dark-20 sticky top-[50px] ">{children}</div>
+      <div className="bg-secondaryBg-20 dark:bg-dark-20 sticky top-[50px] sm1:mb-12">{children}</div>
       <Footer bottom />
     </div>
   );

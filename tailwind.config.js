@@ -169,6 +169,9 @@ module.exports = {
         'xl1': { 'max': '1285px' },
         'xxl1': { 'max': '1480px' },
       },
+      fontSize: {
+        'xss': ['0.6rem', '0.8rem'],
+      },
     },
   },
   plugins: [],
