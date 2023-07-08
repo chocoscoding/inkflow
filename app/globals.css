@@ -57,3 +57,13 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.appScreen {
+  min-height: calc(100vh - 103px);
+}
+
+@media screen and (min-width: 638px) {
+  .appScreen {
+    min-height: calc(100vh - 50px);
+  }
+}
