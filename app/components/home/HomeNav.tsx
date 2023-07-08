@@ -24,13 +24,13 @@ const HomeNav: React.FC<HomeNavType> = ({ Name, mainText, secondaryText, active 
 
   return (
     <div
-      className={`w-full h-[50px] rounded-lg cursor-pointer dark:active:hover:bg-dark-30 active:hover:brightness-90 gap-2 flex p-2 transition-all ${
+      className={`w-full h-[50px] rounded-lg cursor-pointer dark:active:hover:bg-dark-30 active:hover:brightness-90 gap-2 flex p-2 lg1:gap-1 transition-all ${
         section === Name ? "bg-dark-40" : ""
       }`}
       onClick={func[Name]}>
       <div className="dark:bg-dark-40 p-2 rounded-md shrink-0 flex-center">{Icons[Name]}</div>
       <div className="flex flex-col justify-between flex-1 ">
-        <p className=" font-semibold text-xs flex items-center">
+        <p className="font-semibold lg1:font-normal text-xs flex items-center">
           {mainText}
           {Name === "Follow" ? <Ping /> : null}
         </p>

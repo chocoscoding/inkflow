@@ -28,7 +28,7 @@ const HomeNavMobile: React.FC<HomeNavMobileType> = ({ Name, mainText, secondaryT
         section === Name ? "bg-dark-40" : ""
       }`}
       onClick={func[Name]}>
-      <div className="dark:bg-dark-40 p-2 sm1:p-1 rounded-md shrink-0 flex-center">{Icons[Name]}</div>
+      <div className="dark:bg-dark-40 p-2 rounded-md shrink-0 flex-center">{Icons[Name]}</div>
       <p className=" font-semibold sm1:text-xss text-xs flex items-center">
         {mainText}
         {Name === "Follow" ? <Ping /> : null}
