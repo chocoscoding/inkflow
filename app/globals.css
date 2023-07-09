@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 /* :root {
   --foreground-rgb: 0, 0, 0;
@@ -15,6 +15,47 @@
     --background-end-rgb: 0, 0, 0;
   }
 } */
+
+@layer utilities {
+  .truncate-lines-1 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .truncate-lines-2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .truncate-lines-3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+/*
+.text-truncate-1 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+}
+.text-truncate {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+*/
 
 body {
   -webkit-tap-highlight-color: transparent;
@@ -48,14 +89,6 @@ body {
 
 .scrollbar-none::-webkit-scrollbar {
   display: none;
-}
-
-.text-truncate {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2; /* Number of lines to display */
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .appScreen {

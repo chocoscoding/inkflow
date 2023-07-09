@@ -6,8 +6,8 @@ const Meetups: React.FC<MeetupTypes> = ({}) => {
   console.log();
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div className=" bg-dark-30rounded-xl flex flex-col p-2.5">
-        <div className="flex gap-2">
+      <div className=" bg-dark-30 rounded-xl w-full p-2.5 flex-grow-0">
+        <div className="flex gap-2 w-full">
           <div className="rounded-md overflow-hidden w-[85px] h-[85px] shrink-0">
             <Image
               src={
@@ -20,18 +20,16 @@ const Meetups: React.FC<MeetupTypes> = ({}) => {
             />
           </div>
 
-          <section className="flex justify-between w-full border w-full">
-            <div className="flex flex-col gap-2 w-full">
-              <p className="overflow-clip truncate w-full">UIHUT - Crunchbase Company Profile & Funding</p>
-              <p className=" text-xs text-secondary-30">
-                UIHUT <span></span> <span>Sylhet, Bangladesh</span>
-              </p>
-            </div>
-            <div className="rounded-md flex flex-col items-center h-[4.3rem] lg1:h-[3.5rem] px-2 shadow-md dark:shadow-dark-10 shrink-0 ml-2">
-              <p className="">FEB</p>
-              <p className="text-blue-80 font-extrabold text-2xl lg1:text-xl">7</p>
-            </div>
+          <section className="border w-full">
+            <p className="lg:truncate-lines-1 truncate-lines-2 w-full">UIHUT - Crunchbase Company Profile & Funding</p>
+            <p className=" text-xs text-secondary-30">
+              UIHUT <span></span> <span>Sylhet, Bangladesh</span>
+            </p>
           </section>
+          <div className="rounded-md flex flex-col items-center h-[4.3rem] lg1:h-[3.5rem] px-2 shadow-md dark:shadow-dark-10 shrink-0 ml-2">
+            <p className="">FEB</p>
+            <p className="text-blue-80 font-extrabold text-2xl lg1:text-xl">7</p>
+          </div>
         </div>
         {/* <p className="w-full h-11 mb-2 text-xs">
           Dribbble Meetups are a chance for designers to socialize, talk shop, and foster their local design communities. They are

@@ -24,7 +24,7 @@ const Post = () => {
         {/* top */}
         <section>
           <div className="flex gap-10 lg2:gap-3">
-            <p className="xl:text-xl lg:text-base text-sm font-semibold text-truncate hover:underline cursor-pointer">
+            <p className="xl:text-xl lg:text-base text-sm font-semibold truncate-lines-2 hover:underline cursor-pointer">
               This is my favorite title and i dont give to shits about why life is made up of haha or why people eat dog shit aha or why
               people eat dog shit
             </p>
