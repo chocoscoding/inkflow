@@ -6,7 +6,7 @@ const Meetups: React.FC<MeetupTypes> = ({}) => {
   console.log();
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div className="w-full bg-dark-30 min-h-[200px] rounded-xl flex flex-col p-2.5">
+      <div className=" bg-dark-30rounded-xl flex flex-col p-2.5">
         <div className="flex gap-2">
           <div className="rounded-md overflow-hidden w-[85px] h-[85px] shrink-0">
             <Image
@@ -20,20 +20,20 @@ const Meetups: React.FC<MeetupTypes> = ({}) => {
             />
           </div>
 
-          <section className="flex justify-between flex-1">
-            <div className="flex flex-col gap-2">
-              <p className="overflow-clip truncate">UIHUT - Crunchbase Company Profile & Funding</p>
+          <section className="flex justify-between w-full border w-full">
+            <div className="flex flex-col gap-2 w-full">
+              <p className="overflow-clip truncate w-full">UIHUT - Crunchbase Company Profile & Funding</p>
               <p className=" text-xs text-secondary-30">
                 UIHUT <span></span> <span>Sylhet, Bangladesh</span>
               </p>
             </div>
-            <div className="rounded-md flex flex-col items-center h-[4.3rem] lg1:h-[3.5rem] px-2 shadow-md dark:shadow-dark-10">
+            <div className="rounded-md flex flex-col items-center h-[4.3rem] lg1:h-[3.5rem] px-2 shadow-md dark:shadow-dark-10 shrink-0 ml-2">
               <p className="">FEB</p>
               <p className="text-blue-80 font-extrabold text-2xl lg1:text-xl">7</p>
             </div>
           </section>
         </div>
-        <p className="w-full h-11 mb-2 text-xs">
+        {/* <p className="w-full h-11 mb-2 text-xs">
           Dribbble Meetups are a chance for designers to socialize, talk shop, and foster their local design communities. They are
           self-organized events that range from the casual, five-person, coffee-shop roundtable to the chef-catered, bar-tended, 200-person
           extravaganza...
@@ -51,7 +51,7 @@ const Meetups: React.FC<MeetupTypes> = ({}) => {
             label="Sustainability"
             classname="text-sm sm1:text-xss text-secondary-50 py-1.5 hover:underline cursor-pointer"
           />
-        </div>
+        </div> */}
       </div>
     </Suspense>
   );
