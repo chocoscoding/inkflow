@@ -22,7 +22,7 @@ const Meetups: React.FC<MeetupTypes> = ({}) => {
             />
           </div>
           <span className="flex w-full gap-1">
-            <section className="border w-full">
+            <section className="w-full">
               <p className="lg:truncate-lines-1 truncate-lines-2 w-full">UIHUT - Crunchbase Company Profile & Funding</p>
               <p className=" text-xs text-secondary-30">
                 UIHUT <span></span> <span>Sylhet, Bangladesh</span>
@@ -34,12 +34,14 @@ const Meetups: React.FC<MeetupTypes> = ({}) => {
             </div>
           </span>
         </div>
-        {/* <p className="w-full h-11 mb-2 text-xs">
+        <p className="w-full truncate-lines-4 my-2 text-sm sm1:xs">
           Dribbble Meetups are a chance for designers to socialize, talk shop, and foster their local design communities. They are
           self-organized events that range from the casual, five-person, coffee-shop roundtable to the chef-catered, bar-tended, 200-person
-          extravaganza...
+          extravaganzaDribbble Meetups are a chance for designers to socialize, talk shop, and foster their local design communities. They are
+          self-organized events that range from the casual, five-person, coffee-shop roundtable to the chef-catered, bar-tended, 200-person
+          extravaganza
         </p>
-        <div className="w-full flex gap-3 lg1:gap-1.5 mt-5 lg1:mt-4 lg1:mb-1 overflow-x-auto scrollbar-none flex-wrap">
+        <div className="w-full flex gap-3 lg1:gap-1.5 mt-4 lg1:mt-3 lg1:mb-1 overflow-x-auto scrollbar-none flex-wrap">
           <Tags
             label="Enterprenureship"
             classname="text-sm sm1:text-xss text-secondary-50 py-1.5 sm1:p-1 hover:underline cursor-pointer"
@@ -52,7 +54,7 @@ const Meetups: React.FC<MeetupTypes> = ({}) => {
             label="Sustainability"
             classname="text-sm sm1:text-xss text-secondary-50 py-1.5 hover:underline cursor-pointer"
           />
-        </div> */}
+        </div>
       </div>
     </Suspense>
   );

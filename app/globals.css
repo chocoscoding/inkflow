@@ -40,6 +40,13 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  .truncate-lines-4 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 /*
 .text-truncate-1 {
