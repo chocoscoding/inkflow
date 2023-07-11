@@ -1,9 +1,9 @@
+import Ripple from "@/app/components/Ripple";
 import Tags from "@/app/components/Tags";
 import Image from "next/image";
 import React, { Suspense } from "react";
 interface MeetupTypes {}
 const Meetups: React.FC<MeetupTypes> = ({}) => {
-  console.log();
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <div className=" bg-dark-30 rounded-xl w-full p-2.5 sm1:p-1.5 flex-grow-0">
@@ -23,8 +23,10 @@ const Meetups: React.FC<MeetupTypes> = ({}) => {
           </div>
           <span className="flex w-full gap-1">
             <section className="w-full">
-              <p className="lg:truncate-lines-1 truncate-lines-2 w-full">UIHUT - Crunchbase Company Profile & Funding</p>
-              <p className=" text-xs text-secondary-30">
+              <p className="lg:truncate-lines-1 truncate-lines-2 w-full md:text-lg md:font-semibold">
+                UIHUT - Crunchbase Company Profile & Funding
+              </p>
+              <p className=" text-xs text-secondary-30 md:text-sm">
                 UIHUT <span></span> <span>Sylhet, Bangladesh</span>
               </p>
             </section>
@@ -37,23 +39,29 @@ const Meetups: React.FC<MeetupTypes> = ({}) => {
         <p className="w-full truncate-lines-4 my-2 text-sm sm1:xs">
           Dribbble Meetups are a chance for designers to socialize, talk shop, and foster their local design communities. They are
           self-organized events that range from the casual, five-person, coffee-shop roundtable to the chef-catered, bar-tended, 200-person
-          extravaganzaDribbble Meetups are a chance for designers to socialize, talk shop, and foster their local design communities. They are
-          self-organized events that range from the casual, five-person, coffee-shop roundtable to the chef-catered, bar-tended, 200-person
-          extravaganza
+          extravaganzaDribbble Meetups are a chance for designers to socialize, talk shop, and foster their local design communities. They
+          are self-organized events that range from the casual, five-person, coffee-shop roundtable to the chef-catered, bar-tended,
+          200-person extravaganza
         </p>
         <div className="w-full flex gap-3 lg1:gap-1.5 mt-4 lg1:mt-3 lg1:mb-1 overflow-x-auto scrollbar-none flex-wrap">
-          <Tags
-            label="Enterprenureship"
-            classname="text-sm sm1:text-xss text-secondary-50 py-1.5 sm1:p-1 hover:underline cursor-pointer"
-          />
-          <Tags
-            label="International"
-            classname="text-sm sm1:text-xss text-secondary-50 py-1.5 hover:underline cursor-pointer"
-          />
-          <Tags
-            label="Sustainability"
-            classname="text-sm sm1:text-xss text-secondary-50 py-1.5 hover:underline cursor-pointer"
-          />
+          <Ripple backgroundColor="#ffffff26">
+            <Tags
+              label="Enterprenureship"
+              classname="text-xs sm1:text-xss text-secondary-50 py-1.5 sm1:p-1 hover:underline cursor-pointer"
+            />
+          </Ripple>
+          <Ripple>
+            <Tags
+              label="International"
+              classname="text-xs sm1:text-xss text-secondary-50 py-1.5 hover:underline cursor-pointer"
+            />
+          </Ripple>
+          <Ripple className="bg-dark-10">
+            <Tags
+              label="Sustainability"
+              classname="text-xs sm1:text-xss text-secondary-50 py-1.5 hover:underline cursor-pointer"
+            />
+          </Ripple>
         </div>
       </div>
     </Suspense>
