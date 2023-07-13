@@ -37,15 +37,15 @@ const Post = () => {
           <div className="w-full flex gap-3 lg1:gap-1.5 mt-5 lg1:mt-4 lg1:mb-1 overflow-x-auto scrollbar-none flex-wrap">
             <Tags
               label="Enterprenureship"
-              classname="text-sm sm1:text-xss text-secondary-50 py-1.5 sm1:p-1 hover:underline cursor-pointer"
+              classname="text-xss xl:text-xs text-secondary-50 py-1.5 sm1:p-1 hover:underline cursor-pointer"
             />
             <Tags
               label="International"
-              classname="text-sm sm1:text-xss text-secondary-50 py-1.5 hover:underline cursor-pointer"
+              classname="text-xss xl:text-xs text-secondary-50 py-1.5 hover:underline cursor-pointer"
             />
             <Tags
               label="Sustainability"
-              classname="text-sm sm1:text-xss text-secondary-50 py-1.5 hover:underline cursor-pointer"
+              classname="text-xss xl:text-xs text-secondary-50 py-1.5 hover:underline cursor-pointer"
             />
           </div>
         </section>

@@ -47,6 +47,11 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  .flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 /*
 .text-truncate-1 {
@@ -88,12 +93,6 @@ body {
   }
 }
 
-.flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .scrollbar-none::-webkit-scrollbar {
   display: none;
 }
@@ -113,6 +112,8 @@ body {
   border-radius: inherit;
   overflow: hidden;
   position: relative;
+  width: fit-content;
+  height: fit-content;
   border-radius: 9999px;
 }
 

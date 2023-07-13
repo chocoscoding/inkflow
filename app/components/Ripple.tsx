@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect, MouseEvent, useCallback } from "react";
 
 interface RippleProps {
@@ -44,7 +45,7 @@ const Ripple: React.FC<RippleProps> = ({ children, backgroundColor, className })
       onClick={handleClick}>
       {isRippling ? (
         <span
-          className={`ripple ${className || ''}`}
+          className={`ripple ${className || ""}`}
           style={{
             backgroundColor: mainBg(),
             left: coords.x,

@@ -26,8 +26,8 @@ const Posts = () => {
         />
       </div>
       {Array(30)
-        .fill("")
-        .map((i) => (
+        .fill(0)
+        .map((ele, i) => (
           <Post key={`posts${i}`} />
         ))}
     </section>

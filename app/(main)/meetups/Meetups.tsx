@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { Suspense } from "react";
 interface MeetupTypes {}
 const Meetups: React.FC<MeetupTypes> = ({}) => {
+
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <div className=" bg-dark-30 rounded-xl w-full p-2.5 sm1:p-1.5 flex-grow-0">
