@@ -41,7 +41,7 @@ const Ripple: React.FC<RippleProps> = ({ children, backgroundColor, rippleClassN
 
   return (
     <span
-      className={`ripple-button ${containerClassName || ""}`}
+      className={`ripple-button ${containerClassName || "w-fit"}`}
       onClick={handleClick}>
       {isRippling ? (
         <span

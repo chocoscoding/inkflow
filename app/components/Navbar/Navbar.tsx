@@ -4,7 +4,6 @@ import Logo from "./Logo";
 import LNavigation from "./LNavigation";
 import SearchInput from "./SearchInput";
 import RNavigation from "./RNavigation";
-import { useState } from "react";
 import useSearchModal from "@/app/hooks/useSearchModal";
 import { useTheme } from "next-themes";
 import { SafeUser } from "@/app/types";

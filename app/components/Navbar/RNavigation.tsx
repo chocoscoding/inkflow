@@ -1,6 +1,5 @@
 import React from "react";
 import { ArrowDown, Message, Notification } from "../Icons";
-import useLightMode from "@/app/hooks/useLightMode";
 import Image from "next/image";
 import Avatar from "../Avatar";
 import UserMenu from "./UserMenu";

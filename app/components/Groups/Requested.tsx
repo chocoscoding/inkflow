@@ -1,11 +1,9 @@
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
 import Ripple from "../Ripple";
 import { More } from "../Icons";
-interface ListGroupProps {
-  owner: boolean;
-}
-const ListGroup: React.FC<ListGroupProps> = ({ owner }) => {
+interface RequestedProps {}
+const Requested: React.FC<RequestedProps> = ({}) => {
   return (
     <li className="flex justify-between items-center mb-4">
       <div className="flex flex-1 mr-3 sm:mr-4 gap-2 sm:gap-4">
@@ -22,18 +20,14 @@ const ListGroup: React.FC<ListGroupProps> = ({ owner }) => {
           <p className="sm:font-medium text-base lg:text-lg md:truncate-lines-2 truncate-lines-4">
             The association of software developers who know how beautiful life is post Open AI era life is post Open AI era
           </p>
-          <p className="text-sm text-gray-400">
-            12,345 members{owner ? <span className="bg-dark-20 w-fit rounded-md p-1 ml-2">Owner</span> : null}
-          </p>
+          <p className="text-sm text-gray-400">12,345 members</p>
         </div>
       </div>
-      <Ripple containerClassName="">
-        <div className="w-10 h-10 rounded-full cursor-pointer md:hover:bg-dark-30 flex-center ">
-          <More className="" />
-        </div>
+      <Ripple containerClassName="outline outline-1 hover:outline-2 md:hover:bg-dark-20 px-2 outline-neutral-200 self-start">
+        <button className="shrink-0 h-8 rounded-full sm1:text-xs">Withdraw</button>
       </Ripple>
     </li>
   );
 };
 
-export default ListGroup;
+export default Requested;

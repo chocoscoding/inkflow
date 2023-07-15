@@ -111,7 +111,6 @@ body {
   border: none;
   overflow: hidden;
   position: relative;
-  width: fit-content;
   height: fit-content;
   border-radius: 9999px;
 }
