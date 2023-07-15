@@ -1,9 +1,11 @@
-import Image from 'next/image';
-import React from 'react'
-import Ripple from '../Ripple';
-import { More } from '../Icons';
-
-const ListGroup = () => {
+import Image from "next/image";
+import React from "react";
+import Ripple from "../Ripple";
+import { More } from "../Icons";
+interface ListGroupProps {
+  owner: boolean;
+}
+const ListGroup: React.FC<ListGroupProps> = ({ owner }) => {
   return (
     <li className="flex justify-between items-center mb-4">
       <div className="flex flex-1 mr-3 sm:mr-4 gap-2 sm:gap-4">
@@ -16,20 +18,21 @@ const ListGroup = () => {
             className="h-full w-auto"
           />
         </div>
-        <div className="flex flex-col w-full">
-          <p className="sm:font-semibold text-base lg:text-lg md:truncate-lines-2 truncate-lines-4">
+        <div className="flex flex-col w-full gap-1">
+          <p className="sm:font-medium text-base lg:text-lg md:truncate-lines-2 truncate-lines-4">
             The association of software developers who know how beautiful life is post Open AI era life is post Open AI era
           </p>
           <p className="text-sm text-gray-400">12,345 members</p>
+          {owner ? <span className="bg-dark-20 w-fit rounded-md p-1">Owner</span> : null}
         </div>
       </div>
-      <Ripple>
-        <div className="w-10 h-10 rounded-full cursor-pointer md:hover:bg-dark-30 flex-center">
+      <Ripple containerClassName="">
+        <div className="w-10 h-10 rounded-full cursor-pointer md:hover:bg-dark-30 flex-center ">
           <More className="" />
         </div>
       </Ripple>
     </li>
-  )
-}
+  );
+};
 
-export default ListGroup
+export default ListGroup;

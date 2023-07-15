@@ -5,10 +5,11 @@ interface RippleProps {
   children: React.ReactNode;
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   backgroundColor?: string;
-  className?: string;
+  rippleClassName?: string;
+  containerClassName?: string;
 }
 
-const Ripple: React.FC<RippleProps> = ({ children, backgroundColor, className }) => {
+const Ripple: React.FC<RippleProps> = ({ children, backgroundColor, rippleClassName, containerClassName }) => {
   const [coords, setCoords] = useState<{ x: number; y: number }>({ x: -1, y: -1 });
   const [isRippling, setIsRippling] = useState(false);
 
@@ -28,24 +29,23 @@ const Ripple: React.FC<RippleProps> = ({ children, backgroundColor, className })
   }, [isRippling]);
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    console.log("a1");
     const rect = event.currentTarget.getBoundingClientRect();
     setCoords({ x: event.clientX - rect.left, y: event.clientY - rect.top });
   };
 
   const mainBg = useCallback(() => {
     if (backgroundColor) return backgroundColor;
-    if (className) return undefined;
+    if (rippleClassName) return undefined;
     return "#ffffff26";
-  }, [backgroundColor, className]);
+  }, [backgroundColor, rippleClassName]);
 
   return (
     <span
-      className="ripple-button"
+      className={`ripple-button ${containerClassName || ""}`}
       onClick={handleClick}>
       {isRippling ? (
         <span
-          className={`ripple ${className || ""}`}
+          className={`ripple ${rippleClassName || ""}`}
           style={{
             backgroundColor: mainBg(),
             left: coords.x,

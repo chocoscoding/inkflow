@@ -109,7 +109,6 @@ body {
 
 .ripple-button {
   border: none;
-  border-radius: inherit;
   overflow: hidden;
   position: relative;
   width: fit-content;
