@@ -15,13 +15,13 @@ const CreateClient = () => {
         "
         placeholder="Title..."
       />
-      
-      <PostField/>
+
+      <PostField />
       <div className="textArea">P</div>
       <div className="tags"></div>
       <div className="w-full flex gap-4">
-        <button className="bg-blue-default py-2.5 px-6 rounded-md min-w-[140px] hover:bg-blue-80 cursor-pointer">Publish</button>
-        <button className="text-secondary-30 py-2.5 px-6 rounded-md min-w-[140px] hover:bg-dark-20 cursor-pointer">Cancel</button>
+        <button className="bg-blue-default py-2.5 px-6 rounded-md sm:min-w-[140px] hover:bg-blue-80 cursor-pointer">Publish</button>
+        <button className="text-secondary-30 py-2.5 px-6 rounded-md sm:min-w-[140px] hover:bg-dark-20 cursor-pointer">Cancel</button>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import Providers from "./Providers";
 import "./globals.css";
+import "react-responsive-modal/styles.css";
 import { Inter } from "next/font/google";
 import ToasterProvider from "./providers/ToasterProvider";
 import NextTopLoader from "nextjs-toploader";
@@ -14,7 +15,9 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className} suppressHydrationWarning={true}>
+      <body
+        className={inter.className}
+        suppressHydrationWarning={true}>
         <ToasterProvider />
         <NextTopLoader
           showSpinner={false}

@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowDown, Message, Notification } from "../Icons";
+import { ArrowDown, Message, Notification, Post1 } from "../Icons";
 import Image from "next/image";
 import Avatar from "../Avatar";
 import UserMenu from "./UserMenu";
@@ -17,7 +17,12 @@ const RNavigation: React.FC<NavbarProps> = ({ currentUser }) => {
       <Link
         href={`/create`}
         className={`h-full`}>
-        <button className="flex-shrink-0 w-fit px-2 h-full bg-red-80 rounded-md sm1:text-sm">Create Post</button>
+        <button className="flex-shrink-0 w-fit px-2 h-full bg-red-80 rounded-md sm1:text-sm">
+          <span className="lg2a:block hidden"> Create Post</span>
+          <span className="block lg2a:hidden">
+            <Post1 />
+          </span>
+        </button>
       </Link>
       <Link
         href={`#`}
