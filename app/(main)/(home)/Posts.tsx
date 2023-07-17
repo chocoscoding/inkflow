@@ -1,3 +1,4 @@
+import CreatePost from "@/app/components/home/CreatePost";
 import HomeNavMobile from "@/app/components/home/HomeNavMobile";
 import Post from "@/app/components/home/Post";
 import React from "react";
@@ -25,6 +26,7 @@ const Posts = () => {
           active={false}
         />
       </div>
+      <CreatePost/>
       {Array(30)
         .fill(0)
         .map((ele, i) => (

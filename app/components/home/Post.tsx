@@ -8,7 +8,7 @@ import Avatar from "../Avatar";
 const Post = () => {
   const [like, setLike] = useState<boolean>(false);
   return (
-    <div className="bg-dark-30 lg:h-56 h-fit w-full mb-4 rounded-xl flex p-4 sm1:p-3 md:gap-4 gap-2 ">
+    <div className="bg-dark-30 lg:h-56 h-fit w-full mb-4 rounded-xl flex p-4 sm1:p-3 md:gap-4 gap-2 sm1:overflow-hidden">
       <div className="rounded-lg overflow-hidden  xl:w-[200px]  md:w-[150px] sm:w-[130px] w-1/5 shrink-0">
         <Image
           src={
