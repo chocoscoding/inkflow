@@ -11,20 +11,20 @@ const style = {
   button: `cursor-pointer p-2 rounded-md xl1:scale-75 md2:scale-100 sm:bg-secondary-60 dark:sm:bg-dark-40 sm:hover:bg-secondaryBg-20 dark:sm:hover:bg-dark-20`,
   icon: `text-secondary-40 dark:text-secondary-60`,
 };
-const RNavigation:React.FC<NavbarProps> = ({currentUser}) => {
+const RNavigation: React.FC<NavbarProps> = ({ currentUser }) => {
   return (
     <div className={style.container}>
       <Link
-        href={`#`}
-        className={style.button}>
-        <Message className={style.icon} />
+        href={`/create`}
+        className={`h-full`}>
+        <button className="flex-shrink-0 w-fit px-2 h-full bg-red-80 rounded-md sm1:text-sm">Create Post</button>
       </Link>
       <Link
         href={`#`}
         className={style.button}>
         <Notification className={style.icon} />
       </Link>
-      <UserMenu currentUser={currentUser}/>
+      <UserMenu currentUser={currentUser} />
     </div>
   );
 };

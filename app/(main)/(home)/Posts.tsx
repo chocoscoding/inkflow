@@ -26,7 +26,6 @@ const Posts = () => {
           active={false}
         />
       </div>
-      <CreatePost/>
       {Array(30)
         .fill(0)
         .map((ele, i) => (
