@@ -1,14 +1,15 @@
 "use client";
-import { Dispatch, FC, SetStateAction, useRef } from "react";
+import { Dispatch, FC, ReactNode, SetStateAction, memo, useRef } from "react";
 import Modal from "react-responsive-modal";
 import { Home, Interviews, Post } from "../../Icons";
-interface CreationType {
+import { NewCreationFormType, NewCreationTypes } from "@/app/(main)/create/CreateClient";
+import { useFormContext } from "react-hook-form";
+interface CreationTypeProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  postType: "Post" | "Interview" | "Meetup";
-  setPostType: Dispatch<SetStateAction<"Post" | "Interview" | "Meetup">>;
 }
-const CreationType: FC<CreationType> = ({ open, setOpen, postType, setPostType }) => {
+const CreationType: FC<CreationTypeProps> = ({ open, setOpen }) => {
+  const { setValue, getValues } = useFormContext<NewCreationFormType>();
   const myRef = useRef(null);
 
   const closeIcon = (
@@ -22,6 +23,18 @@ const CreationType: FC<CreationType> = ({ open, setOpen, postType, setPostType }
     </svg>
   );
 
+  const Wrapper = ({ children, creationType }: { children: ReactNode; creationType: NewCreationTypes }) => (
+    <div
+      className={`cursor-pointer flex gap-4 ${
+        getValues("creationType") === creationType ? "text-blue-80 bg-dark-30" : "text-secondary-50"
+      } mb-4 p-2.5 rounded-md`}
+      onClick={() => {
+        setValue("creationType", creationType);
+        setOpen(false);
+      }}>
+      {children}
+    </div>
+  );
   return (
     <>
       <div ref={myRef} />
@@ -36,33 +49,21 @@ const CreationType: FC<CreationType> = ({ open, setOpen, postType, setPostType }
           closeButton: "shrink-0 ml-2 text-secondary-50 outline-0",
         }}
         container={myRef.current}>
-        <div
-          className={`cursor-pointer flex gap-4 ${
-            postType === "Post" ? "text-blue-80 bg-dark-30" : "text-secondary-50"
-          } mb-4 p-2.5 rounded-md`}
-          onClick={() => setPostType("Post")}>
+        <Wrapper creationType="Post">
           <Post />
           <p className="font-bold">Post</p>
-        </div>
-        <div
-          className={`cursor-pointer flex gap-4 ${
-            postType === "Meetup" ? "text-blue-80 bg-dark-30" : "text-secondary-50"
-          }  mb-4 p-2.5 rounded-md`}
-          onClick={() => setPostType("Meetup")}>
+        </Wrapper>
+        <Wrapper creationType="Meetup">
           <Home />
           <p className="font-bold">Meetup</p>
-        </div>
-        <div
-          className={`cursor-pointer flex gap-4 ${
-            postType === "Interview" ? "text-blue-80 bg-dark-30" : "text-secondary-50"
-          }  mb-4 p-2.5 rounded-md`}
-          onClick={() => setPostType("Interview")}>
+        </Wrapper>
+        <Wrapper creationType="Interview">
           <Interviews />
           <p className="font-bold">Interviews</p>
-        </div>
+        </Wrapper>
       </Modal>
     </>
   );
 };
 
-export default CreationType;
+export default memo(CreationType);

@@ -10,7 +10,6 @@ interface GroupsProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   group: GroupType | null;
-  setGroup: Dispatch<SetStateAction<GroupType | null>>;
 }
 
 const GROUPS = [
@@ -40,7 +39,8 @@ const GROUPS = [
       "https://images.unsplash.com/photo-1635006459494-c9b9665a666e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80",
   },
 ];
-const Groups: FC<GroupsProps> = ({ open, setOpen, group, setGroup }) => {
+const Groups: FC<GroupsProps> = ({ open, setOpen, group }) => {
+  
   const myRef = useRef(null);
 
   const closeIcon = (
@@ -68,12 +68,15 @@ const Groups: FC<GroupsProps> = ({ open, setOpen, group, setGroup }) => {
           closeButton: "shrink-0 ml-2 text-secondary-50 outline-0",
         }}
         container={myRef.current}>
+        <GroupList
+          setOpen={setOpen}
+          none
+        />
         {GROUPS.map((ele, i) => (
           <GroupList
             key={`groupslist-${i}`}
             {...ele}
             setOpen={setOpen}
-            setPostGroup={setGroup}
           />
         ))}
       </Modal>
