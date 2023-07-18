@@ -18,15 +18,30 @@ const PostField = () => {
   const [openImageUpload, setOpenImageUpload] = useState(false);
   const [postType, setPostType] = useState<"Post" | "Interview" | "Meetup">("Post");
   const [postGroup, setPostGroup] = useState<GroupType | null>(null);
-  const { setValue, getValues } = useFormContext<NewCreationFormType>();
+  const {
+    setValue,
+    getValues,
+    register,
+    formState: { errors },
+  } = useFormContext<NewCreationFormType>();
 
   return (
     <section className="flex gap-6 flex-wrap md1:gap-3">
       <div
         className="flex items-center gap-4 p-3 bg-dark-40 rounded-md cursor-pointer"
+        {...register("coverImage", {
+          required: true,
+        })}
         onClick={() => setOpenImageUpload(true)}>
         <I_Image />
         <p className="text-sm">{getValues("coverImage") ? "Change Cover" : "Set Cover"}</p>
+        {errors["coverImage"] ? (
+          <label
+            htmlFor={"coverImage"}
+            className=" text-red-600">
+            {errors["coverImage"].message || "Required"}
+          </label>
+        ) : null}
       </div>
       <div
         className="flex items-center gap-2 p-3 bg-dark-40 rounded-md max-w-[300px] cursor-pointer"
