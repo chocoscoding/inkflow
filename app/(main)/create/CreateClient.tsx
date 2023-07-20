@@ -40,7 +40,7 @@ const CreateClient = () => {
     console.log("ddd");
   };
   return (
-    <div className="rounded-md bg-dark-30 p-4 w-[95vw] m-auto max-w-[1300px] min-h-[89vh]">
+    <div className="rounded-md bg-secondaryBg-10 dark:bg-dark-30 p-4 w-[95vw] m-auto max-w-[1300px] min-h-[89vh]">
       <FormProvider {...methods}>
         <form
           ref={formRef}
@@ -60,8 +60,8 @@ const CreateClient = () => {
 
           <PostField />
           <Editor
-            className="my-4 border-secondary-40 rounded-md text-white"
-            placeholder={"Write something or insert a star ★"}
+            className="my-4 dark:border-secondary-40 border-gray-500 rounded-md text-gray-800 dark:text-white lg:text-xl text-lg"
+            placeholder={"Write something here..."}
           />
           <div className="tags"></div>
           <div className="w-full flex gap-4">

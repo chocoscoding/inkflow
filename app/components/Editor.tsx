@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, ReactElement, SetStateAction, useEffect, useRef } from "react";
+import { FC } from "react";
 import { useFormContext } from "react-hook-form";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -21,7 +21,7 @@ const modules = {
 const formats = ["header", "bold", "italic", "underline", "strike", "blockquote", "list", "bullet", "indent", "link", "image"];
 
 const Editor: FC<EditorProps> = ({ placeholder, className }) => {
-  const { register, setValue, getValues } = useFormContext<NewCreationFormType>();
+  const { setValue, getValues } = useFormContext<NewCreationFormType>();
 
   return (
     <>
@@ -32,6 +32,7 @@ const Editor: FC<EditorProps> = ({ placeholder, className }) => {
         onChange={(newValue) => setValue("content", newValue)}
         modules={modules}
         formats={formats}
+        
       />
     </>
   );
