@@ -146,3 +146,35 @@ body {
   position: relative;
   z-index: 2;
 }
+
+.quill > * {
+  border-color: inherit !important;
+  color: inherit !important;
+}
+
+.quill > .ql-toolbar {
+  border-radius: 10px 10px 0 0;
+}
+.quill > .ql-toolbar .ql-formats > * {
+  /* color: red; */
+}
+.ql-toolbar.ql-snow .ql-picker-label {
+  color: initial !important;
+  opacity: 0.76;
+}
+/* .ql-snow .ql-picker .ql-expanded {
+  color: #444 !important;
+} */
+.ql-snow.ql-toolbar button svg {
+  opacity: 0.76;
+  color: currentColor;
+}
+.ql-snow .ql-stroke {
+  stroke: currentColor !important;
+}
+.ql-snow .ql-fill {
+  fill: currentColor !important;
+}
+.quill > .ql-container {
+  border-radius: 0 0 10px 10px;
+}

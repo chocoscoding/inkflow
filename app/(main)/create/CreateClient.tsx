@@ -4,6 +4,7 @@ import PostField, { GroupType } from "./PostField";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import Title from "@/app/components/modals/Create/Title";
 import Image from "next/image";
+import Editor from "@/app/components/Editor";
 /*(@chocoscoding) */
 export type NewCreationTypes = "Post" | "Interview" | "Meetup";
 export interface NewCreationFormType {
@@ -58,7 +59,10 @@ const CreateClient = () => {
           <Title />
 
           <PostField />
-          <div className="textArea">P</div>
+          <Editor
+            className="my-4 border-secondary-40 rounded-md text-white"
+            placeholder={"Write something or insert a star ★"}
+          />
           <div className="tags"></div>
           <div className="w-full flex gap-4">
             <button
