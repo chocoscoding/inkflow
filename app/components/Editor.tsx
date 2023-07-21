@@ -18,10 +18,10 @@ const modules = {
   ],
 };
 
-const formats = ["header", "bold", "italic", "underline", "strike", "blockquote", "list", "bullet", "indent", "link", "image"];
+const formats = ["header", "bold", "italic", "underline", "strike", "blockquote", "list", "bullet", "indent", "link", "image"]; 
 
 const Editor: FC<EditorProps> = ({ placeholder, className }) => {
-  const { setValue, getValues } = useFormContext<NewCreationFormType>();
+  const { setValue, getValues, clearErrors } = useFormContext<NewCreationFormType>();
 
   return (
     <>
@@ -29,10 +29,12 @@ const Editor: FC<EditorProps> = ({ placeholder, className }) => {
         className={className}
         placeholder={placeholder}
         value={getValues("content")}
-        onChange={(newValue) => setValue("content", newValue)}
+        onChange={(newValue) => {
+          setValue("content", newValue);
+          clearErrors("content");
+        }}
         modules={modules}
         formats={formats}
-        
       />
     </>
   );
