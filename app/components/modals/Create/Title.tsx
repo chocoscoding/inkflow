@@ -23,7 +23,7 @@ const Title = () => {
           outline outline-0 
           focus:outline-2
           focus:outline-secondary-20
-          ${errors[id] && "outline-1 dark:outline-red-dark-50 outline-red-dark-90"}
+        ${errors[id] && "outline-1 dark:outline-red-dark-50 outline-red-dark-90"}
           ${errors[id] && "focus:outline-2 dark:outline-red-dark-50 outline-red-dark-90"}
         `}
         placeholder="Title..."

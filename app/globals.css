@@ -187,3 +187,8 @@ body {
   /* for dropdown */
   color: #444 !important;
 }
+
+.rti--container {
+  background-color: transparent !important;
+  border-radius: 10px !important;
+}
