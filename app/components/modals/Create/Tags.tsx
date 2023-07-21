@@ -1,38 +1,31 @@
 "use client";
 import { NewCreationFormType } from "@/app/(main)/create/CreateClient";
-import React from "react";
+import React, {memo} from "react";
 import { useFormContext } from "react-hook-form";
 import { TagsInput } from "react-tag-input-component";
 
 const Tags = () => {
   const { register, formState, setValue, setError, watch } = useFormContext<NewCreationFormType>();
-  const { errors, dirtyFields } = formState;
+  const { errors } = formState;
   const id = "tags";
-
-  const setTags = (tags: string[]) => {
-    console.log(tags);
-
-    if (tags.length <= 4) {
-      setValue("tags", tags);
+  const tags = React.useRef<string[]>([]);
+  tags.current = watch("tags");
+  const setTags = (newTags: string[]) => {
+    if (tags.current.length > 4) {
+      return setValue("tags", newTags.slice(0, 4));
     }
+    return;
   };
-  const TagInputStyle = `
-  rounded-lg w-full bg-red-80 text-secondary-30 font-semibold
-    outline outline-1
-    focus:outline-2
-    focus:outline-secondary-20
-    ${errors[id] && "outline-1 dark:outline-red-dark-50 outline-red-dark-90"}
-    ${errors[id] && "focus:outline-2 dark:outline-red-dark-50 outline-red-dark-90"}
-  `;
   return (
     <div className="flex flex-col gap-3 mb-4">
       <TagsInput
         {...register("tags")}
-        value={watch("tags")}
-        onChange={setTags}
-        classNames={{ tag: TagInputStyle, input: TagInputStyle }}
+        value={tags.current}
+        beforeAddValidate={(tag: string, existingTags: string[]) => existingTags.length < 4}
+        onChange={(tags) => setTags(tags)}
+        classNames={{ tag: "!bg-dark-40", input: "bg-transparent" }}
         name="fruits"
-        placeHolder="enter fruits"
+        placeHolder="Enter a 4 tags max"
       />
 
       {errors[id] ? (
@@ -46,4 +39,4 @@ const Tags = () => {
   );
 };
 
-export default Tags;
+export default memo(Tags);
