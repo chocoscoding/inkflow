@@ -27,7 +27,7 @@ const GROUPS = [
   },
   {
     id: "5htg94r2",
-    name: "kre frdg dd ljldkjglk aegh sejfuihjkwhfiuw kjfhwiuhrfjkw hibuwiu egbkjw4tghjbwri3ih  h f fhfhiuewshjkfshkjfhskj",
+    name: "Investor Collective | Active Startup Investors: Angels, Venture Capitalists, Family Officesxxxxxxxxxx",
     image:
       "https://images.unsplash.com/photo-1635006459494-c9b9665a666e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80",
   },
@@ -40,7 +40,6 @@ const GROUPS = [
   },
 ];
 const Groups: FC<GroupsProps> = ({ open, setOpen, group }) => {
-  
   const myRef = useRef(null);
 
   const closeIcon = (
