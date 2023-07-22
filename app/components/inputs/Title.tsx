@@ -8,7 +8,7 @@ const Title = () => {
   const { errors, dirtyFields } = formState;
   const id = "title";
   return (
-    <div className="flex flex-col gap-3 mb-4">
+    <div className="flex flex-col gap-2 mb-4">
       <input
         {...register(id, {
           required: true,
@@ -19,7 +19,7 @@ const Title = () => {
         })}
         id={id}
         type="text"
-        className={` h-14 rounded-lg w-full bg-dark-40 text-secondary-30 text-xl font-semibold p-3
+        className={` h-12 rounded-lg w-full bg-dark-40 text-secondary-30 text-lg font-semibold p-2
           outline outline-0 
           focus:outline-2
           focus:outline-secondary-20

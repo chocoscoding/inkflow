@@ -2,10 +2,11 @@
 import React, { useEffect, useRef } from "react";
 import PostField, { GroupType } from "./PostField";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import Title from "@/app/components/modals/Create/Title";
+import Title from "@/app/components/inputs/Title";
 import Image from "next/image";
 import Editor from "@/app/components/Editor";
-import Tags from "@/app/components/modals/Create/Tags";
+import Tags from "@/app/components/inputs/Tags";
+import InterviewOptions from "@/app/components/inputs/InterviewOptions";
 /*(@chocoscoding) */
 export type NewCreationTypes = "Post" | "Interview" | "Meetup";
 export interface NewCreationFormType {
@@ -16,10 +17,9 @@ export interface NewCreationFormType {
   coverImage: string;
   creationType: NewCreationTypes;
   interviewInfo: {
-    revenue: number;
-    revenueDuration: "mo" | "yr";
-    sector: "string";
-    website: "string";
+    revenue: string;
+    businessType: string;
+    platform: string;
   } | null;
 }
 
@@ -47,7 +47,7 @@ const CreateClient = () => {
   const formRef = useRef<HTMLFormElement | null>(null);
 
   const isValid = (e: any) => {
-    if (getValues("content").length < 1) return setError("content", { message: "Post can't be empty" });
+    if (getValues("content").length < 1) return setError("content", { message: "Post content can't be empty" });
   };
   const onSubmit: SubmitHandler<NewCreationFormType> = async (data, e) => {
     e?.preventDefault();
@@ -55,7 +55,7 @@ const CreateClient = () => {
   };
 
   return (
-    <div className="rounded-md bg-secondaryBg-10 dark:bg-dark-30 p-4 w-[95vw] m-auto max-w-[1300px] min-h-[89vh]">
+    <div className="rounded-md bg-secondaryBg-10 dark:bg-dark-30 p-4 w-[95vw] m-auto max-w-[1300px] min-h-[89vh] mt-2 md1:mt-4 mb-20">
       <FormProvider {...methods}>
         <form
           ref={formRef}
@@ -76,6 +76,8 @@ const CreateClient = () => {
             <Title />
 
             <PostField />
+
+            {watch("creationType") === "Interview" ? <InterviewOptions /> : null}
             <div>
               <Editor
                 className={`my-4 dark:border-secondary-40 border-gray-500 rounded-md text-gray-800 dark:text-white lg:text-xl text-lg
