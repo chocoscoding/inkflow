@@ -80,7 +80,7 @@ const CreateClient = () => {
             {watch("creationType") === "Interview" ? <InterviewOptions /> : null}
             <div>
               <Editor
-                className={`my-4 dark:border-secondary-40 border-gray-500 rounded-md text-gray-800 dark:text-white lg:text-xl text-lg
+                className={`my-4 dark:border-[#ccc] rounded-md text-gray-800 dark:text-white lg:text-xl text-lg
                 ${errors["content"] && "border-1 dark:border-red-dark-50 border-red-dark-90"}
                 ${errors["content"] && "focus:border-2 dark:border-red-dark-50 outline-red-dark-90"}
                 ${errors["content"] && "mt-4 mb-1.5"}
