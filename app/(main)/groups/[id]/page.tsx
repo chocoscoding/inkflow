@@ -8,19 +8,13 @@ import Main from "./Main";
 import Image from "next/image";
 import Create from "./Create";
 import { Follow, Follow1 } from "@/app/components/Icons";
-
+import { redirect } from "next/navigation";
+import Link from "next/link";
+import SeeAllButton from "./SeeAllButton";
 const page = ({ params }: { params: { slug: string } }) => {
   return (
     <main className="flex w-full p-6 xl1:p-2 max-w-[1600px] m-auto gap-4 flex-wrap">
       <div className="sticky top-[60px] w-2/12 min-w-[230px] lg1:min-w-[200px] h-fit flex flex-col gap-2 md2:hidden shrink-0 lg2:hidden">
-        <section className="flex p-4 lg1:p-2 rounded-2xl flex-col justify-start items-start gap-3 dark:bg-dark-30">
-          <HomeNav
-            Name="New"
-            mainText="Newest and Recent"
-            secondaryText="Find the latest updates"
-            active={true}
-          />
-        </section>
         <Trending />
       </div>
 
@@ -97,11 +91,7 @@ const page = ({ params }: { params: { slug: string } }) => {
             />
           </div>
 
-          <Ripple containerClassName="outline outline-1 hover:outline-2 md:hover:bg-dark-20 outline-neutral-200 w-full m-auto block mt-2">
-            <button className="shrink-0 h-8 rounded-full sm1:text-xs outline outline-1 hover:outline-2 md:hover:bg-dark text-gray-400 w-full select-none">
-              See all
-            </button>
-          </Ripple>
+          <SeeAllButton />
         </div>
       </section>
     </main>

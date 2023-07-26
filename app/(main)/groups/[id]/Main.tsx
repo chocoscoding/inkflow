@@ -7,11 +7,13 @@ import Post from "@/app/components/home/Post";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import Create from "./Create";
+import LeaveGroup from "@/app/components/modals/LeaveGroup";
 
 const Main = () => {
   const aboutRef = useRef<HTMLParagraphElement | null>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const [showMore, setShowMore] = useState(false);
+  const [leaveModal, setLeaveModal] = useState(false);
 
   useEffect(() => {
     const checkOverflow = (scrollW?: number, clientW?: number) => {
@@ -61,7 +63,7 @@ const Main = () => {
               </p>
             </div>
           </div>
-          <button className="rounded-md bg-dark-40 border h-fit py-2 px-4 flex-shrink-0 md:ml-2 cursor-pointer md3:self-end md1:mt-4 md1:w-6/12 md1:ml-[65px]">
+          <button className="rounded-md bg-dark-40 border h-fit py-2 px-4 flex-shrink-0 md:ml-2 cursor-pointer md3:self-end md1:mt-4 md1:w-6/12 md1:ml-[65px]" onClick={()=>setLeaveModal(true)}>
             Leave
           </button>
         </section>
@@ -105,6 +107,8 @@ const Main = () => {
         .map((ele, i) => (
           <Post key={`posts${i}`} />
         ))}
+
+        <LeaveGroup open={leaveModal} setOpen={setLeaveModal}/>
     </section>
   );
 };

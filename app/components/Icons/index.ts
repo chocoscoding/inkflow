@@ -10,6 +10,7 @@ export { default as Business } from "./Business";
 export { default as Calendar } from "./Calendar";
 export { default as Chrckmark } from "./Chrckmark";
 export { default as Close } from "./Close";
+export { default as CloseIcon } from "./CloseIcon";
 export { default as Comment1 } from "./Comment1";
 export { default as Comment } from "./Comment";
 export { default as Design } from "./Design";
