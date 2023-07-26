@@ -7,6 +7,7 @@ import Ripple from "@/app/components/Ripple";
 import Main from "./Main";
 import Image from "next/image";
 import Create from "./Create";
+import { Follow, Follow1 } from "@/app/components/Icons";
 
 const page = ({ params }: { params: { slug: string } }) => {
   return (
@@ -31,7 +32,16 @@ const page = ({ params }: { params: { slug: string } }) => {
         </span>
         <section className="flex p-4 lg1:p-2 rounded-2xl flex-col justify-start items-start gap-1.5 dark:bg-dark-30 my-2 md3:mt-0">
           <p>Admin</p>
-          
+          <div className="flex items-center gap-3 w-full">
+            <Avatar
+              size={30}
+              className="rounded-full flex-shrink-0"
+            />
+            <p className="w-full">timileyinwandfff</p>
+            <button className="w-[30px] h-[30px] bg-blue-10 rounded-full flex-center flex-shrink-0">
+              <Follow1 className="text-blue-default" />
+            </button>
+          </div>
         </section>
         <div className="w-full rounded-xl bg-dark-40 p-4 h-fit min-h-[180px] md1:min-h-[152px] mt-2">
           <p className="font-semibold text-base">Active members</p>
