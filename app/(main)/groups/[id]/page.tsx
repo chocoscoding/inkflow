@@ -10,7 +10,7 @@ import Create from "./Create";
 import { Follow, Follow1 } from "@/app/components/Icons";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import SeeAllButton from "./SeeAllButton";
+import MoreButton from "./MoreButton";
 const page = ({ params }: { params: { slug: string } }) => {
   return (
     <main className="flex w-full p-6 xl1:p-2 max-w-[1600px] m-auto gap-4 flex-wrap">
@@ -36,6 +36,10 @@ const page = ({ params }: { params: { slug: string } }) => {
               <Follow1 className="text-blue-default" />
             </button>
           </div>
+          <MoreButton
+            newPath="/manage/Membership/Members"
+            label="Manage group"
+          />
         </section>
         <div className="w-full rounded-xl bg-dark-40 p-4 h-fit min-h-[180px] md1:min-h-[152px] mt-2">
           <p className="font-semibold text-base">Active members</p>
@@ -91,7 +95,10 @@ const page = ({ params }: { params: { slug: string } }) => {
             />
           </div>
 
-          <SeeAllButton />
+          <MoreButton
+            newPath="/members"
+            label="See more"
+          />
         </div>
       </section>
     </main>
