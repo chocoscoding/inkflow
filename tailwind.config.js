@@ -166,6 +166,7 @@ module.exports = {
         'ba1': { 'max': '520px' },
         'ba1a': { 'min': '520px' },
         'md2': { 'max': '639px' },
+        'md2a': { 'min': '639px' },
         'md3a': { 'min': '654px' },
         'md3': { 'max': '654px' },
         'md1': { 'max': '768px' },
