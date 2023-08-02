@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import BlockedClient from "./BlockedClient";
 
 const page = () => {
-  return (
-    <div>Blocked</div>
-  )
-}
+  return <BlockedClient />;
+};
 
-export default page
+export default page;

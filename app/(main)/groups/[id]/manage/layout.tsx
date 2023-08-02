@@ -24,7 +24,7 @@ export default async function RootLayout({ children, params }: { children: React
       <main className="gap-4 p-4">
         <div className="relative w-full flex flex-wrap gap-4">
           <MiniNavigation />
-          <div className="bg-secondaryBg-20 dark:bg-dark-20 sticky top-[50px] sm1:mb-12 h-screen border flex-1">{children}</div>
+          <div className="bg-secondaryBg-20 dark:bg-dark-20 sticky top-[50px] sm1:mb-12 min-h-screen flex-1">{children}</div>
         </div>
       </main>
     </div>

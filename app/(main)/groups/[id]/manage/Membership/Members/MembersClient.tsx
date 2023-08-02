@@ -1,15 +1,18 @@
-import { SearchIcon } from "@/app/components/Icons";
+import { More, SearchIcon } from "@/app/components/Icons";
+import Ripple from "@/app/components/Ripple";
+import Image from "next/image";
 import React from "react";
+import OneMemeber from "./OneMemeber";
 
 const MembersClient = () => {
   return (
-    <div className="rounded-md ">
+    <div className="rounded-lg ">
       <div className="w-full">
-        <div className="flex justify-between mb-4 flex-wrap bg-dark-40 py-2 px-1 rounded-t-md">
+        <div className="flex justify-between mb-4 flex-wrap bg-dark-40 py-2 px-2 rounded-lg">
           <p className="text-lg">
             <span>10k </span>Members
           </p>
-          <div className="flex p-2 rounded-md bg-transparent flex-shrink-0 sm1:w-full min-w-[300px] outline outline-1">
+          <div className="flex p-2 rounded-lg bg-transparent flex-shrink-0 sm1:w-full min-w-[300px] outline outline-1">
             <SearchIcon />
             <input
               type="text"
@@ -19,7 +22,18 @@ const MembersClient = () => {
           </div>
         </div>
       </div>
-      <div className="w-full">oijioj</div>
+      <div className="w-full bg-dark-40 p-2 rounded-lg">
+        <ul>
+          {Array(30)
+            .fill(0)
+            .map((e, i) => (
+              <OneMemeber
+                owner={i === 0}
+                key={`group-${i}`}
+              />
+            ))}
+        </ul>
+      </div>
     </div>
   );
 };

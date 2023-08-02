@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import RequestClient from "./RequestClient";
 
 const page = () => {
-  return (
-    <div>Request</div>
-  )
-}
+  return <RequestClient />;
+};
 
-export default page
+export default page;
