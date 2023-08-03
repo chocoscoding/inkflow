@@ -1,8 +1,7 @@
 import { More, SearchIcon } from "@/app/components/Icons";
-import Ripple from "@/app/components/Ripple";
 import Image from "next/image";
 import React from "react";
-import OneMemeber from "./OneMemeber";
+import OneMemeber from "../Membership/Members/OneMemeber";
 
 const MembersClient = () => {
   return (

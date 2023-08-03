@@ -25,7 +25,7 @@ const MiniNavigation = () => {
     if (pathLists[4] === "Membership" && pathLists[5] === "Blocked") return 3;
   }, [path]);
 
-  if (path?.includes(`/groups/${params!.id}/manage/Content`)) return null;
+  if (path?.includes(`/groups/${params!.id}/manage/Contents`)) return null;
   return (
     <section className="rounded-md text-se bg-dark-30 overflow-hidden min-w-[200px] md2a:sticky md2a:top-[180px] h-fit md2:w-full flex-shrink-0">
       <ul className="flex flex-col gap-4">

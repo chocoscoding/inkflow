@@ -25,7 +25,6 @@ const OneMemeber: React.FC<ListGroupProps> = ({ keyName }) => {
 
         <div className="flex w-full gap-1 items-center">
           <p className="sm:font-medium text-base lg:text-lg md:truncate-lines-2 truncate-lines-4">@timileyinwandfff</p>
-          
         </div>
       </div>
 
@@ -41,6 +40,7 @@ const OneMemeber: React.FC<ListGroupProps> = ({ keyName }) => {
         elementLists={[
           { label: "Accept", onClick: () => {} },
           { label: "Reject", onClick: () => {} },
+          { label: "Block", onClick: () => {} },
         ]}
       />
     </li>
