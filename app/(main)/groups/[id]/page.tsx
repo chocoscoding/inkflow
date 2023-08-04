@@ -41,7 +41,7 @@ const page = ({ params }: { params: { slug: string } }) => {
             label="Manage group"
           />
         </section>
-        <div className="w-full rounded-xl bg-dark-40 p-4 h-fit min-h-[180px] md1:min-h-[152px] mt-2">
+        <div className="w-full rounded-xl bg-dark-30 p-4 h-fit min-h-[180px] md1:min-h-[152px] mt-2">
           <p className="font-semibold text-base">Active members</p>
           <p className="font-light text-sm text-secondary-40">9999999999999999999 members</p>
           <div className="mt-4 flex flex-wrap gap-2 max-h-24 overflow-hidden">

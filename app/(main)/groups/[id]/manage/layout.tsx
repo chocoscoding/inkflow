@@ -13,7 +13,7 @@ export default async function RootLayout({ children, params }: { children: React
           className="rounded-md flex-shrink-0 h-fit"
         />
         <Link href={`/groups/${params.id}`}>
-          <p className="text-lg font-bold text-blue-default md1:text-sm">
+          <p className="text-lg font-bold text-secondary-30 md1:text-sm hover:underline">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident eos vero a, at facere iste dolorum, mollitia, delectus
             quidem praesentium laboriosam deleniti beatae rem magnam adipisci culpa ea molestias eum.
           </p>

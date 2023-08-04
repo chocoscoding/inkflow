@@ -9,7 +9,7 @@ const MembersClient = () => {
     <>
       <div className="flex gap-2 items-baseline mb-4">
         <span onClick={back}>
-          <BackArrow className="flex-shrink-0 mr-2" />
+          <BackArrow className="flex-shrink-0 mr-2 cursor-pointer" />
         </span>
         <p className="w-full text-secondary-30 text-lg font-bold">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores unde iusto veniam cupiditate, culpa iste dolorem Lorem ipsum
