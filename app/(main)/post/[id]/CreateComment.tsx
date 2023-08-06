@@ -10,7 +10,7 @@ const CreateComment = () => {
         size={42}
         className="rounded-full flex-shrink-0 h-fit"
       />
-      <div className="flex rounded-xl gap-3 outline outline-1 outline-secondary-30 w-full items-center min-h-[auto] transition-all p-2">
+      <div className="flex rounded-full gap-3 outline outline-1 outline-secondary-50 w-full items-center min-h-[auto] transition-all p-2">
         <textarea
           rows={1}
           maxLength={1200}

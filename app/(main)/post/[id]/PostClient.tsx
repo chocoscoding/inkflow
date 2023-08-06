@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import CreateComment from "./CreateComment";
+import Comments from "./Comments";
 
 const PostClient = () => {
   return (
@@ -39,7 +40,7 @@ const PostClient = () => {
           </div>
           <hr className="w-full bg-secondary-30 opacity-10 my-2" />
           {/* main post data */}
-          <div className="text-secondary-30">
+          <div className="text-secondary-30 mb-8">
             <p className="mb-4">
               OnePay is a modern, easy-to-use Online Payment Processing Web App UI Kit template that will help you build a web app for your
               payment/marketplace platform. OnePay, a multi-payment platform to facilitate payments online.
@@ -61,6 +62,7 @@ const PostClient = () => {
           </div>
 
           <CreateComment />
+          <Comments />
         </section>
       </section>
     </main>

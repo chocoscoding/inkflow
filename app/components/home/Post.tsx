@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Like } from "../Icons/Icon";
 import Tags from "../Tags";
 import Avatar from "../Avatar";
+import Link from "next/link";
 
 const Post = () => {
   const [like, setLike] = useState<boolean>(false);
@@ -24,10 +25,12 @@ const Post = () => {
         {/* top */}
         <section>
           <div className="flex gap-10 lg2:gap-3">
+            <Link href={`/post/1234`}>
             <p className="xl:text-xl lg:text-base text-sm font-semibold truncate-lines-2 hover:underline cursor-pointer">
-              This is my favorite title and i dont give to shits about why life is made up of haha or why people eat dog shit aha or why
-              people eat dog shit
+              This is my favorite title and i dont give to free noting about why life is made up of nothing or why people eat sweet things aha or why
+              people love good things
             </p>
+            </Link>
             <div className="h-fit p-1.5 bg-dark-40 rounded-full cursor-pointer hidden sm:block">
               <Like className={`text-secondary-50`} />
             </div>
