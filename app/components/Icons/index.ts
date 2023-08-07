@@ -1,4 +1,5 @@
 export { default as Plus } from "./Plus";
+export { default as Trash } from "./Trash";
 export { default as Arrow1 } from "./Arrow1";
 export { default as ArrowDown } from "./ArrowDown";
 export { default as Arrow } from "./Arrow";

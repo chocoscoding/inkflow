@@ -3,7 +3,7 @@ import React from "react";
 import CreateComment from "./CreateComment";
 import Comments from "./Comments";
 import CreatorInfo from "./CreatorInfo";
-import PostFuntions from "./PostFuntions";
+import PostFuntions from "../../../components/PostFuntions";
 
 const PostClient = () => {
   return (

@@ -2,7 +2,7 @@ import Avatar from "@/app/components/Avatar";
 import { Comment, Report, Share } from "@/app/components/Icons";
 import { Like } from "@/app/components/Icons/Icon";
 import React from "react";
-import PostFuntions from "./PostFuntions";
+import PostFuntions from "../../../components/PostFuntions";
 import CreatorInfo from "./CreatorInfo";
 import PostClient from "./PostClient";
 
