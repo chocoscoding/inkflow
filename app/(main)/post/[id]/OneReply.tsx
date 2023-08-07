@@ -7,7 +7,7 @@ const OneReply = () => {
     <div className="p-1 mb-4 last:mb-0">
       <div className="flex gap-3 h-fit">
         <Avatar
-          size={42}
+          size={38}
           className="rounded-full flex-shrink-0 h-fit"
         />
         <div className="w-full">

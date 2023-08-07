@@ -8,10 +8,12 @@ import PostClient from "./PostClient";
 
 const page = () => {
   return (
-    <div className="appScreen flex py-2 px-4 max-w-[1600px] m-auto gap-3">
-      <PostFuntions />
+    <div className="appScreen flex py-2 px-4 max-w-[1600px] m-auto gap-3 flex-wrap">
+      <PostFuntions extraClass="md1:hidden sticky top-[55px]" />
       <PostClient />
-      <CreatorInfo />
+      <span className="lg3:hidden">
+        <CreatorInfo />
+      </span>
     </div>
   );
 };
