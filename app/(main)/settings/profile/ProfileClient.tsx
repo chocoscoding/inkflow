@@ -6,10 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 const ProfileClient = () => {
   const methods = useForm<{}>({ defaultValues: {} });
-  const { back } = useRouter();
 
   return (
     <section className="pl-5 w-full">

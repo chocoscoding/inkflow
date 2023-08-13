@@ -24,7 +24,6 @@
     "eslint-config-next": "13.4.6",
     "framer-motion": "^10.12.16",
     "i18n-iso-countries": "^7.6.0",
-    "layout-greed": "^1.0.7",
     "next": "13.4.6",
     "next-auth": "^4.22.1",
     "next-cloudinary": "^4.14.1",

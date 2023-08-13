@@ -1,8 +1,11 @@
+"use client";
 import { FC } from "react";
 import { useFormContext } from "react-hook-form";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { NewCreationFormType } from "../(main)/create/CreateClient";
+import dynamic from "next/dynamic";
+
+const ReactQuill = dynamic(() => import("./ReactQuill"), { ssr: false });
 interface EditorProps {
   className: string;
   placeholder: string;
@@ -18,8 +21,7 @@ const modules = {
   ],
 };
 
-const formats = ["header", "bold", "italic", "underline", "strike", "blockquote", "list", "bullet", "indent", "link", "image"]; 
-
+const formats = ["header", "bold", "italic", "underline", "strike", "blockquote", "list", "bullet", "indent", "link", "image"];
 const Editor: FC<EditorProps> = ({ placeholder, className }) => {
   const { setValue, getValues, clearErrors } = useFormContext<NewCreationFormType>();
 

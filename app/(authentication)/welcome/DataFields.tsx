@@ -4,7 +4,6 @@ import Step1 from "@/app/components/welcome/Step1";
 import Step2 from "@/app/components/welcome/Step2";
 import Step3 from "@/app/components/welcome/Step3";
 import Step4 from "@/app/components/welcome/Step4";
-import useLightMode from "@/app/hooks/useLightMode";
 import useWelcomeSteps from "@/app/hooks/useWelcomeSteps";
 import axios from "axios";
 import React, { useState } from "react";
