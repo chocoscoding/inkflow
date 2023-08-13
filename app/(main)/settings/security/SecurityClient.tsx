@@ -6,11 +6,9 @@ import Link from "next/link";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { BackArrow, Upload } from "@/app/components/Icons";
-import { useRouter } from "next/navigation";
 
 const SecurityClient = () => {
   const methods = useForm<{}>({ defaultValues: {} });
-  const { back } = useRouter();
 
   return (
     <section className="pl-5 w-full">
@@ -41,7 +39,6 @@ const SecurityClient = () => {
         </div>
 
         <div className="flex justify-end gap-4 mr-3 items-center">
-
           <button className="bg-blue-default rounded-lg py-2.5 px-4 cursor-pointer">Change</button>
         </div>
       </FormProvider>

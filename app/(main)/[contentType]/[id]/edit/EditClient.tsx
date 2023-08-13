@@ -8,6 +8,7 @@ import Editor from "@/app/components/Editor";
 import Tags from "@/app/components/inputs/Tags";
 import InterviewOptions from "@/app/components/inputs/InterviewOptions";
 import MeetupOptions from "@/app/components/inputs/MeetupOptions";
+import { useRouter } from "next/navigation";
 /*(@chocoscoding) */
 export type NewCreationTypes = "Post" | "Interview" | "Meetup";
 export interface NewCreationFormType {
@@ -29,7 +30,7 @@ export interface NewCreationFormType {
   } | null;
 }
 
-const CreateClient = () => {
+const EditClient = () => {
   const methods = useForm<NewCreationFormType>({
     defaultValues: {
       title: "",
@@ -41,6 +42,7 @@ const CreateClient = () => {
       interviewInfo: null,
     },
   });
+  const { back } = useRouter();
   const {
     handleSubmit,
     register,
@@ -108,7 +110,12 @@ const CreateClient = () => {
               className="bg-blue-default py-2.5 px-6 rounded-md sm:min-w-[140px] hover:bg-blue-80 cursor-pointer">
               Publish
             </button>
-            <button className="text-secondary-30 py-2.5 px-6 rounded-md sm:min-w-[140px] hover:bg-dark-20 cursor-pointer">Cancel</button>
+            <button
+              className="text-secondary-30 py-2.5 px-6 rounded-md sm:min-w-[140px] hover:bg-dark-20 cursor-pointer"
+              onClick={back}
+              type="button">
+              Cancel
+            </button>
           </div>
         </form>
       </FormProvider>
@@ -116,4 +123,4 @@ const CreateClient = () => {
   );
 };
 
-export default CreateClient;
+export default EditClient;

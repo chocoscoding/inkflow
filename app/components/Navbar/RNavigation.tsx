@@ -25,11 +25,6 @@ const RNavigation: React.FC<NavbarProps> = ({ currentUser }) => {
           </span>
         </button>
       </Link>
-      <Link
-        href={`#`}
-        className={style.button}>
-        <Notification className={style.icon} />
-      </Link>
       <UserMenu currentUser={currentUser} />
     </div>
   );
