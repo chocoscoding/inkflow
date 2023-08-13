@@ -26,12 +26,15 @@ const OneComment = () => {
               beatae soluta obcaecati accusantium! Esse sunt mollitia sint, magnam tempora ratione provident!
             </p>
           </div>
-          <div className="flex items-center text-secondary-30 py-2 gap-5">
-            <div className="flex gap-2 items-center">
-              <Like className="cursor-pointer" />
-              <p className="text-secondaryBg-20">2k</p>
+          <div className="flex items-center text-secondary-30 py-2 gap-5 justify-between">
+            <div>
+              <div className="flex gap-2 items-center">
+                <Like className="cursor-pointer" />
+                <p className="text-secondaryBg-20">2k</p>
+              </div>
+              <Reply className="cursor-pointer" />
+              <More className="cursor-pointer" />
             </div>
-            <Reply className="cursor-pointer" />
             <More className="cursor-pointer" />
           </div>
           <div className="mt-2">

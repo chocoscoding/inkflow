@@ -46,11 +46,11 @@ const page = () => {
         </section>
         <hr className="my-3 border-secondary-30" />
         <section className="main">
-          <h1 className="mb-1.5">
+          <h1 className="mb-1.5 bg-dark-40 p-2 w-fit rounded-lg">
             <span className="font-semibold text-lg ">Date:</span>{" "}
             <span className=" font-normal text-base text-secondary-30">07-08-2023</span>
           </h1>
-          <h1 className="mb-1.5">
+          <h1 className="mb-1.5 bg-dark-40 p-2 w-fit rounded-lg">
             <span className=" font-semibold text-lg">Time:</span>{" "}
             <span className=" font-normal text-base text-secondary-30">10AM - 3PM, GMT +1</span>
           </h1>
@@ -73,7 +73,6 @@ const page = () => {
           </p>
         </section>
       </div>
-      
     </main>
   );
 };

@@ -9,8 +9,8 @@ import Link from "next/link";
 const Post = () => {
   const [like, setLike] = useState<boolean>(false);
   return (
-    <div className="bg-dark-30 lg:h-56 h-fit w-full mb-4 rounded-xl flex p-4 sm1:p-3 md:gap-4 gap-2 sm1:overflow-hidden">
-      <div className="rounded-lg overflow-hidden  xl:w-[200px]  md:w-[150px] sm:w-[130px] w-1/5 shrink-0">
+    <div className="bg-dark-30 lg:h-56 h-fit w-full mb-4 rounded-xl flex p-4 md1:p-2 sm1:p-3 md:gap-4 gap-2 sm1:overflow-hidden sm1:flex-col">
+      <div className="rounded-lg overflow-hidden  xl:w-[200px]  md:w-[150px] sm:w-[130px] sm1:w-full sm1:h-60 w-1/5 shrink-0">
         <Image
           src={
             "https://images.unsplash.com/photo-1635006459494-c9b9665a666e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80"
@@ -26,10 +26,10 @@ const Post = () => {
         <section>
           <div className="flex gap-10 lg2:gap-3">
             <Link href={`/post/1234`}>
-            <p className="xl:text-xl lg:text-base text-sm font-semibold truncate-lines-2 hover:underline cursor-pointer">
-              This is my favorite title and i dont give to free noting about why life is made up of nothing or why people eat sweet things aha or why
-              people love good things
-            </p>
+              <p className="xl:text-xl lg:text-base text-sm font-semibold truncate-lines-2 hover:underline cursor-pointer">
+                This is my favorite title and i dont give to free noting about why life is made up of nothing or why people eat sweet things
+                aha or why people love good things
+              </p>
             </Link>
             <div className="h-fit p-1.5 bg-dark-40 rounded-full cursor-pointer hidden sm:block">
               <Like className={`text-secondary-50`} />

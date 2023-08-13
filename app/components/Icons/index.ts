@@ -7,6 +7,8 @@ export { default as BackArrow } from "./BackArrow";
 export { default as Bitcoin } from "./Bitcoin";
 export { default as Blogging } from "./Blogging";
 export { default as Bold } from "./Bold";
+export { default as ProfileOutline } from "./ProfileOutline";
+export { default as LockOutline } from "./LockOutline";
 export { default as Business } from "./Business";
 export { default as Calendar } from "./Calendar";
 export { default as Chrckmark } from "./Chrckmark";
