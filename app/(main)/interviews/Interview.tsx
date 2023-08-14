@@ -2,6 +2,7 @@ import Avatar from "@/app/components/Avatar";
 import Ripple from "@/app/components/Ripple";
 import Tags from "@/app/components/Tags";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Interview = () => {
@@ -32,9 +33,11 @@ const Interview = () => {
         <span className="block ba1:hidden">
           <UserInfo />
         </span>
+        <Link href={`/interviews/123`}>
         <p className="truncate-lines-2 w-full md:text-lg md:font-semibold mb-3">
           UIHUT - Crunchbase Company Profile & Funding UIHUT - Crunchbase Company Profile & Funding
         </p>
+        </Link>
         <section className="flex w-full justify-between flex-wrap gap-2">
           <section className="flex gap-1">
             <div className="">

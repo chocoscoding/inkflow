@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { NavbarProps } from "./Navbar";
 import { signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const UserMenu: React.FC<NavbarProps> = ({ currentUser }) => {
   const { isOpen, onOpen, onClose } = useNavigation();
@@ -84,14 +85,18 @@ const UserMenu: React.FC<NavbarProps> = ({ currentUser }) => {
               </>
             ) : (
               <>
-                <MenuItem
-                  onClick={() => push("/auth/signin")}
-                  label="Login"
-                />
-                <MenuItem
-                  onClick={() => push("/auth/signup")}
-                  label="Signup"
-                />
+                <Link href={`/auth/signin`}>
+                  <MenuItem
+                    onClick={() => {}}
+                    label="Login"
+                  />
+                </Link>
+                <Link href={`/auth/signup`}>
+                  <MenuItem
+                    onClick={() => {}}
+                    label="Signup"
+                  />
+                </Link>
               </>
             )}
             <motion.div className="border-t border-secondaryBg-20 dark:border-gray-700 mx-4 my-1"></motion.div>

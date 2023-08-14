@@ -1,6 +1,7 @@
 import Ripple from "@/app/components/Ripple";
 import Tags from "@/app/components/Tags";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Meetup = () => {
@@ -22,9 +23,11 @@ const Meetup = () => {
         </div>
         <span className="flex w-full gap-1">
           <section className="w-full">
-            <p className="lg:truncate-lines-1 truncate-lines-2 w-full md:text-lg md:font-semibold">
-              UIHUT - Crunchbase Company Profile & Funding
-            </p>
+            <Link href={"/meetups/123"}>
+              <p className="lg:truncate-lines-1 truncate-lines-2 w-full md:text-lg md:font-semibold">
+                UIHUT - Crunchbase Company Profile & Funding
+              </p>
+            </Link>
             <p className=" text-xs text-secondary-30 md:text-sm">
               UIHUT <span></span> <span>Sylhet, Bangladesh</span>
             </p>

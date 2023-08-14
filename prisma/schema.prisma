@@ -10,45 +10,162 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  email String? @unique
-  firstname String?
-  lastname String?
-  image String?
-  dob String?
-  country String?
-  hashedPassword String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  accounts Account[]
-  username String? 
-  questions Questions?
-  emailVerified Boolean?
+type SocialLink {
+  website   String
+  instagram String
+  twitter   String
+  linkedin  String
 }
 
 type Questions {
-    q1 Int
-    q2 Int
-    q3 Int[]
+  q1 Int
+  q2 Int
+  q3 Int[]
 }
 
+model User {
+  id             String       @id @default(auto()) @map("_id") @db.ObjectId
+  email          String?      @unique
+  firstname      String?
+  lastname       String?
+  image          String?
+  dob            String?
+  country        String?
+  hashedPassword String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  accounts       Account[]
+  username       String?
+  questions      Questions?
+  emailVerified  Boolean?
+  bio            String?
+  occupation     String?
+  socailLink     SocialLink?
+  bannedGroups   BannedUser[]
+}
 
 model Account {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  userId String @db.ObjectId
-  type String
-  provider String
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
   providerAccountId String
-  refresh_token String? @db.String
-  access_token String @db.String
-  expires_at Int?
-  token_type String?
-  scope String?
-  id_token String? @db.String
-  session_state String?
+  refresh_token     String? @db.String
+  access_token      String  @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
 
-   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@unique([provider, providerAccountId])
+  @@unique([provider, providerAccountId])
+}
+
+model Group {
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  bannedUsers BannedUser[]
+}
+
+model UserGroupRelation {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  userId    String   @db.ObjectId
+  groupId   String   @db.ObjectId
+
+  @@unique([userId, groupId])
+  @@index([userId])
+  @@index([groupId])
+}
+
+model GroupRequest {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  userId  String @db.ObjectId
+  groupId String @db.ObjectId
+}
+
+model BannedUser {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  groupId  String   @db.ObjectId
+  userId   String   @db.ObjectId
+  bannedAt DateTime @default(now())
+  User     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Group    Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@unique([groupId, userId])
+  @@index([groupId])
+  @@index([userId])
+}
+
+model Post {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String   @db.ObjectId
+  tags       String[]
+  coverImage String?
+  Group      String?  @db.ObjectId
+  createdAt  DateTime @default(now())
+  title      String
+  views      Int      @default(0)
+  likes      Int      @default(0)
+  reports    String[] @db.ObjectId
+}
+
+model Meetup {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  createdAt DateTime @default(now())
+  title     String
+  views     Int      @default(0)
+  likes     Int      @default(0)
+  reports   String[] @db.ObjectId
+}
+
+model Interviews {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  createdAt DateTime @default(now())
+  title     String
+  views     Int      @default(0)
+  likes     Int      @default(0)
+  reports   String[] @db.ObjectId
+}
+
+model Reports {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String    @db.ObjectId
+  typeOf    LikesType
+  contentId String    @db.ObjectId
+}
+
+model Comments {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  body   String
+}
+
+model Replies {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  commentId String @db.ObjectId
+  userId    String @db.ObjectId
+  body      String
+}
+
+enum LikesType {
+  Post
+  Interviews
+  Meetup
+  Comments
+}
+
+model Likes {
+  id     String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId String    @db.ObjectId
+  typeOf LikesType
+}
+
+model Follow {
+  id         String @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String @db.ObjectId
+  followerId String @db.ObjectId
 }

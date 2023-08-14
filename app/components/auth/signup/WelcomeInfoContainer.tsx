@@ -6,9 +6,10 @@ interface WelcomeInfoContainerType {
 }
 
 const boxVariants = {
-  initial: { y: "10rem" },
+  initial: { y: "10rem", opacity: "0" },
   animate: {
     y: 0,
+    opacity: "1",
     transition: { staggerChildren: 0.05, ease: "easeInOut", duration: 0.4 },
   },
 };
