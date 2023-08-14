@@ -1,7 +1,7 @@
 "use client";
 import React, { FC, useCallback } from "react";
 import { usePathname } from "next/navigation";
-import { Calendar, Groups, GroupsActive, Home, Interviews, Podcasts, SearchIcon } from "../Icons";
+import { Calendar, Groups,Home, Interviews, SearchIcon } from "../Icons";
 import Link from "next/link";
 import useSearchModal from "@/app/hooks/useSearchModal";
 

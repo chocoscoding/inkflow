@@ -1,6 +1,3 @@
-import Avatar from "@/app/components/Avatar";
-import { Comment, Report, Share } from "@/app/components/Icons";
-import { Like } from "@/app/components/Icons/Icon";
 import React from "react";
 import PostFuntions from "../../../components/PostFuntions";
 import CreatorInfo from "../../../components/ContentControl";
