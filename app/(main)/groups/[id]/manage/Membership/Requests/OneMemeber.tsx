@@ -40,7 +40,7 @@ const OneMemeber: React.FC<ListGroupProps> = ({ keyName }) => {
         elementLists={[
           { label: "Accept", onClick: () => {} },
           { label: "Reject", onClick: () => {} },
-          { label: "Block", onClick: () => {} },
+          { label: "Ban", onClick: () => {} },
         ]}
       />
     </li>

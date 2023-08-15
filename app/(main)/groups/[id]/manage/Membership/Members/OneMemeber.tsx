@@ -44,9 +44,9 @@ const OneMemeber: React.FC<ListGroupProps> = ({ owner, key }) => {
           </div>
         }
         elementLists={[
-          { label: "Block", onClick: () => {} },
+          { label: "Ban", onClick: () => {} },
           { label: "Remove", onClick: () => {} },
-          { label: "Remove and Block", onClick: () => {} },
+          { label: "Remove and Ban", onClick: () => {} },
         ]}
       />
     </li>

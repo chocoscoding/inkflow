@@ -2,7 +2,7 @@
 import React from "react";
 import OneMemeber from "./OneMemeber";
 
-const BlockedClient = () => {
+const BannedClient = () => {
   return (
     <div className="rounded-lg ">
       <div className="w-full bg-dark-40 p-2 rounded-lg">
@@ -11,8 +11,8 @@ const BlockedClient = () => {
             .fill(0)
             .map((e, i) => (
               <OneMemeber
-                key={`blockedMember-${i}`}
-                buttonLabel={`Unblock`}
+                key={`bannedMember-${i}`}
+                buttonLabel={`Unban`}
                 buttonOnClick={() => {}}
               />
             ))}
@@ -22,4 +22,4 @@ const BlockedClient = () => {
   );
 };
 
-export default BlockedClient;
+export default BannedClient;

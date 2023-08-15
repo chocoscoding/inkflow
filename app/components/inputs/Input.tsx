@@ -6,12 +6,13 @@ import { useFormContext } from "react-hook-form";
 interface InputPropsType {
   id: string;
   label: string;
+  className?: string;
 }
-const Input: FC<InputPropsType> = ({ id, label }) => {
+const Input: FC<InputPropsType> = ({ id, label, className }) => {
   const { register, formState } = useFormContext<any>();
   const { errors, dirtyFields } = formState;
   return (
-    <div className="flex flex-col gap-2 mb-4 w-[49%] md3:w-full min-w-[280px] max-w-[700px]">
+    <div className={`flex flex-col gap-2 mb-4 w-[49%] ${className ? className : `md3:w-full min-w-[280px] max-w-[700px]`}`}>
       <label
         htmlFor="Title"
         className="font-medium text-lg">

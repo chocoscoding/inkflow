@@ -1,8 +1,8 @@
 import React from "react";
-import BlockedClient from "./BlockedClient";
+import BannedClient from "./BannedClient";
 
 const page = () => {
-  return <BlockedClient />;
+  return <BannedClient />;
 };
 
 export default page;
