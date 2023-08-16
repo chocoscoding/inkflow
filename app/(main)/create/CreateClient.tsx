@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PostField, { GroupType } from "./PostField";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import Title from "@/app/components/inputs/Title";
@@ -8,6 +8,8 @@ import Editor from "@/app/components/Editor";
 import Tags from "@/app/components/inputs/Tags";
 import InterviewOptions from "@/app/components/inputs/InterviewOptions";
 import MeetupOptions from "@/app/components/inputs/MeetupOptions";
+import axios from "axios";
+import toast from "react-hot-toast";
 /*(@chocoscoding) */
 export type NewCreationTypes = "Post" | "Interview" | "Meetup";
 export interface NewCreationFormType {
@@ -50,13 +52,36 @@ const CreateClient = () => {
     setError,
   } = methods;
   const formRef = useRef<HTMLFormElement | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const isValid = (e: any) => {
     if (getValues("content").length < 1) return setError("content", { message: "Post content can't be empty" });
   };
   const onSubmit: SubmitHandler<NewCreationFormType> = async (data, e) => {
     e?.preventDefault();
-    console.log(methods.formState.isValid);
+    const { creationType, coverImage, title, group, interviewInfo, tags, content } = data;
+    if (creationType === "Post") {
+      setIsLoading(true);
+      const loadingToast = toast.loading("Creating post...");
+      try {
+        const createPost = await axios.post("/api/post/create", {
+          tags,
+          coverImage,
+          title,
+          body: content,
+          groupId: group,
+        });
+        toast.remove(loadingToast);
+        toast.remove();
+        toast.success("Post created 🎊");
+      } catch (error) {
+        console.log(error.message);
+        toast.remove();
+        toast.error("Something went wrong");
+      } finally {
+        setIsLoading(false);
+      }
+    }
   };
 
   return (
@@ -104,6 +129,7 @@ const CreateClient = () => {
           <div className="w-full flex gap-4">
             <button
               onClick={isValid}
+              disabled={isLoading}
               type="submit"
               className="bg-blue-default py-2.5 px-6 rounded-md sm:min-w-[140px] hover:bg-blue-80 cursor-pointer">
               Publish

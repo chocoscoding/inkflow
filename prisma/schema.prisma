@@ -118,7 +118,7 @@ model Post {
   userId     String    @db.ObjectId
   tags       String[]
   coverImage String?
-  createdAt  DateTime  @default(now())
+  createdAt  DateTime?  @default(now())
   title      String
   body       String
   views      Int       @default(0)
