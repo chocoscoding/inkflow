@@ -10,6 +10,7 @@ import InterviewOptions from "@/app/components/inputs/InterviewOptions";
 import MeetupOptions from "@/app/components/inputs/MeetupOptions";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 /*(@chocoscoding) */
 export type NewCreationTypes = "Post" | "Interview" | "Meetup";
 export interface NewCreationFormType {
@@ -32,6 +33,7 @@ export interface NewCreationFormType {
 }
 
 const CreateClient = () => {
+  const { push } = useRouter();
   const methods = useForm<NewCreationFormType>({
     defaultValues: {
       title: "",
@@ -47,6 +49,7 @@ const CreateClient = () => {
     handleSubmit,
     register,
     getValues,
+    trigger,
     formState: { errors },
     watch,
     setError,
@@ -54,12 +57,29 @@ const CreateClient = () => {
   const formRef = useRef<HTMLFormElement | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const isValid = (e: any) => {
-    if (getValues("content").length < 1) return setError("content", { message: "Post content can't be empty" });
-  };
+  useEffect(() => {
+    const form = formRef.current;
+    if (!form) return;
+    const handleSubmit = (event: any) => {
+      event.preventDefault();
+      event.stopPropagation();
+    };
+
+    form.addEventListener("submit", handleSubmit);
+
+    return () => {
+      form.removeEventListener("submit", handleSubmit);
+    };
+  }, []);
+
   const onSubmit: SubmitHandler<NewCreationFormType> = async (data, e) => {
     e?.preventDefault();
+
+    await trigger();
+    if (getValues("content").length < 1) return setError("content", { message: "Post content can't be empty" });
+    if (Array(errors).length > 1) return;
     const { creationType, coverImage, title, group, interviewInfo, tags, content } = data;
+
     if (creationType === "Post") {
       setIsLoading(true);
       const loadingToast = toast.loading("Creating post...");
@@ -69,13 +89,17 @@ const CreateClient = () => {
           coverImage,
           title,
           body: content,
-          groupId: group,
+          groupId: group?.id,
         });
         toast.remove(loadingToast);
-        toast.remove();
-        toast.success("Post created 🎊");
-      } catch (error) {
-        console.log(error.message);
+
+        if (createPost.status === 200) {
+          toast.success("Post created 🎊");
+          push(`/post/${createPost.data.id}`);
+        } else {
+          throw new Error(`Something went wrong`);
+        }
+      } catch (e: any) {
         toast.remove();
         toast.error("Something went wrong");
       } finally {
@@ -89,7 +113,6 @@ const CreateClient = () => {
       <FormProvider {...methods}>
         <form
           ref={formRef}
-          onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col justify-between">
           <section>
             {getValues("coverImage") ? (
@@ -128,13 +151,19 @@ const CreateClient = () => {
           </section>
           <div className="w-full flex gap-4">
             <button
-              onClick={isValid}
+              onClick={handleSubmit(onSubmit)}
               disabled={isLoading}
-              type="submit"
-              className="bg-blue-default py-2.5 px-6 rounded-md sm:min-w-[140px] hover:bg-blue-80 cursor-pointer">
+              type="button"
+              className={`bg-blue-default py-2.5 px-6 rounded-md sm:min-w-[140px] cursor-pointer disabled:bg-blue-40`}>
               Publish
             </button>
-            <button className="text-secondary-30 py-2.5 px-6 rounded-md sm:min-w-[140px] hover:bg-dark-20 cursor-pointer">Cancel</button>
+
+            <button
+              className={`text-secondary-30 py-2.5 px-6 rounded-md sm:min-w-[140px] hover:bg-dark-20 cursor-pointer`}
+              disabled={isLoading}
+              onClick={() => push("/")}>
+              Cancel
+            </button>
           </div>
         </form>
       </FormProvider>

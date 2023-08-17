@@ -16,7 +16,7 @@ interface ImageUploadProps {
 
 const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, value }) => {
   const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
-  
+
   const handleUpload = useCallback(
     (result: any) => {
       onChange(result.info.secure_url);
@@ -37,7 +37,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, value }) => {
       {({ open }) => {
         return (
           <div
-            onClick={() => open?.()}
+            onClick={() => (open ? open() : () => {})}
             className="
               relative
               cursor-pointer
