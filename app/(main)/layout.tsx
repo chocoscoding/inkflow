@@ -10,7 +10,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const currentUser = await getCurrentUser();
+  const currentUser = await getCurrentUser([]);
 
   if (currentUser?.id && !currentUser?.username) return redirect("/welcome");
   return (

@@ -13,7 +13,7 @@ export async function POST(request: Request) {
   const { tags, coverImage, title, body, groupId } = await request.json();
 
   try {
-    const currentUser = await getCurrentUser();
+    const currentUser = await getCurrentUser([]);
     if (!currentUser) return NextResponse.error();
     const post = await prisma.post.create({
       data: {

@@ -6,7 +6,7 @@ export const metadata = {
 };
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
-  const currentUser = await getCurrentUser();
+  const currentUser = await getCurrentUser([]);
   if (currentUser) return redirect("/");
   return <div>{children}</div>;
 }
