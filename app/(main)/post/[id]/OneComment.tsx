@@ -2,10 +2,14 @@ import Avatar from "@/app/components/Avatar";
 import { More, Reply } from "@/app/components/Icons";
 import { Like } from "@/app/components/Icons/Icon";
 import OneReply from "./OneReply";
+import { OneCommentType } from "@/app/types/client";
+import { FC, useState } from "react";
 
-const OneComment = () => {
+const OneComment: FC<OneCommentType> = (props) => {
+  const { id, userId, referenceId, body, _count, replies } = props;
+  const [showReply, setShowReply] = useState(false);
   return (
-    <div className="p-1 mb-4">
+    <div className="p-1 mb-1.5">
       <div className="flex gap-3 h-fit">
         <Avatar
           size={42}
@@ -18,29 +22,27 @@ const OneComment = () => {
               <div className="w-1 h-1 rounded-full bg-white"></div>
               <p className=" text-xs font-thin">10 days ago</p>
             </div>
-            <p className="text-secondary-30">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo modi dolore quo veritatis in corporis doloremque. Velit sed
-              beatae soluta obcaecati accusantium! Esse sunt mollitia sint, magnam tempora consectetur adipisicing elit. Nemo modi dolore
-              quo veritatis in corporis doloremque. Velit sed beatae soluta obcaecati beatae soluta obcaecati accusantium! Esse sunt
-              mollitia sint, magnam tempora consectetur adipisicing elit. Nemo modi dolore quo veritatis in corporis doloremque. Velit sed
-              beatae soluta obcaecati accusantium! Esse sunt mollitia sint, magnam tempora ratione provident!
-            </p>
+            <p className="text-secondary-30">{body}</p>
           </div>
           <div className="flex items-center text-secondary-30 py-2 gap-5 justify-between">
-            <div>
+            <div className="flex gap-6">
               <div className="flex gap-2 items-center">
                 <Like className="cursor-pointer" />
-                <p className="text-secondaryBg-20">2k</p>
+                <p className="text-secondaryBg-20">{_count.likes}</p>
               </div>
               <Reply className="cursor-pointer" />
               <More className="cursor-pointer" />
             </div>
-            <More className="cursor-pointer" />
+            {replies.length > 0 ? (
+              <p
+                className="p-1 bg-dark-40 cursor-pointer rounded-md"
+                onClick={() => setShowReply(!showReply)}>{`${showReply ? "Hide" : "Show"} replies`}</p>
+            ) : null}
           </div>
-          <div className="mt-2">
-            <OneReply />
-            <OneReply />
-            <OneReply />
+          <div className={`mt-2 overflow-hidden transition-all ${showReply ? "" : "h-0"}`}>
+            {replies.map((reply, i) => (
+              <OneReply key={`replies__${i}`} />
+            ))}
           </div>
         </div>
       </div>

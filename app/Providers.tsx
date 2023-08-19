@@ -3,6 +3,7 @@ import { ThemeProvider } from "next-themes";
 import { useState, useEffect, ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { toast } from "react-hot-toast";
+import { SkeletonTheme } from "react-loading-skeleton";
 export default function Providers({ children }: { children: ReactNode }) {
   const [mounted, setMounted] = useState<boolean>(false);
   const pathname = usePathname();
@@ -15,5 +16,13 @@ export default function Providers({ children }: { children: ReactNode }) {
 
   if (!mounted) null;
 
-  return <ThemeProvider attribute="class">{children}</ThemeProvider>;
+  return (
+    <ThemeProvider attribute="class">
+      <SkeletonTheme
+        baseColor="#2C353D"
+        highlightColor="#1E252B">
+        {children}
+      </SkeletonTheme>
+    </ThemeProvider>
+  );
 }

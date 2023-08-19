@@ -8,8 +8,8 @@ import PostFuntions from "../../../components/PostFuntions";
 import { PostClientType } from "@/app/types/client";
 import TimeAgo from "react-timeago";
 import Link from "next/link";
-const PostClient: FC<PostClientType> = ({ postData, currentUser }) => {
-  const { id, userId, tags, coverImage, createdAt, title, body, views, group, comments, _count } = postData;
+const PostClient: FC<PostClientType> = ({ postData, currentUser, comments }) => {
+  const { id, userId, tags, coverImage, createdAt, title, body, views, group, _count } = postData;
   // const { id } = currentUser;
   // console.log(id);
 
@@ -52,7 +52,7 @@ const PostClient: FC<PostClientType> = ({ postData, currentUser }) => {
             <div className="text-secondary-30 mb-4">
               <div className="ql-snow">
                 <div
-                  className="ql-editor mx-auto mt-6 sm:mt-16"
+                  className="ql-editor mx-auto mt-6 sm:mt-2"
                   dangerouslySetInnerHTML={{ __html: body }}></div>
               </div>
             </div>
@@ -60,12 +60,11 @@ const PostClient: FC<PostClientType> = ({ postData, currentUser }) => {
 
           <section className="bg-dark-30 md:p-4 p-2">
             <PostFuntions extraClass="hidden md1:block p-5 !bg-dark-20 mb-4 !w-full" />
-            <CreateComment />
-            <Comments />
+            <Comments comments={comments} postId={id} userId={userId}/>
           </section>
         </section>
       </section>
-      <section className="mt-8">
+      <section className="mt-8 lg3a:hidden">
         <CreatorInfo />
       </section>
     </main>

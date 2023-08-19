@@ -43,6 +43,7 @@ model User {
   socailLink     SocialLink?
   groups         UserGroupRelation[]
   bannedGroups   BannedUser[]
+  comments   Comment[]
 }
 
 model Account {
@@ -174,9 +175,12 @@ model Comment {
   contentType ContentType
   referenceId String      @db.ObjectId
   body        String
+  createdAt  DateTime  @default(now())
+  likes       Likes[]
+  replies     Replies[]
+  user        User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
   post        Post?       @relation(fields: [referenceId], references: [id], onDelete: Cascade)
   interview   Interview?  @relation(fields: [referenceId], references: [id], onDelete: Cascade)
-  likes       Likes[]
 }
 
 model Replies {
@@ -184,6 +188,8 @@ model Replies {
   commentId String @db.ObjectId
   userId    String @db.ObjectId
   body      String
+  createdAt  DateTime  @default(now())
+  comment Comment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
 }
 
 enum LikesType {

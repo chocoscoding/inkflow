@@ -1,5 +1,6 @@
 import Providers from "./Providers";
 import "./globals.css";
+import "react-loading-skeleton/dist/skeleton.css";
 import "react-responsive-modal/styles.css";
 import { Inter } from "next/font/google";
 import ToasterProvider from "./providers/ToasterProvider";

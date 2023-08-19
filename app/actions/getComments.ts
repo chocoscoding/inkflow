@@ -3,26 +3,26 @@ import getCurrentUser from "./getCurrentUser";
 interface ParamsType {
   id: string;
 }
-export default async function getOnePost(params: ParamsType) {
+export default async function getComments(params: ParamsType) {
   try {
-    const { id } = params;
-    const post = await prisma.post.findUnique({
-      where: { id },
+    const { id: referenceId } = params;
+    const comments = await prisma.comment.findMany({
+      where: { referenceId },
       include: {
         _count: {
           select: {
             likes: {
-              where: { referenceId: id, typeOf: "Post" },
+              where: { referenceId, typeOf: "Comments" },
             },
           },
         },
-        group: true,
+        replies: true,
       },
     });
-    if (!post) {
+    if (!comments) {
       return null;
     }
-      return post;
+    return comments;
   } catch (error: any) {
     console.log(error);
     return null;

@@ -1,23 +1,69 @@
 "use client";
 import Avatar from "@/app/components/Avatar";
 import { Send } from "@/app/components/Icons";
-import React from "react";
+import { CreateCommentType } from "@/app/types/client";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import React, { FC, useState } from "react";
+import toast from "react-hot-toast";
 
-const CreateComment = () => {
+const CreateComment: FC<CreateCommentType> = ({ postId, userId }) => {
+  const [comment, setComment] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const submit = async () => {
+    try {
+      setIsLoading(true);
+      const loadingToast = toast.loading("Creating comment...");
+
+      const createPost = await axios.post("/api/comments/create", {
+        referenceId: postId,
+        userId,
+        body: comment,
+        contentType: "Post",
+      });
+      toast.remove(loadingToast);
+      if (createPost.status === 200) {
+        toast.success("Your opinion has been shared 🎊");
+        setComment("");
+        router.refresh();
+        setTimeout(() => {
+          window.scrollTo(0, document.body.scrollHeight);
+        }, 1000);
+      } else {
+        toast.error("Something went wrong");
+      }
+    } catch (e: any) {
+      toast.remove();
+      toast.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
-    <div className="flex gap-3 p-1 h-fit">
+    <div className={`flex gap-3 p-1 h-fit mb-2 ${isLoading && "opacity-25"}`}>
       <Avatar
         size={42}
         className="rounded-full flex-shrink-0 h-fit"
       />
-      <div className="flex rounded-full gap-3 outline outline-1 outline-secondary-50 w-full items-center min-h-[auto] transition-all p-2">
+      <div
+        className={`flex gap-3 outline outline-1 outline-secondary-50 w-full items-center min-h-[auto] transition-all p-2 ${
+          comment.length > 0 ? "rounded-lg" : "rounded-full"
+        }`}>
         <textarea
+          value={comment}
+          disabled={isLoading}
+          onChange={(e) => setComment(e.target.value)}
           rows={1}
           maxLength={1200}
-          className="w-full placeholder-shown:h-fit h-[90px] bg-transparent outline-0 px-2 overflow-y-hidden resize-none"
+          className={`w-full placeholder-shown:h-fit h-[90px] bg-transparent outline-0 px-2 overflow-y-hidden resize-none `}
           placeholder="Write a new comment here... 🫲"
         />
-        <Send className="flex-shrink-0" />
+        <span
+          className="cursor-pointer"
+          onClick={submit}>
+          <Send className="flex-shrink-0" />
+        </span>
       </div>
     </div>
   );

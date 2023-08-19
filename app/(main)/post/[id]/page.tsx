@@ -1,4 +1,4 @@
-import React from "react";
+import getComments from "@/app/actions/getComments";
 import PostFuntions from "../../../components/PostFuntions";
 import CreatorInfo from "./CreatorInfo";
 import PostClient from "./PostClient";
@@ -12,6 +12,7 @@ interface PostPageType {
 const PostPage = async ({ params }: PostPageType) => {
   const currentUser = await getCurrentUser([]);
   const post = await getOnePost(params);
+  const comments = await getComments(params);
   console.log(post);
 
   if (!post)
@@ -25,6 +26,7 @@ const PostPage = async ({ params }: PostPageType) => {
       <PostFuntions extraClass="md1:hidden sticky top-[55px]" />
       <PostClient
         postData={post}
+        comments={comments}
         currentUser={currentUser}
       />
       <span className="lg3:hidden">
