@@ -6,10 +6,10 @@ import SearchInput from "./SearchInput";
 import RNavigation from "./RNavigation";
 import useSearchModal from "@/app/hooks/useSearchModal";
 import { useTheme } from "next-themes";
-import { SafeUser } from "@/app/types";
+import { SafeUser2 } from "@/app/types";
 
 export interface NavbarProps {
-  currentUser?: SafeUser | null;
+  currentUser: SafeUser2 | null;
 }
 
 const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {

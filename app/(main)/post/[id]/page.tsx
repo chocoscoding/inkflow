@@ -13,7 +13,6 @@ const PostPage = async ({ params }: PostPageType) => {
   const currentUser = await getCurrentUser([]);
   const post = await getOnePost(params);
   const comments = await getComments(params);
-  console.log(post);
 
   if (!post)
     return (
