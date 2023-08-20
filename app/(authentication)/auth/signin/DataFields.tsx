@@ -21,7 +21,7 @@ export interface FormType {
   confirmPassword: string;
 }
 const DataFields = () => {
-  const { push } = useRouter();
+  const { push, refresh } = useRouter();
   const {
     register,
     handleSubmit,
@@ -60,6 +60,7 @@ const DataFields = () => {
       });
       if (signinReq?.status === 200) {
         toast.dismiss(loading);
+        refresh();
         push("/");
         return;
       }
