@@ -47,7 +47,7 @@ const UserMenu: React.FC<NavbarProps> = ({ currentUser }) => {
       window.removeEventListener("keydown", handleEscKeyPress);
     };
   }, []);
-  if (status === "loading") {
+  if (status === "loading" ) {
     return (
       <section className="flex items-center xl1:gap-2 gap-4 dark:text-secondary-60 cursor-pointer h-full">
         <div className=" rounded-md xl1:scale-75 h-full overflow-hidden">

@@ -1,7 +1,5 @@
 import React from "react";
-import { ArrowDown, Message, Notification, Post1 } from "../Icons";
-import Image from "next/image";
-import Avatar from "../Avatar";
+import { Post1 } from "../Icons";
 import UserMenu from "./UserMenu";
 import Link from "next/link";
 import { NavbarProps } from "./Navbar";

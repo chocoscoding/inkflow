@@ -7,7 +7,6 @@ import RNavigation from "./RNavigation";
 import useSearchModal from "@/app/hooks/useSearchModal";
 import { useTheme } from "next-themes";
 import { SafeUser2 } from "@/app/types";
-
 export interface NavbarProps {
   currentUser: SafeUser2 | null;
 }
@@ -28,7 +27,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
         <div className="flex w-full justify-between lg:max-w-[1200px] md:max-w-[850px] lg:mr-6">
           <LNavigation />
           <SearchInput />
-          <RNavigation currentUser={currentUser}/>
+          <RNavigation currentUser={currentUser} />
         </div>
       </div>
     </nav>
