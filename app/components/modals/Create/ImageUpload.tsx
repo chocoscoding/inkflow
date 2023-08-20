@@ -48,7 +48,7 @@ const ImageUpload: FC<ImageUploadProps> = ({ open, setOpen, postType, setPostTyp
         }}
         container={myRef.current}>
         <ImageUploadInput
-          onChange={(value) => setCustomValue(value)}
+          onChange={(value) => setCustomValue(value) }
           value={getValues('coverImage')}
         />
       </Modal>

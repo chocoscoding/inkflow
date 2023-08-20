@@ -163,6 +163,7 @@ module.exports = {
       },
       screens: {
         'sm1': { 'max': '480px' },
+        'sm1': { 'max': '480px' },
         'ba1': { 'max': '520px' },
         'ba1a': { 'min': '520px' },
         'md2': { 'max': '639px' },

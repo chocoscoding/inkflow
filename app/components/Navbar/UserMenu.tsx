@@ -10,12 +10,13 @@ import { NavbarProps } from "./Navbar";
 import { signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-
+import { useSession } from "next-auth/react";
+import Skeleton from "react-loading-skeleton";
 const UserMenu: React.FC<NavbarProps> = ({ currentUser }) => {
   const { isOpen, onOpen, onClose } = useNavigation();
   const { push } = useRouter();
   const [isOpenAnimated, setIsOpenAnimated] = useState(isOpen);
-
+  const { data: session, status } = useSession();
   const toggle = () => {
     if (isOpen) return onClose();
     return onOpen();
@@ -46,6 +47,18 @@ const UserMenu: React.FC<NavbarProps> = ({ currentUser }) => {
       window.removeEventListener("keydown", handleEscKeyPress);
     };
   }, []);
+  if (status === "loading") {
+    return (
+      <section className="flex items-center xl1:gap-2 gap-4 dark:text-secondary-60 cursor-pointer h-full">
+        <div className=" rounded-md xl1:scale-75 h-full overflow-hidden">
+          <Skeleton className="h-[90%] w-[30px]" />
+        </div>
+        <p className="font-semibold xl1:text-[10px] text-secondary-10 dark:text-secondaryBg-10">
+          <Skeleton width={50} />
+        </p>
+      </section>
+    );
+  }
   return (
     <>
       <section

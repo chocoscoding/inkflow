@@ -95,12 +95,16 @@ const CreateClient = () => {
 
         if (createPost.status === 200) {
           toast.success("Post created 🎊");
-          push(`/post/${createPost.data.id}`);
+          push(`/post/${createPost.data.title}`);
         } else {
           throw new Error(`Something went wrong`);
         }
       } catch (e: any) {
         toast.remove();
+        if (e.message.includes("400")) {
+          toast.error("Title is already in use 💔");
+          return;
+        }
         toast.error("Something went wrong");
       } finally {
         setIsLoading(false);

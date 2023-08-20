@@ -1,13 +1,16 @@
 "use client";
 import Avatar from "@/app/components/Avatar";
 import { Send } from "@/app/components/Icons";
+import { AuthFunction } from "@/app/libs/AuthFunction";
 import { CreateCommentType } from "@/app/types/client";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { FC, useState } from "react";
 import toast from "react-hot-toast";
 
-const CreateComment: FC<CreateCommentType> = ({ postId, userId }) => {
+const CreateComment: FC<CreateCommentType> = ({ postId }) => {
+  const { data, status } = useSession();
   const [comment, setComment] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -18,7 +21,7 @@ const CreateComment: FC<CreateCommentType> = ({ postId, userId }) => {
 
       const createPost = await axios.post("/api/comments/create", {
         referenceId: postId,
-        userId,
+        userId: data?.user?.id,
         body: comment,
         contentType: "Post",
       });
@@ -57,11 +60,11 @@ const CreateComment: FC<CreateCommentType> = ({ postId, userId }) => {
           rows={1}
           maxLength={1200}
           className={`w-full placeholder-shown:h-fit h-[90px] bg-transparent outline-0 px-2 overflow-y-hidden resize-none `}
-          placeholder="Write a new comment here... 🫲"
+          placeholder={status === "unauthenticated" ? 'Login to comment':`Write a new comment here... 🫲`}
         />
         <span
           className="cursor-pointer"
-          onClick={submit}>
+          onClick={() => AuthFunction(() => submit, status)}>
           <Send className="flex-shrink-0" />
         </span>
       </div>

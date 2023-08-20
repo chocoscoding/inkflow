@@ -6,10 +6,11 @@ import OneComment from "./OneComment";
 import CreateComment from "./CreateComment";
 import { CommentType } from "@/app/types/client";
 
-const Comments: FC<CommentType> = ({ comments, postId, userId }) => {
+const Comments: FC<CommentType> = ({ comments, postId }) => {
+
   return (
     <div className="mt-2">
-      <CreateComment postId={postId} userId={userId}/>
+      <CreateComment postId={postId}/>
       {!comments
         ? null
         : comments.map((comment, i) => (

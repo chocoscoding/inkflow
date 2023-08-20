@@ -7,6 +7,14 @@ import PostFuntions from "../../../components/PostFuntions";
 import InterviewClientTop from "./InterviewClientTop";
 
 const OneInterviewClient = () => {
+  const dataTemp = {
+    referenceId: "64e1fb2d2e4b51bab1ec5f19",
+    likeStatus: { id: "64d965ec96e0bce41d66ec9b" },
+    replies: [],
+    userId: "64d965ec96e0bce41d66ec9b",
+    _count: { likes: 1, comments: 1 },
+    extraClass: "hidden md1:block p-5 !bg-dark-20 mb-4 !w-full",
+  };
   return (
     <main className="flex-1 max-w-[1000px]">
       <section className="min-h-screen rounded-xl">
@@ -41,7 +49,7 @@ const OneInterviewClient = () => {
           </section>
 
           <section className="bg-dark-30 md:p-4 p-2 rounded-b-lg">
-            <PostFuntions extraClass="hidden md1:block p-5 !bg-dark-20 mb-4 !w-full" />
+            <PostFuntions {...dataTemp} />
             <CreateComment />
             <Comments />
           </section>

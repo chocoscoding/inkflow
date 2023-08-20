@@ -5,6 +5,8 @@ import "react-responsive-modal/styles.css";
 import { Inter } from "next/font/google";
 import ToasterProvider from "./providers/ToasterProvider";
 import NextTopLoader from "nextjs-toploader";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,7 +15,9 @@ export const metadata = {
   description: "Let's start our journey here",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const session = await getServerSession(authOptions)
+
   return (
     <html lang="en">
       <body
@@ -26,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           speed={300}
           shadow="0 0 10px #FF4401,0 0 5px #FF4401"
         />
-        <Providers>{children}</Providers>
+        <Providers session={session}>{children}</Providers>
       </body>
     </html>
   );

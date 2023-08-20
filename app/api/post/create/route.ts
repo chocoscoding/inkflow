@@ -28,8 +28,12 @@ export async function POST(request: Request) {
     console.log(post);
 
     return NextResponse.json(post);
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    console.log(error.message);
+
+    if (error.message.includes("Unique constraint failed on the constraint")) {
+      return NextResponse.json({ error: "Name not unique" }, { status: 400 });
+    }
     return NextResponse.error();
   }
 }

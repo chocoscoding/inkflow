@@ -8,22 +8,24 @@ import PostFuntions from "../../../components/PostFuntions";
 import { PostClientType } from "@/app/types/client";
 import TimeAgo from "react-timeago";
 import Link from "next/link";
-const PostClient: FC<PostClientType> = ({ postData, currentUser, comments }) => {
-  const { id, userId, tags, coverImage, createdAt, title, body, views, group, _count } = postData;
-  // const { id } = currentUser;
+import ContentControl from "@/app/components/ContentControl";
+const PostClient: FC<PostClientType> = ({ postData, currentUser, comments, likeStatus }) => {
+  const { id, userId, tags, coverImage, createdAt, title, body, views, group, _count, owner } = postData;
+  const currentUserId = currentUser?.id;
   // console.log(id);
 
   return (
     <main className="flex-1">
-      <section className="min-h-screen rounded-xl">
+      <section className="min-h-0 xl:min-h-screen rounded-xl">
         <section>
-          <div className="w-full overflow-hidden rounded-t-xl object-cover h-[300px]">
+          <div className="w-full overflow-hidden rounded-t-xl object-cover h-[300px] md1:h-[200px] sm1:h-[120px]">
             <Image
               src={coverImage || "/image/placeholder.png"}
-              width={500}
-              height={500}
+              width={700}
+              height={700}
+              priority
               alt="post-Image"
-              className="w-full h-auto"
+              className="w-full h-auto sm1:h-[105%]"
             />
           </div>
           {/* post info */}
@@ -58,14 +60,31 @@ const PostClient: FC<PostClientType> = ({ postData, currentUser, comments }) => 
             </div>
           </section>
 
-          <section className="bg-dark-30 md:p-4 p-2">
-            <PostFuntions extraClass="hidden md1:block p-5 !bg-dark-20 mb-4 !w-full" />
-            <Comments comments={comments} postId={id} userId={userId}/>
+          <section className="bg-dark-30 md:p-4 p-2 rounded-b-xl ">
+            <PostFuntions
+              extraClass="hidden md1:block p-5 !bg-dark-20 mb-4 !w-full"
+              referenceId={id}
+              userId={currentUser?.id}
+              _count={_count}
+              likeStatus={likeStatus}
+            />
+            <Comments
+              comments={comments}
+              postId={id}
+            />
           </section>
         </section>
       </section>
       <section className="mt-8 lg3a:hidden">
-        <CreatorInfo />
+        {currentUserId === userId ? (
+          <ContentControl
+            editLink={`/post/${id}edit/`}
+            contentType="Post"
+            contentId={id}
+          />
+        ) : (
+          <CreatorInfo {...owner} />
+        )}
       </section>
     </main>
   );

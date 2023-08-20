@@ -5,26 +5,48 @@ interface ParamsType {
 }
 export default async function getOnePost(params: ParamsType) {
   try {
-    const { id } = params;
+    const title = decodeURIComponent(params.id);
     const post = await prisma.post.findUnique({
-      where: { id },
+      where: { title },
       include: {
         _count: {
           select: {
             likes: {
-              where: { referenceId: id, typeOf: "Post" },
+              where: { typeOf: "Post" },
+            },
+            comments: {
+              where: {},
             },
           },
         },
         group: true,
+        owner: {
+          select: {
+            id: true,
+            username: true,
+            image: true,
+            posts: {
+              select: {
+                id: true,
+                title: true,
+                tags: true,
+              },
+              orderBy: { createdAt: "desc" },
+              take: 3,
+              where: {
+                title: { not: title },
+              },
+            },
+          },
+        },
       },
     });
     if (!post) {
       return null;
     }
-      return post;
+    return post;
   } catch (error: any) {
-    console.log(error);
+    console.log(error.message);
     return null;
   }
 }

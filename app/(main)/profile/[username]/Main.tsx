@@ -2,10 +2,10 @@ import Ripple from "@/app/components/Ripple";
 import Tags from "@/app/components/Tags";
 import Image from "next/image";
 import React, { Suspense } from "react";
-import Meetup from "../meetups/Meetup";
+import Meetup from "../../meetups/Meetup";
 import SectionControl from "./SectionControl";
 import Post from "@/app/components/home/Post";
-import Interview from "../interviews/Interview";
+import Interview from "../../interviews/Interview";
 import useProfileSection from "@/app/hooks/useProfileSection";
 interface Profile {}
 const Profile: React.FC<Profile> = ({}) => {

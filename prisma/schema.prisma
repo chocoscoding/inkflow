@@ -44,6 +44,7 @@ model User {
   groups         UserGroupRelation[]
   bannedGroups   BannedUser[]
   comments   Comment[]
+  posts   Post[]
 }
 
 model Account {
@@ -115,19 +116,21 @@ model BannedUser {
 }
 
 model Post {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId 
   userId     String    @db.ObjectId
   tags       String[]
   coverImage String?
   createdAt  DateTime  @default(now())
-  title      String
+  title      String @unique
   body       String
   views      Int       @default(0)
   likes      Likes[]
   reports    String[]  @db.ObjectId
   comments   Comment[]
   group      Group?    @relation(fields: [groupId], references: [id])
+  owner      User    @relation(fields: [userId], references: [id])
   groupId    String?   @db.ObjectId
+  
 }
 
 model Meetup {
@@ -207,6 +210,7 @@ model Likes {
   post        Post?      @relation(fields: [referenceId], references: [id])
   interview   Interview? @relation(fields: [referenceId], references: [id])
   comment     Comment?   @relation(fields: [referenceId], references: [id])
+  @@unique([userId, referenceId])
 }
 
 model Follow {

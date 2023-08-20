@@ -1,10 +1,10 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import NextAuth, { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "@/app/libs/prismadb";
 import bcrypt from "bcrypt";
+import { JWT } from "next-auth/jwt/types";
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -40,7 +40,6 @@ export const authOptions: AuthOptions = {
         });
 
         if (!user || !user.hashedPassword) throw new Error("Email doesn't exist");
-
         const isCorrectPassword = await bcrypt.compare(credentials.password, user.hashedPassword);
         if (!isCorrectPassword) throw new Error("Incorrect Password");
 
@@ -48,9 +47,15 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
+  // callbacks
+  callbacks: {
+    async session({ session, token, user }: any) {
+      session.user.id = token.sub;
+      return session;
+    },
+  },
   pages: {
     signIn: `/auth/signin`,
-    
   },
   debug: process.env.NODE_ENV === "development",
   session: {

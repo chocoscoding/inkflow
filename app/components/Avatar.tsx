@@ -14,6 +14,7 @@ const Avatar: React.FC<AvatarProps> = ({ src, className, size }) => {
       height={size || 30}
       width={size || 30}
       alt="avatar"
+      priority
       src={src || `/images/placeholder.jpg`}
     />
   );

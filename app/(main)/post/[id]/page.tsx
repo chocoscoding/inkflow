@@ -4,15 +4,22 @@ import CreatorInfo from "./CreatorInfo";
 import PostClient from "./PostClient";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import getOnePost from "@/app/actions/getOnePost";
+import getHasUserLiked from "@/app/actions/getHasUserLiked";
 interface PostPageType {
   params: {
     id: string;
   };
 }
 const PostPage = async ({ params }: PostPageType) => {
-  const currentUser = await getCurrentUser([]);
-  const post = await getOnePost(params);
-  const comments = await getComments(params);
+
+  const currentUserPromise = getCurrentUser([]);
+  const postPromise = getOnePost(params);
+
+  const [currentUser, post] = await Promise.all([currentUserPromise, postPromise]);
+  const commentsPromise = getComments({id:post?.id});
+  const postLikeStatus = getHasUserLiked({id:post?.id});
+
+  const [comments, likeStatus] = await Promise.all([commentsPromise, postLikeStatus]);
 
   if (!post)
     return (
@@ -22,14 +29,21 @@ const PostPage = async ({ params }: PostPageType) => {
     );
   return (
     <div className="appScreen flex py-2 px-4 max-w-[1600px] m-auto gap-3 flex-wrap">
-      <PostFuntions extraClass="md1:hidden sticky top-[55px]" />
+      <PostFuntions
+        extraClass="md1:hidden sticky top-[55px]"
+        referenceId={post?.id}
+        userId={currentUser?.id}
+        likeStatus={likeStatus}
+        _count={post._count}
+      />
       <PostClient
-        postData={post}
         comments={comments}
+        postData={post}
         currentUser={currentUser}
+        likeStatus={likeStatus}
       />
       <span className="lg3:hidden">
-        <CreatorInfo />
+        <CreatorInfo {...post.owner}/>
       </span>
     </div>
   );
