@@ -130,7 +130,6 @@ model Post {
   group      Group?    @relation(fields: [groupId], references: [id])
   owner      User    @relation(fields: [userId], references: [id])
   groupId    String?   @db.ObjectId
-  
 }
 
 model Meetup {
