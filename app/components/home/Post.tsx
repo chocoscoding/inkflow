@@ -34,7 +34,7 @@ const Post: FC<OnePostComponentType> = (props) => {
   useEffect(() => {
     setCount(count + 1);
     if (count < 1) return;
-    /*
+    
     const functionTimeout = setTimeout(async () => {
       try {
         await axios.post("/api/like/toggle", {
@@ -47,7 +47,7 @@ const Post: FC<OnePostComponentType> = (props) => {
         toast.error("Something went wrong");
       }
     }, 1000);
-    return () => clearTimeout(functionTimeout); */
+    return () => clearTimeout(functionTimeout); 
   }, [hasLiked]);
 
   return (
