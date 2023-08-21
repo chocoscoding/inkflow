@@ -104,10 +104,21 @@ const Main = () => {
           </button>
         </section>
       </div>
-      {Array(30)
-        .fill(0)
-        .map((ele, i) => (
-          <Post key={`posts${i}`} />
+      {[{
+    id: '64dd80ffc0a3ec6db14334cf',
+    title: 'edls',
+    tags: [ 'gbdrklvfd' ],
+    coverImage: 'https://res.cloudinary.com/chocoscoding/image/upload/v1692238032/zd4kmzdvaiqqtitp7kqh.jpg',
+    createdAt: new Date('2023-08-17T02:07:59.029Z'),
+    views: 0,
+    owner: {
+      id: '64d965ec96e0bce41d66ec9b',
+      username: 'kfsffjoeijfios',
+      image: null
+    },
+    _count: { likes: 0, comments: 0 }
+  }].map((ele, i) => (
+          <Post key={`posts${i}`} {...ele}/>
         ))}
 
       <LeaveGroup
