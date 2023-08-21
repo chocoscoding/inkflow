@@ -10,6 +10,7 @@ import TimeAgo from "react-timeago";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const likesFormatter = (likes?: any[]) => {
   if (!likes) return false;
@@ -20,7 +21,7 @@ const Post: FC<OnePostComponentType> = (props) => {
   const { likes, id, owner, _count, title, tags, coverImage, createdAt, views } = props;
   const [hasLiked, setHasLiked] = useState<boolean>(likesFormatter(likes));
   const { status, data } = useSession();
-
+  const { refresh } = useRouter();
   const likePost = () => {
     toast.dismiss();
     if (status === "loading") return;
@@ -34,20 +35,23 @@ const Post: FC<OnePostComponentType> = (props) => {
   useEffect(() => {
     setCount(count + 1);
     if (count < 1) return;
-    
+
     const functionTimeout = setTimeout(async () => {
       try {
-        await axios.post("/api/like/toggle", {
+        const toggleLike = await axios.post("/api/like/toggle", {
           userId: data?.user.id,
           referenceId: id,
           typeOf: "Post",
         });
+        if (toggleLike.status === 200) {
+          refresh();
+        }
       } catch (error) {
         toast.dismiss();
         toast.error("Something went wrong");
       }
     }, 1000);
-    return () => clearTimeout(functionTimeout); 
+    return () => clearTimeout(functionTimeout);
   }, [hasLiked]);
 
   return (
