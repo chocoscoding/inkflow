@@ -15,6 +15,11 @@ const CreateComment: FC<CreateCommentType> = ({ postId }) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const submit = async () => {
+    if (status === "loading") return;
+    if (status === "unauthenticated") {
+      toast.error("Login to make a comment", { duration: 2300 });
+      return;
+    }
     try {
       setIsLoading(true);
       const loadingToast = toast.loading("Creating comment...");
@@ -55,16 +60,16 @@ const CreateComment: FC<CreateCommentType> = ({ postId }) => {
         }`}>
         <textarea
           value={comment}
-          disabled={isLoading}
+          disabled={isLoading || status === "unauthenticated"}
           onChange={(e) => setComment(e.target.value)}
           rows={1}
           maxLength={1200}
           className={`w-full placeholder-shown:h-fit h-[90px] bg-transparent outline-0 px-2 overflow-y-hidden resize-none `}
-          placeholder={status === "unauthenticated" ? 'Login to comment':`Write a new comment here... 🫲`}
+          placeholder={status === "unauthenticated" ? "Login to comment" : `Write a new comment here... 🫲`}
         />
         <span
           className="cursor-pointer"
-          onClick={() => AuthFunction(() => submit, status)}>
+          onClick={submit}>
           <Send className="flex-shrink-0" />
         </span>
       </div>
