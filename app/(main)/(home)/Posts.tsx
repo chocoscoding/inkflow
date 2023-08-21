@@ -1,9 +1,10 @@
 import CreatePost from "@/app/components/home/CreatePost";
 import HomeNavMobile from "@/app/components/home/HomeNavMobile";
 import Post from "@/app/components/home/Post";
-import React from "react";
+import { OnePost } from "@/app/types/client";
+import React, { FC } from "react";
 
-const Posts = () => {
+const Posts: FC<OnePost> = ({ posts }) => {
   return (
     <section className="min-h-screen w-7/12 flex-1 pt-1 md:overflow-hidden">
       <div className="sticky top-[50px] py-2 bg-dark-20 md2:flex hidden">
@@ -26,11 +27,12 @@ const Posts = () => {
           active={false}
         />
       </div>
-      {Array(30)
-        .fill(0)
-        .map((ele, i) => (
-          <Post key={`posts${i}`} />
-        ))}
+      {posts.map((ele, i) => (
+        <Post
+          key={`posts${i}`}
+          {...ele}
+        />
+      ))}
     </section>
   );
 };

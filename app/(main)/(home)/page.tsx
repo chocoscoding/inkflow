@@ -2,8 +2,11 @@ import HomeNav from "../../components/home/HomeNav";
 import Trending from "./Trending";
 import Posts from "./Posts";
 import Meetups from "./Meetups";
+import getPosts from "@/app/actions/getPosts";
+import { OnePost } from "@/app/types/client";
 
-export default function Home() {
+export default async function Home() {
+  const posts = await getPosts();
   return (
     <main className="flex w-full p-6 xl1:p-2 max-w-[1600px] m-auto gap-4">
       <div className="sticky top-[60px] w-2/12 min-w-[230px] lg1:min-w-[200px] h-fit flex flex-col gap-2 md2:hidden shrink-0">
@@ -30,7 +33,7 @@ export default function Home() {
         <Trending />
       </div>
 
-      <Posts />
+      <Posts posts={posts} />
       <section className="sticky top-[60px] lg:min-w-[266px] md:min-w-[220px] lg2:hidden h-fit flex flex-col gap-2 w-3/12 shrink-0">
         <Meetups />
       </section>

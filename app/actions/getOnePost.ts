@@ -1,5 +1,4 @@
 import prisma from "@/app/libs/prismadb";
-import getCurrentUser from "./getCurrentUser";
 interface ParamsType {
   id: string;
 }
