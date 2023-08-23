@@ -17,19 +17,19 @@ export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
   const userId = session?.user.id;
   if (!userId) return NextResponse.json({ error: "User not authenticated" }, { status: 403 });
-  const { coverImage, title, body, groupId, date, time,location } = await request.json();
+  const { coverImage, title, body, groupId, businessType, platform, revenue } = await request.json();
 
   try {
-    const meetup = await prisma.meetup.create({
+    const meetup = await prisma.interview.create({
       data: {
+        businessType,
+        platform,
+        revenue,
         userId: userId,
         coverImage,
         title,
         body,
         groupId,
-        date,
-        location,
-        time,
       },
     });
 

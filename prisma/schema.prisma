@@ -136,12 +136,15 @@ model Meetup {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   userId    String   @db.ObjectId
   createdAt DateTime @default(now())
+  coverImage String?
   title     String
+  location     String
   body      String
   date      String
-  Time      String
+  time      String
   group     Group?   @relation(fields: [groupId], references: [id])
   groupId   String?  @db.ObjectId
+  @@unique([title])
 }
 
 model Interview {
@@ -149,11 +152,16 @@ model Interview {
   userId    String    @db.ObjectId
   createdAt DateTime  @default(now())
   title     String
+  coverImage String?
   body      String
+  revenue String
+  businessType String
+  platform String
   views     Int       @default(0)
   likes     Likes[]
   reports   String[]  @db.ObjectId
   comments  Comment[]
+  @@unique([title])
 
   group   Group?  @relation(fields: [groupId], references: [id])
   groupId String? @db.ObjectId

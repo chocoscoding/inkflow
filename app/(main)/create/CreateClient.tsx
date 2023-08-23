@@ -43,6 +43,7 @@ const CreateClient = () => {
       coverImage: "",
       creationType: "Post",
       interviewInfo: null,
+      meetupInfo: null,
     },
   });
   const {
@@ -78,13 +79,13 @@ const CreateClient = () => {
     await trigger();
     if (getValues("content").length < 1) return setError("content", { message: "Post content can't be empty" });
     if (Array(errors).length > 1) return;
-    const { creationType, coverImage, title, group, interviewInfo, tags, content } = data;
+    const { creationType, coverImage, title, group, interviewInfo, tags, content, meetupInfo } = data;
 
+    setIsLoading(true);
     if (creationType === "Post") {
-      setIsLoading(true);
       const loadingToast = toast.loading("Creating post...");
       try {
-        const createPost = await axios.post("/api/post/create", {
+        const createContent = await axios.post("/api/post/create", {
           tags,
           coverImage,
           title,
@@ -93,9 +94,9 @@ const CreateClient = () => {
         });
         toast.remove(loadingToast);
 
-        if (createPost.status === 200) {
+        if (createContent.status === 200) {
           toast.success("Post created 🎊");
-          push(`/post/${createPost.data.title}`);
+          push(`/post/${createContent.data.title}`);
         } else {
           throw new Error(`Something went wrong`);
         }
@@ -103,6 +104,76 @@ const CreateClient = () => {
         toast.remove();
         if (e.message.includes("400")) {
           toast.error("Title is already in use 💔");
+          return;
+        }
+        toast.error("Something went wrong");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    if (creationType === "Meetup") {
+      const loadingToast = toast.loading("Creating Meetup...");
+      try {
+        const createContent = await axios.post("/api/meetup/create", {
+          date: meetupInfo?.date,
+          time: meetupInfo?.time,
+          location: meetupInfo?.location,
+          coverImage,
+          title,
+          body: content,
+          groupId: group?.id,
+        });
+        toast.remove(loadingToast);
+
+        if (createContent.status === 200) {
+          toast.success("Meetup created 🎊");
+          push(`/meetups/${createContent.data.title}`);
+        } else {
+          throw new Error(`Something went wrong`);
+        }
+      } catch (e: any) {
+        toast.remove();
+        if (e.message.includes("400")) {
+          toast.error("Title is already in use 💔");
+          return;
+        }
+        if (e.message.includes("403")) {
+          toast.error("User not authenticated 🔒");
+          return;
+        }
+        toast.error("Something went wrong");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    if (creationType === "Interview") {
+      const loadingToast = toast.loading("Creating Interview...");
+      try {
+        const createContent = await axios.post("/api/interview/create", {
+          businessType: interviewInfo?.businessType,
+          platform: interviewInfo?.platform,
+          revenue: interviewInfo?.revenue,
+          coverImage,
+          title,
+          body: content,
+          groupId: group?.id,
+        });
+        toast.remove(loadingToast);
+
+        if (createContent.status === 200) {
+          toast.success("Interview created 🎊");
+          push(`/interviews/${createContent.data.title}`);
+        } else {
+          throw new Error(`Something went wrong`);
+        }
+      } catch (e: any) {
+        toast.remove();
+        if (e.message.includes("400")) {
+          toast.error("Title is already in use 💔");
+          return;
+        }
+        if (e.message.includes("403")) {
+          toast.error("User not authenticated 🔒");
           return;
         }
         toast.error("Something went wrong");

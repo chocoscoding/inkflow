@@ -25,7 +25,6 @@ export async function POST(request: Request) {
         groupId,
       },
     });
-    console.log(post);
 
     return NextResponse.json(post);
   } catch (error: any) {
