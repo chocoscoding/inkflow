@@ -5,19 +5,32 @@ import PostClient from "./PostClient";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import getOnePost from "@/app/actions/getOnePost";
 import getHasUserLiked from "@/app/actions/getHasUserLiked";
+import { Metadata, ResolvingMetadata } from "next";
 interface PostPageType {
   params: {
     id: string;
   };
 }
-const PostPage = async ({ params }: PostPageType) => {
 
+export async function generateMetadata({ params }: PostPageType, parent: ResolvingMetadata): Promise<Metadata> {
+  const post = await getOnePost(params);
+  if (!post)
+    return {
+      title: "No post found",
+      description: `Couldn't find the post you're trying to get`,
+    };
+  return {
+    title: post.title,
+  };
+}
+
+const PostPage = async ({ params }: PostPageType) => {
   const currentUserPromise = getCurrentUser([]);
   const postPromise = getOnePost(params);
 
   const [currentUser, post] = await Promise.all([currentUserPromise, postPromise]);
-  const commentsPromise = getComments({id:post?.id});
-  const postLikeStatus = getHasUserLiked({id:post?.id});
+  const commentsPromise = getComments({ id: post?.id });
+  const postLikeStatus = getHasUserLiked({ id: post?.id });
 
   const [comments, likeStatus] = await Promise.all([commentsPromise, postLikeStatus]);
 
@@ -43,7 +56,7 @@ const PostPage = async ({ params }: PostPageType) => {
         likeStatus={likeStatus}
       />
       <span className="lg3:hidden">
-        <CreatorInfo {...post.owner}/>
+        <CreatorInfo {...post.owner} />
       </span>
     </div>
   );

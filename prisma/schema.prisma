@@ -45,6 +45,8 @@ model User {
   bannedGroups   BannedUser[]
   comments   Comment[]
   posts   Post[]
+  meetups   Meetup[]
+  interviews   Interview[]
 }
 
 model Account {
@@ -128,7 +130,7 @@ model Post {
   reports    String[]  @db.ObjectId
   comments   Comment[]
   group      Group?    @relation(fields: [groupId], references: [id])
-  owner      User    @relation(fields: [userId], references: [id])
+  owner      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   groupId    String?   @db.ObjectId
 }
 
@@ -138,11 +140,11 @@ model Meetup {
   createdAt DateTime @default(now())
   coverImage String?
   title     String
-  location     String
   body      String
   date      String
   time      String
   group     Group?   @relation(fields: [groupId], references: [id])
+  owner      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   groupId   String?  @db.ObjectId
   @@unique([title])
 }
@@ -161,10 +163,10 @@ model Interview {
   likes     Likes[]
   reports   String[]  @db.ObjectId
   comments  Comment[]
-  @@unique([title])
-
+  owner      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   group   Group?  @relation(fields: [groupId], references: [id])
   groupId String? @db.ObjectId
+  @@unique([title])
 }
 
 model Reports {

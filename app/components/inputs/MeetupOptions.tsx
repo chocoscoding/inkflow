@@ -15,6 +15,7 @@ const MeetupOptions = () => {
     formState: { errors },
     register,
   } = useFormContext<NewCreationFormType>();
+  
 
   return (
     <section className="flex gap-6 md1:flex-wrap md1:gap-3 mt-2 items-baseline">

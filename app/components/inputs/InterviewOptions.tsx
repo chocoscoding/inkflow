@@ -5,9 +5,6 @@ import { useFormContext } from "react-hook-form";
 import { NewCreationFormType } from "@/app/(main)/create/CreateClient";
 
 const InterviewOptions = () => {
-  const [openRevenue, setOpenRevenue] = useState(false);
-  const [openPlatforms, setOpenPlatforms] = useState(false);
-  const [openBusinessType, setOpenBusinessType] = useState(false);
   const [selectionValue, setselectionValue] = useState("mo");
 
   const {
@@ -51,8 +48,10 @@ const InterviewOptions = () => {
       <div className="flex rounded-md p-1 cursor-pointer bg-dark-40 h-[51.2px]">
         <select
           className="bg-dark-40 w-full border-red-10"
-          name="ss"
-          id="s">
+          id="platform"
+          {...register("interviewInfo.platform", {
+            required: getValues("creationType") === "Interview",
+          })}>
           <option value="Mobile">Mobile</option>
           <option value="Web">Web</option>
           <option value="Console">Console</option>
@@ -62,8 +61,9 @@ const InterviewOptions = () => {
       <div className="flex rounded-md p-1 cursor-pointer bg-dark-40 h-[51.2px]">
         <select
           className="bg-dark-40 w-full border-red-10"
-          name="ss"
-          id="s">
+          {...register("interviewInfo.businessType", {
+            required: getValues("creationType") === "Interview",
+          })}>
           <option value="Saas">Saas</option>
           <option value="Education">Education</option>
           <option value="Finance">Finance</option>

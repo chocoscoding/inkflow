@@ -3,43 +3,16 @@ import { Dispatch, FC, SetStateAction, useRef } from "react";
 import Modal from "react-responsive-modal";
 import { Home, Interviews, Post } from "../../Icons";
 import Image from "next/image";
-import { GroupType } from "@/app/(main)/create/PostField";
 import GroupList from "../../GroupList";
+import { GroupUserFollow } from "@/app/types/client";
 
 interface GroupsProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  group: GroupType | null;
+  groups: GroupUserFollow[];
 }
 
-const GROUPS = [
-  {
-    id: "1efg34h2",
-    name: "fajklfjlakjfklajwkljkjakfjkljeflkj f fewklfjeklw sjfkljresklf",
-    image:
-      "https://images.unsplash.com/photo-1635006459494-c9b9665a666e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80",
-  },
-  {
-    id: "p02ghr8c",
-    name: "fjelkrsdjflkjklfje ej fjlkersjlfk",
-    image:
-      "https://images.unsplash.com/photo-1635006459494-c9b9665a666e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80",
-  },
-  {
-    id: "5htg94r2",
-    name: "Investor Collective | Active Startup Investors: Angels, Venture Capitalists, Family Officesxxxxxxxxxx",
-    image:
-      "https://images.unsplash.com/photo-1635006459494-c9b9665a666e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80",
-  },
-  // Continue adding more elements up to Group 20
-  {
-    id: "l37tg1s0",
-    name: "Group 4 fei outio4 tfewfjjefjselkf fiowjfkljrf fwekjfk j rowjfsejklfjsejfws flkesjfklwsjflkwse jfw l fw joiflk lkw l i jjo",
-    image:
-      "https://images.unsplash.com/photo-1635006459494-c9b9665a666e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80",
-  },
-];
-const Groups: FC<GroupsProps> = ({ open, setOpen, group }) => {
+const Groups: FC<GroupsProps> = ({ open, setOpen, groups }) => {
   const myRef = useRef(null);
 
   const closeIcon = (
@@ -67,11 +40,13 @@ const Groups: FC<GroupsProps> = ({ open, setOpen, group }) => {
           closeButton: "shrink-0 ml-2 text-secondary-50 outline-0",
         }}
         container={myRef.current}>
-        <GroupList
-          setOpen={setOpen}
-          none
-        />
-        {GROUPS.map((ele, i) => (
+        {groups.length <= 0 ? (
+          <GroupList
+            setOpen={setOpen}
+            none
+          />
+        ) : null}
+        {groups.map((ele, i) => (
           <GroupList
             key={`groupslist-${i}`}
             {...ele}

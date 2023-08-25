@@ -1,9 +1,15 @@
+import getGroupsUserFollow from "@/app/actions/getGroupsUserFollow";
 import CreateClient from "./CreateClient";
 
-const page = () => {
+export const metadata = {
+  title: "Inkflow - Create",
+  description: "Let's Create something awesome",
+};
+const page = async () => {
+  const groups_User_Follows = await getGroupsUserFollow()
   return (
     <div className="appScreen flex-center">
-      <CreateClient />
+      <CreateClient guf={groups_User_Follows}/>
     </div>
   );
 };

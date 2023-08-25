@@ -20,7 +20,6 @@ export async function POST(request: Request) {
     const d = await prisma.likes.create({
       data: { userId, referenceId, typeOf },
     });
-    console.log(d);
     
     return NextResponse.json("Successfull");
   } catch (error) {

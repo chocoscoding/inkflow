@@ -17,7 +17,7 @@ const RNavigation: React.FC<NavbarProps> = ({ currentUser }) => {
         href={`/create`}
         className={`h-full`}>
         <button className={style.cta}>
-          <span className="lg2a:block hidden"> Create Post</span>
+          <span className="lg2a:block hidden"> Create</span>
           <span className="block lg2a:hidden">
             <Post1 />
           </span>

@@ -38,7 +38,6 @@ export default async function getComments(params: ParamsType) {
       },
     });
 
-    console.log(comments);
 
     if (!comments) {
       return [];

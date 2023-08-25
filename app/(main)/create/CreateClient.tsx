@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import PostField, { GroupType } from "./PostField";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import Title from "@/app/components/inputs/Title";
@@ -11,7 +11,9 @@ import MeetupOptions from "@/app/components/inputs/MeetupOptions";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { CreateClientType } from "@/app/types/client";
 /*(@chocoscoding) */
+
 export type NewCreationTypes = "Post" | "Interview" | "Meetup";
 export interface NewCreationFormType {
   title: string;
@@ -32,7 +34,7 @@ export interface NewCreationFormType {
   } | null;
 }
 
-const CreateClient = () => {
+const CreateClient: FC<CreateClientType> = ({ guf }) => {
   const { push } = useRouter();
   const methods = useForm<NewCreationFormType>({
     defaultValues: {
@@ -42,7 +44,10 @@ const CreateClient = () => {
       group: null,
       coverImage: "",
       creationType: "Post",
-      interviewInfo: null,
+      interviewInfo: {
+        businessType: "Saas",
+        platform: "Web",
+      },
       meetupInfo: null,
     },
   });
@@ -203,7 +208,7 @@ const CreateClient = () => {
             ) : null}
             <Title />
 
-            <PostField />
+            <PostField guf={guf} />
 
             {watch("creationType") === "Interview" ? <InterviewOptions /> : null}
             {watch("creationType") === "Meetup" ? <MeetupOptions /> : null}

@@ -17,7 +17,6 @@ const ContentControl: FC<ContentControlType> = (props) => {
     const loadingToast = toast.loading(`Deleting ${contentType}...`);
     try {
       const removeContent = await axios.delete("/api/content/dsds", {});
-      console.log(removeContent);
     } catch (error) {
       console.log(error);
     }

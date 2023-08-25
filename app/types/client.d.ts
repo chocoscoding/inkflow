@@ -86,3 +86,15 @@ export interface OnePost {
 }
 
 export type OnePostComponentType = OnePostMain;
+
+type GroupUserFollow = {
+  id: string;
+  coverPhoto: string;
+  name: string;
+};
+
+export type CreateClientType = {
+  guf: GroupUserFollow[] | null;
+};
+
+type PostFieldType = CreateClientType & {}
