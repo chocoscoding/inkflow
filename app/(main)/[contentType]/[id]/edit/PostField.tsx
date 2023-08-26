@@ -59,8 +59,6 @@ const PostField:FC<PostFieldType> = ({guf}) => {
       <ImageUpload
         open={openImageUpload}
         setOpen={setOpenImageUpload}
-        postType={postType}
-        setPostType={setPostType}
       />
       <Groups
         open={openGroups}

@@ -88,7 +88,7 @@ export interface OnePost {
 export type OnePostComponentType = OnePostMain;
 
 interface GroupUserFollow {
-  group: { id: string; coverPhoto: string | null; name: string };
+  group: { id: string; coverImage: string | null; name: string };
 }
 
 export type CreateClientType = {
@@ -96,3 +96,10 @@ export type CreateClientType = {
 };
 
 type PostFieldType = CreateClientType & {};
+
+interface GroupCreationFormType {
+  name: string;
+  about: string;
+  admin: string[];
+  coverImage: string;
+}

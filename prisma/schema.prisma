@@ -72,7 +72,7 @@ model Group {
   id          String              @id @default(auto()) @map("_id") @db.ObjectId
   name        String              @unique
   about       String
-  coverPhoto  String?
+  coverImage  String?
   admin       String[]            @db.ObjectId
   members     UserGroupRelation[]
   requests    GroupRequest[]

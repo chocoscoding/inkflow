@@ -1,12 +1,12 @@
 "use client";
 import { NewCreationFormType } from "@/app/(main)/create/CreateClient";
-import React from "react";
+import { GroupCreationFormType } from "@/app/types/client";
+import React, { FC } from "react";
 import { useFormContext } from "react-hook-form";
 
-const Title = () => {
-  const { register, formState } = useFormContext<NewCreationFormType>();
+const Title: FC<{ id: "title" | "name"; placeholder?: string }> = ({ id, placeholder }) => {
+  const { register, formState } = useFormContext<{ title: string; name: string }>();
   const { errors, dirtyFields } = formState;
-  const id = "title";
   return (
     <div className="flex flex-col gap-2 mb-4">
       <input
@@ -26,14 +26,14 @@ const Title = () => {
         ${errors[id] && "outline-1 dark:outline-red-dark-50 outline-red-dark-90"}
           ${errors[id] && "focus:outline-2 dark:outline-red-dark-50 outline-red-dark-90"}
         `}
-        placeholder="Title..."
+        placeholder={placeholder || id}
       />
 
       {errors[id] ? (
         <label
           htmlFor={id}
           className=" text-red-600">
-          {errors[id].message || "Required"}
+          {errors[id]?.message || "Required"}
         </label>
       ) : null}
     </div>

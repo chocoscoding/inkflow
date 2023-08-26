@@ -206,7 +206,7 @@ const CreateClient: FC<CreateClientType> = ({ guf }) => {
                 />
               </div>
             ) : null}
-            <Title />
+            <Title id="title"/>
 
             <PostField guf={guf} />
 

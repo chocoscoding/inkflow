@@ -21,6 +21,7 @@ const CreateComment: FC<CreateCommentType> = ({ postId }) => {
       return;
     }
     try {
+      toast.remove();
       setIsLoading(true);
       const loadingToast = toast.loading("Creating comment...");
 

@@ -2,8 +2,16 @@ import React from "react";
 import GroupClient from "./GroupClient";
 import Image from "next/image";
 import RecommendedGroups from "@/app/components/Groups/RecommendedGroups";
+import getGroupsUserFollow from "@/app/actions/getGroupsUserFollow";
+import getOneGroup from "@/app/actions/getOneGroup";
+import { Metadata, ResolvingMetadata } from "next";
+interface GroupPageType {
+  params: {
+    id: string;
+  };
+}
 
-const page = () => {
+const page = async ({params}: GroupPageType) => {
   return (
     <main className="appScreen p-6 xl1:p-2 max-w-[1600px] m-auto">
       <div className="w-full flex lg2:flex-wrap gap-4">

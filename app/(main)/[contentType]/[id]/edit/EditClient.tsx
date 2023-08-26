@@ -81,9 +81,9 @@ const EditClient: FC<CreateClientType> = ({ guf }) => {
                 />
               </div>
             ) : null}
-            <Title />
+            <Title id="title" />
 
-            <PostField guf={guf}/>
+            <PostField guf={guf} />
 
             {watch("creationType") === "Interview" ? <InterviewOptions /> : null}
             {watch("creationType") === "Meetup" ? <MeetupOptions /> : null}

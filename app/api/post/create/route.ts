@@ -30,7 +30,7 @@ export async function POST(request: Request) {
   } catch (error: any) {
     console.log(error.message);
 
-    if (error.message.includes("Unique constraint failed on the constraint")) {
+    if (error.message.includes("Unique constraint failed")) {
       return NextResponse.json({ error: "Name not unique" }, { status: 400 });
     }
     return NextResponse.error();

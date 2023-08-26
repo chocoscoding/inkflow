@@ -5,6 +5,7 @@ import Ripple from "@/app/components/Ripple";
 import React, { useState } from "react";
 import RequestedClient from "./RequestedClient";
 import YourGroupsClient from "./YourGroupsClient";
+import Link from "next/link";
 const GroupClient = () => {
   const [currentSection, setCurrentSection] = useState<1 | 2>(1);
   return (
@@ -32,7 +33,9 @@ const GroupClient = () => {
             </div>
           </div>
           <Ripple containerClassName="outline outline-1 hover:outline-2 md:hover:bg-dark-20 px-2 outline-neutral-200">
-            <button className="shrink-0 h-8 rounded-full sm1:text-xs">Create Group</button>
+            <Link href={`/create/group`}>
+              <button className="shrink-0 h-8 rounded-full sm1:text-xs">Create Group</button>
+            </Link>
           </Ripple>
         </div>
 

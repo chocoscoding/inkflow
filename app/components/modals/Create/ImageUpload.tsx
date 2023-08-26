@@ -8,10 +8,8 @@ import { useFormContext } from "react-hook-form";
 interface ImageUploadProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  postType: "Post" | "Interview" | "Meetup";
-  setPostType: Dispatch<SetStateAction<"Post" | "Interview" | "Meetup">>;
 }
-const ImageUpload: FC<ImageUploadProps> = ({ open, setOpen, postType, setPostType }) => {
+const ImageUpload: FC<ImageUploadProps> = ({ open, setOpen }) => {
     const { setValue,getValues } = useFormContext<NewCreationFormType>();
     const myRef = useRef(null);
 

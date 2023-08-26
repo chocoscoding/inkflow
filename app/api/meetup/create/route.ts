@@ -1,4 +1,4 @@
-import getCurrentUser from "@/app/actions/getCurrentUser";
+
 import prisma from "@/app/libs/prismadb";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
@@ -28,7 +28,6 @@ export async function POST(request: Request) {
         body,
         groupId,
         date,
-        location,
         time,
       },
     });

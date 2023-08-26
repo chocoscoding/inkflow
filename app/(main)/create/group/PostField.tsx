@@ -3,9 +3,9 @@ import CreationType from "@/app/components/modals/Create/CreationType";
 import Groups from "@/app/components/modals/Create/Groups";
 import ImageUpload from "@/app/components/modals/Create/ImageUpload";
 import React, { FC, useState } from "react";
-import { NewCreationFormType } from "./CreateClient";
 import { useFormContext } from "react-hook-form";
 import { PostFieldType } from "@/app/types/client";
+import { NewCreationFormType } from "../CreateClient";
 //Author: @codingNinja-1
 export type GroupType = {
   id: string;
