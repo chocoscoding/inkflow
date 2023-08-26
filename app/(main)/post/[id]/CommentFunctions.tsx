@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 
 const CommentFunctions: FC<CommentFunctionType> = (props) => {
   const route = useRouter();
-  const { _count, userId, referenceId, showReply, setShowReply, likeStatus,replies } = props;
+  const { _count, userId, referenceId, showReply, setShowReply, likeStatus, replies } = props;
   const count = useRef(0);
   const [hasLiked, setHasLiked] = useState(typeof likeStatus[0]?.userId === "string");
   const [likesCount, setLikesCount] = useState(_count?.likes || 0);
@@ -18,9 +18,9 @@ const CommentFunctions: FC<CommentFunctionType> = (props) => {
     count.current++;
     if (count.current > 1) {
       if (hasLiked) {
-        setLikesCount(likesCount + 1);
+        setLikesCount((prev) => prev + 1);
       } else {
-        setLikesCount(likesCount - 1);
+        setLikesCount((prev) => prev - 1);
       }
     }
     const functionTimeout = setTimeout(async () => {

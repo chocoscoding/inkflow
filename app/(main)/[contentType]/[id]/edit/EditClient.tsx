@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { FC, useEffect, useRef } from "react";
 import PostField, { GroupType } from "./PostField";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import Title from "@/app/components/inputs/Title";
@@ -9,6 +9,7 @@ import Tags from "@/app/components/inputs/Tags";
 import InterviewOptions from "@/app/components/inputs/InterviewOptions";
 import MeetupOptions from "@/app/components/inputs/MeetupOptions";
 import { useRouter } from "next/navigation";
+import { CreateClientType } from "@/app/types/client";
 /*(@chocoscoding) */
 export type NewCreationTypes = "Post" | "Interview" | "Meetup";
 export interface NewCreationFormType {
@@ -30,7 +31,7 @@ export interface NewCreationFormType {
   } | null;
 }
 
-const EditClient = () => {
+const EditClient: FC<CreateClientType> = ({ guf }) => {
   const methods = useForm<NewCreationFormType>({
     defaultValues: {
       title: "",
@@ -82,7 +83,7 @@ const EditClient = () => {
             ) : null}
             <Title />
 
-            <PostField />
+            <PostField guf={guf}/>
 
             {watch("creationType") === "Interview" ? <InterviewOptions /> : null}
             {watch("creationType") === "Meetup" ? <MeetupOptions /> : null}

@@ -46,6 +46,7 @@ const UserMenu: React.FC<NavbarProps> = ({ currentUser }) => {
     return () => {
       window.removeEventListener("keydown", handleEscKeyPress);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (status === "loading" ) {
     return (

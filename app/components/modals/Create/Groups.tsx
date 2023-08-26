@@ -40,12 +40,7 @@ const Groups: FC<GroupsProps> = ({ open, setOpen, groups }) => {
           closeButton: "shrink-0 ml-2 text-secondary-50 outline-0",
         }}
         container={myRef.current}>
-        {groups.length <= 0 ? (
-          <GroupList
-            setOpen={setOpen}
-            none
-          />
-        ) : null}
+        <GroupList setOpen={setOpen} />
         {groups.map((ele, i) => (
           <GroupList
             key={`groupslist-${i}`}

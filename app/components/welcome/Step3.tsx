@@ -59,7 +59,9 @@ const Step3: React.FC<StepType> = ({ data, set }) => {
 
         <button
           type="button"
-          className={`w-3/12 h-[50px] min-w-[60px] ${isValid ? "bg-red-90" : "bg-red-40"} text-secondaryBg-10 rounded-lg cursor-pointer mt-4`}
+          className={`w-3/12 h-[50px] min-w-[60px] ${
+            isValid ? "bg-red-90" : "bg-red-40"
+          } text-secondaryBg-10 rounded-lg cursor-pointer mt-4`}
           onClick={next}>
           Next
         </button>
