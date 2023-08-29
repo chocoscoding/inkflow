@@ -19,7 +19,7 @@ export interface FormType {
   confirmPassword: string;
 }
 const DataFields = () => {
-  const { push } = useRouter();
+  const { push, refresh } = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<{ message: string } | null>(null);
   const { steps } = useWelcomeSteps();
@@ -42,8 +42,9 @@ const DataFields = () => {
       const response: any = await axios.post("/api/userinfo", welcomeInfo);
       if (response.data.status === 200) {
         toast.success("Data Updated successfully", { id: loading });
+        toast.loading("Redirecting", { id: loading });
+        refresh();
         push("/");
-        toast.loading("Redirecting", { id: loading});
         return;
       }
       throw new Error(response.data.error);

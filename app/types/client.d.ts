@@ -90,8 +90,18 @@ export type OnePostComponentType = OnePostMain;
 interface GroupUserFollow {
   group: { id: string; coverImage: string | null; name: string };
 }
+type GroupRequests = {
+  group: {
+    id: string;
+    name: string;
+    coverImage: string | null;
+    _count: {
+      members: number;
+    };
+  };
+};
 
-export type CreateClientType = {
+type CreateClientType = {
   guf: GroupUserFollow[] | null;
 };
 
@@ -102,4 +112,9 @@ interface GroupCreationFormType {
   about: string;
   admin: string[];
   coverImage: string;
+}
+
+interface GroupsClientType {
+  groupRequests: GroupRequests[] | null;
+  guf: GroupUserFollow[] | null;
 }

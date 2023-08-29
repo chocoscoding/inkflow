@@ -73,7 +73,7 @@ const Post: FC<OnePostComponentType> = (props) => {
             <Link
               href={`/post/${title}`}
               className="w-full">
-              <p className="xl:text-xl lg:text-base text-sm font-semibold truncate-lines-2 hover:underline cursor-pointer">{`lorem`}</p>
+              <p className="xl:text-xl lg:text-base text-sm font-semibold truncate-lines-2 hover:underline cursor-pointer">{title}</p>
             </Link>
             <div className="h-fit p-1.5 bg-dark-40 rounded-full cursor-pointer hidden sm:block">
               <span onClick={likePost}>
