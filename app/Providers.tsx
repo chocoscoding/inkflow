@@ -24,10 +24,10 @@ export default function Providers({ children, session }: { children: ReactNode; 
   };
   return (
     <>
-      <Layout
+      {/* <Layout
         hide={hider()}
         customKeyBinding="alt+t"
-      />
+      /> */}
       <SessionProvider session={session}>
         <ThemeProvider attribute="class">
           <SkeletonTheme

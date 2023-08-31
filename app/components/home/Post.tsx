@@ -63,7 +63,7 @@ const Post: FC<OnePostComponentType> = (props) => {
           width={700}
           height={800}
           alt="post-Image"
-          className="rounded-lg h-full"
+          className="rounded-lg w-full h-auto aspect-square"
         />
       </div>
       <div className="flex flex-col justify-between w-full">

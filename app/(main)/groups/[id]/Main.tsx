@@ -5,11 +5,13 @@ import CreatePost from "@/app/components/home/CreatePost";
 import HomeNavMobile from "@/app/components/home/HomeNavMobile";
 import Post from "@/app/components/home/Post";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import Create from "./Create";
 import LeaveGroup from "@/app/components/modals/LeaveGroup";
+import { OneGroupType } from "@/app/types/client";
 
-const Main = () => {
+const Main: FC<OneGroupType> = (props) => {
+  const {id,name,about, coverImage, admin } = props;
   const aboutRef = useRef<HTMLParagraphElement | null>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const [showMore, setShowMore] = useState(false);
@@ -39,24 +41,19 @@ const Main = () => {
       <div className="bg-dark-30 p-2 rounded-lg mb-4">
         <section className={`rounded-lg overflow-hidden  w-full h-52 shrink-0 object-cover`}>
           <Image
-            src={
-              "https://images.unsplash.com/photo-1635006459494-c9b9665a666e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=464&q=80"
-            }
-            width={500}
-            height={500}
+            src={coverImage || `/images/placeholder.jpg`}
+            priority
+            width={600}
+            height={600}
             alt="post-Image"
             className="rounded-lg w-full h-auto"
           />
         </section>
         <section className="flex flex-wrap justify-between mt-4">
           <div className="gap-1 flex-1 flex md1:min-w-full">
-            <Avatar
-              className="rounded-full flex-grow-0 h-fit"
-              size={60}
-            />
             <div className="flex flex-col">
               <p className="text-lg font-semibold md1:font-medium text-secondary-60">
-                Investor Collective | Active Startup Investors: Angels, Venture Capitalists, Family Officesxxxxxxxxxx
+                {name}
               </p>
               <p className="text-sm font-thin text-secondary-50">
                 Created by <span className="font-medium">AK jrdsddsfssdfsd</span>
@@ -74,10 +71,7 @@ const Main = () => {
           <p
             className={`text-secondary-50 ${showMore ? "" : "truncate-lines-3"}`}
             ref={aboutRef}>
-            Download thousands of free & premium web design, illustration, bootstrap template, flutter app, icon, 3d illustration, and
-            graphic assets for your UI, UX design project Download thousands of free & premium web design, illustration, bootstrap template,
-            flutter app, icon, 3d illustration, and graphic assets for your UI, UX design project Download thousands of free & premium web
-            design, illustration, bootstrap template, flutter app, icon, 3d illustration, and graphic assets for your UI, UX design project
+            {about}
           </p>
           {isOverflowing || showMore ? (
             <span onClick={() => setShowMore(!showMore)}>
@@ -104,22 +98,27 @@ const Main = () => {
           </button>
         </section>
       </div>
-      {[{
-    id: '64dd80ffc0a3ec6db14334cf',
-    title: 'edls',
-    tags: [ 'gbdrklvfd' ],
-    coverImage: 'https://res.cloudinary.com/chocoscoding/image/upload/v1692238032/zd4kmzdvaiqqtitp7kqh.jpg',
-    createdAt: new Date('2023-08-17T02:07:59.029Z'),
-    views: 0,
-    owner: {
-      id: '64d965ec96e0bce41d66ec9b',
-      username: 'kfsffjoeijfios',
-      image: null
-    },
-    _count: { likes: 0, comments: 0 }
-  }].map((ele, i) => (
-          <Post key={`posts${i}`} {...ele}/>
-        ))}
+      {[
+        {
+          id: "64dd80ffc0a3ec6db14334cf",
+          title: "edls",
+          tags: ["gbdrklvfd"],
+          coverImage: "https://res.cloudinary.com/chocoscoding/image/upload/v1692238032/zd4kmzdvaiqqtitp7kqh.jpg",
+          createdAt: new Date("2023-08-17T02:07:59.029Z"),
+          views: 0,
+          owner: {
+            id: "64d965ec96e0bce41d66ec9b",
+            username: "kfsffjoeijfios",
+            image: null,
+          },
+          _count: { likes: 0, comments: 0 },
+        },
+      ].map((ele, i) => (
+        <Post
+          key={`posts${i}`}
+          {...ele}
+        />
+      ))}
 
       <LeaveGroup
         open={leaveModal}

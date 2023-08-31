@@ -88,7 +88,15 @@ export interface OnePost {
 export type OnePostComponentType = OnePostMain;
 
 interface GroupUserFollow {
-  group: { id: string; coverImage: string | null; name: string };
+  group: {
+    id: string;
+    coverImage: string | null;
+    name: string;
+    admin: string[];
+    _count: {
+      members: number;
+    };
+  };
 }
 type GroupRequests = {
   group: {
@@ -117,4 +125,16 @@ interface GroupCreationFormType {
 interface GroupsClientType {
   groupRequests: GroupRequests[] | null;
   guf: GroupUserFollow[] | null;
+}
+
+interface OneGroupType {
+  id: string;
+  name: string;
+  about: string;
+  coverImage: string | null;
+  admin: string[];
+
+  _count: {
+    members: number;
+  }
 }

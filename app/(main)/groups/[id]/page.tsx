@@ -33,13 +33,19 @@ export async function generateMetadata({ params }: GroupPageType, parent: Resolv
 
 const page = async ({ params }: GroupPageType) => {
   const group = await getOneGroup(params);
+  if (!group)
+    return (
+      <div>
+        <p>Group not found</p>
+      </div>
+    );
   return (
     <main className="flex w-full p-6 xl1:p-2 max-w-[1600px] m-auto gap-4 flex-wrap">
       <div className="sticky top-[60px] w-2/12 min-w-[230px] lg1:min-w-[200px] h-fit flex flex-col gap-2 md2:hidden shrink-0 lg2:hidden">
         <Trending />
       </div>
 
-      <Main />
+      <Main {...group}/>
 
       <section className="md3a:sticky md3a:top-[60px]  w-4/12 md3a:max-w-[310px] max-w-[500px] shrink-0 lg2:order-1  md3:w-full h-fit">
         <span className="md3:hidden">

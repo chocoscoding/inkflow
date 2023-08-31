@@ -43,10 +43,11 @@ model User {
   socailLink     SocialLink?
   groups         UserGroupRelation[]
   bannedGroups   BannedUser[]
-  comments   Comment[]
-  posts   Post[]
-  meetups   Meetup[]
-  interviews   Interview[]
+  comments       Comment[]
+  posts          Post[]
+  meetups        Meetup[]
+  interviews     Interview[]
+  Group          Group[]
 }
 
 model Account {
@@ -80,6 +81,8 @@ model Group {
   posts       Post[]
   meetups     Meetup[]
   interview   Interview[]
+
+  adminInfos User @relation(fields: [admin], references: [id], onDelete: Cascade)
 }
 
 model UserGroupRelation {
@@ -118,54 +121,56 @@ model BannedUser {
 }
 
 model Post {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId 
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
   userId     String    @db.ObjectId
   tags       String[]
   coverImage String?
   createdAt  DateTime  @default(now())
-  title      String @unique
+  title      String    @unique
   body       String
   views      Int       @default(0)
   likes      Likes[]
   reports    String[]  @db.ObjectId
   comments   Comment[]
   group      Group?    @relation(fields: [groupId], references: [id])
-  owner      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  owner      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   groupId    String?   @db.ObjectId
 }
 
 model Meetup {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String   @db.ObjectId
-  createdAt DateTime @default(now())
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String   @db.ObjectId
+  createdAt  DateTime @default(now())
   coverImage String?
-  title     String
-  body      String
-  date      String
-  time      String
-  group     Group?   @relation(fields: [groupId], references: [id])
-  owner      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  groupId   String?  @db.ObjectId
+  title      String
+  body       String
+  date       String
+  time       String
+  group      Group?   @relation(fields: [groupId], references: [id])
+  owner      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  groupId    String?  @db.ObjectId
+
   @@unique([title])
 }
 
 model Interview {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String    @db.ObjectId
-  createdAt DateTime  @default(now())
-  title     String
-  coverImage String?
-  body      String
-  revenue String
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId       String    @db.ObjectId
+  createdAt    DateTime  @default(now())
+  title        String
+  coverImage   String?
+  body         String
+  revenue      String
   businessType String
-  platform String
-  views     Int       @default(0)
-  likes     Likes[]
-  reports   String[]  @db.ObjectId
-  comments  Comment[]
-  owner      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  group   Group?  @relation(fields: [groupId], references: [id])
-  groupId String? @db.ObjectId
+  platform     String
+  views        Int       @default(0)
+  likes        Likes[]
+  reports      String[]  @db.ObjectId
+  comments     Comment[]
+  owner        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  group        Group?    @relation(fields: [groupId], references: [id])
+  groupId      String?   @db.ObjectId
+
   @@unique([title])
 }
 
@@ -187,7 +192,7 @@ model Comment {
   contentType ContentType
   referenceId String      @db.ObjectId
   body        String
-  createdAt  DateTime  @default(now())
+  createdAt   DateTime    @default(now())
   likes       Likes[]
   replies     Replies[]
   user        User?       @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -196,12 +201,12 @@ model Comment {
 }
 
 model Replies {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
-  commentId String @db.ObjectId
-  userId    String @db.ObjectId
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  commentId String   @db.ObjectId
+  userId    String   @db.ObjectId
   body      String
-  createdAt  DateTime  @default(now())
-  comment Comment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  comment   Comment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
 }
 
 enum LikesType {
@@ -219,6 +224,7 @@ model Likes {
   post        Post?      @relation(fields: [referenceId], references: [id])
   interview   Interview? @relation(fields: [referenceId], references: [id])
   comment     Comment?   @relation(fields: [referenceId], references: [id])
+
   @@unique([userId, referenceId])
 }
 

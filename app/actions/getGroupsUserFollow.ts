@@ -8,15 +8,21 @@ export default async function getGroupsUserFollow() {
   if (!userId) return null;
   try {
     const groups = await prisma.userGroupRelation.findMany({
-      where: {userId },
+      where: { userId },
       select: {
         group: {
           select: {
             id: true,
             name: true,
-            coverImage: true
-          }
-        }
+            coverImage: true,
+            admin: true,
+            _count: {
+              select: {
+                members: true,
+              },
+            },
+          },
+        },
       },
     });
     if (!groups) {

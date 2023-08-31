@@ -40,7 +40,7 @@ const GroupClient:FC<GroupsClientType> = ({guf, groupRequests}) => {
           </Ripple>
         </div>
 
-        <ul className="w-full px-4 mt-4">{currentSection === 1 ? <YourGroupsClient  /> : <RequestedClient />}</ul>
+        <ul className="w-full px-4 mt-4">{currentSection === 1 ? <YourGroupsClient data={guf} /> : <RequestedClient data={groupRequests}/>}</ul>
       </section>
     </>
   );
