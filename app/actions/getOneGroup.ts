@@ -12,7 +12,27 @@ export default async function getOneGroup(params: ParamsType) {
         name: true,
         about: true,
         coverImage: true,
-        admin: true,
+        admininstrators: {
+          select: {
+            user: {
+              select: {
+                id: true,
+                username: true,
+                image: true,
+              },
+            },
+          },
+        },
+        members: {
+          take: 10,
+          select: {
+            user: {
+              select: {
+                image: true,
+              },
+            },
+          },
+        },
         _count: {
           select: {
             members: true,

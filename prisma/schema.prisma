@@ -24,30 +24,31 @@ type Questions {
 }
 
 model User {
-  id             String              @id @default(auto()) @map("_id") @db.ObjectId
-  email          String?             @unique
-  firstname      String?
-  lastname       String?
-  image          String?
-  dob            String?
-  country        String?
-  hashedPassword String?
-  createdAt      DateTime            @default(now())
-  updatedAt      DateTime            @updatedAt
-  accounts       Account[]
-  username       String?
-  questions      Questions?
-  emailVerified  Boolean?
-  bio            String?
-  occupation     String?
-  socailLink     SocialLink?
-  groups         UserGroupRelation[]
-  bannedGroups   BannedUser[]
-  comments       Comment[]
-  posts          Post[]
-  meetups        Meetup[]
-  interviews     Interview[]
-  Group          Group[]
+  id                 String              @id @default(auto()) @map("_id") @db.ObjectId
+  email              String?             @unique
+  firstname          String?
+  lastname           String?
+  image              String?
+  dob                String?
+  country            String?
+  hashedPassword     String?
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  accounts           Account[]
+  username           String?
+  questions          Questions?
+  emailVerified      Boolean?
+  bio                String?
+  occupation         String?
+  socailLink         SocialLink?
+  groups             UserGroupRelation[]
+  bannedGroups       BannedUser[]
+  comments           Comment[]
+  posts              Post[]
+  meetups            Meetup[]
+  interviews         Interview[]
+  // Group          Group[]
+  administeredGroups GroupAdmin[]
 }
 
 model Account {
@@ -74,15 +75,22 @@ model Group {
   name        String              @unique
   about       String
   coverImage  String?
-  admin       String[]            @db.ObjectId
+  admin       String[]
+  admininstrators  GroupAdmin[]
   members     UserGroupRelation[]
   requests    GroupRequest[]
   bannedUsers BannedUser[]
   posts       Post[]
   meetups     Meetup[]
   interview   Interview[]
+}
 
-  adminInfos User @relation(fields: [admin], references: [id], onDelete: Cascade)
+model GroupAdmin {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  groupId String @db.ObjectId
+  userId  String @db.ObjectId
+  group   Group  @relation(fields: [groupId], references: [id])
+  user    User   @relation(fields: [userId], references: [id])
 }
 
 model UserGroupRelation {

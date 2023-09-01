@@ -59,7 +59,6 @@ const EditClient: FC<CreateClientType> = ({ guf }) => {
   };
   const onSubmit: SubmitHandler<NewCreationFormType> = async (data, e) => {
     e?.preventDefault();
-    console.log(methods.formState.isValid);
   };
 
   return (

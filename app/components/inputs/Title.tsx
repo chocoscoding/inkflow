@@ -1,6 +1,4 @@
 "use client";
-import { NewCreationFormType } from "@/app/(main)/create/CreateClient";
-import { GroupCreationFormType } from "@/app/types/client";
 import React, { FC } from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -13,8 +11,8 @@ const Title: FC<{ id: "title" | "name"; placeholder?: string }> = ({ id, placeho
         {...register(id, {
           required: true,
           pattern: {
-            value: /^(?!\s*$).+/,
-            message: "Title name should contain only characters.",
+            value: /^[^;/\s]+$/,
+            message: "Title name should contain only normal characters.",
           },
         })}
         id={id}

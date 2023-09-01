@@ -7,7 +7,7 @@ import RequestedClient from "./RequestedClient";
 import YourGroupsClient from "./YourGroupsClient";
 import Link from "next/link";
 import { GroupsClientType } from "@/app/types/client";
-const GroupClient:FC<GroupsClientType> = ({guf, groupRequests}) => {
+const GroupClient: FC<GroupsClientType> = ({ guf, groupRequests }) => {
   const [currentSection, setCurrentSection] = useState<1 | 2>(1);
   return (
     <>
@@ -40,7 +40,9 @@ const GroupClient:FC<GroupsClientType> = ({guf, groupRequests}) => {
           </Ripple>
         </div>
 
-        <ul className="w-full px-4 mt-4">{currentSection === 1 ? <YourGroupsClient data={guf} /> : <RequestedClient data={groupRequests}/>}</ul>
+        <ul className="w-full px-4 mt-4">
+          {currentSection === 1 ? <YourGroupsClient data={guf} /> : <RequestedClient data={groupRequests} />}
+        </ul>
       </section>
     </>
   );

@@ -9,15 +9,21 @@ export async function POST(request: Request) {
   if (!userId) return NextResponse.json({ error: "User is not authenticated" }, { status: 403 });
 
   const { coverImage, name, about } = await request.json();
+  if (!coverImage || !name || !about) return NextResponse.error();
 
   try {
     const group = await prisma.group.create({
       data: { about, coverImage, name, admin: [userId] },
     });
     if (group) {
-      await prisma.userGroupRelation.create({
-        data: { userId, groupId: group.id },
-      });
+      await Promise.all([
+        prisma.userGroupRelation.create({
+          data: { userId, groupId: group.id },
+        }),
+        prisma.groupAdmin.create({
+          data: { userId, groupId: group.id },
+        }),
+      ]);
     }
     return NextResponse.json(group);
   } catch (error: any) {

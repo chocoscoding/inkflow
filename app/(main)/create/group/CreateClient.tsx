@@ -26,6 +26,7 @@ const CreateClient: FC<CreateClientType> = ({ guf }) => {
       about: "",
       coverImage: "",
     },
+    mode: "onSubmit",
   });
   const {
     handleSubmit,
@@ -69,7 +70,7 @@ const CreateClient: FC<CreateClientType> = ({ guf }) => {
       toast.remove(loadingToast);
       if (createGroup.status === 200) {
         push("/groups/" + createGroup.data.id);
-        reset()
+        reset();
         toast.success("Group created successfully");
         return;
       }
@@ -90,6 +91,9 @@ const CreateClient: FC<CreateClientType> = ({ guf }) => {
     <div className="rounded-md bg-secondaryBg-10 dark:bg-dark-30 p-4 w-[95vw] m-auto max-w-[1300px] min-h-[89vh] mt-2 md1:mt-4 mb-20">
       <FormProvider {...methods}>
         <form
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
           ref={formRef}
           className="flex flex-col justify-between">
           <section>
@@ -105,6 +109,7 @@ const CreateClient: FC<CreateClientType> = ({ guf }) => {
               </div>
             ) : null}
             <Title
+              key={"ww"}
               id="name"
               placeholder={`Group name`}
             />
@@ -133,7 +138,7 @@ const CreateClient: FC<CreateClientType> = ({ guf }) => {
             <button
               onClick={handleSubmit(onSubmit)}
               disabled={isLoading}
-              type="button"
+              type="submit"
               className={`bg-blue-default py-2.5 px-6 rounded-md sm:min-w-[140px] cursor-pointer disabled:bg-blue-40`}>
               Create
             </button>

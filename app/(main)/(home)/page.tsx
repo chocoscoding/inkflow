@@ -7,6 +7,18 @@ import { OnePost } from "@/app/types/client";
 
 export default async function Home() {
   const posts = await getPosts();
+  const trendingData = [
+    { tag_count: 7, name: "TEST" },
+    { tag_count: 2, name: "ssa2" },
+    { tag_count: 2, name: "JKNKL" },
+    { tag_count: 2, name: "JLLL" },
+    { tag_count: 2, name: "JLLLKOPK" },
+    { tag_count: 2, name: "dsklm" },
+    { tag_count: 2, name: "9i" },
+    { tag_count: 2, name: "JKNKLJ" },
+    { tag_count: 1, name: "JLsL" },
+    { tag_count: 1, name: "ue" },
+  ];
   return (
     <main className="flex w-full p-6 xl1:p-2 max-w-[1600px] m-auto gap-4">
       <div className="sticky top-[60px] w-2/12 min-w-[230px] lg1:min-w-[200px] h-fit flex flex-col gap-2 md2:hidden shrink-0">
@@ -30,7 +42,7 @@ export default async function Home() {
             active={false}
           />
         </section>
-        <Trending />
+        <Trending data={trendingData} />
       </div>
 
       <Posts posts={posts} />

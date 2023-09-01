@@ -11,7 +11,7 @@ import LeaveGroup from "@/app/components/modals/LeaveGroup";
 import { OneGroupType } from "@/app/types/client";
 
 const Main: FC<OneGroupType> = (props) => {
-  const {id,name,about, coverImage, admin } = props;
+  const { id, name, about, coverImage, admininstrators } = props;
   const aboutRef = useRef<HTMLParagraphElement | null>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const [showMore, setShowMore] = useState(false);
@@ -39,7 +39,7 @@ const Main: FC<OneGroupType> = (props) => {
   return (
     <section className="min-h-screen lg1a:w-7/12 flex-1 pt-1 md:overflow-hidden shrink-0 md:mb-4 lg2:order-2 md3:!order-1">
       <div className="bg-dark-30 p-2 rounded-lg mb-4">
-        <section className={`rounded-lg overflow-hidden  w-full h-52 shrink-0 object-cover`}>
+        <section className={`rounded-lg overflow-hidden  w-full h-56 shrink-0 object-cover`}>
           <Image
             src={coverImage || `/images/placeholder.jpg`}
             priority
@@ -52,11 +52,9 @@ const Main: FC<OneGroupType> = (props) => {
         <section className="flex flex-wrap justify-between mt-4">
           <div className="gap-1 flex-1 flex md1:min-w-full">
             <div className="flex flex-col">
-              <p className="text-lg font-semibold md1:font-medium text-secondary-60">
-                {name}
-              </p>
+              <p className="text-lg font-semibold md1:font-medium text-secondary-60">{name}</p>
               <p className="text-sm font-thin text-secondary-50">
-                Created by <span className="font-medium">AK jrdsddsfssdfsd</span>
+                Created by <span className="font-medium">{admininstrators[0].user.username}</span>
               </p>
             </div>
           </div>

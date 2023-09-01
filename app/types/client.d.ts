@@ -126,15 +126,33 @@ interface GroupsClientType {
   groupRequests: GroupRequests[] | null;
   guf: GroupUserFollow[] | null;
 }
-
+type Admininstrators = {
+  user: {
+    id: string;
+    image: string | null;
+    username: string | null;
+  };
+}[];
+type GroupMemberMini = {
+  user: { image: string | null };
+};
 interface OneGroupType {
   id: string;
   name: string;
   about: string;
   coverImage: string | null;
-  admin: string[];
-
+  admininstrators: Admininstrators;
+  members: GroupMemberMini[];
   _count: {
     members: number;
-  }
+  };
 }
+
+interface GroupInfoType {
+  admininstrators: Admininstrators;
+  membersCount: number;
+  membersMiniList: GroupMemberMini[];
+  isUserFollowingGroup: string | null;
+}
+
+type TrendingTags = { name: string; tag_count: number }[] | null;
