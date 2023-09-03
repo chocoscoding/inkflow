@@ -22,6 +22,7 @@ export default async function getGroupMembers(groupId: string) {
     const groupInfoCall = prisma.group.findUnique({
       where: { id: groupId },
       select: {
+        admin: true,
         name: true,
         id: true,
         _count: {
@@ -31,8 +32,8 @@ export default async function getGroupMembers(groupId: string) {
         },
       },
     });
-    const [posts, groupInfo] = await Promise.all([postsCall, groupInfoCall]);
-    return { posts, groupInfo };
+    const [users, groupInfo] = await Promise.all([postsCall, groupInfoCall]);
+    return { users, groupInfo };
   } catch (error: any) {
     console.log(error.message);
     return null;

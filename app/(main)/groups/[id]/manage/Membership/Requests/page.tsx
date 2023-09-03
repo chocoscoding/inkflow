@@ -4,7 +4,15 @@ import getGroupJoinRequests from "@/app/actions/getGroupJoinRequests";
 
 const page = async ({ params }: { params: { id: string } }) => {
   const groupRequests = await getGroupJoinRequests(params.id);
-  return <RequestClient />;
+  console.log(groupRequests);
+
+  if (!groupRequests)
+    return (
+      <>
+        <p>No request yet</p>
+      </>
+    );
+  return <RequestClient userRequests={groupRequests} />;
 };
 
 export default page;

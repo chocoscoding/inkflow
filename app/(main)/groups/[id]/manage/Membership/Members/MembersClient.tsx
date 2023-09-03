@@ -1,16 +1,18 @@
 import { More, SearchIcon } from "@/app/components/Icons";
 import Ripple from "@/app/components/Ripple";
 import Image from "next/image";
-import React from "react";
+import React, { FC } from "react";
 import OneMemeber from "./OneMemeber";
+import {GroupMembers as MemberClientType } from "@/app/types/client";
 
-const MembersClient = () => {
+const MembersClient: FC<MemberClientType> = ({ users, groupInfo }) => {
+  const { id, _count, name, admin } = groupInfo!;
   return (
     <div className="rounded-lg ">
       <div className="w-full">
         <div className="flex justify-between mb-4 flex-wrap bg-dark-40 py-2 px-2 rounded-lg items-center">
           <p className="text-lg">
-            <span>10k </span>Members
+            <span>{_count.members || 0} </span>Members
           </p>
           <div className="flex p-2 rounded-lg bg-transparent flex-shrink-0 sm1:w-full min-w-[300px] outline outline-1">
             <SearchIcon />
@@ -23,16 +25,19 @@ const MembersClient = () => {
         </div>
       </div>
       <div className="w-full bg-dark-40 p-2 rounded-lg">
-        <ul>
-          {Array(30)
-            .fill(0)
-            .map((e, i) => (
+        {!users ? (
+          <p>No data found</p>
+        ) : (
+          <ul>
+            {users.map((user, i) => (
               <OneMemeber
-                admin={i === 0}
+                {...user.user}
+                admin={admin.includes(user.user.id)}
                 key={`group-${i}`}
               />
             ))}
-        </ul>
+          </ul>
+        )}
       </div>
     </div>
   );

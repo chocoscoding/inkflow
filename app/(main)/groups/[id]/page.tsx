@@ -17,15 +17,12 @@ import GroupInfo from "./GroupInfo";
 import getUserIsFollowingGroup from "@/app/actions/getUserIsFollowingGroup";
 import getTrendingTagsInGroup from "@/app/actions/getTrendingTagsInGroup";
 import getGroupPosts from "@/app/actions/getGroupPost";
+import getOneGroupOptional from "@/app/actions/getOneGroupOptional";
+import { GroupPageType } from "@/app/types/client";
 
-interface GroupPageType {
-  params: {
-    id: string;
-  };
-}
 
 export async function generateMetadata({ params }: GroupPageType, parent: ResolvingMetadata): Promise<Metadata> {
-  const group = await getOneGroup(params);
+  const group = await getOneGroupOptional(params,{name:true});
   if (!group)
     return {
       title: "Group not found",

@@ -5,11 +5,12 @@ type OwnerPost = {
   title: string;
   tags: string[];
 };
-type PostOwnerMain = {
+type MiniUser = {
   id: string;
   image: string | null;
   username: string | null;
 };
+type PostOwnerMain = MiniUser;
 
 type PostOwner = {
   image?: string | null;
@@ -28,7 +29,7 @@ export interface OneCommentType extends Comment {
   _count: { likes: number };
   replies: Replies[];
   likes: Likes[];
-  user: { username: string | null; id: string; image: string | null } | null;
+  user: MiniUser | null;
 }
 
 export interface PostClientType {
@@ -127,11 +128,7 @@ interface GroupsClientType {
   guf: GroupUserFollow[] | null;
 }
 type Admininstrators = {
-  user: {
-    id: string;
-    image: string | null;
-    username: string | null;
-  };
+  user: MiniUser;
 }[];
 type GroupMemberMini = {
   user: { image: string | null };
@@ -158,21 +155,46 @@ interface GroupInfoType {
 
 type TrendingTags = { name: string; tag_count: number }[] | null;
 type GroupMember = {
-  user: {
-    image: string | null;
-    id: string;
+  user: MiniUser & {
     firstname: string | null;
     lastname: string | null;
-    username: string | null;
   };
 };
 interface GroupMembers {
-  posts: GroupMember[];
+  users: GroupMember[];
   groupInfo: {
     id: string;
+    admin: string[];
     _count: {
       members: number;
     };
     name: string;
   } | null;
+}
+
+interface ListGroupProps extends MiniUser {
+  admin: boolean;
+  firstname: string | null;
+  lastname: string | null;
+}
+
+interface OneMember_BannedUser {
+  image: string | null;
+  id: string;
+  username: string | null;
+  buttonLabel: string;
+  buttonOnClick: () => void;
+}
+interface BannedClient {
+  user: {
+    image: string | null;
+    id: string;
+    username: string | null;
+  };
+}
+
+interface GroupPageType {
+  params: {
+    id: string;
+  };
 }

@@ -4,7 +4,13 @@ import getGroupMembers from "@/app/actions/getGroupMembers";
 
 const page = async ({ params }: { params: { id: string } }) => {
   const members = await getGroupMembers(params.id);
-  return <MembersClient />;
+  if (!members)
+    return (
+      <>
+        <p>Could not get this data</p>
+      </>
+    );
+  return <MembersClient {...members} />;
 };
 
 export default page;

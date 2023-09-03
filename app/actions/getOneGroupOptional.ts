@@ -33,12 +33,12 @@ const MainSelectQuery = {
       members: true,
     },
   },
-}
-export default async function getOneGroup(params: ParamsType) {
+};
+export default async function getOneGroupOptional(params: ParamsType, customSelection?: Partial<typeof MainSelectQuery>) {
   try {
     const post = await prisma.group.findUnique({
       where: { id: params.id },
-      select: MainSelectQuery,
+      select: customSelection || {},
     });
     if (!post) {
       return null;
