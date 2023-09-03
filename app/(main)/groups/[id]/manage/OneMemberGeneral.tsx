@@ -6,12 +6,12 @@ import React from "react";
 import { Menu } from "@headlessui/react";
 import Dropdown from "@/app/components/Dropdown";
 interface ListGroupProps {
-  owner: boolean;
+  admin: boolean;
   buttonLabel: string;
   buttonOnClick: () => void;
 }
 
-const OneMemeberGeneral: React.FC<ListGroupProps> = ({ owner, buttonOnClick, buttonLabel }) => {
+const OneMemeberGeneral: React.FC<ListGroupProps> = ({ admin, buttonOnClick, buttonLabel }) => {
   return (
     <li className="flex justify-between items-center mb-4 border-b border-secondary-20 pb-2">
       <div className="flex flex-1 mr-3 sm:mr-4 gap-2 sm:gap-4">
@@ -27,15 +27,17 @@ const OneMemeberGeneral: React.FC<ListGroupProps> = ({ owner, buttonOnClick, but
 
         <div className="flex w-full gap-1 items-center">
           <p className="sm:font-medium text-base lg:text-lg md:truncate-lines-2 truncate-lines-4">@timileyinwandfff</p>
-          {owner ? (
+          {admin ? (
             <p className="text-sm text-gray-400">
-              <span className="bg-dark-20 w-fit rounded-md p-1 ml-2">Owner</span>
+              <span className="bg-dark-20 w-fit rounded-md p-1 ml-2">Admin</span>
             </p>
           ) : null}
         </div>
       </div>
       <Ripple containerClassName="outline outline-slate-400 outline-1 hover:outline-2 outline-neutral-200 w-fit m-auto block my-2">
-        <button onClick={buttonOnClick} className=" bg- shrink-0 h-8 rounded-full sm1:text-xs  md:hover:bg-dark text-gray-400 w-full select-none px-4 ">
+        <button
+          onClick={buttonOnClick}
+          className=" bg- shrink-0 h-8 rounded-full sm1:text-xs  md:hover:bg-dark text-gray-400 w-full select-none px-4 ">
           {buttonLabel}
         </button>
       </Ripple>

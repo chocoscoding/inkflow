@@ -28,7 +28,7 @@ const MembersClient = () => {
             .fill(0)
             .map((e, i) => (
               <OneMemeber
-                owner={i === 0}
+                admin={i === 0}
                 key={`group-${i}`}
               />
             ))}

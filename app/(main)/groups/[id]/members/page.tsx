@@ -1,10 +1,10 @@
 import { BackArrow } from "@/app/components/Icons";
 import React from "react";
 import MembersClient from "./MembersClient";
-import getGroupParticipants from "@/app/actions/getGroupParticipants";
+import getGroupMembers from "@/app/actions/getGroupMembers";
 
 const page = async ({ params }: { params: { id: string } }) => {
-  const GroupMembersData = await getGroupParticipants(params.id);
+  const GroupMembersData = await getGroupMembers(params.id);
   if (!GroupMembersData)
     return (
       <main className="appScreen w-full p-6 xl1:p-2 m-auto">

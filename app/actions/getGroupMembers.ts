@@ -1,5 +1,5 @@
 import prisma from "@/app/libs/prismadb";
-export default async function getGroupParticipants(groupId: string) {
+export default async function getGroupMembers(groupId: string) {
   if (!groupId) return null;
   try {
     const postsCall = prisma.userGroupRelation.findMany({

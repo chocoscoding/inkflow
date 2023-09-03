@@ -157,17 +157,17 @@ interface GroupInfoType {
 }
 
 type TrendingTags = { name: string; tag_count: number }[] | null;
-
+type GroupMember = {
+  user: {
+    image: string | null;
+    id: string;
+    firstname: string | null;
+    lastname: string | null;
+    username: string | null;
+  };
+};
 interface GroupMembers {
-  posts: {
-    user: {
-      image: string | null;
-      id: string;
-      firstname: string | null;
-      lastname: string | null;
-      username: string | null;
-    };
-  }[];
+  posts: GroupMember[];
   groupInfo: {
     id: string;
     _count: {

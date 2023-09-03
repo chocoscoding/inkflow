@@ -28,7 +28,7 @@ const ListGroup: React.FC<GroupUserFollow> = ({ group }) => {
           </Link>
           <p className="text-sm text-gray-400">
             {`${_count.members} members`}
-            {admin.includes(`${data?.user.id}`) ? <span className="bg-dark-20 w-fit rounded-md p-1 ml-2">{`Owner`}</span> : ""}
+            {admin.includes(`${data?.user.id}`) ? <span className="bg-dark-20 w-fit rounded-md p-1 ml-2">{`Admin`}</span> : ""}
           </p>
         </div>
       </div>

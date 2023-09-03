@@ -49,6 +49,7 @@ model User {
   interviews         Interview[]
   // Group          Group[]
   administeredGroups GroupAdmin[]
+  GroupRequests          GroupRequest[]
 }
 
 model Account {
@@ -111,7 +112,7 @@ model GroupRequest {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
   userId  String @db.ObjectId
   groupId String @db.ObjectId
-
+user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
 }
 
@@ -120,8 +121,8 @@ model BannedUser {
   groupId  String   @db.ObjectId
   userId   String   @db.ObjectId
   bannedAt DateTime @default(now())
-  User     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  Group    Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  uroup    Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
   @@unique([groupId, userId])
   @@index([groupId])

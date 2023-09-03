@@ -4,19 +4,24 @@ import { NextResponse } from "next/server";
 import prisma from "@/app/libs/prismadb";
 
 export async function POST(request: Request) {
-  const { groupId } = await request.json();
+  const { groupId, accept, requestId } = await request.json();
   if (!groupId) return NextResponse.error();
   const session = await getServerSession(authOptions);
   const userId = session?.user.id;
   if (!userId) return NextResponse.json({ error: "User not authenticated" }, { status: 400 });
   try {
-    await prisma.userGroupRelation.deleteMany({
-      where: {
-        userId,
-        groupId,
-      },
+    if (accept) {
+      await prisma.userGroupRelation.create({
+        data: {
+          userId,
+          groupId,
+        },
+      });
+    }
+    await prisma.groupRequest.delete({
+      where: { id: requestId },
     });
-    return NextResponse.json({ groupId });
+    return NextResponse.json({ message: `User ${accept ? `Accepted` : "Rejected"} successfully` });
   } catch (error) {
     return NextResponse.error();
   }

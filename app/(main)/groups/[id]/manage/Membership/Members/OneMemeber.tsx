@@ -6,11 +6,11 @@ import React from "react";
 import { Menu } from "@headlessui/react";
 import Dropdown from "@/app/components/Dropdown";
 interface ListGroupProps {
-  owner: boolean;
+  admin: boolean;
   key: string;
 }
 
-const OneMemeber: React.FC<ListGroupProps> = ({ owner, key }) => {
+const OneMemeber: React.FC<ListGroupProps> = ({ admin, key }) => {
   return (
     <li className="flex justify-between items-center mb-4 border-b border-secondary-20 pb-2">
       <div className="flex flex-1 mr-3 sm:mr-4 gap-2 sm:gap-4">
@@ -26,9 +26,9 @@ const OneMemeber: React.FC<ListGroupProps> = ({ owner, key }) => {
 
         <div className="flex w-full gap-1 items-center">
           <p className="sm:font-medium text-base lg:text-lg md:truncate-lines-2 truncate-lines-4">@timileyinwandfff</p>
-          {owner ? (
+          {admin ? (
             <p className="text-sm text-gray-400">
-              <span className="bg-dark-20 w-fit rounded-md p-1 ml-2">Owner</span>
+              <span className="bg-dark-20 w-fit rounded-md p-1 ml-2">Admin</span>
             </p>
           ) : null}
         </div>

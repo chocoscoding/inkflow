@@ -29,7 +29,7 @@ const MembersClient: FC<{ data: GroupMembers }> = ({ data }) => {
         </div>
 
         {posts.map((ele, i) => (
-          <User key={`user__${i}`} />
+          <User {...ele} key={`user__${i}`} />
         ))}
       </div>
     </>

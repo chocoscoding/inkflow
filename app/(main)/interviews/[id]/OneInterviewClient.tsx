@@ -2,7 +2,6 @@ import Image from "next/image";
 import React from "react";
 import CreateComment from "./CreateComment";
 import Comments from "./Comments";
-import CreatorInfo from "../../../components/ContentControl";
 import PostFuntions from "../../../components/PostFuntions";
 import InterviewClientTop from "./InterviewClientTop";
 
