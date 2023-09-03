@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { Edit } from "../Icons";
 import { useFormContext } from "react-hook-form";
 import { NewCreationFormType } from "@/app/(main)/create/CreateClient";
 

@@ -14,9 +14,9 @@ const User = () => {
           <p>Timileyin Oluwachocos</p>
           <p className="font-thin opacity-80 hover:underline">@{`username`}</p>
         </div>
-        <button className="w-[40px] h-[40px] bg-blue-10 rounded-full flex-center flex-shrink-0">
+        {/* <button className="w-[40px] h-[40px] bg-blue-10 rounded-full flex-center flex-shrink-0">
           <Follow1 className="text-blue-default" />
-        </button>
+        </button> */}
       </div>
     </div>
   );

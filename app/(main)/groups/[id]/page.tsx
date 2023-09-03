@@ -16,6 +16,7 @@ import { Metadata, ResolvingMetadata } from "next";
 import GroupInfo from "./GroupInfo";
 import getUserIsFollowingGroup from "@/app/actions/getUserIsFollowingGroup";
 import getTrendingTagsInGroup from "@/app/actions/getTrendingTagsInGroup";
+import getGroupPosts from "@/app/actions/getGroupPost";
 
 interface GroupPageType {
   params: {
@@ -35,8 +36,12 @@ export async function generateMetadata({ params }: GroupPageType, parent: Resolv
 }
 
 const page = async ({ params }: GroupPageType) => {
-  const [group, isUserFollowingGroup] = await Promise.all([getOneGroup(params), getUserIsFollowingGroup()]);
-  const trendingTags = await getTrendingTagsInGroup(group?.id);
+  const [group, isUserFollowingGroup, trendingTags, groupPosts] = await Promise.all([
+    getOneGroup(params),
+    getUserIsFollowingGroup(),
+    getTrendingTagsInGroup(params.id),
+    getGroupPosts(params.id),
+  ]);
   if (!group)
     return (
       <div>
@@ -49,7 +54,7 @@ const page = async ({ params }: GroupPageType) => {
         <Trending data={trendingTags} />
       </div>
 
-      <Main {...group} />
+      <Main {...group} Posts={groupPosts} />
 
       <GroupInfo
         admininstrators={group.admininstrators}

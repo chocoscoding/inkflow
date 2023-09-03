@@ -11,7 +11,7 @@ import LeaveGroup from "@/app/components/modals/LeaveGroup";
 import { OneGroupType } from "@/app/types/client";
 
 const Main: FC<OneGroupType> = (props) => {
-  const { id, name, about, coverImage, admininstrators } = props;
+  const { id, name, about, coverImage, admininstrators,Posts } = props;
   const aboutRef = useRef<HTMLParagraphElement | null>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const [showMore, setShowMore] = useState(false);
@@ -96,22 +96,7 @@ const Main: FC<OneGroupType> = (props) => {
           </button>
         </section>
       </div>
-      {[
-        {
-          id: "64dd80ffc0a3ec6db14334cf",
-          title: "edls",
-          tags: ["gbdrklvfd"],
-          coverImage: "https://res.cloudinary.com/chocoscoding/image/upload/v1692238032/zd4kmzdvaiqqtitp7kqh.jpg",
-          createdAt: new Date("2023-08-17T02:07:59.029Z"),
-          views: 0,
-          owner: {
-            id: "64d965ec96e0bce41d66ec9b",
-            username: "kfsffjoeijfios",
-            image: null,
-          },
-          _count: { likes: 0, comments: 0 },
-        },
-      ].map((ele, i) => (
+      {Posts.map((ele, i) => (
         <Post
           key={`posts${i}`}
           {...ele}

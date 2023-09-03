@@ -146,6 +146,7 @@ interface OneGroupType {
   _count: {
     members: number;
   };
+  Posts: OnePostComponentType[];
 }
 
 interface GroupInfoType {
@@ -156,3 +157,22 @@ interface GroupInfoType {
 }
 
 type TrendingTags = { name: string; tag_count: number }[] | null;
+
+interface GroupMembers {
+  posts: {
+    user: {
+      image: string | null;
+      id: string;
+      firstname: string | null;
+      lastname: string | null;
+      username: string | null;
+    };
+  }[];
+  groupInfo: {
+    id: string;
+    _count: {
+      members: number;
+    };
+    name: string;
+  } | null;
+}
