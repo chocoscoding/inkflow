@@ -85,7 +85,7 @@ const UserMenu: React.FC<NavbarProps> = ({ currentUser }) => {
             {currentUser ? (
               <>
                 <MenuItem
-                  onClick={() => push("/profile")}
+                  onClick={() => push("/profile/me")}
                   label="Profile"
                 />
                 <MenuItem

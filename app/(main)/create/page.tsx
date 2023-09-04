@@ -1,4 +1,4 @@
-import getGroupsUserFollow from "@/app/actions/getGroupsUserFollow";
+import getGroupsUserFollow from "@/app/actions/Group/getGroupsUserFollow";
 import CreateClient from "./CreateClient";
 
 export const metadata = {
@@ -6,10 +6,10 @@ export const metadata = {
   description: "Let's Create something awesome",
 };
 const page = async () => {
-  const groups_User_Follows = await getGroupsUserFollow()
+  const groups_User_Follows = await getGroupsUserFollow();
   return (
     <div className="appScreen flex-center">
-      <CreateClient guf={groups_User_Follows}/>
+      <CreateClient guf={groups_User_Follows} />
     </div>
   );
 };

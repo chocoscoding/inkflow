@@ -7,6 +7,7 @@ const MainSelectQuery = {
   name: true,
   about: true,
   coverImage: true,
+  admin: true,
   admininstrators: {
     select: {
       user: {

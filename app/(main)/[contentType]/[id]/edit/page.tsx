@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import EditClient from "./EditClient";
-import getGroupsUserFollow from "@/app/actions/getGroupsUserFollow";
+import getGroupsUserFollow from "@/app/actions/Group/getGroupsUserFollow";
 
 const page = async ({ params }: { params: { contentType: string; id: string } }) => {
   const groups_User_Follows = await getGroupsUserFollow();

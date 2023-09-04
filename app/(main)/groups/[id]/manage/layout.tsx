@@ -4,7 +4,7 @@ import MiniNavigation from "./MiniNavigation";
 import MainNavigation from "./MainNavigation";
 import { GroupPageType } from "@/app/types/client";
 import { Metadata, ResolvingMetadata } from "next";
-import getOneGroupOptional from "@/app/actions/getOneGroupOptional";
+import getOneGroupOptional from "@/app/actions/Group/getOneGroupOptional";
 
 export async function generateMetadata({ params }: GroupPageType, parent: ResolvingMetadata): Promise<Metadata> {
   const group = await getOneGroupOptional(params, { name: true });

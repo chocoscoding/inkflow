@@ -6,17 +6,6 @@ const MiniNavigation = () => {
   const path = usePathname();
   const params = useParams();
 
-  const pageLink = useCallback(
-    (newPage: string) => {
-      let pathLists = path?.split("/");
-      if (!pathLists) return "#";
-      pathLists.length = 6;
-      pathLists.splice(pathLists.length - 1, 1, newPage);
-      return pathLists.join("/");
-    },
-    [path]
-  );
-
   const isActive = useCallback(() => {
     const pathLists = path?.split("/");
     if (!pathLists) return;
@@ -29,19 +18,19 @@ const MiniNavigation = () => {
     return (
       <section className="rounded-md text-se bg-dark-30 overflow-hidden min-w-[200px] md2a:sticky md2a:top-[180px] h-fit md2:w-full flex-shrink-0">
         <ul className="flex flex-col gap-4">
-          <Link href={pageLink("Members")}>
+          <Link href={"Members"}>
             <li className="flex items-center">
               <span className={`h-10 w-[3px] ${isActive() === 1 ? "bg-red-80" : "bg-transparent"} mr-5`}></span>
               <p className={isActive() === 1 ? "text-red-80" : "text-secondaryBg-20"}>Members</p>
             </li>
           </Link>
-          <Link href={pageLink("Requests")}>
+          <Link href={"Requests"}>
             <li className="flex items-center">
               <span className={`h-10 w-[3px] ${isActive() === 2 ? "bg-red-80" : "bg-transparent"} mr-5`}></span>
               <p className={isActive() === 2 ? "text-red-80" : "text-secondaryBg-20"}>Requests</p>
             </li>
           </Link>
-          <Link href={pageLink("Banned")}>
+          <Link href={"Banned"}>
             <li className="flex items-center">
               <span className={`h-10 w-[3px] ${isActive() === 3 ? "bg-red-80" : "bg-transparent"} mr-5`}></span>
               <p className={isActive() === 3 ? "text-red-80" : "text-secondaryBg-20"}>Banned</p>

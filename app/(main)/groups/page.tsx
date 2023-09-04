@@ -2,12 +2,12 @@ import React from "react";
 import GroupClient from "./GroupClient";
 import Image from "next/image";
 import RecommendedGroups from "@/app/components/Groups/RecommendedGroups";
-import getGroupsUserFollow from "@/app/actions/getGroupsUserFollow";
-import getOneGroup from "@/app/actions/getOneGroup";
+import getGroupsUserFollow from "@/app/actions/Group/getGroupsUserFollow";
+import getOneGroup from "@/app/actions/Group/getOneGroup";
 import { Metadata, ResolvingMetadata } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import getUserGroupRequests from "@/app/actions/getUserGroupRequests";
+import getUserGroupRequests from "@/app/actions/Group/getUserGroupRequests";
 interface GroupPageType {
   params: {
     id: string;

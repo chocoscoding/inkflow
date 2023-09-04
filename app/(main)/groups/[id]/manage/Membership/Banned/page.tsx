@@ -1,6 +1,6 @@
 import React from "react";
 import BannedClient from "./BannedClient";
-import getGroupBannedUsers from "@/app/actions/getGroupBannedUsers";
+import getGroupBannedUsers from "@/app/actions/Group/getGroupBannedUsers";
 
 const page = async ({ params }: { params: { id: string } }) => {
   const bannedUsers = await getGroupBannedUsers(params.id);

@@ -11,18 +11,17 @@ import { Follow, Follow1 } from "@/app/components/Icons";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import MoreButton from "./MoreButton";
-import getOneGroup from "@/app/actions/getOneGroup";
+import getOneGroup from "@/app/actions/Group/getOneGroup";
 import { Metadata, ResolvingMetadata } from "next";
 import GroupInfo from "./GroupInfo";
-import getUserIsFollowingGroup from "@/app/actions/getUserIsFollowingGroup";
-import getTrendingTagsInGroup from "@/app/actions/getTrendingTagsInGroup";
-import getGroupPosts from "@/app/actions/getGroupPost";
-import getOneGroupOptional from "@/app/actions/getOneGroupOptional";
+import getUserIsFollowingGroup from "@/app/actions/Group/getUserIsFollowingGroup";
+import getTrendingTagsInGroup from "@/app/actions/Group/getTrendingTagsInGroup";
+import getGroupPosts from "@/app/actions/Group/getGroupPost";
+import getOneGroupOptional from "@/app/actions/Group/getOneGroupOptional";
 import { GroupPageType } from "@/app/types/client";
 
-
 export async function generateMetadata({ params }: GroupPageType, parent: ResolvingMetadata): Promise<Metadata> {
-  const group = await getOneGroupOptional(params,{name:true});
+  const group = await getOneGroupOptional(params, { name: true });
   if (!group)
     return {
       title: "Group not found",
@@ -51,7 +50,10 @@ const page = async ({ params }: GroupPageType) => {
         <Trending data={trendingTags} />
       </div>
 
-      <Main {...group} Posts={groupPosts} />
+      <Main
+        {...group}
+        Posts={groupPosts}
+      />
 
       <GroupInfo
         admininstrators={group.admininstrators}

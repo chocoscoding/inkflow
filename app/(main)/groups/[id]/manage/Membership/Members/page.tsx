@@ -1,6 +1,6 @@
 import React from "react";
 import MembersClient from "./MembersClient";
-import getGroupMembers from "@/app/actions/getGroupMembers";
+import getGroupMembers from "@/app/actions/Group/getGroupMembers";
 
 const page = async ({ params }: { params: { id: string } }) => {
   const members = await getGroupMembers(params.id);
