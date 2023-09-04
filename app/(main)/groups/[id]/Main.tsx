@@ -9,6 +9,7 @@ import React, { FC, useEffect, useRef, useState } from "react";
 import Create from "./Create";
 import LeaveGroup from "@/app/components/modals/LeaveGroup";
 import { OneGroupType } from "@/app/types/client";
+import JoinOrLeave from "./JoinOrLeave";
 
 const Main: FC<OneGroupType> = (props) => {
   const { id, name, about, coverImage, admininstrators, Posts, isUserFollowingGroup } = props;
@@ -58,19 +59,7 @@ const Main: FC<OneGroupType> = (props) => {
               </p>
             </div>
           </div>
-          {isUserFollowingGroup ? (
-            <button
-              className="rounded-md bg-dark-40 outline outline-1 outline-secondary-40 h-fit py-2 px-4 flex-shrink-0 md:ml-2 cursor-pointer md3:self-end md1:mt-4 md1:w-6/12 md1:ml-[65px]"
-              onClick={() => setLeaveModal(true)}>
-              Leave
-            </button>
-          ) : (
-            <button
-              className="rounded-md bg-dark-40 outline outline-1 outline-secondary-40 h-fit py-2 px-4 flex-shrink-0 md:ml-2 cursor-pointer md3:self-end md1:mt-4 md1:w-6/12 md1:ml-[65px]"
-              onClick={() => {}}>
-              Join
-            </button>
-          )}
+          <JoinOrLeave isUserFollowingGroup={isUserFollowingGroup} />
         </section>
         <section className="mt-4 border-t-[1px] border-secondary-20 pt-2">
           <p className="text-lg font-medium md2:hidden">About</p>
@@ -111,10 +100,10 @@ const Main: FC<OneGroupType> = (props) => {
         />
       ))}
 
-      <LeaveGroup
+      {/* <LeaveGroup
         open={leaveModal}
         setOpen={setLeaveModal}
-      />
+      /> */}
     </section>
   );
 };

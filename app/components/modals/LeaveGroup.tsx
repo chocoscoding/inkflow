@@ -5,8 +5,9 @@ import { CloseIcon } from "../Icons";
 interface LeaveGroupProps {
   setOpen: Dispatch<SetStateAction<boolean>>;
   open: boolean;
+  action: (typeOfAction: "Joining" | "Leaving") => Promise<void>;
 }
-const LeaveGroup: FC<LeaveGroupProps> = ({ open, setOpen }) => {
+const LeaveGroup: FC<LeaveGroupProps> = ({ open, setOpen, action }) => {
   const myRef = useRef(null);
   return (
     <>
@@ -24,11 +25,15 @@ const LeaveGroup: FC<LeaveGroupProps> = ({ open, setOpen }) => {
         container={myRef.current}>
         <p>Are you sure you want to leave ?</p>
         <div className="flex w-full max-w-[300px] justify-between mt-4">
-          <button className="w-6/12 rounded-md bg-blue-default py-2">Leave</button>
+          <button
+            className="w-6/12 rounded-md bg-blue-default py-2"
+            onClick={() => action("Leaving")}>
+            Leave
+          </button>
           <button
             className="w-6/12 py-2 text-secondary-30"
             onClick={() => setOpen(false)}>
-            Cancle
+            Cancel
           </button>
         </div>
       </Modal>
