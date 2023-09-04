@@ -66,7 +66,7 @@ const CreateClient: FC<CreateClientType> = ({ guf }) => {
       toast.remove();
       setIsLoading(true);
       const loadingToast = toast.loading("Creating group");
-      const createGroup = await axios.post(`/api/groups/create`, { name: name, about: about, coverImage });
+      const createGroup = await axios.post(`/api/group/create`, { name: name, about: about, coverImage });
       toast.remove(loadingToast);
       if (createGroup.status === 200) {
         push("/groups/" + createGroup.data.id);

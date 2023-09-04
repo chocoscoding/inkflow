@@ -5,8 +5,10 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import prisma from "@/app/libs/prismadb";
+import { GroupPageType } from "@/app/types/client";
 
-export async function POST(request: Request) {
+export async function POST(request: Request, params: GroupPageType) {
+  const groupId =  params.params.id;
   const { postId } = await request.json();
   if (!postId) return NextResponse.error();
   const session = await getServerSession(authOptions);
@@ -16,6 +18,7 @@ export async function POST(request: Request) {
     await prisma.post.update({
       where: {
         id: postId,
+        groupId,
         group: {
           admin: {
             has: userId,

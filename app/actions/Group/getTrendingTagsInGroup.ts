@@ -2,7 +2,7 @@ import prisma from "@/app/libs/prismadb";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import { TrendingTags } from "../types/client";
+import { TrendingTags } from "@/app/types/client";
 
 export default async function getTrendingTagsInGroup(groupId?: string) {
   if (!groupId) return null;
