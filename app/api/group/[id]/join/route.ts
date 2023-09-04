@@ -11,7 +11,7 @@ export async function POST(request: Request, params: GroupPageType) {
   const userId = session?.user.id;
   if (!userId) return NextResponse.json({ error: "User not authenticated" }, { status: 400 });
   try {
-    await prisma.groupRequest.create({
+    await prisma.userGroupRelation.create({
       data: {
         userId,
         groupId,
@@ -21,4 +21,4 @@ export async function POST(request: Request, params: GroupPageType) {
   } catch (error) {
     return NextResponse.error();
   }
-}
+} 

@@ -1,11 +1,22 @@
 import { More, SearchIcon } from "@/app/components/Icons";
 import Ripple from "@/app/components/Ripple";
 import Image from "next/image";
-import React from "react";
+import React, { FC } from "react";
 import OneMemeber from "../Membership/Members/OneMemeber";
 import OnePost from "./OnePost";
+import { OnePostMain } from "@/app/types/client";
 
-const ContentsClient = () => {
+const ContentsClient: FC<{ groupPosts: OnePostMain[] }> = ({ groupPosts }) => {
+  if (groupPosts.length < 1)
+    return (
+      <div className="rounded-lg ">
+        <div className="w-full">
+          <div className="flex justify-between mb-4 flex-wrap bg-dark-40 py-2 px-2 rounded-lg items-center">
+            <p>No Post yet</p>
+          </div>
+        </div>
+      </div>
+    );
   return (
     <div className="rounded-lg ">
       <div className="w-full">
@@ -25,11 +36,12 @@ const ContentsClient = () => {
       </div>
       <div className="w-full bg-dark-40 p-2 rounded-lg">
         <ul>
-          {Array(30)
-            .fill(0)
-            .map((e, i) => (
-              <OnePost key={`group-${i}`} />
-            ))}
+          {groupPosts.map((post, i) => (
+            <OnePost
+              key={`group-${i}`}
+              {...post}
+            />
+          ))}
         </ul>
       </div>
     </div>

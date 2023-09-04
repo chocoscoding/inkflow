@@ -35,18 +35,18 @@ const OneMemeber: React.FC<ListGroupProps> = ({ admin, id, username, image }) =>
       </div>
 
       {/* list and dropdown  */}
-      <Dropdown
-        key={`dropdown_Members_${id}`}
-        keyName={`dropdown_Members_${id}`}
-        triggerButton={
-          <div className="w-10 h-10 rounded-full cursor-pointer lg:hover:bg-dark-30 flex-center ">
-            <More className="" />
-          </div>
-        }
-        elementLists={[
-          { label: "Ban", onClick: () => {} },
-        ]}
-      />
+      {admin ? null : (
+        <Dropdown
+          key={`dropdown_Members_${id}`}
+          keyName={`dropdown_Members_${id}`}
+          triggerButton={
+            <div className="w-10 h-10 rounded-full cursor-pointer lg:hover:bg-dark-30 flex-center ">
+              <More className="" />
+            </div>
+          }
+          elementLists={[{ label: "Ban", onClick: () => {} }]}
+        />
+      )}
     </li>
   );
 };

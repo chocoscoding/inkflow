@@ -10,8 +10,7 @@ const MiniNavigation = () => {
     const pathLists = path?.split("/");
     if (!pathLists) return;
     if (pathLists[4] === "Membership" && pathLists[5] === "Members") return 1;
-    if (pathLists[4] === "Membership" && pathLists[5] === "Requests") return 2;
-    if (pathLists[4] === "Membership" && pathLists[5] === "Banned") return 3;
+    if (pathLists[4] === "Membership" && pathLists[5] === "Banned") return 2;
   }, [path]);
 
   if (path?.includes(`/groups/${params!.id}/manage/Membership`))
@@ -24,16 +23,10 @@ const MiniNavigation = () => {
               <p className={isActive() === 1 ? "text-red-80" : "text-secondaryBg-20"}>Members</p>
             </li>
           </Link>
-          <Link href={"Requests"}>
-            <li className="flex items-center">
-              <span className={`h-10 w-[3px] ${isActive() === 2 ? "bg-red-80" : "bg-transparent"} mr-5`}></span>
-              <p className={isActive() === 2 ? "text-red-80" : "text-secondaryBg-20"}>Requests</p>
-            </li>
-          </Link>
           <Link href={"Banned"}>
             <li className="flex items-center">
-              <span className={`h-10 w-[3px] ${isActive() === 3 ? "bg-red-80" : "bg-transparent"} mr-5`}></span>
-              <p className={isActive() === 3 ? "text-red-80" : "text-secondaryBg-20"}>Banned</p>
+              <span className={`h-10 w-[3px] ${isActive() === 2 ? "bg-red-80" : "bg-transparent"} mr-5`}></span>
+              <p className={isActive() === 2 ? "text-red-80" : "text-secondaryBg-20"}>Banned</p>
             </li>
           </Link>
         </ul>

@@ -143,6 +143,7 @@ interface OneGroupType {
   _count: {
     members: number;
   };
+  isUserFollowingGroup: string | null;
   Posts: OnePostComponentType[];
 }
 

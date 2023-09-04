@@ -52,6 +52,7 @@ const page = async ({ params }: GroupPageType) => {
 
       <Main
         {...group}
+        isUserFollowingGroup={isUserFollowingGroup}
         Posts={groupPosts}
       />
 
