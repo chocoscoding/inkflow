@@ -12,9 +12,17 @@ const tempdata = {
   id: "64dd80ffc0a3ec6db14334cf",
   title: "edls",
   tags: ["gbdrklvfd"],
+  revenue: "1111",
+  platform: "mobile",
+  businessType: "1111",
   coverImage: "https://res.cloudinary.com/chocoscoding/image/upload/v1692238032/zd4kmzdvaiqqtitp7kqh.jpg",
   createdAt: new Date("2023-08-17T02:07:59.029Z"),
   views: 0,
+  time: "10pm",
+  date: "2023-08-17T02:07:59.029Z",
+  userId: "64d965ec96e0bce41d66ec9b",
+  body: "dsds",
+  groupId: null,
   owner: {
     id: "64d965ec96e0bce41d66ec9b",
     username: "kfsffjoeijfios",
@@ -30,11 +38,11 @@ const Profile: React.FC<Profile> = ({}) => {
       <>
         <SectionControl />
 
-        {section === "meetups" ? <Meetup /> : null}
+        {section === "meetups" ? <Meetup {...tempdata} /> : null}
 
         {section === "posts" ? <Post {...tempdata} /> : null}
 
-        {section === "interviews" ? <Interview /> : null}
+        {section === "interviews" ? <Interview {...tempdata} /> : null}
       </>
     </Suspense>
   );

@@ -5,7 +5,7 @@ interface ParamsType {
 export default async function getOneMeetup(params: ParamsType) {
   try {
     const oneMeetup = await prisma.meetup.findUnique({
-      where: { id },
+      where: { id:params.id },
       include: {
         group: true,
         owner: {
