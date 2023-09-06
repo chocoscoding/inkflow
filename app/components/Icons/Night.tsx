@@ -4,6 +4,7 @@ const Night = (props: { className?: string }) => (
     width={20}
     height={20}
     fill="none"
+    id="svgee"
     className={props.className}
     {...props}>
     <path

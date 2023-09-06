@@ -8,15 +8,17 @@ import useNavigation from "@/app/hooks/useNavigation";
 import { useRouter } from "next/navigation";
 import { NavbarProps } from "./Navbar";
 import { signOut } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import Skeleton from "react-loading-skeleton";
+import toast from "react-hot-toast";
 const UserMenu: React.FC<NavbarProps> = ({ currentUser }) => {
   const { isOpen, onOpen, onClose } = useNavigation();
   const { push } = useRouter();
   const [isOpenAnimated, setIsOpenAnimated] = useState(isOpen);
   const { data: session, status } = useSession();
+  const elementRef = useRef<HTMLDivElement>(null);
   const toggle = () => {
     if (isOpen) return onClose();
     return onOpen();
@@ -46,9 +48,61 @@ const UserMenu: React.FC<NavbarProps> = ({ currentUser }) => {
     return () => {
       window.removeEventListener("keydown", handleEscKeyPress);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  if (status === "loading" ) {
+  //function to check if an element or its next 3 parent have that id
+  function hasParentWithId(element: any, id: string) {
+    let currentElement = element;
+    let count = 0;
+    while (currentElement !== null && currentElement !== document) {
+      //dont traverse more than 3 times
+      if (count > 3) return;
+      count++;
+      if (currentElement.id === id) {
+        return true;
+      }
+      currentElement = currentElement.parentElement;
+    }
+
+    return false;
+  }
+
+  // The click occurred outside the element and its nested elements
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        elementRef.current &&
+        !elementRef.current.contains(event.target as Node) &&
+        !isInsideNestedElements(elementRef.current, event.target as Node)
+      ) {
+        onClose();
+      }
+    };
+
+    const isInsideNestedElements = (element: HTMLElement, target: Node) => {
+      if (hasParentWithId(target, "svgee")) {
+        return true;
+      }
+      if (element.contains(target)) {
+        return true;
+      }
+      return false;
+    };
+    document.addEventListener("click", handleClickOutside);
+
+    // clean up
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [isOpen]);
+
+  const signOutUser = async () => {
+    const loading = toast.loading("signin out");
+    await signOut();
+    toast.dismiss(loading);
+  };
+  if (status === "loading") {
     return (
       <section className="flex items-center xl1:gap-2 gap-4 dark:text-secondary-60 cursor-pointer h-full">
         <div className=" rounded-md xl1:scale-75 h-full overflow-hidden">
@@ -81,23 +135,25 @@ const UserMenu: React.FC<NavbarProps> = ({ currentUser }) => {
           exit={"exit"}
           variants={itemVariants}
           transition={{ duration: 0.1, ease: "easeOut", staggerChildren: 0.1 }}>
-          <div className="flex flex-col cursor-pointer">
+          <div
+            className="flex flex-col cursor-pointer"
+            ref={elementRef}>
             {currentUser ? (
               <>
                 <Link href={`/profile/me`}>
-                <MenuItem
-                  onClick={() => {}}
-                  label="Profile"
-                />
+                  <MenuItem
+                    onClick={() => {}}
+                    label="Profile"
+                  />
                 </Link>
                 <Link href={`/settings`}>
-                <MenuItem
-                  onClick={() => push("/settings")}
-                  label="Settings"
-                />
+                  <MenuItem
+                    onClick={() => {}}
+                    label="Settings"
+                  />
                 </Link>
                 <MenuItem
-                  onClick={() => signOut()}
+                  onClick={() => signOutUser()}
                   label="Log out"
                 />
               </>
