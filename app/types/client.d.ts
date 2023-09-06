@@ -1,4 +1,4 @@
-import { Post, User, Group, Comment, Replies, Likes, Interview } from "@prisma/client";
+import { Post, User, Group, Comment, Replies, Likes, Interview, Meetup } from "@prisma/client";
 import { Dispatch, SetStateAction } from "react";
 type OwnerPost = {
   id: string;
@@ -209,6 +209,14 @@ type OneInterviewsType = {
   revenue: string;
   businessType: string;
   platform: string;
+  owner: {
+    id: string;
+    image: string | null;
+    username: string | null;
+  };
+};
+
+type OneMeetupType = Meetup & {
   owner: {
     id: string;
     image: string | null;

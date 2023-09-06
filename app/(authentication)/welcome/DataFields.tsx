@@ -39,7 +39,7 @@ const DataFields = () => {
     setIsLoading(true);
     const loading = toast.loading("loading");
     try {
-      const response: any = await axios.post("/api/userinfo", welcomeInfo);
+      const response: any = await axios.post("/api/userInfo", welcomeInfo);
       if (response.data.status === 200) {
         toast.success("Data Updated successfully", { id: loading });
         toast.loading("Redirecting", { id: loading });
@@ -49,6 +49,7 @@ const DataFields = () => {
       }
       throw new Error(response.data.error);
     } catch (error: any) {
+      console.log(error)
       toast.dismiss(loading);
       if (error.message === "username taken") {
         setError({

@@ -154,6 +154,7 @@ model Meetup {
   title      String
   body       String
   date       String
+  tags       String[]
   time       String
   group      Group?   @relation(fields: [groupId], references: [id])
   owner      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -171,6 +172,7 @@ model Interview {
   body         String
   revenue      String
   businessType String
+  tags       String[]
   platform     String
   views        Int       @default(0)
   likes        Likes[]

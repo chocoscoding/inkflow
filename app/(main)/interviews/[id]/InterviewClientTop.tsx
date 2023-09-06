@@ -57,7 +57,7 @@ const InterviewClientTop: FC<InterviewClientTopType> = (props) => {
             group?.id ? "md2:h-60 md2:mb-4" : ""
           }`}>
           <Image
-            src={coverImage || "images/placeholder.jpg"}
+            src={coverImage || "/images/placeholder.jpg"}
             width={500}
             height={500}
             alt="post-Image"

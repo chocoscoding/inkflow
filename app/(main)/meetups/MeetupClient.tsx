@@ -1,11 +1,12 @@
 "use client";
 import Checkbox from "@/app/components/Checkbox";
 import { Arrow1 } from "@/app/components/Icons";
-import React from "react";
+import React, { FC } from "react";
 import Meetups from "./Meetups";
 import Image from "next/image";
+import { OneMeetupType } from "@/app/types/client";
 
-const MeetupClient = () => {
+const MeetupClient:FC<OneMeetupType[]> = (meetups) => {
   const CreateAMeetup = () => (
     <section className="lg2a:sticky lg2a:top-[60px] rounded-xl bg-[#FF7C4D] w-4/12 lg2a:max-w-[310px] max-w-[500px]  p-4 h-[180px] shrink-0  lg2:flex-auto lg2:order-2 lg2:w-full">
       <p className="font-semibold text-lg">Host a Meetup</p>
@@ -62,7 +63,7 @@ const MeetupClient = () => {
         </section>
 
         <section className="w-full flex flex-col gap-2 lg2:order-3 md1:mb-[50px]">
-          <Meetups />
+          <Meetups {...meetups}/>
         </section>
         <CreateAMeetup />
       </div>

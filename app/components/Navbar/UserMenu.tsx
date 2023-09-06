@@ -84,14 +84,18 @@ const UserMenu: React.FC<NavbarProps> = ({ currentUser }) => {
           <div className="flex flex-col cursor-pointer">
             {currentUser ? (
               <>
+                <Link href={`/profile/me`}>
                 <MenuItem
-                  onClick={() => push("/profile/me")}
+                  onClick={() => {}}
                   label="Profile"
                 />
+                </Link>
+                <Link href={`/settings`}>
                 <MenuItem
                   onClick={() => push("/settings")}
                   label="Settings"
                 />
+                </Link>
                 <MenuItem
                   onClick={() => signOut()}
                   label="Log out"

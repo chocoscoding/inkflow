@@ -1,14 +1,20 @@
 import Ripple from "@/app/components/Ripple";
 import Tags from "@/app/components/Tags";
 import Image from "next/image";
-import React, { Suspense } from "react";
+import React, { FC, Suspense } from "react";
 import Meetup from "./Meetup";
-interface MeetupTypes {}
-const Meetups: React.FC<MeetupTypes> = ({}) => {
+import { OneMeetupType } from "@/app/types/client";
+
+const Meetups: FC<OneMeetupType[]> = (meetups) => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-    <Meetup/>
-    </Suspense>
+    <>
+      {Object.values(meetups).map((meetup, i) => (
+        <Meetup
+          key={`meetup_${i}`}
+          {...meetup}
+        />
+      ))}
+    </>
   );
 };
 

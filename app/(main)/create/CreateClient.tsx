@@ -125,6 +125,7 @@ const CreateClient: FC<CreateClientType> = ({ guf }) => {
           location: meetupInfo?.location,
           coverImage,
           title,
+          tags,
           body: content,
           groupId: group?.id,
         });
@@ -160,6 +161,7 @@ const CreateClient: FC<CreateClientType> = ({ guf }) => {
           revenue: interviewInfo?.revenue,
           coverImage,
           title,
+          tags,
           body: content,
           groupId: group?.id,
         });

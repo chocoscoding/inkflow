@@ -6,13 +6,7 @@ export default async function getMeetups() {
       orderBy: {
         createdAt: "desc",
       },
-      select: {
-        id: true,
-        title: true,
-        time: true,
-        coverImage: true,
-        createdAt: true,
-        date: true,
+      include: {
         owner: {
           select: {
             id: true,
