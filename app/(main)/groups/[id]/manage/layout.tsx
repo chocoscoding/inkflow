@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: GroupPageType, parent: Resolv
       title: "Group not found",
     };
   return {
-    title: group.name + " - Inkflow",
+    title: group.name + " Manage - Inkflow",
   };
 }
 export default async function RootLayout({ children, params }: { children: React.ReactNode; params: { id: string } }) {

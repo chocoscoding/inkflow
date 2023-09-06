@@ -11,7 +11,7 @@ const Title: FC<{ id: "title" | "name"; placeholder?: string }> = ({ id, placeho
         {...register(id, {
           required: true,
           pattern: {
-            value: /^[^;/\s]+$/,
+            value: /^(?!\s*$).+/,
             message: "Title name should contain only normal characters.",
           },
         })}

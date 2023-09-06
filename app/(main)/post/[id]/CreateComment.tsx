@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import React, { FC, useState } from "react";
 import toast from "react-hot-toast";
 
-const CreateComment: FC<CreateCommentType> = ({ postId }) => {
+const CreateComment: FC<CreateCommentType> = ({ contentId, contentType }) => {
   const { data, status } = useSession();
   const [comment, setComment] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -26,10 +26,10 @@ const CreateComment: FC<CreateCommentType> = ({ postId }) => {
       const loadingToast = toast.loading("Creating comment...");
 
       const createPost = await axios.post("/api/comments/create", {
-        referenceId: postId,
+        referenceId: contentId,
         userId: data?.user?.id,
         body: comment,
-        contentType: "Post",
+        contentType
       });
       toast.remove(loadingToast);
       if (createPost.status === 200) {

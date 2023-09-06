@@ -19,7 +19,7 @@ const InterviewOptions = () => {
           <input
             placeholder={"Revenue"}
             {...register("interviewInfo.revenue", {
-              setValueAs: (value) => `${value + selectionValue}`,
+              setValueAs: (value) => `${value + "/" + selectionValue}`,
               required: getValues("creationType") === "Interview",
             })}
             type="number"

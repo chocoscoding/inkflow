@@ -1,29 +1,33 @@
 import prisma from "@/app/libs/prismadb";
 import getCurrentUser from "./getCurrentUser";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 interface ParamsType {
   id?: string;
+  contentType: "Post" | "Interview";
 }
 export default async function getComments(params: ParamsType) {
   try {
-    const user = await getCurrentUser(["id"]);
-    const { id: referenceId } = params;
-    if(!referenceId) return []
+    const session = await getServerSession(authOptions);
+    const userId = session?.user.id;;
+    const { id: referenceId, contentType } = params;
+    if (!referenceId) return [];
     const comments = await prisma.comment.findMany({
-      where: { referenceId },
+      where: { referenceId, contentType },
       include: {
         _count: {
           select: {
             likes: {
-              where: {typeOf: "Comments" },
+              where: { typeOf: "Comments" },
             },
           },
         },
         likes:
-          user !== null
+          userId !== null
             ? {
-                where: { userId: user?.id, typeOf: "Comments" },
+                where: { userId: userId, typeOf: "Comments" },
                 select: {
-                  userId: true, 
+                  userId: true,
                 },
               }
             : true,
@@ -37,7 +41,6 @@ export default async function getComments(params: ParamsType) {
         },
       },
     });
-
 
     if (!comments) {
       return [];

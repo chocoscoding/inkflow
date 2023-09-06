@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { AuthFunction } from "@/app/libs/AuthFunction";
 const CreatorInfo: FC<CreatorInfoType> = (props) => {
-  const { id, username, image, posts = [], occupation } = props as CreatorInfoType;
+  const { id, username, image, posts = [], occupation } = props;
   const { status } = useSession();
   return (
     <section className="lg3a:w-10 w-full flex-shrink-0 min-w-[305px] h-fit lg3a:sticky lg3a:top-[55px]">
@@ -28,7 +28,7 @@ const CreatorInfo: FC<CreatorInfoType> = (props) => {
         </button>
       </div>
       <div className="mt-4 bg-dark-30 rounded-xl p-3">
-        <p className="b-3">{`More posts from ${username}`}</p>
+        <p className="b-3">{`More from ${username}`}</p>
         <div className="">
           {posts.map((post, i) => (
             <div

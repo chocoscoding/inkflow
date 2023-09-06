@@ -1,4 +1,4 @@
-import { Post, User, Group, Comment, Replies, Likes } from "@prisma/client";
+import { Post, User, Group, Comment, Replies, Likes, Interview } from "@prisma/client";
 import { Dispatch, SetStateAction } from "react";
 type OwnerPost = {
   id: string;
@@ -19,29 +19,33 @@ type PostOwner = {
   occupation?: string;
   posts?: OwnerPost[];
 };
-export type ClientPost = Post & {
+type ContentExtension = {
   group: null | { id: string; name: string };
   _count: { likes: number; comments: number };
   owner: PostOwner;
 };
-export interface CreatorInfoType extends PostOwner {}
-export interface OneCommentType extends Comment {
+interface CreatorInfoType extends PostOwner {}
+interface OneCommentType extends Comment {
   _count: { likes: number };
   replies: Replies[];
   likes: Likes[];
   user: MiniUser | null;
 }
 
-export interface PostClientType {
-  postData: ClientPost;
-  currentUser: SafeUser2 | null;
+interface PostClientType {
+  postData: Post & ContentExtension;
   comments: OneCommentType[];
   likeStatus: { id: string } | null;
 }
-export interface CreateCommentType {
-  postId?: string;
+interface CreateCommentType {
+  contentId?: string;
+  contentType: "Post" | "Interview";
 }
-export interface CommentFunctionType {
+
+interface InterviewClientType extends Omit<PostClientType, "postData"> {
+  InterviewData: Interview & ContentExtension;
+}
+interface CommentFunctionType {
   _count: { likes: number };
   showReply: boolean;
   setShowReply: Dispatch<SetStateAction<boolean>>;
@@ -50,25 +54,23 @@ export interface CommentFunctionType {
   userId?: string;
   replies: Replies[];
 }
-export interface CommentType extends CreateCommentType {
+interface CommentType extends CreateCommentType {
   comments: OneCommentType[] | null;
 }
 
-export interface PostFunctionsType {
+interface PostFunctionsType {
   extraClass: string;
   referenceId?: string;
-  userId?: string;
   likeStatus: { id: string } | null;
   _count?: { likes: number; comments: number };
 }
 
-export interface CreatorInfo {
+interface CreatorInfo {
   owner: string;
 }
 
-export interface ContentControlType {
-  editLink: string;
-  contentType: "Post" | "Meetup" | "Interview";
+interface ContentControlType {
+  contentType: "post" | "meetup" | "interview";
   contentId: string;
 }
 type OnePostMain = {
@@ -82,11 +84,11 @@ type OnePostMain = {
   views: number;
   id: string;
 };
-export interface OnePost {
+interface OnePost {
   posts: OnePostMain[];
 }
 
-export type OnePostComponentType = OnePostMain;
+type OnePostComponentType = OnePostMain;
 
 interface GroupUserFollow {
   group: {
@@ -184,7 +186,6 @@ interface OneMember_BannedUser {
   id: string;
   username: string | null;
   buttonLabel: string;
-  buttonOnClick: () => void;
 }
 interface BannedClient {
   user: {
@@ -199,3 +200,24 @@ interface GroupPageType {
     id: string;
   };
 }
+
+type OneInterviewsType = {
+  id: string;
+  createdAt: Date;
+  title: string;
+  coverImage: string | null;
+  revenue: string;
+  businessType: string;
+  platform: string;
+  owner: {
+    id: string;
+    image: string | null;
+    username: string | null;
+  };
+};
+
+interface InterviewClientTopType
+  extends Pick<
+    InterviewClientType["InterviewData"],
+    "group" | "owner" | "coverImage" | "title" | "platform" | "createdAt" | "businessType" | "revenue" | "body"
+  > {}

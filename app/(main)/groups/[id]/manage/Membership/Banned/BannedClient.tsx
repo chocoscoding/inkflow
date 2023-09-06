@@ -13,7 +13,6 @@ const BannedClient: FC<{ bannedUsers: BannedClient[] }> = ({ bannedUsers }) => {
               {...bannedUser.user}
               key={`bannedMember-${i}`}
               buttonLabel={`Unban`}
-              buttonOnClick={() => {}}
             />
           ))}
         </ul>

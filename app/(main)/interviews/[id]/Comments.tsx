@@ -1,23 +1,23 @@
 import Avatar from "@/app/components/Avatar";
 import { More, Reply } from "@/app/components/Icons";
 import { Like } from "@/app/components/Icons/Icon";
-import React from "react";
+import React, { FC } from "react";
 import OneComment from "./OneComment";
+import CreateComment from "./CreateComment";
+import { CommentType } from "@/app/types/client";
 
-const Comments = () => {
+const Comments: FC<CommentType> = ({ comments}) => {
   return (
     <div className="mt-2">
-      <OneComment />
-      <OneComment />
-      <OneComment />
-      <OneComment />
-      <OneComment />
-      <OneComment />
-      <OneComment />
-      <OneComment />
-      <OneComment />
-      <OneComment />
-      <OneComment />
+      {/* <CreateComment postId={postId} /> */}
+      {!comments
+        ? null
+        : comments.map((comment, i) => (
+            <OneComment
+              {...comment}
+              key={`comment__${comment.id}`}
+            />
+          ))}
     </div>
   );
 };

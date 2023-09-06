@@ -9,9 +9,11 @@ import { PostClientType } from "@/app/types/client";
 import TimeAgo from "react-timeago";
 import Link from "next/link";
 import ContentControl from "@/app/components/ContentControl";
-const PostClient: FC<PostClientType> = ({ postData, currentUser, comments, likeStatus }) => {
+import { useSession } from "next-auth/react";
+const PostClient: FC<PostClientType> = ({ postData, comments, likeStatus }) => {
   const { id, userId, tags, coverImage, createdAt, title, body, views, group, _count, owner } = postData;
-  const currentUserId = currentUser?.id;
+  const {data} = useSession()
+  const currentUserId = data?.user.id;
   // console.log(id);
 
   return (
@@ -64,13 +66,13 @@ const PostClient: FC<PostClientType> = ({ postData, currentUser, comments, likeS
             <PostFuntions
               extraClass="hidden md1:block p-5 !bg-dark-20 mb-4 !w-full"
               referenceId={id}
-              userId={currentUser?.id}
               _count={_count}
               likeStatus={likeStatus}
             />
             <Comments
               comments={comments}
-              postId={id}
+              contentId={id}
+              contentType="Post"
             />
           </section>
         </section>
@@ -78,8 +80,7 @@ const PostClient: FC<PostClientType> = ({ postData, currentUser, comments, likeS
       <section className="mt-8 lg3a:hidden">
         {currentUserId === userId ? (
           <ContentControl
-            editLink={`/post/${id}edit/`}
-            contentType="Post"
+            contentType="post"
             contentId={id}
           />
         ) : (

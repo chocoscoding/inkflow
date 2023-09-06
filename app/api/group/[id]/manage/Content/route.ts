@@ -8,14 +8,14 @@ import prisma from "@/app/libs/prismadb";
 import { GroupPageType } from "@/app/types/client";
 
 export async function POST(request: Request, params: GroupPageType) {
-  const groupId =  params.params.id;
+  const groupId = params.params.id;
   const { postId } = await request.json();
   if (!postId) return NextResponse.error();
   const session = await getServerSession(authOptions);
   const userId = session?.user.id;
-  if (!userId) return NextResponse.json({ error: "User not authenticated" }, { status: 400 });
+  if (!userId) return NextResponse.json({ error: "User not authenticated" }, { status: 403 });
   try {
-    await prisma.post.update({
+    const d = await prisma.post.update({
       where: {
         id: postId,
         groupId,

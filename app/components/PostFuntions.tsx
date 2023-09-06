@@ -10,10 +10,11 @@ import { useSession } from "next-auth/react";
 
 const PostFuntions: FC<PostFunctionsType> = (props) => {
   const count = useRef(0);
-  const { extraClass, referenceId, userId, likeStatus, _count } = props;
+  const { extraClass, referenceId, likeStatus, _count } = props;
   const [hasLiked, setHasLiked] = useState(typeof likeStatus?.id === "string");
   const [likesCount, setLikesCount] = useState(_count?.likes || 0);
-  const { status } = useSession();
+  const { status,data } = useSession();
+  const userId = data?.user.id;
   useEffect(() => {
     count.current++;
     if (count.current > 1) {

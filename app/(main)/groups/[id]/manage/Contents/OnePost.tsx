@@ -2,18 +2,50 @@
 import { More } from "@/app/components/Icons";
 import Ripple from "@/app/components/Ripple";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { Menu } from "@headlessui/react";
 import Dropdown from "@/app/components/Dropdown";
 import Avatar from "@/app/components/Avatar";
 import { OnePostComponentType } from "@/app/types/client";
 import ReactTimeago from "react-timeago";
 import Link from "next/link";
+import { useParams, useRouter } from "next/navigation";
+import axios from "axios";
+import toast from "react-hot-toast";
 interface OnePostProps extends OnePostComponentType {
   key: string;
 }
 
 const OnePost: React.FC<OnePostProps> = ({ id, coverImage, createdAt, owner, title }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const params = useParams();
+  const { refresh } = useRouter();
+  const detachPost = async () => {
+    toast.dismiss();
+    setIsLoading(true);
+
+    toast.loading("Processing...");
+    try {
+      const action = await axios.post(`/api/group/${params?.id}/manage/Content`, {
+        postId: id,
+      });
+      toast.dismiss();
+      if (action.status === 200) {
+        refresh();
+      } else {
+        throw new Error("Something went wrong");
+      }
+    } catch (error: any) {
+      toast.dismiss();
+      if (error.message.includes("403")) {
+        toast.error("User is not authenticated 🔒");
+      } else {
+        toast.error("Something went wrong");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <li className="flex justify-between items-center mb-4 border-b border-secondary-20 pb-2">
       <div className="flex flex-1 mr-3 sm:mr-4 gap-2 sm:gap-4">
@@ -58,11 +90,16 @@ const OnePost: React.FC<OnePostProps> = ({ id, coverImage, createdAt, owner, tit
         key={`dropdown_Members_${id}`}
         keyName={`dropdown_Members_${id}`}
         triggerButton={
-          <div className="w-10 h-10 sm1:w-8 sm1:h-8 rounded-full cursor-pointer lg:hover:bg-dark-30 flex-center ">
+          <div className="w-10 h-10 sm1:w-8 sm1:h-8 rounded-full cursor-pointer lg:hover:bg-dark-30 flex-center">
             <More className="sm1:scale-90" />
           </div>
         }
-        elementLists={[{ label: "Remove Post", onClick: () => {} }]}
+        elementLists={[
+          {
+            label: "Remove Post",
+            onClick: detachPost,
+          },
+        ]}
       />
     </li>
   );

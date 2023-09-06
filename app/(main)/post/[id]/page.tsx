@@ -6,13 +6,16 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 import getOnePost from "@/app/actions/getOnePost";
 import getHasUserLiked from "@/app/actions/getHasUserLiked";
 import { Metadata, ResolvingMetadata } from "next";
+import ContentControl from "@/app/components/ContentControl";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { getServerSession } from "next-auth";
 interface PostPageType {
   params: {
     id: string;
   };
 }
 
-export async function generateMetadata({ params }: PostPageType, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata({ params }: PostPageType): Promise<Metadata> {
   const post = await getOnePost(params);
   if (!post)
     return {
@@ -25,14 +28,12 @@ export async function generateMetadata({ params }: PostPageType, parent: Resolvi
 }
 
 const PostPage = async ({ params }: PostPageType) => {
-  const currentUserPromise = getCurrentUser([]);
-  const postPromise = getOnePost(params);
-
-  const [currentUser, post] = await Promise.all([currentUserPromise, postPromise]);
-  const commentsPromise = getComments({ id: post?.id });
+  const post =await getOnePost(params);
+  const userPromise = getServerSession(authOptions);
+  const commentsPromise = getComments({ id: post?.id, contentType: 'Post' });
   const postLikeStatus = getHasUserLiked({ id: post?.id });
 
-  const [comments, likeStatus] = await Promise.all([commentsPromise, postLikeStatus]);
+  const [comments, likeStatus,userSession] = await Promise.all([commentsPromise, postLikeStatus, userPromise]);
 
   if (!post)
     return (
@@ -45,18 +46,23 @@ const PostPage = async ({ params }: PostPageType) => {
       <PostFuntions
         extraClass="md1:hidden sticky top-[55px]"
         referenceId={post?.id}
-        userId={currentUser?.id}
         likeStatus={likeStatus}
         _count={post._count}
       />
       <PostClient
         comments={comments}
         postData={post}
-        currentUser={currentUser}
         likeStatus={likeStatus}
       />
       <span className="lg3:hidden">
+      {userSession?.user.id === post.owner.id ? (
+        <ContentControl
+          contentType="post"
+          contentId={"1"}
+        />
+      ) : (
         <CreatorInfo {...post.owner} />
+      )}
       </span>
     </div>
   );
