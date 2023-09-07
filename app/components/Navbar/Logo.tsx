@@ -19,6 +19,7 @@ const Logo: React.FC<LogoType> = ({ lightMode, noMarginLeft }) => {
           width={350}
           height={200}
           priority
+          loading="eager"
           className="w-full h-auto hidden sm:block"
         />
         <Image
@@ -27,6 +28,7 @@ const Logo: React.FC<LogoType> = ({ lightMode, noMarginLeft }) => {
           width={100}
           height={100}
           priority
+          loading="eager"
           className="w-auto h-[60%] block sm:hidden"
         />
       </div>
