@@ -229,3 +229,4 @@ interface InterviewClientTopType
     InterviewClientType["InterviewData"],
     "group" | "owner" | "coverImage" | "title" | "platform" | "createdAt" | "businessType" | "revenue" | "body"
   > {}
+    interface UserInfoClient extends Pick<User, 'bio'| 'id'| 'image'| 'createdAt'| 'username'| 'occupation'| 'socailLink'>{}
