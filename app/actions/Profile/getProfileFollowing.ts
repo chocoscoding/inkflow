@@ -21,14 +21,14 @@ export default async function getProfileFollowing({
     if (responseType === "count") {
       const count = await prisma?.follow.count({
         where: {
-          userId: id || profileId,
+          followerId: id || profileId,
         },
       });
       return count;
     }
     const follwingList = await prisma.follow.findMany({
       where: {
-        userId: id || profileId,
+        followerId: id || profileId,
       },
       take: 100,
       select: {
