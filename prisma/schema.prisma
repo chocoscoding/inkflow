@@ -13,7 +13,7 @@ datasource db {
 type SocialLink {
   website   String
   instagram String
-  twitter   String
+  x         String
   linkedin  String
 }
 
@@ -49,7 +49,9 @@ model User {
   interviews         Interview[]
   // Group          Group[]
   administeredGroups GroupAdmin[]
-  GroupRequests          GroupRequest[]
+  GroupRequests      GroupRequest[]
+  followers          Follow[]            @relation("UserFollowers")
+  following          Follow[]            @relation("UserFollowing")
 }
 
 model Account {
@@ -72,18 +74,18 @@ model Account {
 }
 
 model Group {
-  id          String              @id @default(auto()) @map("_id") @db.ObjectId
-  name        String              @unique
-  about       String
-  coverImage  String?
-  admin       String[]
-  admininstrators  GroupAdmin[]
-  members     UserGroupRelation[]
-  requests    GroupRequest[]
-  bannedUsers BannedUser[]
-  posts       Post[]
-  meetups     Meetup[]
-  interview   Interview[]
+  id              String              @id @default(auto()) @map("_id") @db.ObjectId
+  name            String              @unique
+  about           String
+  coverImage      String?
+  admin           String[]
+  admininstrators GroupAdmin[]
+  members         UserGroupRelation[]
+  requests        GroupRequest[]
+  bannedUsers     BannedUser[]
+  posts           Post[]
+  meetups         Meetup[]
+  interview       Interview[]
 }
 
 model GroupAdmin {
@@ -112,8 +114,8 @@ model GroupRequest {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
   userId  String @db.ObjectId
   groupId String @db.ObjectId
-user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
-  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  group   Group  @relation(fields: [groupId], references: [id], onDelete: Cascade)
 }
 
 model BannedUser {
@@ -172,7 +174,7 @@ model Interview {
   body         String
   revenue      String
   businessType String
-  tags       String[]
+  tags         String[]
   platform     String
   views        Int       @default(0)
   likes        Likes[]
@@ -243,4 +245,9 @@ model Follow {
   id         String @id @default(auto()) @map("_id") @db.ObjectId
   userId     String @db.ObjectId
   followerId String @db.ObjectId
+
+  followingUser     User? @relation(fields: [userId], references: [id], name: "UserFollowers")
+  followerUser User? @relation(fields: [followerId], references: [id], name: "UserFollowing")
+
+  @@unique([userId, followerId])
 }

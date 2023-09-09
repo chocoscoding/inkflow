@@ -55,8 +55,8 @@ const ProfileClient = () => {
             label="Username"
           />
           <Input
-            id="twitter"
-            label="Username"
+            id="x"
+            label="X"
           />
           <Input
             id="linkedin"

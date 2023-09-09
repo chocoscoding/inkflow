@@ -8,6 +8,7 @@ export default async function getOneProfile(userId?: string | "me") {
     if (!userId) return null;
     if (userId == "me") {
       const session = await getServerSession(authOptions);
+      if (!session) return 'User not logged in';
       tempUserId = session?.user.id;
     }
     const profile = await prisma.user.findUnique({

@@ -2,11 +2,12 @@ import Ripple from "@/app/components/Ripple";
 import Tags from "@/app/components/Tags";
 import Image from "next/image";
 import React, { Suspense } from "react";
-import Meetup from "../../meetups/Meetup";
 import SectionControl from "./SectionControl";
-import Post from "@/app/components/home/Post";
-import Interview from "../../interviews/Interview";
+import Posts from "./Posts";
+import Interviews from "./Interviews";
+import Meetups from "./Meetups";
 import useProfileSection from "@/app/hooks/useProfileSection";
+import { ProfileClientType } from "@/app/types/client";
 interface Profile {}
 const tempdata = {
   id: "64dd80ffc0a3ec6db14334cf",
@@ -30,19 +31,20 @@ const tempdata = {
   },
   _count: { likes: 0, comments: 0 },
 };
-const Profile: React.FC<Profile> = ({}) => {
+const Profile: React.FC<ProfileClientType> = (props) => {
   const { section } = useProfileSection();
+  const { Meetups: MeetupsData, Posts: PostsData, Interviews: InterviewsData } = props;
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <>
         <SectionControl />
 
-        {section === "meetups" ? <Meetup {...tempdata} /> : null}
+        {section === "posts" ? <Posts data={PostsData} /> : null}
 
-        {section === "posts" ? <Post {...tempdata} /> : null}
+        {section === "meetups" ? <Meetups data={MeetupsData} /> : null}
 
-        {section === "interviews" ? <Interview {...tempdata} /> : null}
+        {section === "interviews" ? <Interviews data={InterviewsData} /> : null}
       </>
     </Suspense>
   );

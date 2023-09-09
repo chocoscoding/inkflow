@@ -16,7 +16,7 @@ const CreatorInfo: FC<CreatorInfoType> = (props) => {
           src={image}
           className="rounded-full my-4"
         />
-        <Link href={`/profile/${username}`}>
+        <Link href={`/profile/${id}`}>
           <p className=" text-xl mb-1 hover:underline">{username}</p>
         </Link>
         <p className=" text-base font-light text-secondary-30">{occupation}</p>

@@ -5,7 +5,7 @@ import { ArrowDown } from "../Icons";
 import MenuItem from "./MenuItem";
 import ModeToggler from "./ModeToggler";
 import useNavigation from "@/app/hooks/useNavigation";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { NavbarProps } from "./Navbar";
 import { signOut } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
@@ -15,7 +15,8 @@ import Skeleton from "react-loading-skeleton";
 import toast from "react-hot-toast";
 const UserMenu: React.FC<NavbarProps> = ({ currentUser }) => {
   const { isOpen, onOpen, onClose } = useNavigation();
-  const { push } = useRouter();
+  const path = usePathname();
+
   const [isOpenAnimated, setIsOpenAnimated] = useState(isOpen);
   const { data: session, status } = useSession();
   const elementRef = useRef<HTMLDivElement>(null);
@@ -159,7 +160,7 @@ const UserMenu: React.FC<NavbarProps> = ({ currentUser }) => {
               </>
             ) : (
               <>
-                <Link href={`/auth/signin`}>
+                <Link href={`/auth/signin?redirectUrl=${path}`}>
                   <MenuItem
                     onClick={() => {}}
                     label="Login"

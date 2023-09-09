@@ -1,4 +1,4 @@
-import { Post, User, Group, Comment, Replies, Likes, Interview, Meetup } from "@prisma/client";
+import { Post, User, Group, Comment, Replies, Likes, Interview, Meetup, Follow } from "@prisma/client";
 import { Dispatch, SetStateAction } from "react";
 type OwnerPost = {
   id: string;
@@ -229,4 +229,36 @@ interface InterviewClientTopType
     InterviewClientType["InterviewData"],
     "group" | "owner" | "coverImage" | "title" | "platform" | "createdAt" | "businessType" | "revenue" | "body"
   > {}
-    interface UserInfoClient extends Pick<User, 'bio'| 'id'| 'image'| 'createdAt'| 'username'| 'occupation'| 'socailLink'>{}
+
+type MiniUser = {
+  usernames: string;
+  id: string;
+  image: string | null;
+};
+interface FollowerType {
+  followerUser: MiniUser | null;
+}
+interface FollowingType {
+  followingUser: MiniUser | null;
+}
+
+type ProfileMiniType = Pick<User, "bio" | "id" | "image" | "createdAt" | "username" | "occupation" | "socailLink">;
+interface UserInfoClient {
+  followersCount: number;
+  followingCount: number;
+  userFollowingUserStatus: boolean | null;
+  profile: ProfileMiniType;
+  followingList?: FollowingType[] | null;
+  followersList?: FollowerType[] | null;
+}
+interface ProfileClientType {
+  Posts: OnePostMain[] | null;
+  Interviews: OneInterviewsType[] | null;
+  Meetups: OneMeetupType[] | null;
+}
+
+interface FollowActionType {
+  userId?: string;
+  id: string;
+  userFollowingProfileUser: boolean | null;
+}

@@ -5,7 +5,7 @@ import React, { useCallback, useState } from "react";
 import { FieldValues, useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { SignInResponse, signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Input from "@/app/components/auth/Input";
 import { validateNotEmpty } from "@/app/libs/helper";
 import WelcomeInfoContainer2 from "@/app/components/auth/signup/WelcomeInfoContainer2";
@@ -22,6 +22,7 @@ export interface FormType {
 }
 const DataFields = () => {
   const { push, refresh } = useRouter();
+  const params = useSearchParams();
   const {
     register,
     handleSubmit,
@@ -61,7 +62,7 @@ const DataFields = () => {
       if (signinReq?.status === 200) {
         toast.dismiss(loading);
         refresh();
-        push("/");
+        push(params?.get("redirectUrl") || "/");
         return;
       }
       if (signinReq?.error === `Email doesn't exist`) {
