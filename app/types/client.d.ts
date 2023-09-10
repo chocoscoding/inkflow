@@ -243,6 +243,12 @@ interface FollowingType {
 }
 
 type ProfileMiniType = Pick<User, "bio" | "id" | "image" | "createdAt" | "username" | "occupation" | "socailLink">;
+type ProfileMiniTypeForm = Pick<User, "bio" | "id" | "image" | "createdAt" | "username" | "occupation"> & {
+  website: string | null;
+  instagram: string | null;
+  linkedin: string | null;
+  x: string | null;
+};
 interface UserInfoClient {
   followersCount: number;
   followingCount: number;

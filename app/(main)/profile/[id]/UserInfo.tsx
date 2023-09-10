@@ -13,13 +13,8 @@ import useFollowersCount from "@/app/hooks/useFollowersCount";
 const UserInfo: FC<UserInfoClient> = (props) => {
   //destructure from props
   const { profile, followersCount, followersList, followingCount, followingList, userFollowingUserStatus } = props;
-  const { bio, id, image, createdAt, username, occupation } = profile;
-  const socailLink = {
-    x: "soks",
-    website: "soks",
-    linkedin: "soks",
-    instagram: "soks",
-  };
+  const { bio, id, image, createdAt, username, occupation,socailLink } = profile;
+  
   const { data } = useSession();
   return (
     <section className="lg2a:sticky lg2a:top-[60px] lg2:flex-1 rounded-xl bg-dark-30 w-3/12 lg2a:max-w-[290px] min-w-[230px] max-w-none h-fit shrink-0 lg2:order-1 overflow-hidden">
@@ -59,12 +54,12 @@ const UserInfo: FC<UserInfoClient> = (props) => {
         </div>
 
         <p className="text-secondary-30 w-[70%] mt-3">
-          {bio || `Hey there... Im ${username}.] I'm here to learn from and support the other members of this community!`}
+          {bio || `Hey there... Im ${username}.I'm cooking something awesome for you all, I'll update my bio soon 😉`}
         </p>
 
         <Link
           target="_blank"
-          href={socailLink.x || `https://x.com/inkflow`}>
+          href={socailLink?.x || `https://x.com/inkflow`}>
           <div className="mt-5 flex gap-3">
             <Web />
             <p className="font-bold">{socailLink?.website}</p>

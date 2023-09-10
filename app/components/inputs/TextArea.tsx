@@ -1,48 +1,40 @@
 "use client";
 import { NewCreationFormType } from "@/app/(main)/create/CreateClient";
-import React, { FC } from "react";
+import React, { ChangeEvent, FC, TextareaHTMLAttributes, useEffect, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 
-interface InputPropsType {
+interface TextAreaPropsType {
   id: string;
   label: string;
   className?: string;
-  placeholder?: string;
-  notRequired?: boolean;
-  regexMatch?: {
-    pattern: {
-      value: RegExp;
-      message: string;
-    };
-  };
+  maxLength?: number;
 }
-const Input: FC<InputPropsType> = ({ id, label, className, placeholder, notRequired, regexMatch }) => {
+const TextArea: FC<TextAreaPropsType> = ({ id, label, className, maxLength }) => {
   const { register, formState } = useFormContext<any>();
   const { errors, dirtyFields } = formState;
+
   return (
     <div className={`flex flex-col gap-2 mb-4 w-[49%] ${className ? className : `md3:w-full min-w-[280px] max-w-[700px]`}`}>
       <label
-        htmlFor="Title"
+        htmlFor="label"
         className="font-medium text-lg">
         {label}
       </label>
-      <input
+      <textarea
         {...register(id, {
-          ...(!notRequired ? { required: true } : {}),
-          ...(regexMatch ? { pattern: regexMatch.pattern } : {}),
+          required: true,
+          ...(maxLength ? { maxLength: { value: maxLength, message: id + " is too long" } } : {}),
         })}
         id={id}
-        type="text"
-        className={` h-11 rounded-lg w-full bg-transparent text-secondary-30 p-2
+        className={` resize-none overflow-y-auto max-h-40 h-40 rounded-lg w-full bg-transparent text-secondary-30 p-2
           outline outline-1 
           outline-secondary-20
           focus:outline-2
-           placeholder-shown:text-secondary-20
           focus:outline-secondary-30
         ${errors[id] && "outline-1 dark:outline-red-dark-50 outline-red-dark-90"}
           ${errors[id] && "focus:outline-2 dark:outline-red-dark-50 outline-red-dark-90"}
         `}
-        placeholder={placeholder || "Input"}
+        placeholder={label}
       />
 
       {errors[id] ? (
@@ -56,4 +48,4 @@ const Input: FC<InputPropsType> = ({ id, label, className, placeholder, notRequi
   );
 };
 
-export default Input;
+export default TextArea;

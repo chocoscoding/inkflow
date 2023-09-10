@@ -120,8 +120,13 @@ const UserMenu: React.FC<NavbarProps> = ({ currentUser }) => {
       <section
         className="flex items-center xl1:gap-2 gap-4 dark:text-secondary-60 cursor-pointer"
         onClick={toggle}>
-        <div className="outline outline-yellow-default rounded-md xl1:scale-75">
-          <Avatar src={currentUser?.image} />
+        <div className="outline outline-yellow-default outline-[2px] rounded xl1:scale-75 h-[37px] w-[37px] p-[1px]">
+          <div className="rounded-md xl1:scale-75 h-full w-full object-cover overflow-hidden relative ">
+            <Avatar
+              src={currentUser?.image}
+              className="w-full"
+            />
+          </div>
         </div>
         <p className="font-semibold xl1:text-[10px] text-secondary-10 dark:text-secondaryBg-10">{currentUser?.username || "Login"}</p>
         <span>

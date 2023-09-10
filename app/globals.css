@@ -200,6 +200,15 @@ body {
   color: #0074ff;
 }
 
+.SpinnerSmall {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #2b2e2fdb;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  z-index: 10;
+  animation: spin 1s linear infinite;
+}
 .Spinner {
   border: 10px solid #f3f3f3;
   border-top: 10px solid #2b2e2fdb;
@@ -218,3 +227,9 @@ body {
     transform: rotate(360deg);
   }
 }
+
+/* for textarea span */
+/* .textAreaSpan[contenteditable]:empty::before {
+  content: "Placeholder still possible";
+  color: gray;
+} */
