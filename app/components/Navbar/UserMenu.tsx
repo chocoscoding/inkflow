@@ -124,7 +124,7 @@ const UserMenu: React.FC<NavbarProps> = ({ currentUser }) => {
           <div className="rounded-md xl1:scale-75 h-full w-full object-cover overflow-hidden relative ">
             <Avatar
               src={currentUser?.image}
-              className="w-full"
+              className="h-full w-auto aspect-square"
             />
           </div>
         </div>

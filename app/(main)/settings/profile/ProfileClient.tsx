@@ -71,7 +71,6 @@ const ProfileClient: FC<{ profileData: ProfileMiniType }> = ({ profileData }) =>
       if (changeInfoApi.status === 200) {
         toast.success("Info updated successfully 🎊");
         refresh();
-        reset();
       } else {
         throw new Error(`Something went wrong`);
       }
@@ -100,7 +99,7 @@ const ProfileClient: FC<{ profileData: ProfileMiniType }> = ({ profileData }) =>
           <div className="pointer w-30 h-30 rounded-full relative cursor-pointer inline-block">
             <div className="rounded-full flex-shrink-0 h-[180px] w-[180px] outline outline-4 outline-dark-30 overflow-hidden">
               <Avatar
-                className="w-full"
+                className="h-full w-auto aspect-square"
                 src={getValues("image")}
                 size={152}
               />

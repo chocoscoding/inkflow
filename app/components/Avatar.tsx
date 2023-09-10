@@ -9,14 +9,16 @@ interface AvatarProps {
 }
 const Avatar: React.FC<AvatarProps> = ({ src, className, size }) => {
   return (
-    <Image
-      className={`select-none  ${className || "rounded-md"}`}
-      height={size || 30}
-      width={size || 30}
-      alt="avatar"
-      priority
-      src={src || `/images/placeholder.jpg`}
-    />
+    <div className={`w-[${size}px] h-[${size}px] select-none object-cover ${className || "rounded-md"}`}>
+      <Image
+        className={`select-none ${className || "rounded-md"} aspect-square`}
+        height={size || 30}
+        width={size || 30}
+        alt="avatar"
+        priority
+        src={src || `/images/placeholder.jpg`}
+      />
+    </div>
   );
 };
 
