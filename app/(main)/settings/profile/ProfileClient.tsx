@@ -132,7 +132,7 @@ const ProfileClient: FC<{ profileData: ProfileMiniType }> = ({ profileData }) =>
             <TextArea
               id="bio"
               label="Bio"
-              maxLength={250}
+              maxLength={210}
             />
           </div>
           <h2 className="font-bold my-4 text-xl">Social Link</h2>

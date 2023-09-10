@@ -6,26 +6,11 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { FC } from "react";
 import ReactTimeago from "react-timeago";
+import UserInfo from "./UserInfo";
 
 const Interview: FC<OneInterviewsType> = (props) => {
   const { id, createdAt, title, coverImage, revenue, businessType, platform, owner } = props;
-  const UserInfo = () => (
-    <section className="flex gap-4 p-1">
-      <div className="rounded-md overflow-hidden w-[42px] h-[42px] object-cover">
-        <Avatar
-          src={owner.image}
-          size={40}
-          className="m-0 rounded-full"
-        />
-      </div>
-      <div className="">
-        <p className="text-base md:font-semibold">{owner.username}</p>
-        <p className="text-xs text-secondary-30 md:text-sm">
-          <ReactTimeago date={createdAt} />
-        </p>
-      </div>
-    </section>
-  );
+
   const VerticalLine = () => {
     return <div className="h-full w-[1.5px] mx-4 bg-secondary-50 last:hidden opacity-30"></div>;
   };
@@ -42,12 +27,18 @@ const Interview: FC<OneInterviewsType> = (props) => {
         />
       </div>
       <span className="hidden ba1:block order-1 mt-1">
-        <UserInfo />
+        <UserInfo
+          {...owner}
+          createdAt={createdAt}
+        />
       </span>
       <div className="flex flex-col gap-2 w-full">
         {/* userinfo */}
         <span className="block ba1:hidden">
-          <UserInfo />
+          <UserInfo
+            {...owner}
+            createdAt={createdAt}
+          />
         </span>
         <Link href={`/interviews/${title}`}>
           <p className="truncate-lines-2 w-full md:text-lg md:font-semibold mb-3">{title}</p>

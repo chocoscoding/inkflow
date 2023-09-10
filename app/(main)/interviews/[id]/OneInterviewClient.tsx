@@ -26,6 +26,7 @@ const OneInterviewClient: FC<InterviewClientType> = ({ InterviewData, comments, 
 
           <section className="bg-dark-30 md:p-4 p-2 rounded-b-lg">
             <PostFuntions
+            functionType="Interviews"
               extraClass="hidden md1:block p-5 !bg-dark-20 mb-4 !w-full"
               referenceId={id}
               likeStatus={likeStatus}

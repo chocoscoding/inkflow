@@ -59,6 +59,7 @@ interface CommentType extends CreateCommentType {
 }
 
 interface PostFunctionsType {
+  functionType?: 'Interviews'|'Post'
   extraClass: string;
   referenceId?: string;
   likeStatus: { id: string } | null;
@@ -268,3 +269,14 @@ interface FollowActionType {
   id: string;
   userFollowingProfileUser: boolean | null;
 }
+
+
+interface SecurityClient {
+  userHasPassword: boolean;
+}
+interface SecurityClientForm {
+  oldPass?: string;
+  newPass: string;
+  confirmNew: string;
+}
+

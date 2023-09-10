@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { FC } from "react";
 import ReactTimeago from "react-timeago";
-import UserInfo from "./UserInfo";
+import UserInfo from "../UserInfo";
 
 const InterviewClientTop: FC<InterviewClientTopType> = (props) => {
   const { title, group, owner, coverImage, platform, createdAt, businessType, revenue } = props;

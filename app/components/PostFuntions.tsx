@@ -10,7 +10,7 @@ import { useSession } from "next-auth/react";
 
 const PostFuntions: FC<PostFunctionsType> = (props) => {
   const count = useRef(0);
-  const { extraClass, referenceId, likeStatus, _count } = props;
+  const { extraClass, referenceId, likeStatus, _count,functionType } = props;
   const [hasLiked, setHasLiked] = useState(typeof likeStatus?.id === "string");
   const [likesCount, setLikesCount] = useState(_count?.likes || 0);
   const { status,data } = useSession();
@@ -30,7 +30,7 @@ const PostFuntions: FC<PostFunctionsType> = (props) => {
         await axios.post("/api/like/toggle", {
           userId,
           referenceId,
-          typeOf: "Post",
+          typeOf: functionType|| "Post",
         });
       } catch (error) {
         toast.error("Something went wrong");

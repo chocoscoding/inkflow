@@ -13,8 +13,8 @@ import useFollowersCount from "@/app/hooks/useFollowersCount";
 const UserInfo: FC<UserInfoClient> = (props) => {
   //destructure from props
   const { profile, followersCount, followersList, followingCount, followingList, userFollowingUserStatus } = props;
-  const { bio, id, image, createdAt, username, occupation,socailLink } = profile;
-  
+  const { bio, id, image, createdAt, username, occupation, socailLink } = profile;
+
   const { data } = useSession();
   return (
     <section className="lg2a:sticky lg2a:top-[60px] lg2:flex-1 rounded-xl bg-dark-30 w-3/12 lg2a:max-w-[290px] min-w-[230px] max-w-none h-fit shrink-0 lg2:order-1 overflow-hidden">
@@ -53,8 +53,8 @@ const UserInfo: FC<UserInfoClient> = (props) => {
           </div>
         </div>
 
-        <p className="text-secondary-30 w-[70%] mt-3">
-          {bio || `Hey there... Im ${username}.I'm cooking something awesome for you all, I'll update my bio soon 😉`}
+        <p className="text-secondary-30 w-[85%] mt-3">
+          {bio?.substring(0, 210) || `Hey there... Im ${username}.I'm cooking something awesome for you all, I'll update my bio soon 😉`}
         </p>
 
         <Link

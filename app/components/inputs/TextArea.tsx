@@ -26,7 +26,7 @@ const TextArea: FC<TextAreaPropsType> = ({ id, label, className, maxLength }) =>
           ...(maxLength ? { maxLength: { value: maxLength, message: id + " is too long" } } : {}),
         })}
         id={id}
-        className={` resize-none overflow-y-auto max-h-40 h-40 rounded-lg w-full bg-transparent text-secondary-30 p-2
+        className={` resize-none overflow-y-auto max-h-32 h-32 rounded-lg w-full bg-transparent text-secondary-30 p-2
           outline outline-1 
           outline-secondary-20
           focus:outline-2
