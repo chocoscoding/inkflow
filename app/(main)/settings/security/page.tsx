@@ -4,7 +4,7 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 
 const page = async () => {
   const userPassword = await getCurrentUser(["hashedPassword"]);
-  const userHasPassword = !!userPassword;
+  const userHasPassword = !!userPassword?.hashedPassword;
   if (userHasPassword === null) {
     <div className="border-l border-secondary-30 md3:border-none w-full">
       <section className="pl-5 w-full">
