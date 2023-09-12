@@ -1,10 +1,10 @@
 import React, { MutableRefObject, useCallback } from "react";
-import Input from "../Input";
 import { useFormContext } from "react-hook-form";
 import { validateNotEmpty } from "@/app/libs/helper";
 import { FormType } from "@/app/(authentication)/auth/signup/DataFields";
 import { BackArrow } from "../../Icons";
 import useSignupSteps from "@/app/hooks/useSignupSteps";
+import AuthInput from "../../inputs/AuthInput";
 interface Step2Type {
   formRef: MutableRefObject<HTMLFormElement | null>;
   isLoading: boolean;
@@ -40,12 +40,10 @@ const Step2: React.FC<Step2Type> = ({ formRef, isLoading }) => {
         onClick={() => one()}>
         <BackArrow className="text-secondary-40 scale-125" />
       </div>
-      <Input
+      <AuthInput
         id="email"
         label="Email"
-        register={register}
         inputType="email"
-        errors={errors}
         placeholder="example@email.com"
         required={{
           required: "What's your email?",
@@ -56,12 +54,10 @@ const Step2: React.FC<Step2Type> = ({ formRef, isLoading }) => {
           },
         }}
       />
-      <Input
+      <AuthInput
         id="password"
         label="Password"
         inputType="password"
-        register={register}
-        errors={errors}
         required={{
           required: "Password required?",
           minLength: {
@@ -72,13 +68,11 @@ const Step2: React.FC<Step2Type> = ({ formRef, isLoading }) => {
         }}
       />
 
-      <Input
+      <AuthInput
         id="confirmPassword"
         label="Confirm Password"
-        register={register}
         inputType="password"
         placeholder="Confirm your password"
-        errors={errors}
         required={{
           required: "This field is required",
           validate: {

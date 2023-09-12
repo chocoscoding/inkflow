@@ -3,7 +3,7 @@ import SecurityClient from "./SecurityClient";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 
 const page = async () => {
-  const userPassword = await getCurrentUser(["password"]);
+  const userPassword = await getCurrentUser(["hashedPassword"]);
   const userHasPassword = !!userPassword;
   if (userHasPassword === null) {
     <div className="border-l border-secondary-30 md3:border-none w-full">

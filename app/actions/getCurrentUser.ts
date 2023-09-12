@@ -18,11 +18,11 @@ export default async function getCurrentUser(keysToReturn: string[]) {
       });
     }
     const session = await getSession();
-    if (!session?.user?.email) return null;
+    if (!session?.user?.id) return null;
     //if user is authenticated
     const currentUser = await prisma.user.findUnique({
       where: {
-        email: session.user.email as string,
+        id: session.user.id as string,
       },
       ...(keysToReturn.length > 0 ? { select: selectObject } : {}),
     });

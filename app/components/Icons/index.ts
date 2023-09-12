@@ -82,3 +82,5 @@ export { default as Vector } from "./Vector";
 export { default as View } from "./View";
 export { default as Voice } from "./Voice";
 export { default as Web } from "./Web";
+export { default as MdiHide } from "./MdiHide";
+export { default as MdiShow } from "./MdiShow";

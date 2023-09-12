@@ -6,10 +6,10 @@ import { FieldValues, useForm, FormProvider, SubmitHandler } from "react-hook-fo
 import { toast } from "react-hot-toast";
 import { SignInResponse, signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import Input from "@/app/components/auth/Input";
 import { validateNotEmpty } from "@/app/libs/helper";
 import WelcomeInfoContainer2 from "@/app/components/auth/signup/WelcomeInfoContainer2";
 import Link from "next/link";
+import AuthInput from "@/app/components/inputs/AuthInput";
 
 export interface FormType {
   firstname: string;
@@ -23,19 +23,20 @@ export interface FormType {
 const DataFields = () => {
   const { push, refresh } = useRouter();
   const params = useSearchParams();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, dirtyFields },
-    trigger,
-    setError,
-  } = useForm<FormType>({
+  const methods = useForm<FormType>({
     defaultValues: {
       email: "",
       password: "",
     },
     mode: "onChange",
   });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, dirtyFields },
+    trigger,
+    setError,
+  } = methods;
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const isComplete = useCallback(() => {
     //get if the values have been inputed
@@ -108,46 +109,44 @@ const DataFields = () => {
         heading="Sign in to Inkflow"
         key={"mobileWelcome1"}
       />
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className={`w-full sm:w-10/12 lg:w-8/12 sm:mt-9`}>
-        <Input
-          id="email"
-          label="Email"
-          register={register}
-          inputType="email"
-          errors={errors}
-          placeholder="example@email.com"
-          required={{
-            required: "What's your email?",
-            validate: (value: string) => validateNotEmpty(value, "What's your email"),
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Invalid email address",
-            },
-          }}
-        />
-        <Input
-          id="password"
-          label="Password"
-          inputType="password"
-          register={register}
-          errors={errors}
-          required={{
-            required: "Password required?",
-            validate: (value: string) => validateNotEmpty(value, "Password required"),
-          }}
-        />
-        <button
-          type="submit"
-          disabled={isLoading}
-          className={`w-full h-[50px]  ${
-            isComplete() ? "bg-red-default" : "bg-red-60"
-          } text-secondaryBg-10 disabled:bg-red-60 rounded-lg cursor-pointer`}
-          onClick={(e) => isValid(e)}>
-          SUBMIT
-        </button>
-      </form>
+      <FormProvider {...methods}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className={`w-full sm:w-10/12 lg:w-8/12 sm:mt-9`}>
+          <AuthInput
+            id="email"
+            label="Email"
+            inputType="email"
+            placeholder="example@email.com"
+            required={{
+              required: "What's your email?",
+              validate: (value: string) => validateNotEmpty(value, "What's your email"),
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Invalid email address",
+              },
+            }}
+          />
+          <AuthInput
+            id="password"
+            label="Password"
+            inputType="password"
+            required={{
+              required: "Password required?",
+              validate: (value: string) => validateNotEmpty(value, "Password required"),
+            }}
+          />
+          <button
+            type="submit"
+            disabled={isLoading}
+            className={`w-full h-[50px]  ${
+              isComplete() ? "bg-red-default" : "bg-red-60"
+            } text-secondaryBg-10 disabled:bg-red-60 rounded-lg cursor-pointer`}
+            onClick={(e) => isValid(e)}>
+            SUBMIT
+          </button>
+        </form>
+      </FormProvider>
       <p className="text-sm mt-3">
         {`Don't have an account yet?`}{" "}
         <Link

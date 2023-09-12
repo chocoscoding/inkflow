@@ -7,10 +7,13 @@ import { BackArrow } from "@/app/components/Icons";
 import { SecurityClient, SecurityClientForm } from "@/app/types/client";
 import toast from "react-hot-toast";
 import axios from "axios";
+import AuthInput from "@/app/components/inputs/AuthInput";
+import { validateNotEmpty } from "@/app/libs/helper";
 
 const SecurityClient: FC<SecurityClient> = ({ userHasPassword }) => {
   const methods = useForm<SecurityClientForm>({ defaultValues: {} });
-  const { formState, getValues, setValue, handleSubmit, watch, reset } = methods;
+  const { formState, getValues, setValue, handleSubmit, reset } = methods;
+  const { errors } = formState;
   const [isLoading, setIsLoading] = useState(false);
   const submit: SubmitHandler<SecurityClientForm> = async (data, e) => {
     e?.preventDefault();
@@ -18,7 +21,7 @@ const SecurityClient: FC<SecurityClient> = ({ userHasPassword }) => {
     try {
       const { newPass, oldPass } = data;
       const loadingToast = toast.loading("Updating info");
-      const changeInfoApi = await axios.post(`/apis/userInfo`, {
+      const changeInfoApi = await axios.post(`/apis/user/1/settings/security/changePassword`, {
         newPass,
         oldPass,
       });
@@ -53,34 +56,94 @@ const SecurityClient: FC<SecurityClient> = ({ userHasPassword }) => {
         <form onSubmit={handleSubmit(submit)}>
           <h2 className="font-bold my-4 text-xl">{userHasPassword ? "Change password" : "Set new password"}</h2>
           {userHasPassword ? (
-            <div className="flex flex-wrap gap-3">
-              <Input
-                id="oldPass"
-                label="Old Password"
-              />
+            <div className="flex flex-wrap gap-6">
+              <div className="w-full min-w-[280px] max-w-[500px]">
+                <AuthInput
+                  customClass={`
+                 h-11 rounded-lg w-full bg-transparent text-secondary-30 p-2
+                          outline outline-1 
+                          outline-secondary-20
+                          focus:outline-2
+                           placeholder-shown:text-secondary-20
+                          focus:outline-secondary-30
+                        ${errors["oldPass"] && "outline-1 dark:outline-red-dark-50 outline-red-dark-90"}
+                          ${errors["oldPass"] && "focus:outline-2 dark:outline-red-dark-50 outline-red-dark-90"}
+                        `}
+                  id="oldPass"
+                  label="Old Password"
+                  inputType="password"
+                  required={{
+                    required: "Password required?",
+                    pattern: {
+                      value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                      message: "Must have Capital letter, number and special character",
+                    },
+                    minLength: {
+                      message: "Please pick password longer than 8 characters",
+                      value: 8,
+                    },
+                    validate: (value: string) => validateNotEmpty(value, "Password required"),
+                  }}
+                />
+              </div>
             </div>
           ) : null}
           <div className="flex flex-wrap gap-3">
-            <Input
-              regexMatch={{
-                pattern: {
-                  value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                  message: "Must have Capital letter, number and special character",
-                },
-              }}
-              id="newPass"
-              label="New Password"
-            />
-            <Input
-              regexMatch={{
-                pattern: {
-                  value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                  message: "Must have Capital letter, number and specia",
-                },
-              }}
-              id="confirmNew"
-              label="Confirm new password"
-            />
+            <div className="w-full min-w-[280px] max-w-[500px]">
+              <AuthInput
+                customClass={`
+               h-11 rounded-lg w-full bg-transparent text-secondary-30 p-2
+          outline outline-1 
+          outline-secondary-20
+          focus:outline-2
+           placeholder-shown:text-secondary-20
+          focus:outline-secondary-30
+        ${errors["newPass"] && "outline-1 dark:outline-red-dark-50 outline-red-dark-90"}
+          ${errors["newPass"] && "focus:outline-2 dark:outline-red-dark-50 outline-red-dark-90"}
+        `}
+                id="newPass"
+                label="New Password"
+                inputType="password"
+                required={{
+                  required: "Password required!",
+                  pattern: {
+                    value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                    message: "Must have Capital letter, number and special character",
+                  },
+                  minLength: {
+                    message: "Please pick password longer than 8 characters",
+                    value: 8,
+                  },
+                  validate: (value: string) => validateNotEmpty(value, "Password required"),
+                }}
+              />
+            </div>
+
+            <div className="w-full min-w-[280px] max-w-[500px]">
+              <AuthInput
+                customClass={`
+                h-11 rounded-lg w-full bg-transparent text-secondary-30 p-2
+          outline outline-1 
+          outline-secondary-20
+          focus:outline-2
+           placeholder-shown:text-secondary-20
+          focus:outline-secondary-30
+        ${errors["confirmNew"] && "outline-1 dark:outline-red-dark-50 outline-red-dark-90"}
+          ${errors["confirmNew"] && "focus:outline-2 dark:outline-red-dark-50 outline-red-dark-90"}
+        `}
+                id="confirmNew"
+                label="Confirm Password"
+                inputType="password"
+                placeholder="Confirm your password"
+                required={{
+                  required: "This field is required",
+                  validate: {
+                    notEmpty: (value: string) => validateNotEmpty(value, "This field is required"),
+                    matchPassword: (value: string) => value === getValues("newPass") || "The passwords do not match",
+                  },
+                }}
+              />
+            </div>
           </div>
           <div className="flex justify-end gap-4 mr-3 items-center">
             <button
