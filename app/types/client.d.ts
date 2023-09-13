@@ -16,7 +16,7 @@ type PostOwner = {
   image?: string | null;
   id?: string;
   username?: string | null;
-  occupation?: string;
+  occupation?: string | null;
   posts?: OwnerPost[];
 };
 type ContentExtension = {
@@ -24,7 +24,9 @@ type ContentExtension = {
   _count: { likes: number; comments: number };
   owner: PostOwner;
 };
-interface CreatorInfoType extends PostOwner {}
+interface CreatorInfoType extends PostOwner {
+  showMorePosts?: boolean;
+}
 interface OneCommentType extends Comment {
   _count: { likes: number };
   replies: Replies[];
@@ -59,7 +61,7 @@ interface CommentType extends CreateCommentType {
 }
 
 interface PostFunctionsType {
-  functionType?: 'Interviews'|'Post'
+  functionType?: "Interviews" | "Post";
   extraClass: string;
   referenceId?: string;
   likeStatus: { id: string } | null;
@@ -112,12 +114,52 @@ type GroupRequests = {
     };
   };
 };
+interface NewCreationFormType {
+  title: string;
+  content: string;
+  tags: string[];
+  group: GroupType | null;
+  coverImage: string | null;
+  creationType: NewCreationTypes;
+  interviewInfo: {
+    revenue: string;
+    businessType: string;
+    platform: string;
+  } | null;
+  meetupInfo: {
+    location: string;
+    date: Date;
+    time: string;
+  } | null;
+}
+type NewCreationTypes = "Post" | "Interview" | "Meetup";
 
 type CreateClientType = {
   guf: GroupUserFollow[] | null;
 };
 
-type PostFieldType = CreateClientType & {};
+type EditClientType = {
+  guf: GroupUserFollow[] | null;
+  contentType: NewCreationTypes;
+  data: {
+    id: string;
+    title: string;
+    body: string;
+    coverImage: string | null;
+    tags: string[];
+    userId: string;
+    group: GroupType | null;
+    revenue?: string;
+    businessType?: string;
+    platform?: string;
+    date?: string | Date;
+    time?: string;
+  };
+};
+
+type PostFieldType = CreateClientType & {
+  editing?: boolean;
+};
 
 interface GroupCreationFormType {
   name: string;
@@ -270,7 +312,6 @@ interface FollowActionType {
   userFollowingProfileUser: boolean | null;
 }
 
-
 interface SecurityClient {
   userHasPassword: boolean;
 }
@@ -280,3 +321,7 @@ interface SecurityClientForm {
   confirmNew: string;
 }
 
+interface MeetupClientType extends Meetup {
+  group: GroupType | null;
+  owner: PostOwner;
+}

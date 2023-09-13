@@ -45,7 +45,7 @@ const PostPage = async ({ params }: PostPageType) => {
     <div className="appScreen flex py-2 px-4 max-w-[1600px] m-auto gap-3 flex-wrap">
       <PostFuntions
         extraClass="md1:hidden sticky top-[55px]"
-        referenceId={post?.id}
+        referenceId={post.id}
         likeStatus={likeStatus}
         _count={post._count}
       />
@@ -58,7 +58,7 @@ const PostPage = async ({ params }: PostPageType) => {
       {userSession?.user.id === post.owner.id ? (
         <ContentControl
           contentType="post"
-          contentId={"1"}
+          contentId={post.id}
         />
       ) : (
         <CreatorInfo {...post.owner} />

@@ -12,9 +12,9 @@ const CreatorInfo: FC<CreatorInfoType> = (props) => {
     <section className="lg3a:w-10 w-full flex-shrink-0 min-w-[305px] h-fit lg3a:sticky lg3a:top-[55px]">
       <div className="flex flex-col items-center bg-dark-30 rounded-xl">
         <Avatar
-          size={80}
+          size={140}
           src={image}
-          className="rounded-full my-4"
+          className="rounded-full mt-2 mb-1"
         />
         <Link href={`/profile/${id}`}>
           <p className=" text-xl mb-1 hover:underline">{username}</p>
@@ -27,25 +27,27 @@ const CreatorInfo: FC<CreatorInfoType> = (props) => {
           Follow
         </button>
       </div>
-      <div className="mt-4 bg-dark-30 rounded-xl p-3">
-        <p className="b-3">{`More from ${username}`}</p>
-        <div className="">
-          {posts.map((post, i) => (
-            <div
-              className="first:mt-3 border-t first:border-secondary-30 border-dark-40 py-3 "
-              key={`morePost__${i}`}>
-              <Link href={`/post/${post.title}`}>
-                <p className="text-sm truncate-lines-1">{post.title}</p>
-                <p className="text-sm truncate-lines-1 text-secondary-30">
-                  {post.tags.map((tag, i) => (
-                    <span key={post.id + "tags" + i}>{`# ${tag} `}</span>
-                  ))}
-                </p>
-              </Link>
-            </div>
-          ))}
+      {!props.showMorePosts ? null : (
+        <div className="mt-4 bg-dark-30 rounded-xl p-3">
+          <p className="b-3">{`More from ${username}`}</p>
+          <div className="">
+            {posts.map((post, i) => (
+              <div
+                className="first:mt-3 border-t first:border-secondary-30 border-dark-40 py-3 "
+                key={`morePost__${i}`}>
+                <Link href={`/post/${post.title}`}>
+                  <p className="text-sm truncate-lines-1">{post.title}</p>
+                  <p className="text-sm truncate-lines-1 text-secondary-30">
+                    {post.tags.map((tag, i) => (
+                      <span key={post.id + "tags" + i}>{`# ${tag} `}</span>
+                    ))}
+                  </p>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 };

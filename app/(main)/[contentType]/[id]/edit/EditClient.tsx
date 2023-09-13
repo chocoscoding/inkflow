@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useEffect, useRef } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import PostField, { GroupType } from "./PostField";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import Title from "@/app/components/inputs/Title";
@@ -9,56 +9,172 @@ import Tags from "@/app/components/inputs/Tags";
 import InterviewOptions from "@/app/components/inputs/InterviewOptions";
 import MeetupOptions from "@/app/components/inputs/MeetupOptions";
 import { useRouter } from "next/navigation";
-import { CreateClientType } from "@/app/types/client";
+import { CreateClientType, EditClientType, NewCreationFormType } from "@/app/types/client";
+import toast from "react-hot-toast";
+import axios from "axios";
+import Link from "next/link";
 /*(@chocoscoding) */
-export type NewCreationTypes = "Post" | "Interview" | "Meetup";
-export interface NewCreationFormType {
-  title: string;
-  content: string;
-  tags: string[];
-  group: GroupType | null;
-  coverImage: string;
-  creationType: NewCreationTypes;
-  interviewInfo: {
-    revenue: string;
-    businessType: string;
-    platform: string;
-  } | null;
-  meetupInfo: {
-    location: string;
-    date: Date;
-    time: string;
-  } | null;
-}
 
-const EditClient: FC<CreateClientType> = ({ guf }) => {
+const EditClient: FC<EditClientType> = ({ guf, data, contentType }) => {
+  const { title, body, coverImage, tags, userId, id, group, revenue, businessType, platform, date, time } = data;
+  const passedInterviewInfo = () => {
+    if (businessType || platform || revenue) {
+      return {
+        businessType: businessType,
+        platform: platform,
+        revenue: revenue,
+      };
+    }
+    return null;
+  };
+  const passedMeetupInfo = () => {
+    if (date || time) {
+      return {
+        date: date! as Date,
+        time: time!,
+      };
+    }
+    return null;
+  };
   const methods = useForm<NewCreationFormType>({
     defaultValues: {
-      title: "",
-      content: "",
-      tags: [],
-      group: null,
-      coverImage: "",
-      creationType: "Post",
-      interviewInfo: null,
+      title,
+      content: body,
+      tags,
+      group,
+      coverImage: coverImage!,
+      creationType: contentType,
+      interviewInfo: passedInterviewInfo(),
+      meetupInfo: passedMeetupInfo(),
     },
   });
-  const { back } = useRouter();
+  const { back, refresh } = useRouter();
   const {
     handleSubmit,
     register,
     getValues,
+    trigger,
     formState: { errors },
     watch,
     setError,
   } = methods;
   const formRef = useRef<HTMLFormElement | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const newContentType = contentType.toLocaleLowerCase();
 
   const isValid = (e: any) => {
     if (getValues("content").length < 1) return setError("content", { message: "Post content can't be empty" });
   };
   const onSubmit: SubmitHandler<NewCreationFormType> = async (data, e) => {
     e?.preventDefault();
+
+    await trigger();
+    if (getValues("content").length < 1) return setError("content", { message: "Post content can't be empty" });
+    if (Array(errors).length > 1) return;
+    const { creationType, coverImage, title, group, interviewInfo, tags, content, meetupInfo } = data;
+    setIsLoading(true);
+    const loadingToast = toast.loading(`Updating ${contentType}...`);
+    if (creationType === "Post") {
+      try {
+        const createContent = await axios.post(`/api/${newContentType}/${id}/edit`, {
+          tags,
+          coverImage,
+          title,
+          body: content,
+          groupId: group?.id,
+        });
+        toast.remove(loadingToast);
+        if (createContent.status === 200) {
+          refresh();
+          toast.success(`${contentType} updated successfully 🎊`);
+          // push(`/post/${title}`);
+        } else {
+          throw new Error(`Something went wrong`);
+        }
+      } catch (e: any) {
+        toast.remove();
+        if (e.message.includes("400")) {
+          toast.error("Title is already in use 💔");
+          return;
+        }
+        if (e.message.includes("403")) {
+          toast.error("User not authenticated 🔒");
+          return;
+        }
+        toast.error("Something went wrong");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    if (creationType === "Meetup") {
+      try {
+        const createContent = await axios.post(`/api/${newContentType}/${id}/edit`, {
+          date: meetupInfo?.date,
+          time: meetupInfo?.time,
+          coverImage,
+          title,
+          tags,
+          body: content,
+          groupId: group?.id,
+        });
+        toast.remove(loadingToast);
+        if (createContent.status === 200) {
+          refresh();
+          toast.success(`${contentType} updated successfully 🎊`);
+          // push(`/meetups/${title}`);
+        } else {
+          throw new Error(`Something went wrong`);
+        }
+      } catch (e: any) {
+        toast.remove();
+        if (e.message.includes("400")) {
+          toast.error("Title is already in use 💔");
+          return;
+        }
+        if (e.message.includes("403")) {
+          toast.error("User not authenticated 🔒");
+          return;
+        }
+        toast.error("Something went wrong");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    if (creationType === "Interview") {
+      try {
+        const createContent = await axios.post(`/api/${newContentType}/${id}/edit`, {
+          businessType: interviewInfo?.businessType,
+          platform: interviewInfo?.platform,
+          revenue: interviewInfo?.revenue,
+          coverImage,
+          title,
+          tags,
+          body: content,
+          groupId: group?.id,
+        });
+        toast.remove(loadingToast);
+        if (createContent.status === 200) {
+          toast.success(`${contentType} updated successfully 🎊`);
+          // push(`/interviews/${title}`);
+        } else {
+          throw new Error(`Something went wrong`);
+        }
+      } catch (e: any) {
+        toast.remove();
+        if (e.message.includes("400")) {
+          refresh();
+          toast.error("Title is already in use 💔");
+          return;
+        }
+        if (e.message.includes("403")) {
+          toast.error("User not authenticated 🔒");
+          return;
+        }
+        toast.error("Something went wrong");
+      } finally {
+        setIsLoading(false);
+      }
+    }
   };
 
   return (
@@ -72,7 +188,7 @@ const EditClient: FC<CreateClientType> = ({ guf }) => {
             {getValues("coverImage") ? (
               <div className="w-full h-80 md1:max-h-[30vh] object-cover rounded-md overflow-hidden mb-4">
                 <Image
-                  src={getValues("coverImage")}
+                  src={getValues("coverImage") || ""}
                   alt="coverImage"
                   className="w-full h-auto"
                   width={1300}
@@ -82,10 +198,13 @@ const EditClient: FC<CreateClientType> = ({ guf }) => {
             ) : null}
             <Title id="title" />
 
-            <PostField guf={guf} />
+            <PostField
+              guf={guf}
+              editing
+            />
 
             {watch("creationType") === "Interview" ? <InterviewOptions /> : null}
-            {watch("creationType") === "Meetup" ? <MeetupOptions /> : null}
+            {watch("creationType") === "Meetup" ? <MeetupOptions oldDate={date?.toString()} /> : null}
             <div>
               <Editor
                 className={`my-4 dark:border-[#ccc] rounded-md text-gray-800 dark:text-white lg:text-xl text-lg
@@ -108,14 +227,15 @@ const EditClient: FC<CreateClientType> = ({ guf }) => {
               onClick={isValid}
               type="submit"
               className="bg-blue-default py-2.5 px-6 rounded-md sm:min-w-[140px] hover:bg-blue-80 cursor-pointer">
-              Publish
+              Update
             </button>
-            <button
-              className="text-secondary-30 py-2.5 px-6 rounded-md sm:min-w-[140px] hover:bg-dark-20 cursor-pointer"
-              onClick={back}
-              type="button">
-              Cancel
-            </button>
+            <Link href={`/${newContentType}${newContentType !== "post" && "s"}/${title}`}>
+              <button
+                className="text-secondary-30 py-2.5 px-6 rounded-md sm:min-w-[140px] hover:bg-dark-20 cursor-pointer"
+                type="button">
+                {`Go back to ${newContentType}`}
+              </button>
+            </Link>
           </div>
         </form>
       </FormProvider>

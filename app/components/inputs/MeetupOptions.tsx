@@ -1,15 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { Edit } from "../Icons";
 import { useFormContext } from "react-hook-form";
 import { NewCreationFormType } from "@/app/(main)/create/CreateClient";
 
-const MeetupOptions = () => {
-  const [openRevenue, setOpenRevenue] = useState(false);
-  const [openPlatforms, setOpenPlatforms] = useState(false);
-  const [openBusinessType, setOpenBusinessType] = useState(false);
-  const [selectionValue, setselectionValue] = useState("mo");
-
+const MeetupOptions:FC<{oldDate?: string}> = ({oldDate}) => {
   const {
     getValues,
     formState: { errors },
@@ -27,7 +22,7 @@ const MeetupOptions = () => {
               required: getValues("creationType") === "Meetup",
             })}
             type="date"
-            min={new Date().toISOString().split("T")[0]}
+            min={oldDate ? oldDate : new Date().toISOString().split("T")[0]}
             className="h-full p-3 bg-dark-30 rounded-md w-full focus:outline-secondary-30"
           />
         </div>

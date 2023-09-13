@@ -23,7 +23,7 @@ const Meetup: FC<OneMeetupType> = (props) => {
         </div>
         <span className="flex w-full gap-1">
           <section className="w-full">
-            <Link href={"/meetups/"+id}>
+            <Link href={"/meetups/"+title}>
               <p className="lg:truncate-lines-1 truncate-lines-2 w-full md:text-lg md:font-semibold">{title}</p>
             </Link>
             <p className=" text-xs text-secondary-30 md:text-sm">

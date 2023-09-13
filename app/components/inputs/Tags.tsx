@@ -12,7 +12,7 @@ const Tags = () => {
   tags.current = watch("tags");
 
   return (
-    <div className="flex flex-col gap-3 mb-4">
+    <div className="flex flex-col gap-3 mb-1">
       <TagsInput
         {...register("tags")}
         value={tags.current}
@@ -22,7 +22,7 @@ const Tags = () => {
         name="fruits"
         placeHolder={getValues("tags").length !== 4 ? "Enter a 4 tags max" : undefined}
       />
-
+      <p className="flex relative top-[-10px] justify-end">{`${tags.current.length}/4`}</p>
       {errors[id] ? (
         <label
           htmlFor={id}

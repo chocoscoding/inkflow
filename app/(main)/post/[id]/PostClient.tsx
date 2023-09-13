@@ -12,9 +12,8 @@ import ContentControl from "@/app/components/ContentControl";
 import { useSession } from "next-auth/react";
 const PostClient: FC<PostClientType> = ({ postData, comments, likeStatus }) => {
   const { id, userId, tags, coverImage, createdAt, title, body, views, group, _count, owner } = postData;
-  const {data} = useSession()
+  const { data } = useSession();
   const currentUserId = data?.user.id;
-  // console.log(id);
 
   return (
     <main className="flex-1">
@@ -80,8 +79,8 @@ const PostClient: FC<PostClientType> = ({ postData, comments, likeStatus }) => {
       <section className="mt-8 lg3a:hidden">
         {currentUserId === userId ? (
           <ContentControl
-            contentType="post"
-            contentId={id}
+          contentId={id}
+          contentType="post"
           />
         ) : (
           <CreatorInfo {...owner} />

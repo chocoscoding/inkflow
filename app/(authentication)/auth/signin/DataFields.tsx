@@ -84,6 +84,7 @@ const DataFields = () => {
       }
       throw new Error(signinReq?.error);
     } catch (error) {
+      toast.dismiss();
       toast.error("Something went wrong, try again");
     } finally {
       setIsLoading(false);

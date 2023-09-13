@@ -33,7 +33,6 @@ const OneMemeber: React.FC<ListGroupProps> = ({ admin, id, username, image }) =>
     }
     try {
       const action = await axiosCall;
-      console.log(action);
       toast.dismiss();
       if (action.status === 200) {
         refresh();

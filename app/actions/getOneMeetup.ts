@@ -3,15 +3,18 @@ interface ParamsType {
   id: string;
 }
 export default async function getOneMeetup(params: ParamsType) {
+  const title = decodeURIComponent(params.id);
   try {
     const oneMeetup = await prisma.meetup.findUnique({
-      where: { id:params.id },
+      where: { title },
       include: {
         group: true,
         owner: {
           select: {
             id: true,
             username: true,
+            image: true,
+            occupation: true,
           },
         },
       },

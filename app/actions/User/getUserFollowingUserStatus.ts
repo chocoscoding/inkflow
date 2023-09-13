@@ -14,7 +14,6 @@ export default async function getUserFollowingUserStatus({followerId}:{followerI
         followerId: userId,
       },
     });
-    console.log(getUserFollowingUserStatus, "aaa");
     if (getUserFollowingUserStatus) return true;
     return false;
   } catch (error) {

@@ -28,7 +28,6 @@ export interface NewCreationFormType {
     platform: string;
   } | null;
   meetupInfo: {
-    location: string;
     date: Date;
     time: string;
   } | null;
@@ -122,7 +121,6 @@ const CreateClient: FC<CreateClientType> = ({ guf }) => {
         const createContent = await axios.post("/api/meetup/create", {
           date: meetupInfo?.date,
           time: meetupInfo?.time,
-          location: meetupInfo?.location,
           coverImage,
           title,
           tags,
