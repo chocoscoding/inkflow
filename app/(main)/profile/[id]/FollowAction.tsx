@@ -57,9 +57,6 @@ const FollowAction: FC<FollowActionType> = ({ userId, id, userFollowingProfileUs
           onClick={() => setFollow("unfollow")}>
           Unfollow
         </button>
-        <button className="bg-blue-30 py-2 px-3 rounded-lg">
-          <Message className="text-blue-default" />
-        </button>
       </>
     );
   }

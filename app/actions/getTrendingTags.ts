@@ -1,16 +1,10 @@
 import prisma from "@/app/libs/prismadb";
 import { TrendingTags } from "@/app/types/client";
 
-export default async function getTrendingTagsInGroup(groupId?: string) {
-  if (!groupId) return null;
+export default async function getTrendingTagsInGroup() {
   try {
     const mostRecurringTags = (await prisma.post.aggregateRaw({
       pipeline: [
-        {
-          $match: {
-            groupId: { $oid: groupId },
-          },
-        },
         {
           $sort: {
             createdAt: -1, // Sort posts by createdAt field in descending order to get the most recent ones

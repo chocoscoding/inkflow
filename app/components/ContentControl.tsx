@@ -1,6 +1,5 @@
 "use client";
 import React, { FC, useState } from "react";
-import Avatar from "@/app/components/Avatar";
 import { Edit, Trash } from "@/app/components/Icons";
 import Link from "next/link";
 import { ContentControlType } from "../types/client";

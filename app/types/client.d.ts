@@ -89,6 +89,7 @@ type OnePostMain = {
 };
 interface OnePost {
   posts: OnePostMain[];
+  followingPost: OnePostMain[];
 }
 
 type OnePostComponentType = OnePostMain;
