@@ -266,6 +266,7 @@ type OneMeetupType = Meetup & {
     username: string | null;
   };
 };
+type OneMiniMeetup = Pick<Meetup, "id" | "title" | "date" | "tags">;
 
 interface InterviewClientTopType
   extends Pick<

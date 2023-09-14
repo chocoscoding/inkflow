@@ -8,7 +8,7 @@ import React, { FC } from "react";
 const MeetupClient: FC<MeetupClientType> = (props) => {
   const { id, userId, createdAt, coverImage, title, body, date, tags, time, group } = props;
   return (
-    <div className="max-w-[950px] min-w-0 bg-dark-30 rounded-xl w-full p-2 min-h-[90vh] ">
+    <div className="max-w-[950px] min-w-[500px] bg-dark-30 rounded-xl w-full p-2 ">
       <section className="flex gap-3">
         <div className="w-[10%] md1:w-[70px] h-fit aspect-square rounded-md overflow-hidden object-cover shrink-0">
           <Image

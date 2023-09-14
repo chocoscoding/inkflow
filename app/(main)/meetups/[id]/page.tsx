@@ -40,9 +40,9 @@ const page = async ({ params }: PostPageType) => {
       </div>
     );
   return (
-    <main className="appScreen pt-2 flex max-w-[1500px] m-auto flex-wrap gap-6 px-1 border border-white">
+    <main className="appScreen pt-2 flex max-w-[1500px] m-auto justify-end lg2:justify-start lg2:flex-wrap gap-6 px-1">
       <MeetupClient {...meetup} />
-      <section className="">
+      <section className="lg2:w-full">
         {currentUser?.user.id === meetup.userId ? (
           <ContentControl
             contentId={meetup.id}

@@ -4,9 +4,10 @@ import Posts from "./Posts";
 import Meetups from "./Meetups";
 import getPosts from "@/app/actions/getPosts";
 import { OnePost } from "@/app/types/client";
+import getMiniMeetups from "@/app/actions/getMiniMeetups";
 
 export default async function Home() {
-  const posts = await getPosts();
+  const [posts, miniMeetups] = await Promise.all([getPosts(), getMiniMeetups()]);
   const trendingData = [
     { tag_count: 7, name: "TEST" },
     { tag_count: 2, name: "ssa2" },
@@ -47,7 +48,7 @@ export default async function Home() {
 
       <Posts posts={posts} />
       <section className="sticky top-[60px] lg:min-w-[266px] md:min-w-[220px] lg2:hidden h-fit flex flex-col gap-2 w-3/12 shrink-0">
-        <Meetups />
+        <Meetups {...miniMeetups}/>
       </section>
     </main>
   );

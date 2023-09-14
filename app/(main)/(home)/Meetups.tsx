@@ -1,13 +1,16 @@
 import Meetup from "@/app/components/home/Meetup";
-import React from "react";
+import { OneMiniMeetup } from "@/app/types/client";
+import React, { FC } from "react";
 
-const Meetups = () => {
+const Meetups: FC<OneMiniMeetup[]> = (meetups) => {
   return (
     <section className="flex p-4 sm:p-2 rounded-2xl flex-col justify-start items-start gap-4 dark:bg-dark-30">
-      <Meetup />
-      <Meetup />
-      <Meetup />
-      <Meetup />
+      {Object.values(meetups).map((meetup, i) => (
+        <Meetup
+          key={`meetup_${i}`}
+          {...meetup}
+        />
+      ))}
     </section>
   );
 };
