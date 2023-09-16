@@ -52,8 +52,8 @@ export default async function getOneProfilePosts({ profileId, page }: { page: nu
         },
       },
     });
-    return Posts;
+    return { data: Posts, page };
   } catch (error) {
-    return null;
+    return { data: [], page };
   }
 }

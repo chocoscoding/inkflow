@@ -2,13 +2,49 @@
 import HomeNavMobile from "@/app/components/home/HomeNavMobile";
 import Post from "@/app/components/home/Post";
 import useHomeSection from "@/app/hooks/useHomeSection";
-import { OnePost } from "@/app/types/client";
+import { CursorPaginativeReturnType, OnePost, OnePostMain } from "@/app/types/client";
 import React, { FC } from "react";
-import FollowingPosts from "./FollowingPosts";
-import NewestPosts from "./NewestPosts";
+import axios from "axios";
+import toast from "react-hot-toast";
+import CursorPagination from "@/app/components/Pagination/CursorPagination";
+import PostsLoading from "@/app/components/loading/PostsLoading";
 
 const Posts: FC<OnePost> = ({ posts, followingPost }) => {
   const { section } = useHomeSection();
+  console.log(posts);
+
+  const fetchDataNewestPosts = async (cursor: string | null) => {
+    try {
+      const apiCall = await axios(`/api/post/all?cursor=${cursor}`);
+      return apiCall.data as CursorPaginativeReturnType<OnePostMain[]>;
+    } catch (error) {
+      toast.dismiss();
+      toast.error("Something went wrong");
+      return {
+        data: [],
+        metaData: {
+          newCursor: cursor,
+          hasMore: true,
+        },
+      };
+    }
+  };
+  const fetchDataFollowingUsersPosts = async (cursor: string | null) => {
+    try {
+      const apiCall = await axios(`/api/post/following/all?cursor=${cursor}`);
+      return apiCall.data as CursorPaginativeReturnType<OnePostMain[]>;
+    } catch (error) {
+      toast.dismiss();
+      toast.error("Something went wrong");
+      return {
+        data: [],
+        metaData: {
+          newCursor: cursor,
+          hasMore: true,
+        },
+      };
+    }
+  };
   return (
     <section className="min-h-screen w-7/12 flex-1 pt-1 md:overflow-hidden">
       <div className="sticky top-[50px] py-2 bg-dark-20 md2:flex hidden">
@@ -31,8 +67,24 @@ const Posts: FC<OnePost> = ({ posts, followingPost }) => {
           active={false}
         />
       </div>
-      {section === "New" ? <NewestPosts {...posts} /> : null}
-      {section === "Follow" ? <FollowingPosts {...followingPost} /> : null}
+      {section === "New" ? (
+        <CursorPagination
+          initialElements={posts}
+          keyname="newestPosts"
+          ListComponent={Post}
+          fetchData={fetchDataNewestPosts}
+          loadingComponent={<PostsLoading />}
+        />
+      ) : null}
+      {section === "Follow" ? (
+        <CursorPagination
+          initialElements={followingPost}
+          keyname="newestPosts"
+          ListComponent={Post}
+          fetchData={fetchDataFollowingUsersPosts}
+          loadingComponent={<PostsLoading />}
+        />
+      ) : null}
     </section>
   );
 };

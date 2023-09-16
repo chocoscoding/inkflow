@@ -37,8 +37,8 @@ export default async function getOneProfileInterviews({ profileId, page }: { pag
         },
       },
     });
-    return Interviews;
+    return { data: Interviews, page };
   } catch (error) {
-    return null;
+    return { data: [], page };
   }
 }

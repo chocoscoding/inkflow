@@ -30,8 +30,8 @@ export default async function getOneProfileMeetups({ profileId, page }: { page: 
         },
       },
     });
-    return Meetups;
+    return { data: Meetups, page };
   } catch (error) {
-    return null;
+    return { data: [], page };
   }
 }

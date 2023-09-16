@@ -1,11 +1,18 @@
+import { GroupPageType } from "@/app/types/client";
 import prisma from "@/app/libs/prismadb";
-export default async function getMeetups() {
+import { NextResponse } from "next/server";
+
+export async function GET(request: Request, params: GroupPageType) {
+  const urlParts = new URL(request.url);
+  const searchParams = urlParts.searchParams;
+  const cursorId = searchParams.get("cursor");
+
+  if (!cursorId) return NextResponse.error();
   try {
     const meetups = await prisma.meetup.findMany({
       orderBy: {
         createdAt: "desc",
       },
-      take: 24,
       include: {
         owner: {
           select: {
@@ -15,9 +22,13 @@ export default async function getMeetups() {
           },
         },
       },
+      skip: 1,
+      take: 24,
+      cursor: {
+        id: cursorId,
+      },
     });
-
-    if (meetups.length == 0)
+    if (meetups.length === 0)
       return {
         data: [],
         metaData: {
@@ -25,7 +36,6 @@ export default async function getMeetups() {
           hasMore: false,
         },
       };
-
     const lastPostInResults: any = meetups[meetups.length - 1];
     const cursor: any = lastPostInResults.id;
 
@@ -34,7 +44,7 @@ export default async function getMeetups() {
         createdAt: "desc",
       },
       take: 1,
-      skip: 1, // Do not include the cursor itself in the query meetups.
+      skip: 1, // Do not include the cursor itself in the query posts.
       cursor: {
         id: cursor,
       },
@@ -46,15 +56,10 @@ export default async function getMeetups() {
         newCursor: cursor,
         hasMore: nextPage.length > 0,
       },
-      error: false,
     };
-    return finalData;
+    return NextResponse.json(finalData);
   } catch (error: any) {
-    console.log(error.message);
-    return {
-      data: [],
-      metaData: null,
-      error: true,
-    };
+    console.log(error);
+    return NextResponse.error();
   }
 }

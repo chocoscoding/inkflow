@@ -88,8 +88,8 @@ type OnePostMain = {
   id: string;
 };
 interface OnePost {
-  posts: OnePostMain[];
-  followingPost: OnePostMain[];
+  posts: CursorPaginativeReturnType<OnePostMain[]>;
+  followingPost: CursorPaginativeReturnType<OnePostMain[]>;
 }
 
 type OnePostComponentType = OnePostMain;
@@ -190,7 +190,7 @@ interface OneGroupType {
     members: number;
   };
   isUserFollowingGroup: string | null;
-  Posts: OnePostComponentType[];
+  Posts: CursorPaginativeReturnType<OnePostComponentType[]>;
 }
 
 interface GroupInfoType {
@@ -327,3 +327,17 @@ interface MeetupClientType extends Meetup {
   group: GroupType | null;
   owner: PostOwner;
 }
+
+type CursorPaginativeReturnType<K> = {
+  data: K;
+  metaData: {
+    newCursor: string | null;
+    hasMore: boolean;
+  } | null;
+  error?: boolean;
+};
+type PagePaginativeReturnType = {
+  data: [];
+  page: number;
+  error?: boolean;
+};

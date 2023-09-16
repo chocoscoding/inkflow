@@ -7,17 +7,32 @@ import Post from "@/app/components/home/Post";
 import Image from "next/image";
 import React, { FC, useEffect, useRef, useState } from "react";
 import Create from "./Create";
-import LeaveGroup from "@/app/components/modals/LeaveGroup";
-import { OneGroupType } from "@/app/types/client";
+import { CursorPaginativeReturnType, OneGroupType, OnePostComponentType } from "@/app/types/client";
 import JoinOrLeave from "./JoinOrLeave";
+import CursorPagination from "@/app/components/Pagination/CursorPagination";
+import axios from "axios";
+import PostsLoading from "@/app/components/loading/PostsLoading";
+import toast from "react-hot-toast";
 
 const Main: FC<OneGroupType> = (props) => {
   const { id, name, about, coverImage, admininstrators, Posts, isUserFollowingGroup } = props;
   const aboutRef = useRef<HTMLParagraphElement | null>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const [showMore, setShowMore] = useState(false);
-  const [leaveModal, setLeaveModal] = useState(false);
 
+  const fetchData = async (cursor: string | null) => {
+    try {
+      const apiCall = await axios(`/api/group/${id}/posts?cursor=${cursor}`);
+      return apiCall.data as CursorPaginativeReturnType<OnePostComponentType[]>;
+    } catch (error) {
+      toast.dismiss();
+      toast.error("Something went wrong");
+      return {
+        data: [],
+        metaData: null,
+      };
+    }
+  };
   useEffect(() => {
     const checkOverflow = (scrollW?: number, clientW?: number) => {
       if (!scrollW || !clientW) return;
@@ -93,12 +108,14 @@ const Main: FC<OneGroupType> = (props) => {
           </button>
         </section>
       </div>
-      {Posts.map((ele, i) => (
-        <Post
-          key={`posts${i}`}
-          {...ele}
-        />
-      ))}
+
+      <CursorPagination
+        initialElements={Posts}
+        keyname="groupPosts"
+        ListComponent={Post}
+        fetchData={fetchData}
+        loadingComponent={<PostsLoading />}
+      />
 
       {/* <LeaveGroup
         open={leaveModal}

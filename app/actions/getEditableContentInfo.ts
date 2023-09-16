@@ -2,6 +2,8 @@ import prisma from "@/app/libs/prismadb";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth/next";
 import { EditClientType, NewCreationTypes } from "../types/client";
+
+//get info for editing content
 export default async function getEditableContentInfo({
   contentId,
   contentType,
@@ -10,6 +12,7 @@ export default async function getEditableContentInfo({
   contentType: NewCreationTypes;
 }): Promise<EditClientType["data"] | null> {
   const apiCalls = {
+    //for post
     Post: prisma.post.findUnique({
       where: { id: contentId },
       select: {
@@ -22,6 +25,7 @@ export default async function getEditableContentInfo({
         userId: true,
       },
     }),
+    //for interview
     Interview: prisma.interview.findUnique({
       where: { id: contentId },
       select: {
@@ -37,6 +41,7 @@ export default async function getEditableContentInfo({
         platform: true,
       },
     }),
+    //for meetup
     Meetup: prisma.meetup.findUnique({
       where: { id: contentId },
       select: {
