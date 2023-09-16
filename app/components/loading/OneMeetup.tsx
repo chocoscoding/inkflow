@@ -3,7 +3,7 @@ import Skeleton from "react-loading-skeleton";
 
 const OneMeetup = () => {
   return (
-    <div className=" bg-dark-30 rounded-xl w-full p-2.5 sm1:p-1.5 flex-grow-0">
+    <div className=" bg-dark-30 rounded-xl w-full p-2.5 sm1:p-1.5 flex-grow-0 mb-3">
       <div className="flex gap-2 w-full sm1:flex-wrap">
         <div
           className="rounded-md overflow-hidden w-[100px] h-[100px] sm1:w-full sm1:h-[200px]

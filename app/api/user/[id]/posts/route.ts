@@ -5,6 +5,7 @@ import prisma from "@/app/libs/prismadb";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request, params: GroupPageType) {
+  const paginationAmount = 30;
   const urlParts = new URL(request.url);
   const searchParams = urlParts.searchParams;
   const page = searchParams.get("page") ? ~~searchParams.get("page")! : 1;
@@ -12,8 +13,6 @@ export async function GET(request: Request, params: GroupPageType) {
   let id = profileId;
   const session = await getServerSession(authOptions);
   const userId = session?.user.id;
-  console.log(userId)
-  console.log(profileId)
   if (profileId === "me") {
     if (!userId) return null;
     id = userId;
@@ -23,8 +22,8 @@ export async function GET(request: Request, params: GroupPageType) {
       where: {
         userId: id,
       },
-      take: 30,
-      skip: page - 1,
+      take: paginationAmount,
+      skip: (page - 1) * paginationAmount,
       orderBy: {
         createdAt: "desc",
       },

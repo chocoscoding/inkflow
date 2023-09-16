@@ -11,7 +11,7 @@ const Meetup: React.FC<OneMiniMeetup> = (props) => {
     <div
       className={`w-full min-h-[70px] rounded-lg cursor-pointer dark:active:hover:bg-dark-30 active:hover:brightness-90 gap-3 flex p-[3px] transition-all select-none`}>
       <div className="rounded-md flex flex-col items-center h-[4.3rem] lg1:h-[3.5rem] px-2 shadow-md dark:shadow-dark-10">
-        <p className="">{formatDateForMeetups(date).month}</p>
+        <p className="">s</p>
         <p className="text-blue-80 font-extrabold text-2xl lg1:text-xl">{formatDateForMeetups(date).day}</p>
       </div>
       <div className="flex-1 overflow-hidden">

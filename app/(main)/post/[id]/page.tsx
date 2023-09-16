@@ -28,12 +28,13 @@ export async function generateMetadata({ params }: PostPageType): Promise<Metada
 }
 
 const PostPage = async ({ params }: PostPageType) => {
-  const post =await getOnePost(params);
+  const post = await getOnePost(params);
   const userPromise = getServerSession(authOptions);
-  const commentsPromise = getComments({ id: post?.id, contentType: 'Post' });
+  const commentsPromise = getComments({ id: post?.id, contentType: "Post" });
   const postLikeStatus = getHasUserLiked({ id: post?.id });
 
-  const [comments, likeStatus,userSession] = await Promise.all([commentsPromise, postLikeStatus, userPromise]);
+  const [comments, likeStatus, userSession] = await Promise.all([commentsPromise, postLikeStatus, userPromise]);
+
 
   if (!post)
     return (
@@ -55,14 +56,14 @@ const PostPage = async ({ params }: PostPageType) => {
         likeStatus={likeStatus}
       />
       <span className="lg3:hidden">
-      {userSession?.user.id === post.owner.id ? (
-        <ContentControl
-          contentType="post"
-          contentId={post.id}
-        />
-      ) : (
-        <CreatorInfo {...post.owner} />
-      )}
+        {userSession?.user.id === post.owner.id ? (
+          <ContentControl
+            contentType="post"
+            contentId={post.id}
+          />
+        ) : (
+          <CreatorInfo {...post.owner} />
+        )}
       </span>
     </div>
   );

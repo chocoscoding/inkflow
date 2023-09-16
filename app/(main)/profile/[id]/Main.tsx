@@ -8,7 +8,7 @@ import { OneInterviewsType, OneMeetupType, OnePostMain, PagePaginativeReturnType
 import axios from "axios";
 import toast from "react-hot-toast";
 import PagePagination from "@/app/components/Pagination/PagePagination";
-import Meetup from "@/app/components/home/Meetup";
+import Meetup from "@/app/(main)/meetups/Meetup";
 import PostsLoading from "@/app/components/loading/PostsLoading";
 import MeetupsLoading from "@/app/components/loading/MeetupsLoading";
 import InterviewsLoading from "@/app/components/loading/InterviewsLoading";
@@ -20,6 +20,7 @@ const Profile: React.FC<ProfileClientType> = (props) => {
   const params = useParams();
 
   const fetchDataPost = async (page: number) => {
+    console.log(page, "page no");
     try {
       const apiCall = await axios(`/api/user/${params?.id}/posts?page=${page}`);
       return apiCall.data as PagePaginativeReturnType<OnePostMain[]>;
@@ -77,7 +78,7 @@ const Profile: React.FC<ProfileClientType> = (props) => {
           <PagePagination
             initialElements={MeetupsData}
             keyname="meetups"
-            ListComponent={Interview}
+            ListComponent={Meetup}
             fetchData={fetchDataMeetup}
             loadingComponent={<MeetupsLoading />}
           />
@@ -87,7 +88,7 @@ const Profile: React.FC<ProfileClientType> = (props) => {
           <PagePagination
             initialElements={InterviewsData}
             keyname="interviews"
-            ListComponent={Meetup}
+            ListComponent={Interview}
             fetchData={fetchDataInterview}
             loadingComponent={<InterviewsLoading />}
           />

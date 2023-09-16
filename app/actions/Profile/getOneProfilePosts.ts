@@ -3,11 +3,12 @@ import { getServerSession } from "next-auth";
 import prisma from "@/app/libs/prismadb";
 
 export default async function getOneProfilePosts({ profileId, page }: { page: number; profileId: string }) {
+  const paginationAmount = 30;
   let id = profileId;
   const session = await getServerSession(authOptions);
   const userId = session?.user.id;
   if (profileId === "me") {
-    if (!userId) return { data: [], page,error:true };
+    if (!userId) return { data: [], page, error: true };
     id = userId;
   }
 
@@ -16,8 +17,8 @@ export default async function getOneProfilePosts({ profileId, page }: { page: nu
       where: {
         userId: id,
       },
-      take: 30,
-      skip: page - 1,
+      take: paginationAmount,
+      skip: (page - 1) * paginationAmount,
       orderBy: {
         createdAt: "desc",
       },

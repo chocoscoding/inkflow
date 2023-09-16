@@ -69,7 +69,7 @@ const PostClient: FC<PostClientType> = ({ postData, comments, likeStatus }) => {
               likeStatus={likeStatus}
             />
             <Comments
-              comments={comments}
+              comments={comments.data}
               contentId={id}
               contentType="Post"
             />

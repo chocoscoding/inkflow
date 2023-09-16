@@ -2,16 +2,21 @@ import prisma from "@/app/libs/prismadb";
 import getCurrentUser from "./getCurrentUser";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { CursorPaginativeReturnType, OneCommentType, PagePaginativeReturnType } from "../types/client";
 interface ParamsType {
   id?: string;
   contentType: "Post" | "Interview";
 }
-export default async function getComments(params: ParamsType) {
+export default async function getComments(params: ParamsType):Promise<CursorPaginativeReturnType<OneCommentType[]>> {
   try {
     const session = await getServerSession(authOptions);
     const userId = session?.user.id;
     const { id: referenceId, contentType } = params;
-    if (!referenceId) return [];
+    if (!referenceId)
+      return {
+        data: [],
+        metaData: null,
+      };
     const comments = await prisma.comment.findMany({
       where: { referenceId, contentType },
       take: 30,

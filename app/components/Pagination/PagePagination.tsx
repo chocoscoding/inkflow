@@ -9,13 +9,20 @@ interface PagePaginationClientType {
   fetchData: (page: number) => Promise<PagePaginativeReturnType<any[]>>;
   ListComponent: ComponentType<any>;
   keyname: string;
+  startPaginatingAfter?: number;
 }
-const PagePagination: FC<PagePaginationClientType> = ({ initialElements, loadingComponent, fetchData, ListComponent, keyname }) => {
+const PagePagination: FC<PagePaginationClientType> = ({
+  initialElements,
+  loadingComponent,
+  fetchData,
+  ListComponent,
+  keyname,
+  startPaginatingAfter,
+}) => {
   const [mainList, setMainLists] = useState<any[]>(initialElements.data);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [page, setPage] = useState<number>(initialElements.page);
-
   const loadMore = async () => {
     setIsLoading(true);
     const newData = await fetchData(page + 1);
@@ -41,7 +48,7 @@ const PagePagination: FC<PagePaginationClientType> = ({ initialElements, loading
         />
       ))}
       <div className="flex flex-col items-center">
-        {hasMore && !isLoading ? (
+        {hasMore && !isLoading && mainList.length > (startPaginatingAfter || 30) ? (
           <button
             className="w-[130px] p-2 bg-blue-70 self-center rounded-md"
             onClick={loadMore}>
