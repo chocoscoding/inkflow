@@ -1,50 +1,97 @@
-import Ripple from "@/app/components/Ripple";
-import Tags from "@/app/components/Tags";
-import Image from "next/image";
+"use client";
 import React, { Suspense } from "react";
 import SectionControl from "./SectionControl";
-import Posts from "./Posts";
-import Interviews from "./Interviews";
-import Meetups from "./Meetups";
+import Post from "@/app/components/home/Post";
+import Interview from "../../interviews/Interview";
 import useProfileSection from "@/app/hooks/useProfileSection";
-import { ProfileClientType } from "@/app/types/client";
-interface Profile {}
-const tempdata = {
-  id: "64dd80ffc0a3ec6db14334cf",
-  title: "edls",
-  tags: ["gbdrklvfd"],
-  revenue: "1111",
-  platform: "mobile",
-  businessType: "1111",
-  coverImage: "https://res.cloudinary.com/chocoscoding/image/upload/v1692238032/zd4kmzdvaiqqtitp7kqh.jpg",
-  createdAt: new Date("2023-08-17T02:07:59.029Z"),
-  views: 0,
-  time: "10pm",
-  date: "2023-08-17T02:07:59.029Z",
-  userId: "64d965ec96e0bce41d66ec9b",
-  body: "dsds",
-  groupId: null,
-  owner: {
-    id: "64d965ec96e0bce41d66ec9b",
-    username: "kfsffjoeijfios",
-    image: null,
-  },
-  _count: { likes: 0, comments: 0 },
-};
+import { OneInterviewsType, OneMeetupType, OnePostMain, PagePaginativeReturnType, ProfileClientType } from "@/app/types/client";
+import axios from "axios";
+import toast from "react-hot-toast";
+import PagePagination from "@/app/components/Pagination/PagePagination";
+import Meetup from "@/app/components/home/Meetup";
+import PostsLoading from "@/app/components/loading/PostsLoading";
+import MeetupsLoading from "@/app/components/loading/MeetupsLoading";
+import InterviewsLoading from "@/app/components/loading/InterviewsLoading";
+import { useParams } from "next/navigation";
+
 const Profile: React.FC<ProfileClientType> = (props) => {
   const { section } = useProfileSection();
   const { Meetups: MeetupsData, Posts: PostsData, Interviews: InterviewsData } = props;
+  const params = useParams();
 
+  const fetchDataPost = async (page: number) => {
+    try {
+      const apiCall = await axios(`/api/user/${params?.id}/posts?page=${page}`);
+      return apiCall.data as PagePaginativeReturnType<OnePostMain[]>;
+    } catch (error) {
+      toast.dismiss();
+      toast.error("Something went wrong");
+      return {
+        data: [],
+        page,
+      };
+    }
+  };
+  const fetchDataInterview = async (page: number) => {
+    try {
+      const apiCall = await axios(`/api/user/${params?.id}/interviews?page=${page}`);
+      return apiCall.data as PagePaginativeReturnType<OneInterviewsType[]>;
+    } catch (error) {
+      toast.dismiss();
+      toast.error("Something went wrong");
+      return {
+        data: [],
+        page,
+      };
+    }
+  };
+  const fetchDataMeetup = async (page: number) => {
+    try {
+      const apiCall = await axios(`/api/user/${params?.id}/meetups?page=${page}`);
+      return apiCall.data as PagePaginativeReturnType<OneMeetupType[]>;
+    } catch (error) {
+      toast.dismiss();
+      toast.error("Something went wrong");
+      return {
+        data: [],
+        page,
+      };
+    }
+  };
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <>
         <SectionControl />
 
-        {section === "posts" ? <Posts data={PostsData} /> : null}
+        {section === "posts" ? (
+          <PagePagination
+            initialElements={PostsData}
+            keyname="posts"
+            ListComponent={Post}
+            fetchData={fetchDataPost}
+            loadingComponent={<PostsLoading />}
+          />
+        ) : null}
 
-        {section === "meetups" ? <Meetups data={MeetupsData} /> : null}
+        {section === "meetups" ? (
+          <PagePagination
+            initialElements={MeetupsData}
+            keyname="meetups"
+            ListComponent={Interview}
+            fetchData={fetchDataMeetup}
+            loadingComponent={<MeetupsLoading />}
+          />
+        ) : null}
 
-        {section === "interviews" ? <Interviews data={InterviewsData} /> : null}
+        {section === "interviews" ? (
+          <PagePagination
+            initialElements={InterviewsData}
+            keyname="interviews"
+            ListComponent={Meetup}
+            fetchData={fetchDataInterview}
+            loadingComponent={<InterviewsLoading />}
+          />
+        ) : null}
       </>
     </Suspense>
   );

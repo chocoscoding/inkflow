@@ -303,9 +303,9 @@ interface UserInfoClient {
   followersList?: FollowerType[] | null;
 }
 interface ProfileClientType {
-  Posts: OnePostMain[] | null;
-  Interviews: OneInterviewsType[] | null;
-  Meetups: OneMeetupType[] | null;
+  Posts: PagePaginativeReturnType<OnePostMain[]>;
+  Interviews: PagePaginativeReturnType<OneInterviewsType[]>;
+  Meetups: PagePaginativeReturnType<OneMeetupType[]>;
 }
 
 interface FollowActionType {
@@ -336,8 +336,8 @@ type CursorPaginativeReturnType<K> = {
   } | null;
   error?: boolean;
 };
-type PagePaginativeReturnType = {
-  data: [];
+type PagePaginativeReturnType<K> = {
+  data: K;
   page: number;
   error?: boolean;
 };

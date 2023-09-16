@@ -4,13 +4,13 @@ import Spinner from "../Spinner";
 import { PagePaginativeReturnType } from "../../types/client";
 
 interface PagePaginationClientType {
-  initialElements: PagePaginativeReturnType;
+  initialElements: PagePaginativeReturnType<any[]>;
   loadingComponent: ReactNode;
-  fetchData: (page: number) => Promise<PagePaginativeReturnType>;
-  CustomComponent: ComponentType<any>;
+  fetchData: (page: number) => Promise<PagePaginativeReturnType<any[]>>;
+  ListComponent: ComponentType<any>;
   keyname: string;
 }
-const PagePagination: FC<PagePaginationClientType> = ({ initialElements, loadingComponent, fetchData, CustomComponent, keyname }) => {
+const PagePagination: FC<PagePaginationClientType> = ({ initialElements, loadingComponent, fetchData, ListComponent, keyname }) => {
   const [mainList, setMainLists] = useState<any[]>(initialElements.data);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [hasMore, setHasMore] = useState<boolean>(true);
@@ -34,20 +34,22 @@ const PagePagination: FC<PagePaginationClientType> = ({ initialElements, loading
   return (
     <div>
       {mainList.map((listElement, i) => (
-        <CustomComponent
+        <ListComponent
           key={keyname + i}
           {...listElement}
           removeMe={removeOneNode}
         />
       ))}
-      {page ? (
-        <button
-          className="w-[130px] p-2 bg-blue-70"
-          onClick={loadMore}>
-          Show more
-        </button>
-      ) : null}
-      {isLoading ? loadingComponent || <Spinner /> : null}
+      <div className="flex flex-col items-center">
+        {hasMore && !isLoading ? (
+          <button
+            className="w-[130px] p-2 bg-blue-70 self-center rounded-md"
+            onClick={loadMore}>
+            Show more
+          </button>
+        ) : null}
+        {isLoading ? loadingComponent || <Spinner /> : null}
+      </div>
     </div>
   );
 };

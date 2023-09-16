@@ -7,7 +7,7 @@ export default async function getOneProfileInterviews({ profileId, page }: { pag
   if (profileId === "me") {
     const session = await getServerSession(authOptions);
     const userId = session?.user.id;
-    if (!userId) return null;
+    if (!userId) return { data: [], page, error: true };
     id = userId;
   }
   try {
@@ -15,7 +15,7 @@ export default async function getOneProfileInterviews({ profileId, page }: { pag
       where: {
         userId: id,
       },
-      take: 50,
+      take: 30,
       skip: page - 1,
       orderBy: {
         createdAt: "desc",

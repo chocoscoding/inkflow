@@ -12,14 +12,12 @@ export async function GET(request: Request, params: GroupPageType) {
   let id = profileId;
   const session = await getServerSession(authOptions);
   const userId = session?.user.id;
-  console.log(userId)
-  console.log(profileId)
   if (profileId === "me") {
     if (!userId) return null;
     id = userId;
   }
   try {
-    const Posts = await prisma.post.findMany({
+    const Posts = await prisma.meetup.findMany({
       where: {
         userId: id,
       },
@@ -28,34 +26,12 @@ export async function GET(request: Request, params: GroupPageType) {
       orderBy: {
         createdAt: "desc",
       },
-      select: {
-        id: true,
-        title: true,
-        tags: true,
-        coverImage: true,
-        createdAt: true,
-        views: true,
+      include: {
         owner: {
           select: {
             id: true,
             username: true,
             image: true,
-          },
-        },
-        ...(userId
-          ? {
-              likes: {
-                select: { userId: true },
-                where: {
-                  userId: userId,
-                },
-              },
-            }
-          : {}),
-        _count: {
-          select: {
-            likes: { where: { typeOf: "Post" } },
-            comments: { where: {} },
           },
         },
       },
