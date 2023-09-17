@@ -38,7 +38,7 @@ const MeetupClient: FC<CursorPaginativeReturnType<OneMeetupType[]>> = (meetups) 
             ListComponent={Meetup}
             fetchData={fetchData}
             loadingComponent={<MeetupsLoading />}
-          />{" "}
+          />
         </section>
         <CreateAMeetup />
       </div>

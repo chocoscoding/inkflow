@@ -14,9 +14,10 @@ import axios from "axios";
 import toast from "react-hot-toast";
 interface OnePostProps extends OnePostComponentType {
   key: string;
+  removeMe?: (id: string) => void;
 }
 
-const OnePost: React.FC<OnePostProps> = ({ id, coverImage, createdAt, owner, title }) => {
+const OnePost: React.FC<OnePostProps> = ({ id, coverImage, createdAt, owner, title, removeMe }) => {
   const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
   const { refresh } = useRouter();
@@ -31,6 +32,9 @@ const OnePost: React.FC<OnePostProps> = ({ id, coverImage, createdAt, owner, tit
       });
       toast.dismiss();
       if (action.status === 200) {
+        if (removeMe) {
+          removeMe(id);
+        }
         refresh();
       } else {
         throw new Error("Something went wrong");

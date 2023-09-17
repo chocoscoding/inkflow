@@ -35,7 +35,7 @@ const ContentControl: FC<ContentControlType> = (props) => {
   return (
     <section className="lg3a:w-10 w-full flex-shrink-0 min-w-[305px] h-fit lg3a:sticky lg3a:top-[55px]">
       <ul className="flex flex-col bg-dark-30 rounded-xl p-2">
-        <Link href={`/${contentType}${contentType !== "post" && "s"}/${contentId}/edit/`}>
+        <Link href={`/${contentType}${contentType !== "post" ? "s" : ""}/${contentId}/edit/`}>
           <li className="flex px-2 py-3 hover:bg-dark-40 cursor-pointer rounded-lg gap-3">
             <Edit /> <p>{`Edit ${capitalizeFirstLetter(contentType)}`}</p>
           </li>

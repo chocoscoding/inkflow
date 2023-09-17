@@ -20,7 +20,6 @@ const Profile: React.FC<ProfileClientType> = (props) => {
   const params = useParams();
 
   const fetchDataPost = async (page: number) => {
-    console.log(page, "page no");
     try {
       const apiCall = await axios(`/api/user/${params?.id}/posts?page=${page}`);
       return apiCall.data as PagePaginativeReturnType<OnePostMain[]>;

@@ -2,9 +2,6 @@
 import React, { ComponentType, FC, ReactNode, useEffect, useState } from "react";
 import Spinner from "../Spinner";
 import { CursorPaginativeReturnType } from "../../types/client";
-import OnePost from "../loading/OnePost";
-import OneInterview from "../loading/OneInterview";
-import OneMeetup from "../loading/OneMeetup";
 
 interface CursorPaginationClientType {
   initialElements: CursorPaginativeReturnType<any[]>;
@@ -29,7 +26,7 @@ const CursorPagination: FC<CursorPaginationClientType> = ({ initialElements, loa
   };
 
   const removeOneNode = (id: string) => {
-    const newList = mainList.map((listElement) => listElement.id !== id);
+    const newList = mainList.filter((listElement) => listElement.id !== id);
     setMainLists(newList);
   };
   return (

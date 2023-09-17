@@ -34,8 +34,6 @@ const PostPage = async ({ params }: PostPageType) => {
   const postLikeStatus = getHasUserLiked({ id: post?.id });
 
   const [comments, likeStatus, userSession] = await Promise.all([commentsPromise, postLikeStatus, userPromise]);
-
-
   if (!post)
     return (
       <div className="appScreen flex py-2 px-4 max-w-[1600px] m-auto gap-3 flex-wrap">

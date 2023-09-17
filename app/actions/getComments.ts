@@ -2,24 +2,18 @@ import prisma from "@/app/libs/prismadb";
 import getCurrentUser from "./getCurrentUser";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import { CursorPaginativeReturnType, OneCommentType, PagePaginativeReturnType } from "../types/client";
 interface ParamsType {
   id?: string;
   contentType: "Post" | "Interview";
 }
-export default async function getComments(params: ParamsType):Promise<CursorPaginativeReturnType<OneCommentType[]>> {
+export default async function getComments(params: ParamsType) {
   try {
     const session = await getServerSession(authOptions);
-    const userId = session?.user.id;
+    const userId = session?.user.id;;
     const { id: referenceId, contentType } = params;
-    if (!referenceId)
-      return {
-        data: [],
-        metaData: null,
-      };
+    if (!referenceId) return [];
     const comments = await prisma.comment.findMany({
       where: { referenceId, contentType },
-      take: 30,
       include: {
         _count: {
           select: {
@@ -48,40 +42,12 @@ export default async function getComments(params: ParamsType):Promise<CursorPagi
       },
     });
 
-    if (comments.length == 0)
-      return {
-        data: [],
-        metaData: {
-          newCursor: null,
-          hasMore: false,
-        },
-      };
-
-    const lastPostInResults: any = comments[comments.length - 1];
-    const cursor: any = lastPostInResults.id;
-
-    const nextPage = await prisma.comment.findMany({
-      where: { referenceId, contentType },
-      take: 1,
-      skip: 1, // Do not include the cursor itself in the query comments.
-      cursor: {
-        id: cursor,
-      },
-    });
-
-    const finalData = {
-      data: comments,
-      metaData: {
-        newCursor: cursor,
-        hasMore: nextPage.length > 0,
-      },
-    };
-    return finalData;
+    if (!comments) {
+      return [];
+    }
+    return comments;
   } catch (error: any) {
     console.log(error);
-    return {
-      data: [],
-      metaData: null,
-    };
+    return [];
   }
 }

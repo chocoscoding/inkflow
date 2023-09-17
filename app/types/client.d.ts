@@ -36,7 +36,7 @@ interface OneCommentType extends Comment {
 
 interface PostClientType {
   postData: Post & ContentExtension;
-  comments: CursorPaginativeReturnType<OneCommentType[]>;
+  comments: OneCommentType[];
   likeStatus: { id: string } | null;
 }
 interface CreateCommentType {
@@ -57,7 +57,7 @@ interface CommentFunctionType {
   replies: Replies[];
 }
 interface CommentType extends CreateCommentType {
-  comments: OneCommentType[] | null;
+  comments:OneCommentType[];
 }
 
 interface PostFunctionsType {

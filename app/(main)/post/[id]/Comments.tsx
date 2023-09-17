@@ -1,6 +1,3 @@
-import Avatar from "@/app/components/Avatar";
-import { More, Reply } from "@/app/components/Icons";
-import { Like } from "@/app/components/Icons/Icon";
 import React, { FC } from "react";
 import OneComment from "./OneComment";
 import CreateComment from "./CreateComment";
