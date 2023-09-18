@@ -11,7 +11,6 @@ import PostsLoading from "@/app/components/loading/PostsLoading";
 
 const Posts: FC<OnePost> = ({ posts, followingPost }) => {
   const { section } = useHomeSection();
-  console.log(posts);
 
   const fetchDataNewestPosts = async (cursor: string | null) => {
     try {

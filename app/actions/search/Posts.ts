@@ -15,7 +15,31 @@ export default async function searchPosts(searchQuery: string) {
             },
           },
         },
-        {$limit: 75}
+        { $limit: 75 },
+        {
+          $lookup: {
+            from: "User",
+            localField: "userId",
+            foreignField: "_id",
+            as: "owner",
+          },
+        },
+        {
+          $unwind: "$owner",
+        },
+        {
+          $project: {
+            id: 1,
+            title: 1,
+            tags: 1,
+            coverImage: 1,
+            createdAt: 1,
+            views: 1,
+            "owner.id": 1,
+            "owner.username": 1,
+            "owner.image": 1,
+          },
+        },
       ],
     })) as unknown as any[];
     if (!rawAggregateResult) return [];
@@ -33,7 +57,7 @@ export default async function searchPosts(searchQuery: string) {
       }
       return transformedItem;
     });
-
+    return transformedResult;
   } catch (error) {
     console.log(error);
     return [];

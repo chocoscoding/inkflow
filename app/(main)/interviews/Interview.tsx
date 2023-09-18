@@ -1,11 +1,7 @@
-import Avatar from "@/app/components/Avatar";
-import Ripple from "@/app/components/Ripple";
-import Tags from "@/app/components/Tags";
 import { OneInterviewsType } from "@/app/types/client";
 import Image from "next/image";
 import Link from "next/link";
 import React, { FC } from "react";
-import ReactTimeago from "react-timeago";
 import UserInfo from "./UserInfo";
 
 const Interview: FC<OneInterviewsType> = (props) => {

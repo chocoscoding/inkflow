@@ -18,7 +18,7 @@ const likesFormatter = (likes?: any[]) => {
 };
 const Post: FC<OnePostComponentType> = (props) => {
   const [count, setCount] = useState(0);
-  const { likes, id, owner, _count, title, tags, coverImage, createdAt, views } = props;
+  const { likes, id, owner, _count, title, tags, coverImage, createdAt, views, showLikes = true } = props;
   const [hasLiked, setHasLiked] = useState<boolean>(likesFormatter(likes));
   const { status, data } = useSession();
   const { refresh } = useRouter();
@@ -76,9 +76,11 @@ const Post: FC<OnePostComponentType> = (props) => {
               <p className="xl:text-xl lg:text-base text-sm font-semibold truncate-lines-2 hover:underline cursor-pointer">{title}</p>
             </Link>
             <div className="h-fit p-1.5 bg-dark-40 rounded-full cursor-pointer hidden sm:block">
-              <span onClick={likePost}>
-                <Like className={hasLiked ? `text-red-80` : `text-secondary-50`} />
-              </span>
+              {showLikes ? (
+                <span onClick={likePost}>
+                  <Like className={hasLiked ? `text-red-80` : `text-secondary-50`} />
+                </span>
+              ) : null}
             </div>
             <Avatar className="rounded-full h-fit block sm:hidden" />
           </div>

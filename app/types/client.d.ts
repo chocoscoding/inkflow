@@ -92,7 +92,9 @@ interface OnePost {
   followingPost: CursorPaginativeReturnType<OnePostMain[]>;
 }
 
-type OnePostComponentType = OnePostMain;
+type OnePostComponentType = OnePostMain & {
+  showLikes: boolean;
+};
 
 interface GroupUserFollow {
   group: {
