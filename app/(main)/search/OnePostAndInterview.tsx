@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { FC } from 'react'
 
-const OnePostAndInterview = () => {
+const OnePostAndInterview:FC<any> = () => {
   return (
     <div>OnePostAndInterview</div>
   )

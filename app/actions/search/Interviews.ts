@@ -1,6 +1,7 @@
 import prisma from "@/app/libs/prismadb";
+import { OneInterviewsType } from "@/app/types/client";
 
-export default async function searchInterviews(searchQuery: string) {
+export default async function searchInterviews(searchQuery: string): Promise<OneInterviewsType[]> {
   try {
     const rawAggregateResult = (await prisma.post.aggregateRaw({
       pipeline: [

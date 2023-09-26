@@ -1,6 +1,7 @@
 import prisma from "@/app/libs/prismadb";
+import { OnePostComponentType } from "@/app/types/client";
 
-export default async function searchPosts(searchQuery: string) {
+export default async function searchPosts(searchQuery: string): Promise<OnePostComponentType[]> {
   try {
     const rawAggregateResult = (await prisma.post.aggregateRaw({
       pipeline: [

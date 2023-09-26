@@ -27,7 +27,7 @@ const page = async ({ searchParams }: { searchParams: { [key: string]: string } 
 
   return (
     <div className="appScreen flex justify-center py-2 px-4 max-w-[1600px] m-auto gap-3 flex-wrap">
-      <SearchClient groups={groups} />
+      <SearchClient groups={groups} posts={posts} />
     </div>
   );
 };
