@@ -1,9 +1,9 @@
-import { OnePostComponentType } from '@/app/types/client';
-import React, { FC } from 'react'
-import OnePostAndInterview from './OnePostAndInterview';
+import { OnePostComponentType } from "@/app/types/client";
+import React, { FC } from "react";
+import OnePostAndInterview from "./OnePostAndInterview";
 
-const Posts:FC<{posts: OnePostComponentType[]}> = ({posts}) => {
-    if (posts.length === 0)
+const Posts: FC<{ posts: OnePostComponentType[] }> = ({ posts }) => {
+  if (posts.length === 0)
     return (
       <div className="flex flex-col items-center justify-center gap-2">
         <p className="text-lg font-semibold">No posts found</p>
@@ -14,12 +14,12 @@ const Posts:FC<{posts: OnePostComponentType[]}> = ({posts}) => {
     <>
       {posts.map((post, i) => (
         <OnePostAndInterview
-          post={post}
-          key={`group_${i}`}
+          {...post}
+          key={`post_${i}`}
         />
       ))}
     </>
   );
-}
+};
 
-export default Posts
+export default Posts;

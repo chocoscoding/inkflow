@@ -4,11 +4,12 @@ import { useSearchParams } from "next/navigation";
 import React, { FC } from "react";
 import PaginationButton from "./PaginationButton";
 import Groups from "./Groups";
-import { GroupUserFollow, OnePostComponentType } from "@/app/types/client";
+import { GroupUserFollow, OneInterviewsType, OnePostComponentType } from "@/app/types/client";
 import Posts from "./Posts";
+import Interviews from "./Interviews";
 
-const SearchClient: FC<{ groups: GroupUserFollow["group"][], posts: OnePostComponentType[] }> = (props) => {
-  const { groups,posts } = props;
+const SearchClient: FC<{ groups: GroupUserFollow["group"][], posts: OnePostComponentType[], interviews: OneInterviewsType[] }> = (props) => {
+  const { groups,posts,interviews } = props;
   const searchParams = useSearchParams();
   const { section, on_group, on_interview, on_meetup, on_posts } = useSearchSection();
   return (
@@ -40,7 +41,7 @@ const SearchClient: FC<{ groups: GroupUserFollow["group"][], posts: OnePostCompo
 
       <div className="full mt-3 rounded-md overflow-hidden">
         {section === "Posts" ? <Posts posts={posts}/> : null}
-        {section === "Interviews" ? <p>Interviews</p> : null}
+        {section === "Interviews" ? <Interviews interviews={interviews}/> : null}
         {section === "Meetups" ? <p>Meetups</p> : null}
         {section === "Groups" ? <Groups groups={groups} /> : null}
       </div>

@@ -20,14 +20,13 @@ const page = async ({ searchParams }: { searchParams: { [key: string]: string } 
     searchGroups(searchParams.query!),
     searchMeetups(searchParams.query!),
   ]);
-  console.log(posts, "posts");
-  console.log(interviews, "interviews");
-  console.log(groups, "groups");
-  console.log(meetups, "meetups");
-
   return (
     <div className="appScreen flex justify-center py-2 px-4 max-w-[1600px] m-auto gap-3 flex-wrap">
-      <SearchClient groups={groups} posts={posts} />
+      <SearchClient
+        groups={groups}
+        posts={posts}
+        interviews={interviews}
+      />
     </div>
   );
 };
