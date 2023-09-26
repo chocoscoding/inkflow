@@ -1,12 +1,12 @@
 import prisma from "@/app/libs/prismadb";
 
-export default async function searchInterviews(searchQuery: string) {
+export default async function searchMeetups(searchQuery: string) {
   try {
-    const rawAggregateResult = (await prisma.post.aggregateRaw({
+    const rawAggregateResult = (await prisma.meetup.aggregateRaw({
       pipeline: [
         {
           $search: {
-            index: "interviewsearch",
+            index: "meetupSearch",
             text: {
               query: searchQuery,
               path: "title",
@@ -17,7 +17,6 @@ export default async function searchInterviews(searchQuery: string) {
             },
           },
         },
-        { $limit: 75 },
         {
           $lookup: {
             from: "User",
@@ -29,16 +28,18 @@ export default async function searchInterviews(searchQuery: string) {
         {
           $unwind: "$owner",
         },
+        { $limit: 75 },
         {
           $project: {
             _id: 0,
             id: { $toString: "$_id" },
             title: true,
-            revenue: true,
+            tags: true,
             coverImage: true,
             createdAt: { $toString: "$createdAt" },
-            platform: true,
-            businessType: true,
+            views: true,
+            date: true,
+            time: true,
             owner: {
               id: { $toString: "$owner._id" },
               username: "$owner.username",
@@ -50,20 +51,7 @@ export default async function searchInterviews(searchQuery: string) {
     })) as unknown as any[];
     if (!rawAggregateResult) return [];
 
-    const transformedResult = rawAggregateResult.map((item) => {
-      const transformedItem: any = {};
-      for (const key in item) {
-        if (key === "createdAt") {
-          transformedItem[key] = item[key].$date;
-        } else if (key === "_id" || key === "userId" || key === "groupId") {
-          transformedItem[key] = item[key]?.$oid || null;
-        } else {
-          transformedItem[key] = item[key];
-        }
-      }
-      return transformedItem;
-    });
-    return transformedResult;
+    return rawAggregateResult;
   } catch (error) {
     console.log(error);
     return [];

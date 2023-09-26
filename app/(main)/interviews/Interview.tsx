@@ -11,7 +11,7 @@ const Interview: FC<OneInterviewsType> = (props) => {
     return <div className="h-full w-[1.5px] mx-4 bg-secondary-50 last:hidden opacity-30"></div>;
   };
   return (
-    <div className=" bg-dark-30 rounded-xl w-full p-2.5 sm1:p-1.5 flex-grow-0 mb-3 flex ba1:flex-wrap-reverse gap-3">
+    <div className=" bg-dark-30 rounded-xl w-full p-2.5 sm1:p-1.5 flex-grow-0 mb-3 flex ba1:flex-wrap gap-3">
       <div className="rounded-md overflow-hidden ba1:w-full w-[32%] md:w-[34%]  min-w-[200px] h-52 flex-grow-0 shrink-0 object-cover md2:h-60 md2:mb-4">
         <Image
           src={coverImage || "/images/placeholder.jpg"}
@@ -30,14 +30,8 @@ const Interview: FC<OneInterviewsType> = (props) => {
       </span>
       <div className="flex flex-col gap-2 w-full">
         {/* userinfo */}
-        <span className="block ba1:hidden">
-          <UserInfo
-            {...owner}
-            createdAt={createdAt}
-          />
-        </span>
         <Link href={`/interviews/${title}`}>
-          <p className="truncate-lines-2 w-full md:text-lg md:font-semibold mb-3">{title}</p>
+          <p className="truncate-lines-2 w-full md:text-lg md:font-semibold mb-3 hover:underline">{title}</p>
         </Link>
         <section className="flex w-full justify-between flex-wrap gap-2">
           <section className="flex gap-1">
@@ -57,11 +51,13 @@ const Interview: FC<OneInterviewsType> = (props) => {
             </div>
             <VerticalLine />
           </section>
-
-          <Link href={`/interviews/${title}`}>
-            <button className="flex-center p-3 rounded bg-blue-default shrink-0 ba1:w-full md1:m1-2 ba1:rounded-lg">Full Details</button>
-          </Link>
         </section>
+        <span className="block ba1:hidden mt-10">
+          <UserInfo
+            {...owner}
+            createdAt={createdAt}
+          />
+        </span>
       </div>
     </div>
   );

@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { SkeletonTheme } from "react-loading-skeleton";
 import { SessionProvider } from "next-auth/react";
-import { Layout } from "layout-greed";
 export default function Providers({ children, session }: { children: ReactNode; session: any }) {
   const [mounted, setMounted] = useState<boolean>(false);
   const pathname = usePathname();
@@ -24,10 +23,6 @@ export default function Providers({ children, session }: { children: ReactNode; 
   };
   return (
     <>
-      {/* <Layout
-        hide={hider()}
-        customKeyBinding="alt+t"
-      /> */}
       <SessionProvider session={session}>
         <ThemeProvider attribute="class">
           <SkeletonTheme

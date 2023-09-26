@@ -15,7 +15,7 @@ export default async function getGroupPosts(groupId: string) {
       orderBy: {
         createdAt: "desc",
       },
-      take: 2,
+      take: 24,
       select: {
         id: true,
         title: true,

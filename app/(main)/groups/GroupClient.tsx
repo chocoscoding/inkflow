@@ -1,6 +1,4 @@
 "use client";
-import ListGroup from "@/app/components/Groups/ListGroup";
-import Requested from "@/app/components/Groups/Requested";
 import Ripple from "@/app/components/Ripple";
 import React, { FC, useState } from "react";
 import RequestedClient from "./RequestedClient";

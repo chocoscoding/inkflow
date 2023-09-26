@@ -93,7 +93,7 @@ interface OnePost {
 }
 
 type OnePostComponentType = OnePostMain & {
-  showLikes: boolean;
+  showLikes?: boolean;
 };
 
 interface GroupUserFollow {

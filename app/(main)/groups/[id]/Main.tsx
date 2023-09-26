@@ -1,8 +1,6 @@
 "use client";
 import Avatar from "@/app/components/Avatar";
 import { ArrowDown, New, New1, Popular } from "@/app/components/Icons";
-import CreatePost from "@/app/components/home/CreatePost";
-import HomeNavMobile from "@/app/components/home/HomeNavMobile";
 import Post from "@/app/components/home/Post";
 import Image from "next/image";
 import React, { FC, useEffect, useRef, useState } from "react";

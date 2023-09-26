@@ -7,18 +7,16 @@ export default async function searchGroups(searchQuery: string) {
         {
           $search: {
             index: "groupsearch",
-            text: {
+            autocomplete: {
               query: searchQuery,
-              path: {
-                wildcard: "*",
-              },
+              path: "name",
             },
           },
         },
         { $limit: 75 },
         {
           $lookup: {
-            from: "userGroupRelation",
+            from: "UserGroupRelation",
             localField: "id",
             foreignField: "groupId",
             as: "members",
@@ -26,8 +24,10 @@ export default async function searchGroups(searchQuery: string) {
         },
         {
           $project: {
-            id: 1,
+            _id: 0,
+            id: { $toString: "$_id" },
             name: 1,
+            admin: 1,
             coverImage: 1,
             _count: {
               members: {
@@ -40,19 +40,7 @@ export default async function searchGroups(searchQuery: string) {
     })) as unknown as any[];
     if (!rawAggregateResult) return [];
 
-    const transformedResult = rawAggregateResult.map((item) => {
-      const transformedItem: any = {};
-      for (const key in item) {
-        if (key === "_id") {
-          transformedItem[key] = item[key].$oid;
-        } else {
-          transformedItem[key] = item[key];
-        }
-      }
-      return transformedItem;
-    });
-
-    return transformedResult;
+    return rawAggregateResult;
   } catch (error) {
     console.log(error);
     return [];

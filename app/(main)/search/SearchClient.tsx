@@ -1,49 +1,47 @@
 "use client";
 import useSearchSection from "@/app/hooks/useSearchSection";
-import React from "react";
+import { useSearchParams } from "next/navigation";
+import React, { FC } from "react";
+import PaginationButton from "./PaginationButton";
+import Groups from "./Groups";
+import { GroupUserFollow } from "@/app/types/client";
 
-const SearchClient = () => {
+const SearchClient: FC<{ groups: GroupUserFollow["group"][] }> = (props) => {
+  const { groups } = props;
+  const searchParams = useSearchParams();
   const { section, on_group, on_interview, on_meetup, on_posts } = useSearchSection();
   return (
-    <div className="w-full max-w-[1000px] border">
-      <h5>Your search result for: abc</h5>
+    <div className="w-full max-w-[1000px]">
+      <h5>{`Your search result for: ${searchParams?.get("query")}`}</h5>
 
       <div className="flex mt-3 w-full flex-wrap gap-4">
-        <button
-          className={`outline outline-2 outline-secondary-20 ${
-            section === "Posts" ? "bg-secondary-20" : ""
-          } w-fit px-3 py-1.5 rounded-full`}
-          onClick={on_posts}>
-          Posts
-        </button>
-        <button
-          className={`outline outline-2 outline-secondary-20 ${
-            section === "Interviews" ? "bg-secondary-20" : ""
-          } w-fit px-3 py-1.5 rounded-full`}
-          onClick={on_interview}>
-          Interviews
-        </button>
-        <button
-          className={`outline outline-2 outline-secondary-20 ${
-            section === "Meetups" ? "bg-secondary-20" : ""
-          } w-fit px-3 py-1.5 rounded-full`}
-          onClick={on_meetup}>
-          Meetups
-        </button>
-        <button
-          className={`outline outline-2 outline-secondary-20 ${
-            section === "Groups" ? "bg-secondary-20" : ""
-          } w-fit px-3 py-1.5 rounded-full`}
-          onClick={on_group}>
-          Groups
-        </button>
+        <PaginationButton
+          label="Posts"
+          highlight={section === "Posts"}
+          onClick={on_posts}
+        />
+        <PaginationButton
+          label="Interviews"
+          highlight={section === "Interviews"}
+          onClick={on_interview}
+        />
+        <PaginationButton
+          label="Meetups"
+          highlight={section === "Meetups"}
+          onClick={on_meetup}
+        />
+        <PaginationButton
+          label="Groups"
+          highlight={section === "Groups"}
+          onClick={on_group}
+        />
       </div>
 
-      <div className="full border mt-3">
+      <div className="full mt-3 rounded-md overflow-hidden">
         {section === "Posts" ? <p>Posts</p> : null}
         {section === "Interviews" ? <p>Interviews</p> : null}
         {section === "Meetups" ? <p>Meetups</p> : null}
-        {section === "Groups" ? <p>Groups</p> : null}
+        {section === "Groups" ? <Groups groups={groups} /> : null}
       </div>
     </div>
   );

@@ -48,14 +48,15 @@ const ContentsClient: FC<{ id: string; postsCount: number | null; groupPosts: Cu
           <p className="text-lg sm1:mb-4">
             <span>{postsCount || 0} </span>Posts
           </p>
-          <div className="flex p-2 rounded-lg bg-transparent flex-shrink-0 sm1:w-full min-w-[300px] outline outline-1">
+          {/* post search */}
+          {/* <div className="flex p-2 rounded-lg bg-transparent flex-shrink-0 sm1:w-full min-w-[300px] outline outline-1">
             <SearchIcon />
             <input
               type="text"
               className={`bg-transparent outline-0 w-full pl-4 font-light`}
               placeholder="Search post by title..."
             />
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="w-full bg-dark-40 p-2 rounded-lg">

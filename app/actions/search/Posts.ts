@@ -9,8 +9,10 @@ export default async function searchPosts(searchQuery: string) {
             index: "postsearch",
             text: {
               query: searchQuery,
-              path: {
-                wildcard: "*",
+              path: "title",
+              fuzzy: {
+                maxEdits: 2,
+                maxExpansions: 50,
               },
             },
           },
@@ -29,35 +31,25 @@ export default async function searchPosts(searchQuery: string) {
         },
         {
           $project: {
-            id: 1,
+            _id: 0,
+            id: { $toString: "$_id" },
             title: 1,
             tags: 1,
             coverImage: 1,
-            createdAt: 1,
+            createdAt: { $toString: "$createdAt" },
             views: 1,
-            "owner.id": 1,
-            "owner.username": 1,
-            "owner.image": 1,
+            owner: {
+              id: { $toString: "$owner._id" },
+              username: "$owner.username",
+              image: "$owner.image",
+            },
           },
         },
       ],
     })) as unknown as any[];
     if (!rawAggregateResult) return [];
 
-    const transformedResult = rawAggregateResult.map((item) => {
-      const transformedItem: any = {};
-      for (const key in item) {
-        if (key === "createdAt") {
-          transformedItem[key] = item[key].$date;
-        } else if (key === "_id" || key === "userId" || key === "groupId") {
-          transformedItem[key] = item[key]?.$oid || null;
-        } else {
-          transformedItem[key] = item[key];
-        }
-      }
-      return transformedItem;
-    });
-    return transformedResult;
+    return rawAggregateResult;
   } catch (error) {
     console.log(error);
     return [];
