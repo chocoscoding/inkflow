@@ -26,6 +26,7 @@ const page = async ({ searchParams }: { searchParams: { [key: string]: string } 
         groups={groups}
         posts={posts}
         interviews={interviews}
+        meetups={meetups}
       />
     </div>
   );

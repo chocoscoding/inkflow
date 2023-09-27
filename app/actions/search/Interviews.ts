@@ -3,7 +3,7 @@ import { OneInterviewsType } from "@/app/types/client";
 
 export default async function searchInterviews(searchQuery: string): Promise<OneInterviewsType[]> {
   try {
-    const rawAggregateResult = (await prisma.post.aggregateRaw({
+    const rawAggregateResult = (await prisma.interview.aggregateRaw({
       pipeline: [
         {
           $search: {

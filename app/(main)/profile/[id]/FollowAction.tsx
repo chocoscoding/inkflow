@@ -1,5 +1,6 @@
 "use client";
 import { Message, Settings } from "@/app/components/Icons";
+import useFollowersCount from "@/app/hooks/useFollowersCount";
 import { FollowActionType } from "@/app/types/client";
 import axios from "axios";
 import Link from "next/link";
@@ -12,6 +13,7 @@ const FollowAction: FC<FollowActionType> = ({ userId, id, userFollowingProfileUs
   const [followStatus, setFollowStatus] = useState(!!userFollowingProfileUser);
   const count = useRef(0);
   const lastFollowStatus = useRef(!!userFollowingProfileUser);
+  const { increase, decrease } = useFollowersCount();
   //check if user is logged in before trigering update
   const setFollow = (followType: "follow" | "unfollow") => {
     if (!userId) {
@@ -20,6 +22,12 @@ const FollowAction: FC<FollowActionType> = ({ userId, id, userFollowingProfileUs
       return;
     }
     setFollowStatus((prev) => !prev);
+    if (followType === "follow") {
+      increase();
+    }
+    if (followType === "unfollow") {
+      decrease();
+    }
   };
   //call api but use setimeout to funnel fast re occuring to one call
   useEffect(() => {
@@ -35,6 +43,7 @@ const FollowAction: FC<FollowActionType> = ({ userId, id, userFollowingProfileUs
         lastFollowStatus.current = followStatus;
         route.refresh();
       } catch (error) {
+        
         toast.error("Something went wrong");
       }
     }, 800);

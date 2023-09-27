@@ -31,6 +31,7 @@ export default async function Home() {
             mainText="Following"
             secondaryText="Explore from your favourite person"
             active={false}
+            followingPostsLength={followingPost.data.length}
           />
         </section>
         <Trending data={trendingData} />

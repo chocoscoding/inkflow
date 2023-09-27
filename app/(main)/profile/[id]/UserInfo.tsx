@@ -1,5 +1,5 @@
 "use client";
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import Checkbox from "@/app/components/Checkbox";
 import { Arrow1, FacebookOutline, InstagramOutline, LinkedinOutline, Message, Settings, TwitterOutline, Web } from "@/app/components/Icons";
 import Avatar from "@/app/components/Avatar";
@@ -16,6 +16,12 @@ const UserInfo: FC<UserInfoClient> = (props) => {
   const { bio, id, image, createdAt, username, occupation, socailLink } = profile;
 
   const { data } = useSession();
+
+  const { newAmount, count, increase, decrease } = useFollowersCount();
+
+  useEffect(() => {
+    newAmount(followersCount);
+  }, []);
   return (
     <section className="lg2a:sticky lg2a:top-[60px] lg2:flex-1 rounded-xl bg-dark-30 w-3/12 lg2a:max-w-[290px] min-w-[230px] max-w-none h-fit shrink-0 lg2:order-1 overflow-hidden">
       <div className="min-h-[250px] relative">
@@ -43,7 +49,7 @@ const UserInfo: FC<UserInfoClient> = (props) => {
 
         <div className="flex mt-4 mb-1">
           <div className="flex flex-col items-center">
-            <p>{followersCount}</p>
+            <p>{count}</p>
             <p>Followers</p>
           </div>
           <div className="h-[49px] w-[2px] bg-secondary-30 mx-4"></div>

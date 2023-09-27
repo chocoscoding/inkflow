@@ -7,7 +7,7 @@ import ReactTimeago from "react-timeago";
 
 const OnePostAndInterview: FC<any> = ({ id, coverImage, createdAt, owner, title }) => {
   return (
-    <li className="flex justify-between items-center mb-4 border-b border-secondary-20 pb-2">
+    <li className="flex justify-between items-center mb-4 rounded-md p-2 bg-dark-30">
       <div className="flex flex-1 mr-3 sm:mr-4 gap-2 sm:gap-4">
         <div className="sm:w-[130px] sm:h-[130px] w-[65px] h-[65px] rounded-md overflow-hidden object-cover shrink-0">
           <Image

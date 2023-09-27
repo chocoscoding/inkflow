@@ -29,6 +29,14 @@ const CursorPagination: FC<CursorPaginationClientType> = ({ initialElements, loa
     const newList = mainList.filter((listElement) => listElement.id !== id);
     setMainLists(newList);
   };
+
+  if (mainList.length === 0)
+    return (
+      <div className="flex flex-col items-center justify-center gap-2">
+        <p className="text-lg font-semibold">No content found</p>
+        <p className="text-sm text-gray-500">Try exploring more on Inkflow</p>
+      </div>
+    );
   return (
     <div>
       {mainList.map((listElement, i) => (
