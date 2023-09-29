@@ -24,7 +24,7 @@ export default function Providers({ children, session }: { children: ReactNode; 
   return (
     <>
       <SessionProvider session={session}>
-        <ThemeProvider attribute="class">
+        <ThemeProvider attribute="class" enableSystem={false} forcedTheme="dark">
           <SkeletonTheme
             baseColor="#2C353D"
             highlightColor="#1E252B">
